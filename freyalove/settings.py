@@ -129,6 +129,7 @@ INSTALLED_APPS = (
     'south',
 
     # CFSG work
+    'freyalove.users',
 )
 
 # A sample logging configuration. The only tangible logging
