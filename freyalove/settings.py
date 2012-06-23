@@ -122,6 +122,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
+    'grappelli',
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
@@ -165,6 +166,10 @@ LOGGING = {
         },
     }
 }
+
+# Setup for grappelli
+ADMIN_MEDIA_PREFIX = STATIC_URL + "grappelli/"
+GRAPPELLI_ADMIN_TITLE = "Freyalove"
 
 # Grab the local override
 try:
