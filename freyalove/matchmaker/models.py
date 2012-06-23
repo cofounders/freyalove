@@ -26,6 +26,9 @@ class Match(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
 
+    class Meta:
+        verbose_name_plural = "matches"
+
     def __unicode__(self):
         return "%s <-> %s by %s" % (self.p1.first_name, self.p2.first_name, self.matchmaker.first_name)
 
