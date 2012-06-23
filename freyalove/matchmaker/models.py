@@ -27,7 +27,7 @@ class Match(models.Model):
     updated_at = models.DateTimeField(auto_now=True, null=True)
 
     def __unicode__(self):
-        return "%s <-> %s by %s" % (p1.first_name, p2.first_name, matchmaker.first_name)
+        return "%s <-> %s by %s" % (self.p1.first_name, self.p2.first_name, self.matchmaker.first_name)
 
     def save(self, *args, **kwargs):
         # mark success/reject
