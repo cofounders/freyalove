@@ -19,6 +19,17 @@ class Profile(models.Model):
     def __unicode__(self):
         return self.first_name
 
+class Blocked(models.Model):
+    belongs_to = models.ForeignKey(Profile)
+    block_profile_id = models.IntegerField()
+
+    def save(self, *args, **kwargs):
+        try:
+            profile_to_block = Profile.objects.get(id=self.block_profile_id)
+        except Profile.DoesNotExist:
+            raise ValidationError("Trying to block profile id %d for member %s but profile doesn't exist!" % (self.block_profile_id, belongs_to.first_name)) 
+        super(Blocked, self).save(*args, **kwargs)
+
 # Basic friendship 
 class Friendship(models.Model):
     # taken from jtauber's django-friends
@@ -30,5 +41,3 @@ class Friendship(models.Model):
 
     class Meta:
         unique_together = (('to_profile', 'from_profile'),)
-
-# Matchmaking
