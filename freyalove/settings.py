@@ -132,6 +132,7 @@ INSTALLED_APPS = (
 
     # Testing/dbugging, turn off before deployment
     'debug_toolbar',
+    'django_extensions',
 
     # CFSG work
     'freyalove.users',
