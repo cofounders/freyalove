@@ -16,6 +16,9 @@ class Profile(models.Model):
     fb_id = models.CharField(max_length=100, blank=True)
     fb_profile_pic = models.URLField(blank=True)
 
+    # Admin controls
+    banned = models.BooleanField(default=False)
+
     def __unicode__(self):
         return self.first_name
 
