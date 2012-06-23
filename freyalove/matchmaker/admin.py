@@ -6,7 +6,7 @@ from freyalove.matchmaker.models import Match
 
 # Admin definitions
 class MatchAdmin(admin.ModelAdmin):
-	pass
+	readonly_fields = ('success', 'rejected',)
 
 #class MatchMakerAdmin(admin.ModelAdmin):
 #	pass
