@@ -7,7 +7,7 @@ from freyalove.users.models import Profile
 # Admin definitions
 class ProfileAdmin(admin.ModelAdmin):
     readonly_fields = ('fb_username', 'fb_link', 'fb_id', 'fb_profile_pic')
-    ordering = ('name',)
+    ordering = ('first_name',)
 
 # Registrations
 admin.site.register(Profile, ProfileAdmin)
