@@ -29,15 +29,32 @@ class Match(models.Model):
     def __unicode__(self):
         return "%s <-> %s by %s" % (self.p1.first_name, self.p2.first_name, self.matchmaker.first_name)
 
+    def validate_profiles(self):
+        if self.p1.banned or self.p2.banned:
+            return False
+        else:
+            return True
+
+    def validate_responses(self):
+        valid_responses = "Pending, Accepted, Declined, Block"
+        if self.p1_response not in valid_responses or self.p2_response not in valid_responses:
+            return False
+        else:
+            return True
+
     def save(self, *args, **kwargs):
+        if not self.validate_profiles():
+            raise ValidationError("Invalid profile in attempt to matchmake!")
+        if not self.validate_responses():
+            raise ValidationError("Invalid response in attempt to matchmake!")
         # mark success/reject
         if self.p1_response == "Accepted" and self.p2_response == "Accepted":
             self.success = True
             # Call method to update matchmaker score perhaps?
-        elif self.p1_response == "Declined" and self.p2_response == "Declined":
+        elif self.p1_response == "Declined" or self.p2_response == "Declined":
             self.rejected = True
             # Call method to update matchmaker score perhaps?
-        elif self.p1_response == "Block" and self.p2_response == "Block":
+        elif self.p1_response == "Block" or self.p2_response == "Block":
             # Call blocker
             pass
         else:
