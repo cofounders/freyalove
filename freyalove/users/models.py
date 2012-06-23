@@ -14,6 +14,7 @@ class Profile(models.Model):
     fb_username = models.CharField(max_length=100, blank=True)
     fb_link = models.URLField()
     fb_id = models.CharField(max_length=100, blank=True)
+    fb_profile_pic = models.URLField(blank=True)
 
     def __unicode__(self):
         return self.first_name

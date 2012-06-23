@@ -130,6 +130,7 @@ INSTALLED_APPS = (
 
     # CFSG work
     'freyalove.users',
+    'freyalove.matchmaker',
 )
 
 # A sample logging configuration. The only tangible logging
