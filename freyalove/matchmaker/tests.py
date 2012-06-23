@@ -6,7 +6,7 @@ from django.contrib.auth.models import User, AnonymousUser
 from freyalove.matchmaker.models import Match
 from freyalove.users.models import Profile
 
-class MatchMakingTest(TestCase):
+class CreateMatchMakingTest(TestCase):
     def setUp(self):
         # We start off with 2 valid profiles
         self.profile_alpha = Profile()
