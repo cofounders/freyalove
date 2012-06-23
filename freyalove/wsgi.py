@@ -1,3 +1,5 @@
+# @kenny: refer to wsgi_server.py on server instead.
+
 """
 WSGI config for freyalove project.
 
@@ -26,3 +28,5 @@ application = get_wsgi_application()
 # Apply WSGI middleware here.
 # from helloworld.wsgi import HelloWorldApplication
 # application = HelloWorldApplication(application)
+
+## Server
