@@ -15,4 +15,9 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^nimdatux/', include(admin.site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),
+
+    # App urls
+
+    # Other pages
+    url(r'^$', 'freyalove.views.homepage'),
 )
