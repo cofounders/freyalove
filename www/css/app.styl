@@ -1,0 +1,61 @@
+@import mixins
+
+header
+	background:
+		url(../img/photo_overlay.png),
+		url(../img/ingenuity_30.jpg) center bottom no-repeat
+	color #222
+	height 780px
+	overflow hidden
+	h1
+		font-family 'League Gothic CFSG', serif
+		font-size 80px
+		font-weight 100
+		margin 0 0 -15px 0
+		padding: 25px 0 0 0
+		text-align center
+		text-transform uppercase
+		span
+			text-transform lowercase
+	ol
+		display block
+		font-style normal
+		font-size 0
+		font-weight normal
+		margin 0
+		padding 0
+		text-align center
+		text-transform uppercase
+		li
+			display inline-block
+			font-family 'Gentium Book Basic', serif
+			font-size 16px
+			margin 0
+		li:before,
+		li:last-of-type:after
+			content "\00B7 "
+			display inline-block
+			font-size 35px
+			font-weight bold
+			line-height 10px
+			overflow hidden
+			vertical-align middle
+			margin 0 4px
+	> p
+		font-family 'Gentium Book Basic', serif
+		font-size 48px
+		font-style normal
+		font-weight normal
+		line-height 1.28
+		margin 0 auto
+		padding 85px 0 0 0
+		width 960px
+		em
+			font-style italic
+			font-weight bold
+		mark
+			background-color rgba(116, 74, 0, 0.4)
+			color white
+			font-style inherit
+			font-weight inherit
+			padding 0 20px

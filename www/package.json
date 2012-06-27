@@ -1,0 +1,25 @@
+{
+	"name": "freyalove",
+	"description": "Homepage",
+	"version": "0.1.0",
+	"homepage": "http://www.freyalove.com/",
+	"author": {
+		"name": "Cofounders Pte Ltd",
+		"email": "team@cofounders.sg"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/cofounders/freyalove.git"
+	},
+	"licenses": [
+		{
+			"type": "All rights reserved",
+			"url": "http://www.freyalove.com/LICENSE"
+		}
+	],
+	"dependencies": {
+		"node-build-script": "https://github.com/h5bp/node-build-script/tarball/master",
+		"stylus": "*"
+	},
+	"keywords": []
+}
