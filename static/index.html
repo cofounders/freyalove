@@ -17,24 +17,11 @@
 
 			<!-- LEFT COLUMN -->
 			<div id="column-left">
-				
+			
 				<!-- PEOPLE THAT SMILED AT ME -->
 				<h2>People That Smiled at You <a href="javascript:alert('opens a page that lists all people that smiled at me');window.location.assign('friends-list.html');" class="see-more" title="See all people that smiled at me">see all</a></h2>
 
-				<!-- USER PREVIEW MODULE SMALL -->
-				<div class="user-preview small">
-					<img src="./dummy/user1.png" alt="Picture of Jenny Schecter" />
-					<a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a>
-					<p class="al">aged 41, in Singapore</p>
-					<p class="likes"><em>Likes:</em> Twilight, Justin Bieber, Drag Racing, Fusce Elit, Malesuada, Ullam</p>
-				</div>
-				<!-- USER PREVIEW MODULE SMALL -->
-				<div class="user-preview small">
-					<img src="./dummy/user1.png" alt="Picture of Jenny Schecter" />
-					<a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a>
-					<p class="al">aged 41, in Singapore</p>
-					<p class="likes"><em>Likes:</em> Twilight, Justin Bieber, Drag Racing, Fusce Elit, Malesuada, Ullam</p>
-				</div>
+				<!--#include virtual="modules/user-preview-small.html" -->
 				
 				<!-- POSSIBLE MATCHES -->
 				<h2>Possible Matches for You <a href="javascript:alert('opens a page that lists all possible matches for you');window.location.assign('friends-list.html');" class="see-more" title="See all possible matches for you">browse all</a></h2>
@@ -91,54 +78,15 @@
 
 			<!-- RIGHT COLUMN -->
 			<div id="column-right">
+			
+				<!--#include virtual="modules/dates-upcoming.html" -->
 
-				<!-- UPCOMING DATES MODULE -->
-				<h2>Upcoming Dates</h2>
+				<!--#include virtual="modules/friends-list-right.html" -->
 
-				<!-- USER PREVIEW MODULE TINY -->
-				<div class="user-preview tiny">
-					<img src="./dummy/user1.png" alt="Picture of Jenny Schecter" />
-					<p class="text">Meet <a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a> today at 3pm at Somerset 313.</p>
-				</div>
+				<!--#include virtual="modules/recent-activity.html" -->
+
+				<!--#include virtual="modules/top-matchmakers.html" -->				
 				
-				<!-- USER PREVIEW MODULE TINY -->
-				<div class="user-preview tiny">
-					<img src="./dummy/user1.png" alt="Picture of Jenny Schecter" />
-					<p class="text">Meet <a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a> tomorrow at 3pm at Somerset 313.</p>
-				</div>
-
-				<!-- FRIENDS LIST MODULE -->
-				<h2>Your Friends <a href="javascript:alert('opens a page that lists all the users friends');window.location.assign('friends-list.html');" class="see-more" title="See all your friends on FreyaLove">see all</a></h2>
-				
-				<ul class="tiny">
-					<li><a href="javascript:alert('opens the matching page');window.location.assign('profile-friend.html');" title="Link to the page of Jenny Schecter"><img src="./dummy/user1.png" alt="Picture of Jenny Schecter" /></a></li>
-					<li><a href="javascript:alert('opens the matching page');window.location.assign('profile-friend.html');" title="Link to the page of Jenny Schecter"><img src="./dummy/user1.png" alt="Picture of Jenny Schecter" /></a></li>
-					<li><a href="javascript:alert('opens the matching page');window.location.assign('profile-friend.html');" title="Link to the page of Jenny Schecter"><img src="./dummy/user1.png" alt="Picture of Jenny Schecter" /></a></li>
-					<li><a href="javascript:alert('opens the matching page');window.location.assign('profile-friend.html');" title="Link to the page of Jenny Schecter"><img src="./dummy/user1.png" alt="Picture of Jenny Schecter" /></a></li>
-				</ul>
-				<a href="javascript:alert('opens the FB invite popup');window.location.assign('fb-invite.html');" title="Invite more friends from Facebook">Invite more friends from Facebook</a>
-
-				<!-- RECENT ACTIVITY MODULE -->
-				<h2>Recent Activity</h2>
-				
-				<ul class="activity">
-					<li>Your friends <a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a> and <a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Tina Kennard">Tina Kennard</a> will meet up on Thursday.</li>
-					<li>Your Facebook friend <a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Tina Kennard">Tina Kennard</a> joined FreyaLove.</li>
-					<li>Your friends <a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a> and <a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Tina Kennard">Tina Kennard</a> are meeting up today.</li>
-					<li><a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a> smiled at you. Smile back.</li>
-					<li>Your friends <a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a> and <a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Tina Kennard">Tina Kennard</a> are meet up yesterday.</li>
-				</ul>
-
-				<!-- MATCHMAKERS MODULE -->
-				<h2>Top Matchmakers <a href="javascript:alert('opens the matchmaker ranking page');window.location.assign('matchmakers.html');" class="see-more" title="See the best matchmakers amongst your friends">see all</a></h2>
-				
-				<ol>
-					<li><a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a>: 1204 points</li>
-					<li><a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Alice Pieszecki">Alice Pieszecki</a>: 905 points</li>
-					<li><a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Tina Kennard">Tina Kennard</a>: 802 points</li>
-					<li><a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Georgina Huxtable">Georgina Huxtable</a>: 352 points</li>
-					<li><a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Bette Porter">Bette Porter</a>: 102 points</li>
-				</ol>
 			</div>
 		</div>
 	</section>

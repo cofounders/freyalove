@@ -16,6 +16,8 @@ h2 {
 	background-color: silver;
 	padding-top: 10px;
 	border: 1px solid grey;}
+h3 {
+	padding-top: 10px;}
 
 ul li {
 	display: inline-block;
@@ -135,3 +137,10 @@ div#column-left div#facebook-ad a {
 	display: block;
 	background-color: blue;
 	border: 1px solid black;}
+	
+div.match-preview {
+	width: 328px;
+	float: left;}
+div.match-preview a {
+	display: inline-block;}
+	

@@ -20,17 +20,23 @@
 			<div id="column-left">
 				
 				<!-- PROFILE PREVIEW -->
-				<img id="profile-pic" src="./dummy/user.png" alt="Your profile picture" />
-				<h3>Jenny Schecter</h3>
+				<img id="profile-pic" src="./dummy/user1.png" alt="Your profile picture" />
+				<h3>Tina Kennard</h3>
 				
-				<a href="javascript:alert('opens the profile edit page');;window.location.assign('profile-edit.html');" type="button" title="Button to edit my profile">Edit Profile</a>
+				<a href="javascript:alert('opens the matchmake page');window.location.assign('matchmake.html');" type="button" title="Matchmake Tina Kennard">Matchmake</a>
+				|
+				<a href="javascript:alert('opens the date popup');" type="button" title="Invite Tina to a date">Invite to a date</a>
+				|
+				<a href="javascript:alert('opens a popup confirming disconnecting/blocking');" type="button" title="Disconnect from Tina">Disconnect</a>
+				|
+				<a href="javascript:alert('notifies the administrators to have a look at the profile');" type="button" title="Report Tina's profile">Report profile</a>
 				
 				<p>Born March 7, 1971 (age 41) in Singapore, Singapore, lives in Singapore, Singapore. 25 friends on FreyaLove</p>
 				<p>Speaks English, Hokkien, Mandarin, French</p>
 				<p>About text... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas faucibus mollis interdum. Cras mattis consectetur purus sit amet fermentum. Donec ullamcorper nulla non metus auctor fringilla. Curabitur blandit tempus porttitor.</p>
 				
 				<!-- MY FACEBOOK LIKES -->
-				<h2>My Likes from Facebook</h2>
+				<h2>Tina's Likes from Facebook</h2>
 				
 				<ul id="profile-likes">
 					<li><em>Music:</em> Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Commodo, Sit Elit Sem, Fusce</li>
@@ -46,8 +52,28 @@
 					<li><em>Inspirational People:</em> Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo</li>
 				</ul>
 
+				<!-- FRIENDS ON FL -->
+				<h2>Tina's Friends on FreyaLove: 25</h2>
+
+				<!-- USER PREVIEW MODULE SMALL -->
+				<div class="user-preview small">
+					<img src="./dummy/user3.png" alt="Picture of Anabella Hernandez" />
+					<a href="javascript:alert('opens the FOF profile page');window.location.assign('profile-fof.html');" title="Link to the profile page of Anabella Hernandez">Anabella Hernandez</a>
+					<p class="al">aged 41, in Singapore</p>
+					<p class="likes"><em>Likes:</em> Twilight, Justin Bieber, Drag Racing, Fusce Elit, Malesuada, Ullam</p>
+				</div>
+				<!-- USER PREVIEW MODULE SMALL -->
+				<div class="user-preview small">
+					<img src="./dummy/user3.png" alt="Picture of Anabella Hernandez" />
+					<a href="javascript:alert('opens the FOF profile page');window.location.assign('profile-fof.html');" title="Link to the profile page of Anabella Hernandez">Anabella Hernandez</a>
+					<p class="al">aged 41, in Singapore</p>
+					<p class="likes"><em>Likes:</em> Twilight, Justin Bieber, Drag Racing, Fusce Elit, Malesuada, Ullam</p>
+				</div>
+				<!--#include virtual="modules/user-preview-small.html" -->
+				
+
 				<!-- MY FACEBOOK QUOTES -->
-				<h2>My Favourite Quotes from Facebook</h2>
+				<h2>Tina's Favourite Quotes from Facebook</h2>
 				
 				<ul id="profile-quotes">
 					<li>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam quis risus eget urna mollis ornare vel eu leo. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec sed odio dui. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Nulla vitae elit libero, a pharetra augue. Cras mattis consectetur purus sit amet fermentum. Maecenas faucibus mollis interdum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</li>
@@ -56,7 +82,7 @@
 				</ul>
 
 				<!-- MY QUESTIONNAIRE SUMMARY -->
-				<h2>My Questionnaire</h2>
+				<h2>Tina's Questionnaire</h2>
 				<ul id="profile-questionnaire">
 					<li><em>About:</em> Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Commodo, Sit Elit Sem, Fusce</li>
 					<li><em>Age:</em> 40&ndash;50</li>
@@ -69,14 +95,23 @@
 			<!-- RIGHT COLUMN -->
 			<div id="column-right">
 			
-				<!--#include virtual="modules/dates-upcoming.html" -->
+				<!-- COMMON FRIENDS MODULE -->
+				<h2>Tina and Your Common Friends <a href="javascript:alert('opens a page that lists all the users friends');window.location.assign('friends-list.html');" class="see-more" title="See all your friends on FreyaLove">see all</a></h2>
+				
+				<ul class="tiny">
+					<li><a href="javascript:alert('opens the matching page');window.location.assign('profile-friend.html');" title="Link to the page of Bette Porter"><img src="./dummy/user1.png" alt="Picture of Bette Porter" /></a></li>
+					<li><a href="javascript:alert('opens the matching page');window.location.assign('profile-friend.html');" title="Link to the page of Bette Porter"><img src="./dummy/user1.png" alt="Picture of Bette Porter" /></a></li>
+					<li><a href="javascript:alert('opens the matching page');window.location.assign('profile-friend.html');" title="Link to the page of Bette Porter"><img src="./dummy/user1.png" alt="Picture of Bette Porter" /></a></li>
+					<li><a href="javascript:alert('opens the matching page');window.location.assign('profile-friend.html');" title="Link to the page of Bette Porter"><img src="./dummy/user1.png" alt="Picture of Bette Porter" /></a></li>
+				</ul>
+				<p>You were introduced by <a href="javascript:alert('opens the matching page');window.location.assign('profile-friend.html');" title="Link to the page of Bette Porter">Bette Porter</a>.</p>
 
-				<!--#include virtual="modules/friends-list-right.html" -->
+				<!--#include virtual="modules/dates-upcoming.html" -->
 
 				<!--#include virtual="modules/recent-activity.html" -->
 
 				<!--#include virtual="modules/top-matchmakers.html" -->				
-				
+							
 			</div>
 		</div>
 	</section>
