@@ -105,6 +105,9 @@ section#popup-dates {
 div.user-preview {
 	float:left;
 	width: 328px;}
+div.user-preview img {
+	float: left;
+	margin-bottom: 20px;}
 
 div.small img, div.medium img {
 	width: 104px;
