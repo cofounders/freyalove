@@ -20,6 +20,13 @@ h2 {
 ul li {
 	display: inline-block;
 	float: left;}
+ul.carousel {
+	width: 100px;
+	margin: 0 auto;
+	height: 20px;
+	background-color: grey;
+	clear:both;}
+
 
 /* MAIN MODULES */
 
@@ -63,12 +70,6 @@ section#main {
 div#column-left {
 	float: left;
 	width: 664px;}
-div#column-left ul {
-	width: 100px;
-	margin: 0 auto;
-	height: 20px;
-	background-color: grey;
-	clear:both;}
 
 div#column-right {
 	float: left;
@@ -108,9 +109,12 @@ div.small img, div.medium img {
 	height: 104px;}
 	
 div.tiny img, ul.tiny img {
+	float: left;
 	width: 60px;
 	height: 60px;}
-	
+div.tiny p {
+	float: left;
+	width: 196px;}
 	
 /* INDEX SPECIFIC */
 div#column-left div#welcome-message {

@@ -9,85 +9,8 @@
 </head>
 <body>
 
-	<!-- HEADER -->
-	<section id="header">
-		<div class="wrapper">
-			<h1><a href="javascript:alert('leads to the home page');window.location.assign('index-fresh.html');" title="Go to the FreyaLove home">FreyaLove</a></h1>
+	<!--#include virtual="header.html" -->
 		
-			<form id="nav-search" method="get" name="nav-search" action="#" role="search">
-	           	<input type="text" maxlength="100" />
-	        </form>
-	        
-	        <ul id="nav-popups">
-	        	<li><a href="javascript:toggle('popup-notifications');" title="Show Notifications">Notifications</a></li>
-	        	<li><a href="javascript:toggle('popup-messages');" title="Show Messages">Messages</a></li>
-	        	<li><a href="javascript:toggle('popup-dates');" title="Show Dates">Dates</a></li>
-	        </ul>
-	        
-	        <a id="nav-name" href="javascript:alert('leads to the user profile');window.location.assign('profile.html');" title="Go to my profile">Bette Porter</a>
-	        
-	        <a id="nav-logout" href="javascript:alert('logs the user out');" title="Logout from Freya Love">Logout</a>
-		</div>
-	</section>
-	
-	<!-- POPUP FOR NOTIFICATIONS -->
-	<section class="popup" id="popup-notifications">
-		<h2>Notifications</h2>
-		<ul>
-			<li><a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a> smiled at you. Smile back.</li>
-			<li><a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a> smiled at you. Smile back.</li>
-			<li><a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a> thinks that you would make a great match for <a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a>. Respond to introduction.</li>
-			<li><a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a> smiled at you. Smile back.</li>
-		</ul>
-	</section>
-	
-	<!-- POPUP FOR MESSAGES -->
-	<section class="popup" id="popup-messages">
-		<h2>Messages <a href="javascript:alert('opens a page that lists all messages');window.location.assign('messages.html');" class="see-all" title="See all messages">see all</a></h2>
-		<ul>
-			<li>
-				<a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a>:
-				Hey Freya, how…
-				<span class="timestamp">2 days ago</span>
-			</li>
-			<li>
-				<a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a>:
-				Hey Freya, how…
-				<span class="timestamp">2 days ago</span>
-			</li>
-			<li>
-				<a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a>:
-				Hey Freya, how…
-				<span class="timestamp">2 days ago</span>
-			</li>
-			<li>
-				<a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a>:
-				Hey Freya, how…
-				<span class="timestamp">2 days ago</span>
-			</li>
-		</ul>
-	</section>
-			
-	<!-- POPUP FOR DATES -->
-	<section class="popup" id="popup-dates">
-		<ul>
-			<li><a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a> wants to meet on Thursday at 3pm at Somerset 313. <a href="javascript:alert('opens the direct reply form below');" title="RSVP to Jenny Schecter's invitation">RSVP now.</li>
-			<li>
-				Meet <a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a> on Saturday at 3pm at Somerset 313.
-				<form id="rsvp" method="get" name="reply" action="#" role="reply">
-	    	       	<input type="text" maxlength="100" />
-	    	       	<input type="button" name="Decline" />
-	    	       	<input type="button" name="Confirm" />
-	    	    </form>
-			</li>
-			<li>
-				<a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a> declined your invite to meet on Tuesday at 3pm at Somerset 313:
-				<p class="comment">Sorry dear, I have a meeting then, I'll send you an invite for Thursday instead.</p>
-			</li>
-			<li><a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a> wants to meet on Thursday at 3pm at Somerset 313.</li>
-		</ul>
-	</section>
-	
 	<!-- MAIN SECTION -->
 	<section id="main">
 		<div class="wrapper">
@@ -141,7 +64,7 @@
 				</div>
 
 				<!-- CAROUSEL -->
-				<ul><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li></ul>
+				<ul class="carousel"><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li></ul>
 
 				
 				<!-- MATCH FRIENDS -->
@@ -193,7 +116,7 @@
 					<li><a href="javascript:alert('opens the matching page');window.location.assign('profile-friend.html');" title="Link to the page of Jenny Schecter"><img src="./dummy/user1.png" alt="Picture of Jenny Schecter" /></a></li>
 					<li><a href="javascript:alert('opens the matching page');window.location.assign('profile-friend.html');" title="Link to the page of Jenny Schecter"><img src="./dummy/user1.png" alt="Picture of Jenny Schecter" /></a></li>
 				</ul>
-				<p><a href="javascript:alert('opens the FB invite popup');window.location.assign('fb-invite.html');" title="Invite more friends from Facebook">Invite more friends from Facebook</a></p>
+				<a href="javascript:alert('opens the FB invite popup');window.location.assign('fb-invite.html');" title="Invite more friends from Facebook">Invite more friends from Facebook</a>
 
 				<!-- RECENT ACTIVITY MODULE -->
 				<h2>Recent Activity</h2>
@@ -219,17 +142,7 @@
 			</div>
 		</div>
 	</section>
+
+	<!--#include virtual="footer.html" -->
 	
-	<!-- FOOTER MODULE -->
-	<section id="footer">
-		<p>
-			<a href="javascript:alert('opens the about page');window.location.assign('about.html');" title="Find out all about Freya Love">About</a>
-			|
-			<a href="javascript:alert('opens the faq page');window.location.assign('faq.html');" title="Read the Frequently Asked Questions about Freya Love">F.A.Q.</a>
-			|
-			<a href="javascript:alert('opens the t&c page');window.location.assign('tnc.html');" title="REad the Terms and Conditions of Freya Love">Terms &amp; Conditions</a>
-			&mdash;
-			&copy; Copyright FreyaLove 2012
-		</p>
-	</section>
 </body>
