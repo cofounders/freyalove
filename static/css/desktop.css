@@ -10,6 +10,14 @@ body {
 
 a {
 	text-decoration: none;}
+a.button {
+	clear: both;
+	color: white;
+	height: 2em;
+	text-align: center;
+	display: block;
+	background-color: blue;
+	border: 1px solid black;}
 
 h2 {
 	clear: both;
@@ -132,14 +140,6 @@ div#column-left div#facebook-ad img {
 	float: left;
 	width: 60px;
 	height: 60px;}
-div#column-left div#facebook-ad a {
-	clear: both;
-	color: white;
-	height: 2em;
-	text-align: center;
-	display: block;
-	background-color: blue;
-	border: 1px solid black;}
 	
 div.match-preview {
 	width: 328px;

@@ -1,0 +1,5 @@
+div#column-left ul#messaging-tabs li {
+	display: block;
+	background: #ccc;
+	border: 1px solid #999;
+	padding: 5px 20px;}
