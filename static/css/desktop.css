@@ -36,6 +36,9 @@ ul.carousel {
 	height: 20px;
 	background-color: grey;
 	clear:both;}
+	
+input {
+	border: 1px solid #333;}
 
 
 /* MAIN MODULES */
