@@ -28,16 +28,18 @@ def create_profile(profile_instance):
 		print "Created profile: %d" % profile_instance.id
 		return profile_instance
 
-"""
+
 p = Profile()
 p.fb_id = "10151211264108098"
 p.first_name = "Kenny"
 p.last_name = "Shen"
 p.fb_username = "kennyshen"
 create_profile(p)
-"""
+
 
 # DESTROY!
+"""
 p = Profile.objects.all()
 for x in p:
 	x.delete()
+"""
