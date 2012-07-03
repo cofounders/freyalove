@@ -131,6 +131,7 @@ INSTALLED_APPS = (
 
     # 3rd party
     'south',
+    'djangorestframework',
 
     # Testing/dbugging, turn off before deployment
     'debug_toolbar',
