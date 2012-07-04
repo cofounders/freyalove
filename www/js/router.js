@@ -8,7 +8,7 @@ define([
 		},
 
 		index: function () {
-			console.log("Default landing page");
+			console.log('Default landing page');
 		}
 
 	});
