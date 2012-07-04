@@ -4,11 +4,20 @@ define([
 	return Backbone.Router.extend({
 
 		routes: {
-			'': 'index'
+			'': 'landing',
+			'dashboard': 'dashboard'
 		},
 
-		index: function () {
-			console.log('Default landing page');
+		landing: function () {
+			if (app.session) {
+				app.router.navigate('dashboard');
+			} else {
+				app.useLayout('landing');
+			}
+		},
+
+		dashboard: function () {
+			app.useLayout('dashboard');
 		}
 
 	});

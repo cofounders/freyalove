@@ -3,13 +3,9 @@ define([
 	'Underscore',
 	'Mustache',
 	'Backbone',
-	'plugins/backbone.layoutmanager',
-	'GoogleAnalytics'
-], function ($, _, Mustache, Backbone, LayoutManager, GoogleAnalytics) {
+	'plugins/backbone.layoutmanager'
+], function ($, _, Mustache, Backbone, LayoutManager) {
 
-	GoogleAnalytics.track('UA-32964267-1');
-
-	// Configure LayoutManager with Backbone Boilerplate defaults.
 	Backbone.LayoutManager.configure({
 
 		paths: {
@@ -18,7 +14,7 @@ define([
 		},
 
 		fetch: function (path) {
-			$.get(name, this.async());
+			$.get(path + '.html', this.async());
 		},
 
 		render: function (template, context) {
@@ -29,12 +25,9 @@ define([
 
 	return _.extend({
 
-		root: '/',
+		el: $('body'),
 
-		// Create a custom object with a nested Views object.
-		module: function (additionalProps) {
-			return _.extend({ Views: {} }, additionalProps);
-		},
+		root: '/',
 
 		useLayout: function (name) {
 			if (this.layout) {
@@ -45,13 +38,13 @@ define([
 				}
 			}
 
-			this.layout = new Backbone.Layout({
-				template: name,
-				className: "layout " + name,
-				id: "layout"
+			this.layout = new Backbone.LayoutManager({
+				className: 'layout ' + name,
+				id: 'layout',
+				template: name
 			});
 
-			$("#main").empty().append(this.layout.el);
+			this.el.empty().append(this.layout.el);
 			this.layout.render();
 			return this.layout;
 		}
