@@ -7,7 +7,17 @@
 1. Install [Node.js/NPM](http://nodejs.org/)
 1. Set up the dependencies: `npm install -g grunt stylus https://github.com/h5bp/node-build-script/tarball/master`
 1. Run `h5bp`
-1. Point Nginx at `./publish`. Best served chilled.
+1. Set up Nginx to serve `./publish` and allow client-side route handling.
+
+        server {
+          listen 80;
+          server_name www.freyalove.com;
+          root /var/www/freyalove.com/www/publish;
+          index index.html;
+          # Let the Backbone.js router handle internal app paths
+          location ~ ^/(css|fonts|img|js|templates)/ {}
+          location / { try_files $uri $uri/ /index.html; }
+        }
 
 ## Development Guidelines
 
