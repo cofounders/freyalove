@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 
 		output: 'publish',
 
-		exclude: '.git* build/** node_modules/** grunt.js package.json *.md'.split(' '),
+		exclude: '.git* build/** node_modules/** grunt-stylus grunt.js package.json *.md'.split(' '),
 
 		clean: {
 			staging: ['<config:staging>'],
