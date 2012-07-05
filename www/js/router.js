@@ -5,15 +5,16 @@ define([
 
 		routes: {
 			'': 'landing',
-			'dashboard': 'dashboard'
+			'dashboard': 'dashboard',
+			'*path': '404'
+		},
+
+		404: function (path) {
+			console.log('not found', path);
 		},
 
 		landing: function () {
-			if (app.session) {
-				app.router.navigate('dashboard');
-			} else {
-				app.useLayout('landing');
-			}
+			app.useLayout('landing');
 		},
 
 		dashboard: function () {
