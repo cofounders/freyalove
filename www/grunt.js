@@ -56,7 +56,7 @@ module.exports = function(grunt) {
 
 		usemin: {
 			css: ['**/*.css'],
-			html: ['**/*.html']
+			html: ['index.html']
 		},
 
 		html: {
