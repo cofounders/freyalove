@@ -1,6 +1,12 @@
 define([
-	'app'
-], function (app) {
+	'jQuery', 'Underscore', 'app',
+	'modules/Header',
+	'modules/Footer'
+], function (
+	$, _, app,
+	Header,
+	Footer
+) {
 	return Backbone.Router.extend({
 
 		routes: {
@@ -18,7 +24,11 @@ define([
 		},
 
 		dashboard: function () {
-			app.useLayout('dashboard');
+			app.useLayout('dashboard')
+				.setViews({
+					'.partial.header': new Header.Views.Top(),
+					'.partial.footer': new Footer.Views.End()
+				});
 		}
 
 	});

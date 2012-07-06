@@ -1,9 +1,6 @@
-define([
-	'jQuery',
-	'app',
-	'router',
-	'plugins/backbone.layoutmanager'
-], function ($, app, Router) {
+define(
+['jQuery', 'app', 'router'],
+function ($,  app, Router) {
 
 	app.router = new Router();
 
