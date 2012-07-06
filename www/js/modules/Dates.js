@@ -10,8 +10,8 @@ function($, _, Mustache, Backbone, app) {
 
 		Views: {
 
-			RecentActivity: Backbone.View.extend({
-				template: 'recent-activity'
+			ListRight: Backbone.View.extend({
+				template: 'dates-upcoming'
 			})
 
 		}

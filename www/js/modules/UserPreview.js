@@ -10,9 +10,13 @@ function($, _, Mustache, Backbone, app) {
 
 		Views: {
 
-			RecentActivity: Backbone.View.extend({
-				template: 'recent-activity'
+			Small: Backbone.View.extend({
+				template: 'user-preview-small'
+			}),
+			Medium: Backbone.View.extend({
+				template: 'user-preview-medium'
 			})
+
 
 		}
 

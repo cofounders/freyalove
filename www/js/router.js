@@ -1,17 +1,21 @@
 define([
 	'jQuery', 'Underscore', 'app',
-	'modules/Header',
+	'modules/Dates',
 	'modules/Footer',
 	'modules/Friends',
+	'modules/Header',
 	'modules/Notifications',
-	'modules/Matchmakers'
+	'modules/Matchmakers',
+	'modules/UserPreview'
 ], function (
 	$, _, app,
-	Header,
+	Dates,
 	Footer,
 	Friends,
+	Header,
 	Notifications,
-	Matchmakers
+	Matchmakers,
+	UserPreview
 ) {
 	return Backbone.Router.extend({
 
@@ -32,11 +36,14 @@ define([
 		dashboard: function () {
 			app.useLayout('dashboard')
 				.setViews({
-					'.header-top': new Header.Views.Top(),
+					'.dates-upcoming': new Dates.Views.ListRight(),
 					'.footer-end': new Footer.Views.End(),
 					'.friends-list-right': new Friends.Views.ListRight(),
+					'.header-top': new Header.Views.Top(),
 					'.recent-activity': new Notifications.Views.RecentActivity(),
-					'.top-matchmakers': new Matchmakers.Views.Top()
+					'.top-matchmakers': new Matchmakers.Views.Top(),
+					'.user-preview-medium': new UserPreview.Views.Medium(),
+					'.user-preview-small': new UserPreview.Views.Small()
 				});
 		}
 
