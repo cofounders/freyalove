@@ -1,4 +1,4 @@
-define(function() {
+define(function () {
 	return {
 		track: function(accountId) {
 			var _gaq = window._gaq = _gaq || [],
