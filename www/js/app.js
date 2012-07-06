@@ -9,8 +9,8 @@ define([
 	Backbone.LayoutManager.configure({
 
 		paths: {
-			layout: 'templates/layouts/',
-			template: 'templates/'
+			layout: '/templates/layouts/',
+			template: '/templates/'
 		},
 
 		fetch: function (path) {

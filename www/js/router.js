@@ -10,7 +10,7 @@ define([
 		},
 
 		404: function (path) {
-			console.log('not found', path);
+			app.useLayout('404');
 		},
 
 		landing: function () {
