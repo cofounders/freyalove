@@ -19,12 +19,16 @@ define([
 ) {
 	return Backbone.Router.extend({
 
+		// Paths
+
 		routes: {
 			'': 'landing',
 			'dashboard': 'dashboard',
 			'index-fresh': 'index-fresh',
 			'*path': '404'
 		},
+
+		// Handlers
 
 		404: function (path) {
 			app.useLayout('404');
@@ -46,15 +50,13 @@ define([
 					'.user-preview-small': new UserPreview.Views.Small()
 				});
 		},
-		
+
 		'index-fresh': function () {
 			app.useLayout('index-fresh')
 				.setViews({
 					'.header-top': new Header.Views.Top(),
 					'.footer-end': new Footer.Views.End(),
-
 					'.user-preview-medium': new UserPreview.Views.Medium(),
-
 					'.dates-upcoming': new Dates.Views.ListRight(),
 					'.friends-list-right': new Friends.Views.ListRight(),
 					'.recent-activity': new Notifications.Views.RecentActivity(),
