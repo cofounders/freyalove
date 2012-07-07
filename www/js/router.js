@@ -47,7 +47,7 @@ define([
 				});
 		},
 		
-		index-fresh: function () {
+		'index-fresh': function () {
 			app.useLayout('index-fresh')
 				.setViews({
 					'.header-top': new Header.Views.Top(),
