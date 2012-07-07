@@ -10,7 +10,7 @@ define([
 
 		paths: {
 			layout: '/templates/layouts/',
-			template: '/templates/'
+			template: '/templates/views/'
 		},
 
 		fetch: function (path) {
