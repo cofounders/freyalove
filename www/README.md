@@ -7,7 +7,12 @@
 1. Install [Node.js/NPM](http://nodejs.org/)
 1. Set up the dependencies: `npm install -g grunt stylus https://github.com/h5bp/node-build-script/tarball/master`
 1. Run `h5bp`
-1. Set up Nginx to serve `./publish` and allow client-side route handling.
+1. For local develpoment, add the following entries to `/etc/hosts` (Mac: `/private/etc/hosts` Win: `%SYSTEMROOT%\system32\drivers\etc\hosts`)
+
+        127.0.0.1     freyalove.localhost
+        127.0.0.1     dev.freyalove.localhost
+
+1. **Nginx** Set up Nginx to serve `./publish` and allow client-side route handling.
 
         server {
           listen 80;
@@ -18,6 +23,31 @@
           location ~ ^/(css|fonts|img|js|templates)/ {}
           location / { try_files $uri $uri/ /index.html; }
         }
+
+  **Apache** Update your http.conf to enable vhosts and update httpd-vhosts.config file and use this template (but change the paths).
+
+        <VirtualHost *:80>
+          ServerName freyalove.localhost
+          DocumentRoot "/Users/username/Sites/freyalove/www/publish"
+          <Directory /Users/username/Sites/freyalove/www/publish>
+            AllowOverride All
+            Order allow,deny
+            Allow from all
+          </Directory>
+        </VirtualHost>
+
+        <VirtualHost *:80>
+          ServerName dev.freyalove.localhost
+          DocumentRoot "/Users/username/Sites/freyalove/www"
+          <Directory /Users/username/Sites/freyalove/www>
+            AllowOverride All
+            Order allow,deny
+            Allow from all
+          </Directory>
+        </VirtualHost>
+
+1. Run `h5bp`
+1. Open http://freyalove.localhost/ or http://dev.freyalove.localhost/
 
 ## Development Guidelines
 
