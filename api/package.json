@@ -19,7 +19,8 @@
 	],
 	"dependencies": {
 		"mongoose": "*",
-		"restify": "*"
+		"restify": "*",
+		"lodash": "*"
 	},
 	"keywords": []
 }
