@@ -1,5 +1,5 @@
 // Don't commit changes to this file
-// Use: git update-index --assume-unchanged <file>
+// Use: git update-index --assume-unchanged config.js
 
 var _ = require('lodash');
 

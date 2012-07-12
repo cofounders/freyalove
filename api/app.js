@@ -1,15 +1,16 @@
 var _ = require('lodash'),
-	restify = require('restify'),
-	mongoose = require('mongoose'),
-	config = require('./config');
+	config = require('./config'),
+	everyauth = require('everyauth'),
+	express = require('express'),
+	mongoose = require('mongoose');
 
 var db = mongoose.connect(config.credentials.mongodb);
 
-var server = restify.createServer({
+var server = express.createServer({
 	name: config.rest.name,
 	version: config.rest.version
 });
-server.use(restify.bodyParser({
+server.use(express.bodyParser({
 	mapParams: false
 }));
 server.listen(config.rest.port, config.rest.host, function () {

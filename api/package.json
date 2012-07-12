@@ -19,7 +19,8 @@
 	],
 	"dependencies": {
 		"mongoose": "*",
-		"restify": "*",
+		"express": "*",
+		"everyauth": "*",
 		"lodash": "*"
 	},
 	"keywords": []
