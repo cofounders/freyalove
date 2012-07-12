@@ -9,7 +9,7 @@ define('User', {
 	facebookId: String
 });
 
-console.log('user', mongoose.model('User').schema);
+//console.log('user', mongoose.model('User').schema);
 
 define('UserSummary', {
 });
