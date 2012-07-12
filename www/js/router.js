@@ -1,5 +1,5 @@
 define([
-	'jQuery', 'Underscore', 'app',
+	'jQuery', 'Underscore', 'Backbone', 'app',
 	'modules/Dates',
 	'modules/Footer',
 	'modules/Friends',
@@ -8,7 +8,7 @@ define([
 	'modules/Matchmakers',
 	'modules/UserPreview'
 ], function (
-	$, _, app,
+	$, _, Backbone, app,
 	Dates,
 	Footer,
 	Friends,
@@ -23,6 +23,7 @@ define([
 
 		routes: {
 			'': 'landing',
+			'logout': 'logout',
 			'dashboard': 'dashboard',
 			'fresh': 'fresh',
 			'matchmake': 'matchmake',
@@ -40,6 +41,35 @@ define([
 
 		landing: function () {
 			app.useLayout('landing');
+			require(['Facebook'], function (Facebook) {
+				Facebook.Event.subscribe('auth.authResponseChange', function (response) {
+					console.log('[auth.authResponseChange] The status of the session is: ' + response.status);
+					if (response.status === 'connected') {
+						Backbone.history.navigate('/dashboard', true);
+					}
+				});
+				Facebook.Event.subscribe('auth.login', function (response) {
+					console.log('[auth.login] The status of the session is: ' + response.status);
+					Backbone.history.navigate('/dashboard', true);
+				});
+				Facebook.init({
+					appId      : '415866361791508', // App ID
+					channelUrl : '//freyalove.cofounders.sg/channel.html', // Channel File
+					status     : true, // check login status
+					cookie     : true, // enable cookies to allow the server to access the session
+					xfbml      : true  // parse XFBML
+				});
+				Facebook.XFBML.parse();
+			});
+		},
+
+		logout: function () {
+			require(['Facebook'], function (Facebook) {
+				Facebook.logout(function (response) {
+					console.log('Facebook logout callback');
+				});
+				Backbone.history.navigate('', true);
+			});
 		},
 
 		dashboard: function () {

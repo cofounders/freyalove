@@ -6,6 +6,7 @@ require.config({
 
 	paths: {
 		Backbone: '//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min',
+		Facebook: '//connect.facebook.net/en_US/all',
 		jQuery: '//cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min',
 		Mustache: '//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.5.0-dev/mustache.min',
 		Underscore: '//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.3.2/lodash.min'
@@ -15,6 +16,9 @@ require.config({
 		Backbone: {
 			deps: ['Underscore', 'jQuery'],
 			exports: 'Backbone'
+		},
+		Facebook: {
+			exports: 'FB'
 		},
 		jQuery: {
 			exports: 'jQuery'

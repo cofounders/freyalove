@@ -1,17 +1,26 @@
 <div id="fb-root"></div>
 
 <script>
-
+/* * /
 window.fbAsyncInit = function () {
 	FB.init({
 		appId      : '415866361791508', // App ID
 		channelUrl : '//freyalove.cofounders.sg/channel.html', // Channel File
-		status     : true, // check login status
+		status     : false, // check login status
 		cookie     : true, // enable cookies to allow the server to access the session
 		xfbml      : true  // parse XFBML
 	});
+
+	FB.Event.subscribe('auth.authResponseChange', function (response) {
+		console.log('The status of the session is: ' + response.status);
+		if (response.status === 'connected') {
+			Backbone.history.navigate('/dashboard', true);
+		}
+	});
+
 	FB.Event.subscribe('auth.login', function (response) {
-		window.location = '/dashboard';
+		console.log('The status of the session is: ' + response.status);
+		Backbone.history.navigate('/dashboard', true);
 	});
 };
 
@@ -23,7 +32,7 @@ js = d.createElement('script'); js.id = id; js.async = true;
 js.src = "//connect.facebook.net/en_US/all.js";
 ref.parentNode.insertBefore(js, ref);
 }(document));
-
+/* */
 </script>
 
 <div class="fb-login-button" scope="email,user_checkins">Login with Facebook</div>
