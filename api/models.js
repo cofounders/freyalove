@@ -8,3 +8,50 @@ define('User', {
 	email: String,
 	facebookId: String
 });
+
+console.log('user', mongoose.model('User').schema);
+
+define('UserSummary', {
+});
+
+define('Activity', {
+});
+
+// inherit Activity
+define('Match', {
+});
+
+// inherit Match
+define('SexyTime', {
+});
+
+// inherit Activity
+define('Wink', {
+});
+
+define('MatchProposal', {
+});
+
+define('Note', {
+});
+
+define('Message', {
+});
+
+define('Conversation', {
+});
+
+define('ConversationSummary', {
+});
+
+define('FacebookFriends', {
+});
+
+define('PrivacySetting', {
+});
+
+define('Question', {
+});
+
+define('Answer', {
+});
