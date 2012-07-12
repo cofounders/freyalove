@@ -24,7 +24,7 @@ define([
 		routes: {
 			'': 'landing',
 			'dashboard': 'dashboard',
-			'fresh': 'index-fresh',
+			'fresh': 'fresh',
 			'matchmake': 'matchmake',
 			'matchmakers': 'matchmakers',
 			'message-list': 'message-list',
@@ -56,7 +56,7 @@ define([
 		},
 
 		fresh: function () {
-			app.useLayout('index-fresh')
+			app.useLayout('fresh')
 				.setViews({
 					'.header-top': new Header.Views.Top(),
 					'.footer-end': new Footer.Views.End(),
@@ -64,7 +64,7 @@ define([
 					'.recent-activity': new Notifications.Views.RecentActivity(),
 					'.top-matchmakers': new Matchmakers.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
-					'.user-preview-small': new UserPreview.Views.Small()				
+					'.user-preview-small': new UserPreview.Views.Small()					
 				});
 		},
 		matchmake: function () {
