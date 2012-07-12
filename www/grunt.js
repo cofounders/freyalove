@@ -39,12 +39,12 @@ module.exports = function(grunt) {
 		},
 
 		css: {
-			'css/desktop.css': ['css/desktop.css']
+			'css/app.css': ['css/app.css']
 		},
 
 		rev: {
 //			js: 'js/**/*.js',
-			css: 'css/desktop.css',
+			css: 'css/app.css',
 			img: 'img/**',
 			fonts: [
 				'fonts/**/*.eot',
