@@ -1,0 +1,22 @@
+div.match-left, div.match-right, div.match-center {
+	float: left;}
+.match-left, .match-right {
+	width: 440px;}
+.match-center {
+	width: 64px;}
+div.match-left img, div.match-right img {
+	width: 320px;}
+
+a#match-button {
+	width: 200px;
+	margin: 0 auto;}
+
+table.match-section {
+	width: 100%;}
+table.match-section tr th {
+	background-color: #aaa;
+	height: 100%;}
+table.match-section td {
+	padding-bottom: 20px;}
+table.match-section tr:nth-child(4n+1), table.match-section tr:nth-child(4n) {
+	background-color: #ddd;}

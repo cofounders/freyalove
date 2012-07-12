@@ -1,0 +1,13 @@
+div#column-left img#profile-pic {
+	width: 216px;
+	height: 216px;
+	float: left;}
+
+div#column-left ul#profile-likes li, div#column-left ul#profile-quotes li, div#column-left ul#profile-questionnaire li {
+	width: 328px;
+	float: left;
+	padding-bottom: 10px;}
+	
+div#column-left ul#profile-likes li em, div#column-left ul#profile-quotes li em, div#column-left ul#profile-questionnaire li em {
+	font-weight: bold;
+	font-style: normal;}
