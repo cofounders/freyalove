@@ -17,8 +17,7 @@ import facebook
 from freyalove.users.models import Profile, Blocked, Friendship
 
 
-# READ/GET
-# Returning models as resource
+# GET
 def profile_summary(request, profile_id):
 	"""
 	Return summarized information on a user profile given an id/fb_id
@@ -80,6 +79,7 @@ def profile(request, profile_id):
 	resp_data["username"] = profile.fb_username 
 	resp_data["facebook_id"] = profile.fb_id
 	resp_data["email"] = profile.email
+	resp_data["profile"] = profile.profile
 	resp_json = json.JSONEncoder().encode(resp_data)
 
 	resp = HttpResponse(resp_json, content_type="application/json")
@@ -150,7 +150,41 @@ def friends_in_freya(request, profile_id):
 	resp = HttpResponse(resp_json, content_type="application/json", status=200)
 	return resp
 
-# Resources that follow a template (e.g. URL)
+# POST
+
+def update_profile(request, profile_id):
+	try:
+		profile_id = int(profile_id)
+	except ValueError:
+		resp = HttpResponse("Bad request", status=400)
+		return resp
+	try:
+		profile = Profile.objects.get(id=profile_id)
+	except Profile.DoesNotExist:
+		try:
+			profile = Profile.objects.get(fb_id=str(profile_id))
+		except Profile.DoesNotExist:
+			resp = HttpResponse("Not found", status=404)
+			return resp
+
+	if request.method == "POST":
+		resp_data = {}
+
+		profile_desc = request.POST.get("profile_desc", None)
+		if not profile_desc:
+			resp_data["status"] = "Fail"
+
+		profile.profile = profile_desc
+		profile.save()
+		resp_data["status"] = "Success"
+
+		resp_json = json.JSONEncoder().encode(resp_data)
+
+		resp = HttpResponse(resp_json, content_type="application/json", status=200)
+		return resp
+	else:
+		resp = HttpResponse("Bad request", status=400)
+		return resp
 
 
 # Direct calls to Open Graph API
