@@ -12,7 +12,7 @@ class ProfileResource(ModelResource):
 urlpatterns = patterns('freyalove.api.views',
 
 	# get routes
+	url(r'users/init/$', 'init'),
 	url(r'users/(\d+)/profile/summary/$', 'profile_summary'),
     url(r'users/(\d+)/profile/$', 'profile'),
-    url(r'users/init/$', 'init'),
 )
