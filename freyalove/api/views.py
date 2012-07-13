@@ -142,7 +142,7 @@ def friends_in_freya(request, profile_id):
 	resp_data = {}
 	resp_data["friends"] = []
 
-	for f in friends_in_freya:
+	for profile in friends_in_freya:
 		resp_data["friends"].append({"name": profile.first_name + " " + profile.last_name , "id": profile.id, "photo": "http://graph.facebook.com/%s/picture" % profile.fb_username})
 
 	resp_json = json.JSONEncoder().encode(resp_data)
