@@ -83,8 +83,7 @@ def init(request):
 		resp = HttpResponse("Cookie not set", status=404)
 		return resp
 
-	graph = facebook.GraphAPI(cookie["access_token"])
-	profile = is_registered_user(fetch_profile(graph))
+	profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
 	resp_data = {}
 	resp_data["id"] = profile.id
