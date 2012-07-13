@@ -4,6 +4,7 @@
 
 ## imports
 from django.http import HttpResponse
+from django.conf import settings
 
 try:
 	import json
@@ -40,7 +41,6 @@ def profile_summary(request, profile_id):
 	resp_data["id"] = profile.id
 	resp_data["name"] = profile.first_name + " " + profile.last_name 
 	resp_data["photo"] = None
-	resp_data["profile"] = fetch_profile("AAAF6Om7ExBQBAK0ldAQBJGOEZAApUOfvZCuSom6WV07ZCJfQ2Ts3etNWKsgZCie9GmfMXNXPZBVhrszBd2FtcOHa4NyDuEazSG6nCOmq5PwZDZD")
 	resp_json = json.JSONEncoder().encode(resp_data)
 
 	resp = HttpResponse(resp_json, content_type="application/json")
@@ -70,11 +70,33 @@ def profile(request, profile_id):
 	resp_data["last_name"] = profile.last_name
 	resp_data["username"] = profile.fb_username 
 	resp_data["facebook_id"] = profile.fb_id
+	resp_data["email"] = profile.email
 	resp_json = json.JSONEncoder().encode(resp_data)
 
 	resp = HttpResponse(resp_json, content_type="application/json")
 	return resp
 
+def init(request):
+	# parse for token in cookie
+	cookie = facebook.get_user_from_cookie(request.cookies, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+	if not cookie:
+		resp = HttpResponse("Not found", status=404)
+		return resp
+
+	graph = facebook.GraphAPI(cookie["access_token"])
+	profile = is_registered_user(fetch_profile(graph.get_object("me")))
+
+	resp_data = {}
+	resp_data["id"] = profile.id
+	resp_data["first_name"] = profile.first_name
+	resp_data["last_name"] = profile.last_name
+	resp_data["username"] = profile.fb_username 
+	resp_data["facebook_id"] = profile.fb_id
+	resp_data["email"] = profile.email
+	resp_json = json.JSONEncoder().encode(resp_data)
+
+	resp = HttpResponse(resp_json, content_type="application/json")
+	return resp
 
 # Resources that follow a template (e.g. URL)
 
