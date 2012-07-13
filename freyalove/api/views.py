@@ -10,17 +10,41 @@ try:
 except ImportError:
 	import simplejson as json
 
+import facebook
+
 #from freyalove.matchmaker.models import MatchMaker
 from freyalove.users.models import Profile, Blocked, Friendship
 
 
 # READ/GET
 # Returning models as resource
-def matchmaker(request, matchmaker_id):
+def profile_summary(request, profile_id):
 	"""
-	Return information on a matchmaker given an id/fb_id
+	Return summarized information on a user profile given an id/fb_id
 	"""
-	pass
+	try:
+		profile_id = int(profile_id)
+	except ValueError:
+		resp = HttpResponse("Bad request", status=400)
+		return resp
+	try:
+		profile = Profile.objects.get(id=profile_id)
+	except Profile.DoesNotExist:
+		try:
+			profile = Profile.objects.get(fb_id=str(profile_id))
+		except Profile.DoesNotExist:
+			resp = HttpResponse("Not found", status=404)
+			return resp
+
+	resp_data = {}
+	resp_data["id"] = profile.id
+	resp_data["name"] = profile.first_name + " " + profile.last_name 
+	resp_data["photo"] = None
+	resp_data["profile"] = fetch_profile("AAAF6Om7ExBQBAK0ldAQBJGOEZAApUOfvZCuSom6WV07ZCJfQ2Ts3etNWKsgZCie9GmfMXNXPZBVhrszBd2FtcOHa4NyDuEazSG6nCOmq5PwZDZD")
+	resp_json = json.JSONEncoder().encode(resp_data)
+
+	resp = HttpResponse(resp_json, content_type="application/json")
+	return resp
 
 def profile(request, profile_id):
 	"""
@@ -41,19 +65,48 @@ def profile(request, profile_id):
 			return resp
 
 	resp_data = {}
+	resp_data["id"] = profile.id
 	resp_data["first_name"] = profile.first_name
 	resp_data["last_name"] = profile.last_name
 	resp_data["username"] = profile.fb_username 
+	resp_data["facebook_id"] = profile.fb_id
 	resp_json = json.JSONEncoder().encode(resp_data)
 
 	resp = HttpResponse(resp_json, content_type="application/json")
 	return resp
 
-def are_friends(request, profile1_id, profile2_id):
-	"""
-	"""
-	pass
-
 
 # Resources that follow a template (e.g. URL)
 
+
+# Direct calls to Open Graph API
+
+def fetch_profile(token):
+	graph = facebook.GraphAPI(token)
+	profile = graph.get_object("me")
+	return profile
+
+# Utils
+def is_registered_user(profile_dict):
+	"""
+	Checks if a user is already registered with us, if not, we register him
+	"""
+	if profile_dict:
+		fb_id = profile_dict["id"]
+		try:
+			profile = Profile.objects.get(fb_id=fb_id)
+			return profile
+		except Profile.DoesNotExist:
+			profile = create_freya_profile(profile_dict)
+			return profile
+
+def create_freya_profile(profile_dict):
+	profile = Profile()
+	profile.first_name = profile_dict["first_name"]
+	profile.last_name = profile_dict["last_name"]
+	profile.fb_id = profile_dict["id"]
+	profile.fb_username = profile_dict["username"]
+	profile.fb_link = profile_dict["link"]
+	profile.email = profile_dict["email"]
+	profile.save()
+	return profile

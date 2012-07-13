@@ -9,10 +9,9 @@ from freyalove.users.models import Profile
 class ProfileResource(ModelResource):
     model = Profile
 
-urlpatterns = patterns('freyalove.api.views',  
-	# drfw doodles
-	url(r'profile/drfw/$', ListOrCreateModelView.as_view(resource=ProfileResource)),
-    url(r'profile/drfw/(?P<pk>[^/]+)/$', InstanceModelView.as_view(resource=ProfileResource)),
-	# kenny doodles
-    url(r'profile/(\d+)/$', 'profile'),
+urlpatterns = patterns('freyalove.api.views',
+
+	# get routes
+	url(r'users/(\d+)/profile/summary/$', 'profile_summary'),
+    url(r'users/(\d+)/profile/$', 'profile'),
 )

@@ -6,9 +6,11 @@ from freyalove.users.managers import FriendshipManager
 import datetime
 
 class Profile(models.Model):
+    # Stuff we would infer from Facebook
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     age = models.CharField(max_length=3, blank=True)
+    email = models.CharField(max_length=100, blank=True)
 
     # Facebook info (just whacking it all here, we can always remove later)
     fb_username = models.CharField(max_length=100, blank=True)
@@ -18,6 +20,9 @@ class Profile(models.Model):
 
     # Admin controls
     banned = models.BooleanField(default=False)
+
+    # About?
+    profile = models.TextField(blank=True)
 
     def __unicode__(self):
         return self.first_name
@@ -44,3 +49,11 @@ class Friendship(models.Model):
 
     class Meta:
         unique_together = (('to_profile', 'from_profile'),)
+
+# Activities
+# Placeholders
+
+class Wink(models.Model):
+    to_profile = models.ForeignKey(Profile, related_name="wink_to")
+    from_profile = models.ForeignKey(Profile, related_name="wink_from")
+    received = models.BooleanField(default=False) # denotes read/received
