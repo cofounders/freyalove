@@ -84,7 +84,7 @@ def init(request):
 		return resp
 
 	graph = facebook.GraphAPI(cookie["access_token"])
-	profile = is_registered_user(fetch_profile(graph.get_object("me")))
+	profile = is_registered_user(fetch_profile(graph))
 
 	resp_data = {}
 	resp_data["id"] = profile.id
