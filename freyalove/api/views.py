@@ -37,10 +37,17 @@ def profile_summary(request, profile_id):
 			resp = HttpResponse("Not found", status=404)
 			return resp
 
+	cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+	if not cookie:
+		resp = HttpResponse("Cookie not set", status=404)
+		return resp
+
+	token = cookie["access_token"]
+
 	resp_data = {}
 	resp_data["id"] = profile.id
 	resp_data["name"] = profile.first_name + " " + profile.last_name 
-	resp_data["photo"] = None
+	resp_data["photo"] = fetch_profile_picture(token)
 	resp_json = json.JSONEncoder().encode(resp_data)
 
 	resp = HttpResponse(resp_json, content_type="application/json")
@@ -108,7 +115,7 @@ def fb_friends(request, profile_id):
 	friends = fetch_friends(token)
 
 	resp_data = {}
-	resp_data["friends"] = friends
+	resp_data["friends"] = friends["data"] # we will handle the "paging" link later on when we do pagination
 
 	resp_json = json.JSONEncoder().encode(resp_data)
 
@@ -124,6 +131,11 @@ def fetch_profile(token):
 	graph = facebook.GraphAPI(token)
 	profile = graph.get_object("me")
 	return profile
+
+def fetch_profile_picture(token):
+	graph = facebook.GraphAPI(token)
+	picture = graph.get_connections("me", "picture")
+	return picture
 
 def fetch_friends(token):
 	graph = facebook.GraphAPI(token)
