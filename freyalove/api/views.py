@@ -37,17 +37,19 @@ def profile_summary(request, profile_id):
 			resp = HttpResponse("Not found", status=404)
 			return resp
 
-	cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
-	if not cookie:
-		resp = HttpResponse("Cookie not set", status=404)
-		return resp
+	# Determine if we need to fetch the actual image object
+	#cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+	#if not cookie:
+	#	resp = HttpResponse("Cookie not set", status=404)
+	#	return resp
 
-	token = cookie["access_token"]
+	#token = cookie["access_token"]
 
 	resp_data = {}
 	resp_data["id"] = profile.id
 	resp_data["name"] = profile.first_name + " " + profile.last_name 
-	resp_data["photo"] = fetch_profile_picture(token)
+	#resp_data["photo"] = fetch_profile_picture(token)
+	resp_data["photo"] = "http://graph.facebook.com/%s/picture" % profile.fb_username
 	resp_json = json.JSONEncoder().encode(resp_data)
 
 	resp = HttpResponse(resp_json, content_type="application/json")
@@ -122,6 +124,32 @@ def fb_friends(request, profile_id):
 	resp = HttpResponse(resp_json, content_type="application/json", status=200)
 	return resp
 
+def friends_in_freya(request, profile_id):
+	# parse for token in cookie
+	cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+	if not cookie:
+		resp = HttpResponse("Cookie not set", status=404)
+		return resp
+
+	token = cookie["access_token"]
+	friends = fetch_friends(token)
+	friends = friends["data"]
+	friends_ids = []
+	for f in friends:
+		friends_ids.append(f["id"])
+
+	friends_in_freya = Profile.objects.filter(fb_id__in=friends_ids)
+	resp_data = {}
+	resp_data["friends"] = []
+
+	for f in friends_in_freya:
+		resp_data["friends"].append({"name": profile.first_name + " " + profile.last_name , "id": profile.id, "photo": "http://graph.facebook.com/%s/picture" % profile.fb_username})
+
+	resp_json = json.JSONEncoder().encode(resp_data)
+
+	resp = HttpResponse(resp_json, content_type="application/json", status=200)
+	return resp
+
 # Resources that follow a template (e.g. URL)
 
 
@@ -138,6 +166,11 @@ def fetch_profile_picture(token):
 	return picture
 
 def fetch_friends(token):
+	graph = facebook.GraphAPI(token)
+	friends = graph.get_connections("me", "friends")
+	return friends
+
+def fetch_all_friends(token):
 	graph = facebook.GraphAPI(token)
 	friends = graph.get_connections("me", "friends")
 	return friends
