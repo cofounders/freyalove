@@ -78,9 +78,9 @@ def profile(request, profile_id):
 
 def init(request):
 	# parse for token in cookie
-	cookie = facebook.get_user_from_cookie(request.cookies, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+	cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
 	if not cookie:
-		resp = HttpResponse("Not found", status=404)
+		resp = HttpResponse("Cookie not set", status=404)
 		return resp
 
 	graph = facebook.GraphAPI(cookie["access_token"])
