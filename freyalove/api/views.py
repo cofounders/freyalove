@@ -94,7 +94,25 @@ def init(request):
 	resp_data["email"] = profile.email
 	resp_json = json.JSONEncoder().encode(resp_data)
 
-	resp = HttpResponse(resp_json, content_type="application/json")
+	resp = HttpResponse(resp_json, content_type="application/json", status=200)
+	return resp
+
+def fb_friends(request, profile_id):
+	# parse for token in cookie
+	cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+	if not cookie:
+		resp = HttpResponse("Cookie not set", status=404)
+		return resp
+
+	token = cookie["access_token"]
+	friends = fetch_friends(token)
+
+	resp_data = {}
+	resp_data["friends"] = friends
+
+	resp_json = json.JSONEncoder().encode(resp_data)
+
+	resp = HttpResponse(resp_json, content_type="application/json", status=200)
 	return resp
 
 # Resources that follow a template (e.g. URL)
@@ -106,6 +124,11 @@ def fetch_profile(token):
 	graph = facebook.GraphAPI(token)
 	profile = graph.get_object("me")
 	return profile
+
+def fetch_friends(token):
+	graph = facebook.GraphAPI(token)
+	friends = graph.get_connections("me", "friends")
+	return friends
 
 # Utils
 def is_registered_user(profile_dict):
