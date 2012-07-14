@@ -225,6 +225,10 @@ def update_profile(request, profile_id):
 		resp = HttpResponse("Bad request", status=400)
 		return resp
 
+def create_sexytime(request):
+
+	pass
+
 
 # Direct calls to Open Graph API
 
