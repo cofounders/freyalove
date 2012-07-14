@@ -1,14 +1,16 @@
-<!-- UPCOMING DATES MODULE -->
 <h2>Upcoming Dates</h2>
 
-<!-- USER PREVIEW MODULE TINY -->
-<div class="user-preview tiny">
-	<img src="./dummy/user1.png" alt="Picture of Bette Porter" />
-	<p class="text">Meet <a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Bette Porter">Bette Porter</a> today at 3pm at Somerset 313.</p>
-</div>
+<h1>FIXME</h1>
 
-<!-- USER PREVIEW MODULE TINY -->
-<div class="user-preview tiny">
-	<img src="./dummy/user1.png" alt="Picture of Bette Porter" />
-	<p class="text">Meet <a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Bette Porter">Bette Porter</a> tomorrow at 3pm at Somerset 313.</p>
-</div>
+Hello {{this}}
+
+<!-- IF users -->
+
+	<!-- FOR ALL USERS -->
+	<div class="partial user-preview-tiny" />
+	<!-- ENDFOR -->
+
+<!-- ELSEIF no users -->
+<p>You have no dates for now, why not <a href="javascript:alert('opens the date invitation popup');" title="Invite someone to a date">create one</a>?</p>
+
+<!-- ENDIF -->

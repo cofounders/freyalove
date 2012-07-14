@@ -8,7 +8,11 @@
 		<div id="column-left">
 		
 			<!-- PEOPLE THAT SMILED AT ME -->
-			<h2>Top Matchmakers Amongst Your Friends</h2>
+			<h2>Top leaderboard Amongst Your Friends</h2>
+			
+			<div class="partial leaderboard-full" />
+			
+			<!-- TODO: shift into leaderboard-full view -->
 
 			<!--#include virtual="modules/user-preview-small.html" -->
 			
@@ -109,14 +113,14 @@
 
 		<!-- RIGHT COLUMN -->
 		<div id="column-right">
-		
-			<!--#include virtual="modules/dates-upcoming.html" -->
 
-			<!--#include virtual="modules/friends-list-right.html" -->
+			<div class="partial dates-upcoming" />	
 
-			<!--#include virtual="modules/recent-activity.html" -->
-
-			<!--#include virtual="modules/top-matchmakers.html" -->				
+			<div class="partial friends-list-right" />
+			
+			<div class="partial recent-activity" />
+			
+			<div class="partial top-leaderboard" />
 			
 		</div>
 	</div>

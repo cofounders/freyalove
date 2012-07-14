@@ -15,8 +15,10 @@ function($, _, Mustache, Backbone, app) {
 			}),
 			Medium: Backbone.View.extend({
 				template: 'user-preview-medium'
+			}),
+			Tiny: Backbone.View.extend({
+				template: 'user-preview-tiny'
 			})
-
 
 		}
 

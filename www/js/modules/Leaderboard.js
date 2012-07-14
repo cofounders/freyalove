@@ -11,7 +11,11 @@ function($, _, Mustache, Backbone, app) {
 		Views: {
 
 			Top: Backbone.View.extend({
-				template: 'top-matchmakers'
+				template: 'leaderboard-top'
+			}),
+
+			Full: Backbone.View.extend({
+				template: 'leaderboard-full'
 			})
 
 		}
