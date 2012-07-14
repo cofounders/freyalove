@@ -173,8 +173,7 @@ def fetch_sexytimes(request):
 	resp_data = {}
 	resp_data['sexytimes'] = []
 
-
-	if not has match:
+	if not has_match:
 		pass
 	else:
 		sexytimes = Match.objects.fetch_sexytimes(profile)
