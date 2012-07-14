@@ -54,10 +54,10 @@ define([
 		},
 
 		landing: function () {
-			app.useLayout('landing');
-			require(['Facebook'], function (Facebook) {
-				Facebook.XFBML.parse();
-			});
+			app.useLayout('landing')
+				.setViews({
+					'.footer-end': new Footer.Views.End()
+				});
 		},
 
 		logout: function () {
