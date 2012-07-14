@@ -1,0 +1,70 @@
+*
+	font-family 'BariolRegular', Helvetica, Arial, sans-serif
+	box-sizing border-box
+
+body
+	font-size $base-font-size
+	line-height 1.25  // 20 px
+	background url('../img/bg.jpg') #efefef repeat
+
+.wrapper
+	position relative
+	width $page-width
+	margin 0 auto
+
+section.main
+	clear both
+	font-size 0
+
+#fb-root
+	display none
+
+input
+	border 1px solid #333
+
+section.popup
+	width 200px
+	z-index 5
+	position absolute
+	top 40px
+	background-color grey
+	display none
+
+#popup-notifications
+	left 680px
+
+#popup-messages
+	left 680px
+
+#popup-dates
+	left 680px
+
+div.user-preview
+	float left
+	width 328px
+
+div.user-preview img
+	float left
+	margin-bottom 20px
+
+div.small, div.medium
+	img
+		width 104px
+		height 104px
+
+div.tiny, ul.tiny
+	img
+		float left
+		width 60px
+		height 60px
+
+div.tiny p
+	float left
+	width 196px
+
+div.match-preview
+	width 328px
+	float left
+
+	a
+		display inline-block

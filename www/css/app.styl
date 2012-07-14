@@ -1,67 +1,16 @@
 @import 'mixins/malarkey'
 @import 'mixins/nib'
-@import 'mixins/normalize'
 
+@import 'mixins/normalize'
 global-normalize()
 
 @import 'variables'
 @import 'fonts'	
+@import 'common'
+@import 'typography'
 
-@import 'layout' //main, wrapper
-@import 'typography' //h1 to h6, hyperlinks, lists
-@import 'forms'
+@import 'modules/leaderboard'
+@import 'modules/header'
+@import 'modules/footer'
 
-@import 'header'
-@import 'footer'
-@import 'columnleft'
-@import 'columnright'
-
-#fb-root
-	display none
-
-section.popup
-	width 200px
-	z-index 5
-	position absolute
-	top 40px
-	background-color grey
-	display none
-
-#popup-notifications
-	left 680px
-
-#popup-messages
-	left 680px
-
-#popup-dates
-	left 680px
-
-div.user-preview
-	float left
-	width 328px
-
-div.user-preview img
-	float left
-	margin-bottom 20px
-
-div.small, div.medium
-	img
-		width 104px
-		height 104px
-
-div.tiny, ul.tiny
-	img
-		float left
-		width 60px
-		height 60px
-
-div.tiny p
-	float left
-	width 196px
-
-div.match-preview
-	width 328px
-	float left
-
-	a
-		display inline-block
+@import 'layouts/twocolumns'
