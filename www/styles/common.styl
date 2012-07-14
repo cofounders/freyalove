@@ -1,23 +1,26 @@
-@import 'mixins/malarkey'
-@import 'mixins/nib'
-@import 'mixins/normalize'
+*
+	font-family 'BariolRegular', Helvetica, Arial, sans-serif
+	box-sizing border-box
 
-global-normalize()
+body
+	font-size $base-font-size
+	line-height 1.25  // 20 px
+	background url('../img/bg.jpg') #efefef repeat
 
-@import 'variables'
-@import 'fonts'	
+.wrapper
+	position relative
+	width $page-width
+	margin 0 auto
 
-@import 'layout' //main, wrapper
-@import 'typography' //h1 to h6, hyperlinks, lists
-@import 'forms'
-
-@import 'header'
-@import 'footer'
-@import 'columnleft'
-@import 'columnright'
+section.main
+	clear both
+	font-size 0
 
 #fb-root
 	display none
+
+input
+	border 1px solid #333
 
 section.popup
 	width 200px
@@ -49,13 +52,13 @@ div.small, div.medium
 		width 104px
 		height 104px
 
-div.tiny, ul.tiny
+div.dates, ul.dates
 	img
 		float left
 		width 60px
 		height 60px
 
-div.tiny p
+div.dates p
 	float left
 	width 196px
 

@@ -49,5 +49,4 @@ publish
 node_modules
 
 # build script local files
-css/app.css
-css/utils.css
+styles/*.css
