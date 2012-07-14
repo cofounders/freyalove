@@ -1,5 +1,18 @@
 # freya love
 
+## pre-bootstrapping
+
+1. You need to install [Python][2] (preferably 2.6+ but not version 3+ - why you say? Read [this][3].).
+
+2. After you have Python instead, you need to download [virtualenv][4]
+
+        tar zxvf virtualenv-x-x-x.tar.gz
+
+        cd virtualenv-x-x-x
+
+        python setup.py install
+
+
 ## bootstrapping locally
 
 1. create a virtualenv instance and activate it
@@ -54,3 +67,6 @@ The Django app generally relies on [facebook-sdk][1] as the only third party lib
 1. please add *.pyc to your gitignore.
 
 [1]: https://github.com/pythonforfacebook/facebook-sdk
+[2]: http://www.python.org
+[3]: http://stackoverflow.com/questions/4486589/should-i-learn-python-3-or-2-x/4486603#4486603
+[4]: http://pypi.python.org/pypi/virtualenv/#downloads
