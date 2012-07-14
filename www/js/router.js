@@ -145,8 +145,8 @@ define([
 				});
 		},
 
-		Leaderboard: function () {
-			app.useLayout('Leaderboard')
+		leaderboard: function () {
+			app.useLayout('leaderboard')
 				.setViews({
 					'.header-top': new Header.Views.Top(),
 					'.footer-end': new Footer.Views.End(),
