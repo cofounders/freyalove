@@ -12,7 +12,7 @@
 
 5. create a local_settings.py file to hold your local database configuration, project paths etc. an example:
 
-	DATABASES = {
+    DATABASES = {
 
     'default': {
 
@@ -26,14 +26,15 @@
 
         'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
 
-	    'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
+        'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
 
-	    }
-	}
+        }
+    }
 
-	FACEBOOK_ID = "1234567890"
-	
-	FACEBOOK_SECRET = "xxx1zCANdsafHAZasfsdfFREYALOVE"
+    FACEBOOK_ID = "1234567890"
+
+    FACEBOOK_SECRET = "xxx1zCANdsafHAZasfsdfFREYALOVE"
+    
 
 6. run `python manage.py syncdb' # this tells Django to prep and setup the database
 
