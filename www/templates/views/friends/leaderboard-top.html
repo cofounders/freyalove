@@ -1,10 +1,19 @@
 <!-- TODO: iterate over elements -->
-<h2>Top leaderboard <a href="javascript:alert('opens the matchmaker ranking page');window.location.assign('leaderboard.html');" class="see-more" title="See the best leaderboard amongst your friends">see all</a></h2>
-
+<!-- IF users -->
 <ol>
-	<li><a href="/profile" title="Link to the profile page of Bette Porter">Bette Porter</a>: 1204 points</li>
+
+	<!-- FOR ALL USERS -->
+	<li><div class="bblm-user-preview-points" /></li>
+
+	<!-- TODO: remove -->
 	<li><a href="/profile" title="Link to the profile page of Alice Pieszecki">Alice Pieszecki</a>: 905 points</li>
 	<li><a href="/profile" title="Link to the profile page of Tina Kennard">Tina Kennard</a>: 802 points</li>
 	<li><a href="/profile" title="Link to the profile page of Georgina Huxtable">Georgina Huxtable</a>: 352 points</li>
 	<li><a href="/profile" title="Link to the profile page of Jenny Schecter">Jenny Schecter</a>: 102 points</li>
+	<!-- ENDFOR -->
 </ol>
+
+<!-- ELSEIF no users -->
+<p>You have no friends yet why not <a href="javascript:alert('opens the facebook invitation screen');" title="Invite Facebook friends">invite some from Facebook</a>?</p>
+<!-- ENDIF -->
+
