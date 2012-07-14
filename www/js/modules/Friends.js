@@ -1,8 +1,9 @@
-define(['jQuery', 'Underscore', 'Mustache', 'Backbone', 'app'],
-function($, _, Mustache, Backbone, app) {
+define(['jQuery', 'Underscore', 'Mustache', 'Backbone', 'app', "modules/UserPreview"],
+function($, _, Mustache, Backbone, app, UserPreview) {
 	return {
 
 		Model: Backbone.Model.extend({
+			defaults: {name: "wolf", age: 65}
 		}),
 
 		Collection: Backbone.Collection.extend({

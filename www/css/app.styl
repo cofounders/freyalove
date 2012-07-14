@@ -7,18 +7,10 @@ global-normalize()
 @import 'variables'
 @import 'fonts'	
 
-*
-	font-family 'BariolBold', Helvetica, Arial, sans-serif
-	box-sizing border-box
-
-body
-	font-size $base-font-size
-	line-height 1.25em  // 20 px
-	background url('../img/bg.jpg') #efefef repeat
-
-@import 'typography' //h1 to h6, hyperlinks, lists
-
 @import 'layout' //main, wrapper
+@import 'typography' //h1 to h6, hyperlinks, lists
+@import 'forms'
+
 @import 'header'
 @import 'footer'
 @import 'columnleft'
@@ -26,9 +18,6 @@ body
 
 #fb-root
 	display none
-
-input
-	border 1px solid #333
 
 section.popup
 	width 200px

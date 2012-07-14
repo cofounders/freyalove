@@ -5,7 +5,7 @@ define([
 	'modules/Friends',
 	'modules/Header',
 	'modules/Notifications',
-	'modules/Matchmakers',
+	'modules/Leaderboard',
 	'modules/UserPreview'
 ], function (
 	$, _, Backbone, app,
@@ -14,7 +14,7 @@ define([
 	Friends,
 	Header,
 	Notifications,
-	Matchmakers,
+	Leaderboard,
 	UserPreview
 ) {
 	return Backbone.Router.extend({
@@ -23,21 +23,34 @@ define([
 
 		routes: {
 			'': 'landing',
-			'fresh': 'fresh',
 			'dashboard': 'dashboard',
+ 			'fresh': 'fresh', // TODO: merge into dashboard
 			'inbox': 'inbox',
 			'logout': 'logout',
 			'matchmake': 'matchmake',
-			'matchmakers': 'matchmakers',
+			'Leaderboard': 'Leaderboard',
 			'message': 'message',
-			'profile': 'profile',
+			'profile': 'profile', // TODO: merge fof and friends into this
+			'terms': 'terms',
 			'*path': '404'
 		},
 
 		// Handlers
 
 		404: function (path) {
-			app.useLayout('404');
+			app.useLayout('404')
+				.setViews({
+					'.header-top': new Header.Views.Top(),
+					'.footer-end': new Footer.Views.End(),
+				});
+		},
+
+		about: function (path) {
+			app.useLayout('about')
+				.setViews({
+					'.header-top': new Header.Views.Top(),
+					'.footer-end': new Footer.Views.End(),
+				});
 		},
 
 		landing: function () {
@@ -67,13 +80,21 @@ define([
 					'.dates-upcoming': new Friends.Views.UpcomingDates(),
 					'.friends-list-right': new Friends.Views.ListRight(),
 					'.recent-activity': new Notifications.Views.RecentActivity(),
-					'.top-matchmakers': new Matchmakers.Views.Top(),
+					'.top-leaderboard': new Leaderboard.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
 					'.user-preview-small': new UserPreview.Views.Small()
 				});
 		},
+		
+		faq: function (path) {
+			app.useLayout('faq')
+				.setViews({
+					'.header-top': new Header.Views.Top(),
+					'.footer-end': new Footer.Views.End(),
+				});
+		},
 
-		fresh: function () {
+		fresh: function () { /* TODO: merge into dashboard */
 			app.useLayout('fresh')
 				.setViews({
 					'.header-top': new Header.Views.Top(),
@@ -81,7 +102,7 @@ define([
 					'.dates-upcoming': new Friends.Views.UpcomingDates(),
 					'.friends-list-right': new Friends.Views.ListRight(),
 					'.recent-activity': new Notifications.Views.RecentActivity(),
-					'.top-matchmakers': new Matchmakers.Views.Top(),
+					'.top-leaderboard': new Leaderboard.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
 					'.user-preview-small': new UserPreview.Views.Small()
 				});
@@ -95,7 +116,7 @@ define([
 					'.dates-upcoming': new Friends.Views.UpcomingDates(),
 					'.friends-list-right': new Friends.Views.ListRight(),
 					'.recent-activity': new Notifications.Views.RecentActivity(),
-					'.top-matchmakers': new Matchmakers.Views.Top(),
+					'.top-leaderboard': new Leaderboard.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
 					'.user-preview-small': new UserPreview.Views.Small()
 				});
@@ -118,21 +139,21 @@ define([
 					'.dates-upcoming': new Friends.Views.UpcomingDates(),
 					'.friends-list-right': new Friends.Views.ListRight(),
 					'.recent-activity': new Notifications.Views.RecentActivity(),
-					'.top-matchmakers': new Matchmakers.Views.Top(),
+					'.top-leaderboard': new Leaderboard.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
 					'.user-preview-small': new UserPreview.Views.Small()
 				});
 		},
 
-		matchmakers: function () {
-			app.useLayout('matchmakers')
+		Leaderboard: function () {
+			app.useLayout('Leaderboard')
 				.setViews({
 					'.header-top': new Header.Views.Top(),
 					'.footer-end': new Footer.Views.End(),
 					'.dates-upcoming': new Friends.Views.UpcomingDates(),
 					'.friends-list-right': new Friends.Views.ListRight(),
 					'.recent-activity': new Notifications.Views.RecentActivity(),
-					'.top-matchmakers': new Matchmakers.Views.Top(),
+					'.top-leaderboard': new Leaderboard.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
 					'.user-preview-small': new UserPreview.Views.Small()
 				});
@@ -146,7 +167,7 @@ define([
 					'.dates-upcoming': new Friends.Views.UpcomingDates(),
 					'.friends-list-right': new Friends.Views.ListRight(),
 					'.recent-activity': new Notifications.Views.RecentActivity(),
-					'.top-matchmakers': new Matchmakers.Views.Top(),
+					'.top-leaderboard': new Leaderboard.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
 					'.user-preview-small': new UserPreview.Views.Small()
 				});
@@ -160,9 +181,17 @@ define([
 					'.dates-upcoming': new Friends.Views.UpcomingDates(),
 					'.friends-list-right': new Friends.Views.ListRight(),
 					'.recent-activity': new Notifications.Views.RecentActivity(),
-					'.top-matchmakers': new Matchmakers.Views.Top(),
+					'.top-leaderboard': new Leaderboard.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
 					'.user-preview-small': new UserPreview.Views.Small()
+				});
+		},
+		
+		terms: function (path) {
+			app.useLayout('terms')
+				.setViews({
+					'.header-top': new Header.Views.Top(),
+					'.footer-end': new Footer.Views.End(),
 				});
 		}
 
