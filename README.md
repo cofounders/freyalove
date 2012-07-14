@@ -13,17 +13,26 @@
 5. create a local_settings.py file to hold your local database configuration, project paths etc. an example:
 
 	DATABASES = {
+
     'default': {
+
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+
         'NAME': 'freyadb',                      # Or path to database file if using sqlite3.
+
         'USER': 'xyz',                      # Not used with sqlite3.
+
         'PASSWORD': '123123',                  # Not used with sqlite3.
+
         'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
+
 	    'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
+
 	    }
 	}
 
 	FACEBOOK_ID = "1234567890"
+	
 	FACEBOOK_SECRET = "xxx1zCANdsafHAZasfsdfFREYALOVE"
 
 6. run `python manage.py syncdb' # this tells Django to prep and setup the database
