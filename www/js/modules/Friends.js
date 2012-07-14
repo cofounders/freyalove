@@ -15,7 +15,7 @@ function($, _, Mustache, Backbone, app) {
 			}),
 
 			UpcomingDates: Backbone.View.extend({
-				template: 'upcoming-dates'
+				template: 'dates-upcoming'
 			})
 
 		}

@@ -5,16 +5,19 @@
 global-normalize()
 
 *
+	font-family 'BariolBold', Helvetica, Arial, sans-serif
 	box-sizing border-box
 
 @import 'variables'
 @import 'fonts'	
 
 body
-	font-family 'Bariol', Helvetica, Arial, sans-serif
-	font-size 12pt // 16 px
+	font-size $base-font-size
 	line-height 1.25em  // 20 px
-	background url("../img/bg.jpg") #efefef repeat
+	background url('../img/bg.jpg') #efefef repeat
+
+#fb-root
+	display none
 
 a
 	color #a63e00
@@ -64,16 +67,39 @@ input
 
 div.wrapper
 	position relative
-	width 944px
+	width $page-width
 	margin 0 auto
+
+section#footer
+	background url('../img/bg_footer.jpg') #aaa repeat-x
+	clear both
+	font-size 0.8em
+	width 100%
+
+	menu
+		margin 0
+		padding 0
+
+		li
+			color #9f3647
+			display inline-block
+			padding 0 10px
+			&:after
+				content "|"
+			&:last-child:after
+				content ""
+
+	small
+		color #444444
+		position absolute
+		right 0
 
 section#header
 	width 100%
 	background-color #62228f
-	background url("../img/bg_header.jpg") purple repeat-x
+	background url('../img/bg_header.jpg') $purple repeat-x
 	font-weight 200
 	height 50px
-	margin-bottom 2.5em
 
 	h1, form, ul, a#nav-name, a#nav-logout
 		position absolute
@@ -121,7 +147,7 @@ section#header
 			padding 5px
 			font-size 0.8em
 			&:focus
-				box-shadow lighten(purple, 70%) 0px 0px 5px
+				box-shadow lighten($purple, 70%) 0px 0px 5px
 
 	ul
 		left 680px
@@ -163,7 +189,6 @@ section#header
 		text-align right
 		width 132px
 		color #d0c0dd
-		font-family 'BariolBold', Helvetica, sans-serif
 		font-size 0.8em
 		background url('../img/ln.png') no-repeat right 0
 		&:hover
@@ -180,29 +205,26 @@ section#header
 
 section#main
 	clear both
+	font-size 0
 
 #column-left
-	float left
-	width 656px
+	display inline-block
+	font-size $base-font-size
+	vertical-align top
+	width $content-width
 
 #column-right
-	float left
+	display inline-block
+	font-size $base-font-size
 	margin-left 24px
-	width 264px
+	vertical-align top
+	width $sidebar-width - @margin-left
 
 #column-right h2
 	padding-bottom 0.5em
 	border-bottom 1px solid rgba(0, 0, 0, 0.1)
 	box-shadow 0px 1px -1px 1px white
 	margin-bottom 0.3em
-
-section#footer
-	clear both
-	width 100%
-	height 80px
-	background-color grey
-	margin-top 80px
-	padding-top 20px
 
 section.popup
 	width 200px
@@ -265,5 +287,3 @@ div.match-preview
 
 	a
 		display inline-block
-
-

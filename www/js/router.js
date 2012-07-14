@@ -43,24 +43,19 @@ define([
 		landing: function () {
 			app.useLayout('landing');
 			require(['Facebook'], function (Facebook) {
-				Facebook.Event.subscribe('auth.authResponseChange', function (response) {
-					console.log('[auth.authResponseChange] The status of the session is: ' + response.status);
-					if (response.status === 'connected') {
-						Backbone.history.navigate('/dashboard', true);
-					}
-				});
-				Facebook.Event.subscribe('auth.login', function (response) {
-					console.log('[auth.login] The status of the session is: ' + response.status);
-					Backbone.history.navigate('/dashboard', true);
-				});
-				Facebook.init({
-					appId      : '415866361791508', // App ID
-					channelUrl : '//freyalove.cofounders.sg/channel.html', // Channel File
-					status     : true, // check login status
-					cookie     : true, // enable cookies to allow the server to access the session
-					xfbml      : true  // parse XFBML
-				});
 				Facebook.XFBML.parse();
+			});
+		},
+
+		logout: function () {
+			console.log('LOGGING OUT');
+			require(['Facebook'], function (Facebook) {
+				console.log('Facebook before logout');
+				Facebook.logout(function (response) {
+					console.log('Facebook logout callback');
+				});
+				console.log('Facebook after logout');
+				Backbone.history.navigate('', true);
 			});
 		},
 
