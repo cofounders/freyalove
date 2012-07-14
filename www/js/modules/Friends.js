@@ -12,6 +12,10 @@ function($, _, Mustache, Backbone, app) {
 
 			ListRight: Backbone.View.extend({
 				template: 'friends-list-right'
+			}),
+
+			UpcomingDates: Backbone.View.extend({
+				template: 'dates-upcoming'
 			})
 
 		}

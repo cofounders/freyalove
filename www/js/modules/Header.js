@@ -13,8 +13,8 @@ function($, _, Mustache, Backbone, app) {
 			Top: Backbone.View.extend({
 				template: 'header'
 			})
-
 		}
 
-	};
+	}
+
 });

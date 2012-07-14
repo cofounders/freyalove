@@ -64,6 +64,7 @@ define([
 				.setViews({
 					'.header-top': new Header.Views.Top(),
 					'.footer-end': new Footer.Views.End(),
+					'.dates-upcoming': new Friends.Views.UpcomingDates(),
 					'.friends-list-right': new Friends.Views.ListRight(),
 					'.recent-activity': new Notifications.Views.RecentActivity(),
 					'.top-matchmakers': new Matchmakers.Views.Top(),
@@ -77,11 +78,12 @@ define([
 				.setViews({
 					'.header-top': new Header.Views.Top(),
 					'.footer-end': new Footer.Views.End(),
+					'.dates-upcoming': new Friends.Views.UpcomingDates(),
 					'.friends-list-right': new Friends.Views.ListRight(),
 					'.recent-activity': new Notifications.Views.RecentActivity(),
 					'.top-matchmakers': new Matchmakers.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
-					'.user-preview-small': new UserPreview.Views.Small()					
+					'.user-preview-small': new UserPreview.Views.Small()
 				});
 		},
 
@@ -90,11 +92,12 @@ define([
 				.setViews({
 					'.header-top': new Header.Views.Top(),
 					'.footer-end': new Footer.Views.End(),
+					'.dates-upcoming': new Friends.Views.UpcomingDates(),
 					'.friends-list-right': new Friends.Views.ListRight(),
 					'.recent-activity': new Notifications.Views.RecentActivity(),
 					'.top-matchmakers': new Matchmakers.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
-					'.user-preview-small': new UserPreview.Views.Small()				
+					'.user-preview-small': new UserPreview.Views.Small()
 				});
 		},
 
@@ -112,11 +115,12 @@ define([
 				.setViews({
 					'.header-top': new Header.Views.Top(),
 					'.footer-end': new Footer.Views.End(),
+					'.dates-upcoming': new Friends.Views.UpcomingDates(),
 					'.friends-list-right': new Friends.Views.ListRight(),
 					'.recent-activity': new Notifications.Views.RecentActivity(),
 					'.top-matchmakers': new Matchmakers.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
-					'.user-preview-small': new UserPreview.Views.Small()				
+					'.user-preview-small': new UserPreview.Views.Small()
 				});
 		},
 
@@ -125,11 +129,12 @@ define([
 				.setViews({
 					'.header-top': new Header.Views.Top(),
 					'.footer-end': new Footer.Views.End(),
+					'.dates-upcoming': new Friends.Views.UpcomingDates(),
 					'.friends-list-right': new Friends.Views.ListRight(),
 					'.recent-activity': new Notifications.Views.RecentActivity(),
 					'.top-matchmakers': new Matchmakers.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
-					'.user-preview-small': new UserPreview.Views.Small()				
+					'.user-preview-small': new UserPreview.Views.Small()
 				});
 		},
 
@@ -138,11 +143,12 @@ define([
 				.setViews({
 					'.header-top': new Header.Views.Top(),
 					'.footer-end': new Footer.Views.End(),
+					'.dates-upcoming': new Friends.Views.UpcomingDates(),
 					'.friends-list-right': new Friends.Views.ListRight(),
 					'.recent-activity': new Notifications.Views.RecentActivity(),
 					'.top-matchmakers': new Matchmakers.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
-					'.user-preview-small': new UserPreview.Views.Small()				
+					'.user-preview-small': new UserPreview.Views.Small()
 				});
 		},
 
@@ -151,11 +157,12 @@ define([
 				.setViews({
 					'.header-top': new Header.Views.Top(),
 					'.footer-end': new Footer.Views.End(),
+					'.dates-upcoming': new Friends.Views.UpcomingDates(),
 					'.friends-list-right': new Friends.Views.ListRight(),
 					'.recent-activity': new Notifications.Views.RecentActivity(),
 					'.top-matchmakers': new Matchmakers.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
-					'.user-preview-small': new UserPreview.Views.Small()				
+					'.user-preview-small': new UserPreview.Views.Small()
 				});
 		}
 
