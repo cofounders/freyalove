@@ -11,19 +11,19 @@ function($, _, Mustache, Backbone, app) {
 		Views: {
 
 			Medium: Backbone.View.extend({
-				template: 'user-preview-medium'
+				template: 'userpreview/medium'
 			}),
 			Small: Backbone.View.extend({
-				template: 'user-preview-small'
+				template: 'userpreview/small'
 			}),
 			SexyTime: Backbone.View.extend({
-				template: 'user-preview-sexytime'
+				template: 'userpreview/sexytime'
 			}),
 			Points: Backbone.View.extend({
-				template: 'user-preview-points'
+				template: 'userpreview/points'
 			}),
 			Tiny: Backbone.View.extend({
-				template: 'user-preview-tiny'
+				template: 'userpreview/tiny'
 			})
 
 		}
