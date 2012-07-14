@@ -2,22 +2,29 @@ section#footer
 	background url('../img/bg_footer.jpg') #aaa repeat-x
 	clear both
 	font-size 0.8em
+	padding 17px 0
 	width 100%
 
 	menu
+		display inline-block
 		margin 0
 		padding 0
 
 		li
 			color #9f3647
 			display inline-block
-			padding 0 10px
+			font-weight bold
 			&:after
-				content "|"
+				color #444444
+				content '|'
+				font-weight normal
+				padding 0 10px
 			&:last-child:after
-				content ""
+				content ''
+				padding 0
 
 	small
 		color #444444
+		font-size 1em
 		position absolute
 		right 0
