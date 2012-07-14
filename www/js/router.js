@@ -23,13 +23,14 @@ define([
 
 		routes: {
 			'': 'landing',
-			'logout': 'logout',
-			'dashboard': 'dashboard',
 			'fresh': 'fresh',
+			'dashboard': 'dashboard',
+			'inbox': 'inbox',
+			'logout': 'logout',
 			'matchmake': 'matchmake',
 			'matchmakers': 'matchmakers',
-			'message-list': 'message-list',
 			'message': 'message',
+			'profile': 'profile',
 			'*path': '404'
 		},
 
@@ -83,6 +84,29 @@ define([
 					'.user-preview-small': new UserPreview.Views.Small()					
 				});
 		},
+
+		inbox: function () {
+			app.useLayout('inbox')
+				.setViews({
+					'.header-top': new Header.Views.Top(),
+					'.footer-end': new Footer.Views.End(),
+					'.friends-list-right': new Friends.Views.ListRight(),
+					'.recent-activity': new Notifications.Views.RecentActivity(),
+					'.top-matchmakers': new Matchmakers.Views.Top(),
+					'.user-preview-medium': new UserPreview.Views.Medium(),
+					'.user-preview-small': new UserPreview.Views.Small()				
+				});
+		},
+
+		logout: function () {
+			require(['Facebook'], function (Facebook) {
+				Facebook.logout(function (response) {
+					console.log('Facebook logout callback');
+				});
+				Backbone.history.navigate('', true);
+			});
+		},
+
 		matchmake: function () {
 			app.useLayout('matchmake')
 				.setViews({
@@ -95,6 +119,7 @@ define([
 					'.user-preview-small': new UserPreview.Views.Small()				
 				});
 		},
+
 		matchmakers: function () {
 			app.useLayout('matchmakers')
 				.setViews({
@@ -107,8 +132,9 @@ define([
 					'.user-preview-small': new UserPreview.Views.Small()				
 				});
 		},
-		'message-list': function () {
-			app.useLayout('message-list')
+
+		message: function () {
+			app.useLayout('message')
 				.setViews({
 					'.header-top': new Header.Views.Top(),
 					'.footer-end': new Footer.Views.End(),
@@ -119,8 +145,9 @@ define([
 					'.user-preview-small': new UserPreview.Views.Small()				
 				});
 		},
-		'message': function () {
-			app.useLayout('message')
+
+		profile: function () {
+			app.useLayout('profile')
 				.setViews({
 					'.header-top': new Header.Views.Top(),
 					'.footer-end': new Footer.Views.End(),

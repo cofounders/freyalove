@@ -2,30 +2,18 @@
 @import 'mixins/nib'
 @import 'mixins/normalize'
 
-//variables
-$purple = #62228f
-$purpledark = #3f0a49
 $page-width = 960px
 $content-width = 672px
 $sidebar-width = ($page-width - $content-width)
 $base-font-size = 12pt // 16 px
-
-//fonts
-@font-face
-    font-family 'BariolBold'
-    src url('fonts/bariol_bold.eot')
-    src url('fonts/bariol_bold.eot?#iefix') format('embedded-opentype'),
-         url('fonts/bariol_bold.woff') format('woff'),
-         url('fonts/bariol_bold.ttf') format('truetype'),
-         url('fonts/bariol_bold.svg#BariolBoldBold') format('svg')
-    font-weight: normal
-    font-style: normal
-
 global-normalize()
 
 *
 	font-family 'BariolBold', Helvetica, Arial, sans-serif
 	box-sizing border-box
+
+@import 'variables'
+@import 'fonts'	
 
 body
 	font-size $base-font-size
@@ -199,13 +187,16 @@ section#header
 				margin-right 0px
 
 	a#nav-name
-		left 760px
+		left 770px
 		margin 0 5px
+		padding 0 10px 0 0
 		text-align right
 		width 132px
 		color #d0c0dd
 		font-size 0.8em
-		border-right 1px solid #d0c0dd
+		background url('../img/ln.png') no-repeat right 0
+		&:hover
+			text-decoration underline
 
 	a#nav-logout
 		right 0px
