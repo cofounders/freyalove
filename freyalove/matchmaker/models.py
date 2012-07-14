@@ -2,6 +2,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 
 from freyalove.users.models import Profile
+from freyalove.matchmaker.managers import MatchManager
 
 MATCHMAKE_RESPONSES = (
     ('Pending', 'Pending'),
@@ -25,6 +26,14 @@ class Match(models.Model):
     # timestamps
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
+
+    # event fields
+    where = models.CharField(max_length=300, blank=True)
+    when = models.DateTimeField(null=True)
+    notes = models.TextField(blank=True)
+
+    # manager
+    objects = MatchManager()
 
     class Meta:
         verbose_name_plural = "matches"

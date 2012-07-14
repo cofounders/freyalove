@@ -15,6 +15,7 @@ import facebook
 
 #from freyalove.matchmaker.models import MatchMaker
 from freyalove.users.models import Profile, Blocked, Friendship
+from freyalove.matchmaker.models import Match
 
 
 # GET
@@ -144,6 +145,45 @@ def friends_in_freya(request, profile_id):
 
 	for profile in friends_in_freya:
 		resp_data["friends"].append({"name": profile.first_name + " " + profile.last_name , "id": profile.id, "photo": "http://graph.facebook.com/%s/picture" % profile.fb_username})
+
+	resp_json = json.JSONEncoder().encode(resp_data)
+
+	resp = HttpResponse(resp_json, content_type="application/json", status=200)
+	return resp
+
+def mutual_friends_in_freya(request, profile_id, target_id):
+	"""
+	Given 2 ids, check that they are friends, then return a set of mutual friends in the system
+	"""
+	
+	return HttpResponse("wip.")
+
+def fetch_sexytimes(request):
+	"""
+	Returns all incoming sexytimes for a user.
+	"""
+
+	cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+	if not cookie:
+		resp = HttpResponse("Cookie not set", status=404)
+		return resp
+
+	profile = is_registered_user(fetch_profile(cookie["access_token"]))
+	has_match = Match.objects.has_match(profile)
+	resp_data = {}
+	resp_data['sexytimes'] = []
+
+
+	if not has match:
+		pass
+	else:
+		sexytimes = Match.objects.fetch_sexytimes(profile)
+		for s in sexytimes:
+			s_dict = {}
+			s_dict["when"] = s.when
+			s_dict["where"] = s.where
+			# we'll add notes when i understand the context
+			resp_data['sexytimes'].append(s_dict)
 
 	resp_json = json.JSONEncoder().encode(resp_data)
 
