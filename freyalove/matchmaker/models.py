@@ -27,11 +27,6 @@ class Match(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
 
-    # event fields
-    where = models.CharField(max_length=300, blank=True)
-    when = models.DateTimeField(null=True)
-    notes = models.TextField(blank=True)
-
     # manager
     objects = MatchManager()
 
@@ -73,6 +68,20 @@ class Match(models.Model):
             pass
 
         super(Match, self).save(*args, **kwargs)
+
+
+class SexyTime(models.Model):
+    match = models.ForeignKey(Match)
+    p1 = models.ForeignKey(Profile, related_name="date1")
+    p2 = models.ForeignKey(Profile, related_name="date2")
+
+    # event fields
+    where = models.CharField(max_length=300, blank=True)
+    when = models.DateTimeField(null=True)
+    notes = models.TextField(blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
 
 #class MatchMaker(models.Model):
 #    matchmaker = models.ForeignKey(Profile)
