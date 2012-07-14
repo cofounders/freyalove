@@ -33,18 +33,18 @@ module.exports = function(grunt) {
 
 		stylus: {
 			file: {
-				src: 'css/app.styl',
-				dest: 'css'
+				src: 'styles/app.styl',
+				dest: 'styles'
 			}
 		},
 
 		css: {
-			'css/app.css': ['css/app.css']
+			'styles/app.css': ['styles/app.css']
 		},
 
 		rev: {
 //			js: 'js/**/*.js',
-			css: 'css/app.css',
+			css: 'styles/app.css',
 			img: 'img/**',
 			fonts: [
 				'fonts/**/*.eot',
