@@ -30,7 +30,8 @@ define([
 			'matchmake': 'matchmake',
 			'Leaderboard': 'Leaderboard',
 			'message': 'message',
-			'profile': 'profile',
+			'profile': 'profile', // TODO: merge fof and friends into this
+			'terms': 'terms',
 			'*path': '404'
 		},
 
@@ -38,6 +39,14 @@ define([
 
 		404: function (path) {
 			app.useLayout('404')
+				.setViews({
+					'.header-top': new Header.Views.Top(),
+					'.footer-end': new Footer.Views.End(),
+				});
+		},
+
+		about: function (path) {
+			app.useLayout('about')
 				.setViews({
 					'.header-top': new Header.Views.Top(),
 					'.footer-end': new Footer.Views.End(),
@@ -74,6 +83,14 @@ define([
 					'.top-leaderboard': new Leaderboard.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
 					'.user-preview-small': new UserPreview.Views.Small()
+				});
+		},
+		
+		faq: function (path) {
+			app.useLayout('faq')
+				.setViews({
+					'.header-top': new Header.Views.Top(),
+					'.footer-end': new Footer.Views.End(),
 				});
 		},
 
@@ -167,6 +184,14 @@ define([
 					'.top-leaderboard': new Leaderboard.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
 					'.user-preview-small': new UserPreview.Views.Small()
+				});
+		},
+		
+		terms: function (path) {
+			app.useLayout('terms')
+				.setViews({
+					'.header-top': new Header.Views.Top(),
+					'.footer-end': new Footer.Views.End(),
 				});
 		}
 
