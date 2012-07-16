@@ -23,7 +23,9 @@ define([
 
 		routes: {
 			'': 'landing',
+			'about': 'about',
 			'dashboard': 'dashboard',
+			'faq': 'faq',
  			'fresh': 'fresh', // TODO: merge into dashboard
 			'inbox': 'inbox',
 			'logout': 'logout',
@@ -42,7 +44,7 @@ define([
 				.setViews({
 					'.header-top': new Header.Views.Top(),
 					'.footer-end': new Footer.Views.End(),
-				});
+				}).render();
 		},
 
 		about: function (path) {
@@ -50,24 +52,20 @@ define([
 				.setViews({
 					'.header-top': new Header.Views.Top(),
 					'.footer-end': new Footer.Views.End(),
-				});
+				}).render();
 		},
 
 		landing: function () {
 			app.useLayout('landing')
 				.setViews({
 					'.footer-end': new Footer.Views.End()
-				});
+				}).render();
 		},
 
 		logout: function () {
-			console.log('LOGGING OUT');
 			require(['Facebook'], function (Facebook) {
-				console.log('Facebook before logout');
 				Facebook.logout(function (response) {
-					console.log('Facebook logout callback');
 				});
-				console.log('Facebook after logout');
 				Backbone.history.navigate('', true);
 			});
 		},
@@ -83,7 +81,7 @@ define([
 					'.top-leaderboard': new Leaderboard.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
 					'.user-preview-small': new UserPreview.Views.Small()
-				});
+				}).render();
 		},
 		
 		faq: function (path) {
@@ -105,7 +103,7 @@ define([
 					'.top-leaderboard': new Leaderboard.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
 					'.user-preview-small': new UserPreview.Views.Small()
-				});
+				}).render();
 		},
 
 		inbox: function () {
@@ -119,13 +117,12 @@ define([
 					'.top-leaderboard': new Leaderboard.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
 					'.user-preview-small': new UserPreview.Views.Small()
-				});
+				}).render();
 		},
 
 		logout: function () {
 			require(['Facebook'], function (Facebook) {
 				Facebook.logout(function (response) {
-					console.log('Facebook logout callback');
 				});
 				Backbone.history.navigate('', true);
 			});
@@ -142,7 +139,7 @@ define([
 					'.top-leaderboard': new Leaderboard.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
 					'.user-preview-small': new UserPreview.Views.Small()
-				});
+				}).render();
 		},
 
 		leaderboard: function () {
@@ -156,7 +153,7 @@ define([
 					'.top-leaderboard': new Leaderboard.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
 					'.user-preview-small': new UserPreview.Views.Small()
-				});
+				}).render();
 		},
 
 		message: function () {
@@ -170,7 +167,7 @@ define([
 					'.top-leaderboard': new Leaderboard.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
 					'.user-preview-small': new UserPreview.Views.Small()
-				});
+				}).render();
 		},
 
 		profile: function () {
@@ -184,7 +181,7 @@ define([
 					'.top-leaderboard': new Leaderboard.Views.Top(),
 					'.user-preview-medium': new UserPreview.Views.Medium(),
 					'.user-preview-small': new UserPreview.Views.Small()
-				});
+				}).render();
 		},
 		
 		terms: function (path) {
@@ -192,7 +189,7 @@ define([
 				.setViews({
 					'.header-top': new Header.Views.Top(),
 					'.footer-end': new Footer.Views.End(),
-				});
+				}).render();
 		}
 
 	});
