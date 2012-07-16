@@ -1,9 +1,9 @@
-define(['jQuery', 'Underscore', 'Mustache', 'Backbone', 'app', "modules/UserPreview"],
-function($, _, Mustache, Backbone, app, UserPreview) {
+define(['jQuery', 'Underscore', 'Mustache', 'Backbone', 'app'],
+function($, _, Mustache, Backbone, app) {
 	return {
 
 		Model: Backbone.Model.extend({
-			defaults: {name: "wolf", age: 65}
+			defaults: {firstname: "Bette", lastname: "Porter", age: 35}
 		}),
 
 		Collection: Backbone.Collection.extend({
@@ -11,12 +11,24 @@ function($, _, Mustache, Backbone, app, UserPreview) {
 
 		Views: {
 
+			LeaderboardTop: Backbone.View.extend({
+				template: 'friends/leaderboard-top'
+			}),
+
+			LeaderboardFull: Backbone.View.extend({
+				template: 'friends/leaderboard-full'
+			}),
+
 			ListRight: Backbone.View.extend({
-				template: 'friends-list-right'
+				template: 'friends/list-right'
+			}),
+
+			ListRightCommon: Backbone.View.extend({
+				template: 'friends/list-right-common'
 			}),
 
 			UpcomingDates: Backbone.View.extend({
-				template: 'dates-upcoming'
+				template: 'friends/dates-upcoming'
 			})
 
 		}

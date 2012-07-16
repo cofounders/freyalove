@@ -16,27 +16,131 @@
 			float left
 			width 60px
 			height 60px
+	#profile-pic
+		width 200px
+		height 200px
+		display inline-block
+		vertical-align top
+		margin-right 10px
+	h1
+		font-weight 700
+	#profile-snapshot
+		display inline-block
+		width 450px
+ul#profile-snapshot-list
+	padding 0
+	li
+		display block
+		input[type=checkbox]
+			display none
+			&:checked 
+				~ p 
+					color black			
+					font-style normal
+				+ label
+					background url('../img/icn_visible.png') no-repeat center center
+			+ label
+				background url('../img/icn_invisible.png') no-repeat center center
+		label, p 
+			display inline-block
+		label
+			height 20px
+			width 25px
+			margin 0 10px 0 0
+			cursor pointer
+		p
+			color #aaa
+			font-style italic	
+			margin 0
+			vertical-align top
+			width 410px
 
+       		
 #column-right
 	display inline-block
-	font-size $base-font-size
 	margin-left 24px
 	vertical-align top
 	width $sidebar-width - @margin-left
+	h3
+		margin-bottom 10px
+	hr 
+		margin-bottom 10px
+	> div
+		margin-bottom 15px
+	p, li
+		font-size 0.875rem //14px
+		color #666
+		margin 0
+		display inline-block
+	p.invite-more
+		vertical-align top
+		display inline-block
+		margin 23px 0 0 8px
+	a
+		color #9f3647
+		font-weight bold
+		&:link, &:visited
+			text-decoration none
+		&:hover, &:active
+			text-decoration underline
+	ul.activity	
+		padding 0
+		margin 0
+		li 
+			margin 0 0 15px 10px
+	.bblm-top-leaderboard ol
+		padding 0
+		margin 0
+		list-style-position inside
+		display 
+		color #b2b3b3
+		font-weight 700
+		counter-reset item 
+		img
+			height 54px
+			width 54px
+		li 
+			display block
+			font-size 2.25rem
+			margin 10px 0
+			&:before
+				content counter(item) " "
+				counter-increment item
+			img
+				border 3px solid white
+				box-shadow 1px 1px 4px #b3b3b3
+				vertical-align middle
+			.user-preview-points-info
+				display inline-block
+				a, p 
+					font-size 0.875rem
+					display block	
 
-	h2
-		padding-bottom 0.5em
-		border-bottom 1px solid rgba(0, 0, 0, 0.1)
-		box-shadow 0px 1px -1px 1px white
-		margin-bottom 0.3em
+	ul.friends-list-dates
+		padding 4px
+		background-color #e2e3e4
+		border-radius 4px
+		width 100%
+		border 1px #d2d3d3 solid 
+		box-shadow 0 0 2px #fff inset 
+		li 
+			display inline-block
+			width 60px
+			height 60px
+			border 3px solid white
+			box-shadow 1px 1px 4px #b3b3b3
+			margin 0 3px 4px 0
+			a 
+				width 100%
+				height 100%
+				display inline-block
+		img
+			width 54px
+			height 54px
+				
+	
+.add-more
+	background url('../img/add.png') no-repeat center center
 
-.friends-list-right
-	
-//to design
-//.dates-upcoming
-	
-.friends-list-dates
-	img
-		float left
-		width 60px
-		height 60px
+
+

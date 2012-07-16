@@ -51,7 +51,10 @@
 
 ## Development Guidelines
 
-- Don't forget to compile `./css/app.styl` with Stylus. Tip: Use Sublime Text 2 with the Stylus build plugin.
+- After any modificatoions to the `*.styl` files, or after a `git pull`, remember to compile the Stylus files.
+
+        stylus --watch ./styles/app.styl ./styles/app.styl
+
 - Learn these frameworks:
   - [RequireJS](http://requirejs.org/)
   - [Underscore.js](http://underscorejs.org/)
