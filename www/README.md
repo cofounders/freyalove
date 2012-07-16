@@ -53,7 +53,7 @@
 
 - After any modificatoions to the `*.styl` files, or after a `git pull`, remember to compile the Stylus files.
 
-        stylus styles/app.styl
+        stylus --watch ./styles/app.styl ./styles/app.styl
 
 - Learn these frameworks:
   - [RequireJS](http://requirejs.org/)
