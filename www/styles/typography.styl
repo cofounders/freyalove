@@ -2,6 +2,7 @@ $base-font-size = 16px //12pt
 
 h1, h2, h3, h4, h5, h6
 	margin 0
+	display inline-block
 h1
 	font-size 1.875em //30px
 	color #a63e00
@@ -25,6 +26,14 @@ h6
 a
 	color #a63e00
 	text-decoration none
+	&.see-more
+		text-transform none
+		margin-left 0.3em
+		float right
+		&:link, &:visited
+			text-decoration none
+		&:hover, &:active
+			text-decoration underline
 
 	.button
 		clear both
@@ -47,14 +56,3 @@ ul
 		height 20px
 		background-color grey
 		clear both		
-
-h2
-	
-	a.see-more
-		font-size 0.6em
-		text-transform none
-		margin-left 0.3em
-		font-weight normal
-
-h3
-	padding-top 10px
