@@ -50,7 +50,7 @@ define([
 				template: name
 			});
 			this.el.empty().append(this.layout.el);
-			this.layout.render();
+			// this.layout.render(); // Call render after setView(s)
 			return this.layout;
 		}
 	}, Backbone.Events);

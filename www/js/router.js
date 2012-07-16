@@ -48,7 +48,7 @@ define([
 					return instantiatedPresets;
 				}),
 				selectedViews = _.extend.apply(null, [{}, views].concat(selectedPresets));
-			app.useLayout(layout).setViews(selectedViews);
+			app.useLayout(layout).setViews(selectedViews).render();
 		};
 
 	return Backbone.Router.extend({
@@ -85,8 +85,8 @@ define([
 		about: function (path) {
 			app.useLayout('about')
 				.setViews({
-					'.header-top': new Header.Views.Top(),
-					'.footer-end': new Footer.Views.End(),
+					'.bblm-header-top': new Header.Views.Top(),
+					'.bblm-footer-end': new Footer.Views.End(),
 				}).render();
 		},
 
@@ -109,7 +109,7 @@ define([
 				.setViews({
 					'.bblm-header-top': new Header.Views.Top(),
 					'.bblm-footer-end': new Footer.Views.End(),
-				});
+				}).render();
 		},
 
 		fresh: function () { /* TODO: merge into dashboard */
@@ -240,7 +240,7 @@ define([
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
 					'.bblm-top-leaderboard': new Friends.Views.LeaderboardTop(),
 					'.bblm-user-preview-small': new UserPreview.Views.Small()
-				});
+				}).render();
 		}
 
 	});
