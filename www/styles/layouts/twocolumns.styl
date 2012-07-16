@@ -25,15 +25,15 @@
 	width $sidebar-width - @margin-left
 	> div
 		margin-bottom 15px
-	p
+	p, li
 		font-size 0.875em //14px
 		color #666
-		display inline-block
 		margin 0
-		&.invite-more
-			vertical-align top
-			display inline-block
-			margin 23px 0 0 8px
+		display inline-block
+	p.invite-more
+		vertical-align top
+		display inline-block
+		margin 23px 0 0 8px
 	a
 		color #9f3647
 		font-weight bold
@@ -41,12 +41,46 @@
 			text-decoration none
 		&:hover, &:active
 			text-decoration underline
+	ul.activity	
+		padding 0
+		margin 0
+		li 
+			margin 0 0 15px 10px
+	.bblm-top-leaderboard ol
+		padding 0
+		margin 0
+		list-style-position inside
+		display 
+		font-size $base-font-size
+		color #b2b3b3
+		font-weight 700
+		counter-reset item 
+		img
+			height 54px
+			width 54px
+		li 
+			display block
+			font-size 2.25em
+			margin 10px 0
+			&:before
+				content counter(item) " "
+				counter-increment item
+			img
+				border 3px solid white
+				box-shadow 1px 1px 4px #b3b3b3
+				vertical-align middle
+			.user-preview-points-info
+				display inline-block
+				a, p 
+					font-size 14px
+					display block	
+
 	
 .add-more
 	background url('../img/add.png') no-repeat center center
 
 
-.friends-list-dates
+ul.friends-list-dates
 	padding 4px
 	background-color #e2e3e4
 	border-radius 4px
@@ -67,3 +101,4 @@
 	img
 		width 54px
 		height 54px
+
