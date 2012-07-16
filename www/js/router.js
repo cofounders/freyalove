@@ -90,21 +90,6 @@ define([
 				}).render();
 		},
 
-		landing: function () {
-			app.useLayout('landing')
-				.setViews({
-					'.footer-end': new Footer.Views.End()
-				}).render();
-		},
-
-		logout: function () {
-			require(['Facebook'], function (Facebook) {
-				Facebook.logout(function (response) {
-				});
-				Backbone.history.navigate('', true);
-			});
-		},
-
 		dashboard: function () {
 			app.useLayout('dashboard')
 				.setViews({
@@ -157,10 +142,10 @@ define([
 		},
 
 		landing: function () {
-			app.useLayout('landing');
-			require(['Facebook'], function (Facebook) {
-				Facebook.XFBML.parse();
-			});
+			app.useLayout('landing')
+				.setViews({
+					'.footer-end': new Footer.Views.End()
+				}).render();
 		},
 
 		leaderboard: function () {
@@ -206,20 +191,6 @@ define([
 					'.bblm-top-leaderboard': new Friends.Views.LeaderboardTop(),
 					'.bblm-user-preview-medium': new UserPreview.Views.Medium(),
 					'.bblm-user-preview-small': new UserPreview.Views.Small()
-				}).render();
-		},
-
-		leaderboard: function () {
-			app.useLayout('leaderboard')
-				.setViews({
-					'.header-top': new Header.Views.Top(),
-					'.footer-end': new Footer.Views.End(),
-					'.dates-upcoming': new Friends.Views.UpcomingDates(),
-					'.friends-list-right': new Friends.Views.ListRight(),
-					'.recent-activity': new Notifications.Views.RecentActivity(),
-					'.top-leaderboard': new Leaderboard.Views.Top(),
-					'.user-preview-medium': new UserPreview.Views.Medium(),
-					'.user-preview-small': new UserPreview.Views.Small()
 				}).render();
 		},
 
