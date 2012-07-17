@@ -91,17 +91,21 @@ define([
 		},
 
 		dashboard: function () {
+			var fbFriends = new Friends.Collection();
 			app.useLayout('dashboard')
 				.setViews({
 					'.bblm-header-top': new Header.Views.Top(),
 					'.bblm-footer-end': new Footer.Views.End(),
 					'.bblm-dates-upcoming': new Friends.Views.UpcomingDates(),
-					'.bblm-friends-list-right': new Friends.Views.ListRight(),
+					'.bblm-friends-list-right': new Friends.Views.ListRight({
+						collection: fbFriends
+					}),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
 					'.bblm-top-leaderboard': new Friends.Views.LeaderboardTop(),
 					'.bblm-user-preview-medium': new UserPreview.Views.Medium(),
 					'.bblm-user-preview-small': new UserPreview.Views.Small()
 				}).render();
+			fbFriends.fetch();
 		},
 		
 		faq: function (path) {

@@ -10,6 +10,7 @@ define([
 	var app = _.extend({
 		el: $('#app'),
 		root: '/',
+		api: '/api/', // 'http://api.freyalove.cofounders.sg/api/',
 		friends: [
 			{firstName: "Sebastiaan"
 			,lastName: "Deckers"
