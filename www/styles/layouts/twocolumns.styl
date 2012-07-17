@@ -1,6 +1,5 @@
 #column-left
 	display inline-block
-	font-size $base-font-size
 	vertical-align top
 	width $content-width
 
@@ -83,6 +82,47 @@ ul#profile-snapshot-list
 			vertical-align top
 			width 410px
       		
+#wink
+	h2
+		text-align center
+		display block
+		font-weight 700
+#winked-list
+	padding 20px 30px 30px 30px	
+	margin 20px 0 0 0 
+	li
+		margin 0 10px	
+
+.bblm-user-preview-small
+	display inline-block
+.user-preview-small
+	width 120px
+	height 155px
+	box-shadow 0 0 2px #aaa
+	background-color #fff
+	padding 8px
+	a
+		font-size 0.875rem
+		display block
+		text-align center
+		margin 5px 0 0 0
+
+div.user-preview-medium, div.user-preview-small, div.user-preview-tiny
+	display inline-block
+
+div.user-preview-small, div.user-preview-medium
+	img
+		width 104px
+		height 104px
+		display inline-block			
+
+ul#winked-list
+	display block
+	border-radius 4px
+	box-shadow 0 0 3px white inset 
+	background-color rgba(226, 227, 228, 0.35)
+	border 1px #d2d3d3 solid
+
 #column-right
 	display inline-block
 	margin-left 24px
@@ -163,6 +203,7 @@ ul#profile-snapshot-list
 	a
 		color #9f3647
 		font-weight bold
+		font-size 0.875rem
 		&:link, &:visited
 			text-decoration none
 		&:hover, &:active
