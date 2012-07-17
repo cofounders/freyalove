@@ -5,17 +5,45 @@
 	width $content-width
 
 	#welcome-message
-		width 416px
-		float left
-
+		display inline-block
+		width 395px
+		h1
+			font-weight 400
+		
 	#facebook-ad
-		float left
-		width 240px
+		display inline-block
+		width 270px
+		background-color #fff
+		border-radius 3px
+		box-shadow 0 0 3px #c6c8c9
+		vertical-align top
+		h2
+			text-align center
+			text-transform uppercase
+			font-size 1.5rem
+			background linear-gradient(top, #f9f9f9, #efefef)
+			line-height 3rem
+			display block
+			color #707070
+			border-bottom 1px solid #c6c8c9
+		ul#facebook-friends-list
+			padding 10px 7px
+			margin 0	
+			li
+				display inline-block
+				margin 0 3px 3px
+			img
+				display inline-block
+				width 54px
+				height 54px
+				border 3px solid white
+				box-shadow 1px 1px 4px #b3b3b3
+		a
+			text-align center
+			display block
+			padding 0 0 20px 0
+			line-height 0.8em
 
-		img
-			float left
-			width 60px
-			height 60px
 	#profile-pic
 		width 200px
 		height 200px
@@ -54,8 +82,7 @@ ul#profile-snapshot-list
 			margin 0
 			vertical-align top
 			width 410px
-
-       		
+      		
 #column-right
 	display inline-block
 	margin-left 24px
@@ -76,13 +103,7 @@ ul#profile-snapshot-list
 		vertical-align top
 		display inline-block
 		margin 23px 0 0 8px
-	a
-		color #9f3647
-		font-weight bold
-		&:link, &:visited
-			text-decoration none
-		&:hover, &:active
-			text-decoration underline
+	
 	ul.activity	
 		padding 0
 		margin 0
@@ -137,7 +158,15 @@ ul#profile-snapshot-list
 		img
 			width 54px
 			height 54px
-				
+
+#column-left, #column-right
+	a
+		color #9f3647
+		font-weight bold
+		&:link, &:visited
+			text-decoration none
+		&:hover, &:active
+			text-decoration underline				
 	
 .add-more
 	background url('../img/add.png') no-repeat center center
