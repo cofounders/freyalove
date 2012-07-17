@@ -16,7 +16,17 @@
 
         server {
           listen 80;
-          server_name www.freyalove.com;
+          server_name dev.freyalove.localhost;
+          root /var/www/freyalove.com/www;
+          index index.html;
+          # Let the Backbone.js router handle internal app paths
+          location ~ ^/(css|fonts|img|js|templates)/ {}
+          location / { try_files $uri $uri/ /index.html; }
+        }
+
+        server {
+          listen 80;
+          server_name freyalove.localhost;
           root /var/www/freyalove.com/www/publish;
           index index.html;
           # Let the Backbone.js router handle internal app paths
