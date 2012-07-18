@@ -1,5 +1,5 @@
-define(['jQuery', 'Underscore', 'Mustache', 'Backbone', 'app', 'modules/UserPreview'],
-function($, _, Mustache, Backbone, app, UserPreview) {
+define(['jQuery', 'Underscore', 'Mustache', 'Backbone', 'app', 'modules/User'],
+function($, _, Mustache, Backbone, app, User) {
 
 	var Collections = {},
 		Views = {};
@@ -61,7 +61,7 @@ function($, _, Mustache, Backbone, app, UserPreview) {
 
 		render: function (manage) {
 			this.collection.each(function (user) {
-				this.insertView('ul', new UserPreview.Views.Tiny({
+				this.insertView('ul', new User.Views.Tiny({
 					model: user
 				}));
 			}, this);

@@ -20,7 +20,7 @@ function($, _, Mustache, Backbone, app) {
 	
 	// Medium User Preview: Profile image, name and more information
 	Views.Medium = Backbone.View.extend({
-		template: 'userpreview/medium',
+		template: 'user/medium',
 		tagName: 'li',
 //		serialize: function () {return this.model.toJSON();}
 	});
@@ -28,7 +28,7 @@ function($, _, Mustache, Backbone, app) {
 
 	// Small User Preview: Profile image and name
 	Views.Small = Backbone.View.extend({
-		template: 'userpreview/small',
+		template: 'user/small',
 		tagName: 'li',
 //		serialize: function () {return this.model.toJSON();}
 	});
@@ -36,7 +36,7 @@ function($, _, Mustache, Backbone, app) {
 
 	// SexyTime (Date) User Preview: Profile image and date invitation text
 	Views.SexyTime = Backbone.View.extend({
-		template: 'userpreview/sexytime',
+		template: 'user/sexytime',
 		tagName: 'li',
 //		serialize: function () {return this.model.toJSON();}
 	});
@@ -44,7 +44,7 @@ function($, _, Mustache, Backbone, app) {
 
 	// Points User Preview: Profile image, name and points
 	Views.Points = Backbone.View.extend({
-		template: 'userpreview/points',
+		template: 'user/points',
 		tagName: 'li',
 //		serialize: function () {return this.model.toJSON();}
 	});
@@ -52,7 +52,7 @@ function($, _, Mustache, Backbone, app) {
 	
 	// Tiny User Preview: Only the profile image
 	Views.Tiny = Backbone.View.extend({
-		template: 'userpreview/tiny',
+		template: 'user/tiny',
 		tagName: 'li',
 		serialize: function () {return this.model.toJSON();}
 	});
