@@ -226,7 +226,7 @@ define([
 				.setViews({
 					'.bblm-header-top': new Header.Views.Top(),
 					'.bblm-footer-end': new Footer.Views.End(),
-					'.bblm-user-profile': new User.Views.FullProfile({
+					'.bblm-user-profile': new UserPreview.Views.FullProfile({
 						model: profile
 					}),
 					'.bblm-dates-upcoming': new Friends.Views.UpcomingDates(),
