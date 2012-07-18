@@ -17,8 +17,16 @@ import facebook
 from freyalove.users.models import Profile, Blocked, Friendship
 from freyalove.matchmaker.models import Match
 
+from freyalove.api.utils import *
+
 
 # GET
+def hello(request):
+	resp_data = {"hello": "api"}
+	resp_json = json.JSONEncoder().encode(resp_data)
+	resp = inject_cors(HttpResponse(resp_json, content_type="application/json"))
+	return resp
+
 def profile_summary(request, profile_id):
 	"""
 	Return summarized information on a user profile given an id/fb_id
@@ -52,7 +60,7 @@ def profile_summary(request, profile_id):
 	resp_data["photo"] = "http://graph.facebook.com/%s/picture" % profile.fb_username
 	resp_json = json.JSONEncoder().encode(resp_data)
 
-	resp = HttpResponse(resp_json, content_type="application/json")
+	resp = inject_cors(HttpResponse(resp_json, content_type="application/json"))
 	return resp
 
 def profile(request, profile_id):
@@ -73,6 +81,9 @@ def profile(request, profile_id):
 			resp = HttpResponse("Not found", status=404)
 			return resp
 
+	if request.method == "POST":
+		return update_profile(request, profile_id)
+
 	resp_data = {}
 	resp_data["id"] = profile.id
 	resp_data["first_name"] = profile.first_name
@@ -83,7 +94,7 @@ def profile(request, profile_id):
 	resp_data["profile"] = profile.profile
 	resp_json = json.JSONEncoder().encode(resp_data)
 
-	resp = HttpResponse(resp_json, content_type="application/json")
+	resp = inject_cors(HttpResponse(resp_json, content_type="application/json"))
 	return resp
 
 def init(request):
@@ -104,7 +115,7 @@ def init(request):
 	resp_data["email"] = profile.email
 	resp_json = json.JSONEncoder().encode(resp_data)
 
-	resp = HttpResponse(resp_json, content_type="application/json", status=200)
+	resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
 	return resp
 
 def fb_friends(request, profile_id):
@@ -122,7 +133,7 @@ def fb_friends(request, profile_id):
 
 	resp_json = json.JSONEncoder().encode(resp_data)
 
-	resp = HttpResponse(resp_json, content_type="application/json", status=200)
+	resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
 	return resp
 
 def friends_in_freya(request, profile_id):
@@ -148,7 +159,7 @@ def friends_in_freya(request, profile_id):
 
 	resp_json = json.JSONEncoder().encode(resp_data)
 
-	resp = HttpResponse(resp_json, content_type="application/json", status=200)
+	resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
 	return resp
 
 def mutual_friends_in_freya(request, profile_id, target_id):
@@ -186,7 +197,7 @@ def fetch_sexytimes(request):
 
 	resp_json = json.JSONEncoder().encode(resp_data)
 
-	resp = HttpResponse(resp_json, content_type="application/json", status=200)
+	resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
 	return resp
 
 # POST
@@ -219,7 +230,7 @@ def update_profile(request, profile_id):
 
 		resp_json = json.JSONEncoder().encode(resp_data)
 
-		resp = HttpResponse(resp_json, content_type="application/json", status=200)
+		resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
 		return resp
 	else:
 		resp = HttpResponse("Bad request", status=400)
@@ -252,27 +263,3 @@ def fetch_all_friends(token):
 	friends = graph.get_connections("me", "friends")
 	return friends
 
-# Utils
-def is_registered_user(profile_dict):
-	"""
-	Checks if a user is already registered with us, if not, we register him
-	"""
-	if profile_dict:
-		fb_id = profile_dict["id"]
-		try:
-			profile = Profile.objects.get(fb_id=fb_id)
-			return profile
-		except Profile.DoesNotExist:
-			profile = create_freya_profile(profile_dict)
-			return profile
-
-def create_freya_profile(profile_dict):
-	profile = Profile()
-	profile.first_name = profile_dict["first_name"]
-	profile.last_name = profile_dict["last_name"]
-	profile.fb_id = profile_dict["id"]
-	profile.fb_username = profile_dict["username"]
-	profile.fb_link = profile_dict["link"]
-	profile.email = profile_dict["email"]
-	profile.save()
-	return profile

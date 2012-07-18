@@ -5,20 +5,23 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'freyalove.views.home', name='home'),
-    # url(r'^freyalove/', include('freyalove.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
+    # Django Admin urls
     url(r'^nimdatux/', include(admin.site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),
 
-    # App urls
-    url(r'^api/', include('freyalove.api.urls')),
-    
-    # Other pages
-    #url(r'^$', 'freyalove.views.homepage'),
+    # API urls
+    # get routes
+    url(r'^users/init/$', 'freyalove.api.views.init'),
+    url(r'^users/(\d+)/friends/(\d+)/mutual/$', 'freyalove.api.views.mutual_friends_in_freya'),
+    url(r'^users/(\d+)/friends/$', 'freyalove.api.views.friends_in_freya'),
+    url(r'^users/(\d+)/facebookfriends/$', 'freyalove.api.views.fb_friends'),
+    url(r'^users/(\d+)/profile/summary/$', 'freyalove.api.views.profile_summary'),
+    url(r'^users/(\d+)/profile/$', 'freyalove.api.views.profile'), # dual
+
+    url(r'^activities/sexytimes/$', 'freyalove.api.views.fetch_sexytimes'),
+
+    # post routes
+
+    # Index
+    url(r'^$', 'freyalove.api.views.hello'),
 )
