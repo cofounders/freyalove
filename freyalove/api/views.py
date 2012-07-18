@@ -53,6 +53,9 @@ def profile_summary(request, profile_id):
 	resp_json = json.JSONEncoder().encode(resp_data)
 
 	resp = HttpResponse(resp_json, content_type="application/json")
+	# send these 2 in all returns
+	resp['Access-Control-Allow-Origin'] = '*'
+	resp['Access-Control-Allow-Headers'] = 'Authorization'
 	return resp
 
 def profile(request, profile_id):
@@ -84,6 +87,8 @@ def profile(request, profile_id):
 	resp_json = json.JSONEncoder().encode(resp_data)
 
 	resp = HttpResponse(resp_json, content_type="application/json")
+	resp['Access-Control-Allow-Origin'] = '*'
+	resp['Access-Control-Allow-Headers'] = 'Authorization'
 	return resp
 
 def init(request):
@@ -105,6 +110,8 @@ def init(request):
 	resp_json = json.JSONEncoder().encode(resp_data)
 
 	resp = HttpResponse(resp_json, content_type="application/json", status=200)
+	resp['Access-Control-Allow-Origin'] = '*'
+	resp['Access-Control-Allow-Headers'] = 'Authorization'
 	return resp
 
 def fb_friends(request, profile_id):
@@ -123,6 +130,8 @@ def fb_friends(request, profile_id):
 	resp_json = json.JSONEncoder().encode(resp_data)
 
 	resp = HttpResponse(resp_json, content_type="application/json", status=200)
+	resp['Access-Control-Allow-Origin'] = '*'
+	resp['Access-Control-Allow-Headers'] = 'Authorization'
 	return resp
 
 def friends_in_freya(request, profile_id):
@@ -149,6 +158,8 @@ def friends_in_freya(request, profile_id):
 	resp_json = json.JSONEncoder().encode(resp_data)
 
 	resp = HttpResponse(resp_json, content_type="application/json", status=200)
+	resp['Access-Control-Allow-Origin'] = '*'
+	resp['Access-Control-Allow-Headers'] = 'Authorization'
 	return resp
 
 def mutual_friends_in_freya(request, profile_id, target_id):
@@ -187,6 +198,8 @@ def fetch_sexytimes(request):
 	resp_json = json.JSONEncoder().encode(resp_data)
 
 	resp = HttpResponse(resp_json, content_type="application/json", status=200)
+	resp['Access-Control-Allow-Origin'] = '*'
+	resp['Access-Control-Allow-Headers'] = 'Authorization'
 	return resp
 
 # POST
@@ -220,6 +233,8 @@ def update_profile(request, profile_id):
 		resp_json = json.JSONEncoder().encode(resp_data)
 
 		resp = HttpResponse(resp_json, content_type="application/json", status=200)
+		resp['Access-Control-Allow-Origin'] = '*'
+		resp['Access-Control-Allow-Headers'] = 'Authorization'
 		return resp
 	else:
 		resp = HttpResponse("Bad request", status=400)
