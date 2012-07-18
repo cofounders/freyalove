@@ -47,6 +47,7 @@ intermediate
 publish
 .idea
 node_modules
+appdirectory-build
 
 # Stylus build files
 *.css
