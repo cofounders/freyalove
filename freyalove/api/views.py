@@ -17,6 +17,8 @@ import facebook
 from freyalove.users.models import Profile, Blocked, Friendship
 from freyalove.matchmaker.models import Match
 
+from freyalove.api.utils import *
+
 
 # GET
 def hello(request):
@@ -78,6 +80,9 @@ def profile(request, profile_id):
 		except Profile.DoesNotExist:
 			resp = HttpResponse("Not found", status=404)
 			return resp
+
+	if request.method == "POST":
+		return update_profile(request, profile_id)
 
 	resp_data = {}
 	resp_data["id"] = profile.id
@@ -258,33 +263,3 @@ def fetch_all_friends(token):
 	friends = graph.get_connections("me", "friends")
 	return friends
 
-# Utils
-def inject_cors(resp_obj):
-	resp_obj['Access-Control-Allow-Origin'] = '*'
-	resp_obj['Access-Control-Allow-Headers'] = 'Authorization'
-
-	return resp_obj
-
-def is_registered_user(profile_dict):
-	"""
-	Checks if a user is already registered with us, if not, we register him
-	"""
-	if profile_dict:
-		fb_id = profile_dict["id"]
-		try:
-			profile = Profile.objects.get(fb_id=fb_id)
-			return profile
-		except Profile.DoesNotExist:
-			profile = create_freya_profile(profile_dict)
-			return profile
-
-def create_freya_profile(profile_dict):
-	profile = Profile()
-	profile.first_name = profile_dict["first_name"]
-	profile.last_name = profile_dict["last_name"]
-	profile.fb_id = profile_dict["id"]
-	profile.fb_username = profile_dict["username"]
-	profile.fb_link = profile_dict["link"]
-	profile.email = profile_dict["email"]
-	profile.save()
-	return profile

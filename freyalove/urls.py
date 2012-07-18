@@ -16,9 +16,11 @@ urlpatterns = patterns('',
     url(r'^users/(\d+)/friends/$', 'freyalove.api.views.friends_in_freya'),
     url(r'^users/(\d+)/facebookfriends/$', 'freyalove.api.views.fb_friends'),
     url(r'^users/(\d+)/profile/summary/$', 'freyalove.api.views.profile_summary'),
-    url(r'^users/(\d+)/profile/$', 'freyalove.api.views.profile'),
+    url(r'^users/(\d+)/profile/$', 'freyalove.api.views.profile'), # dual
 
     url(r'^activities/sexytimes/$', 'freyalove.api.views.fetch_sexytimes'),
+
+    # post routes
 
     # Index
     url(r'^$', 'freyalove.api.views.hello'),
