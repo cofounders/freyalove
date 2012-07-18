@@ -5,6 +5,7 @@
 ## imports
 from django.http import HttpResponse
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 
 try:
 	import json
@@ -201,7 +202,7 @@ def fetch_sexytimes(request):
 	return resp
 
 # POST
-
+@csrf_exempt
 def update_profile(request, profile_id):
 	try:
 		profile_id = int(profile_id)

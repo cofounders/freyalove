@@ -1,16 +1,17 @@
 define(['jQuery', 'Underscore', 'Mustache', 'Backbone', 'app', 'modules/UserPreview'],
 function($, _, Mustache, Backbone, app, UserPreview) {
 
-	var Views = {};
+	var Collections = {},
+		Views = {};
 
 	var Model = Backbone.Model.extend({
 		initialize: function(models, options) {
 		}
 	});
 
-	var Collection = Backbone.Collection.extend({
+	Collections.FacebookFriends = Backbone.Collection.extend({
 		model: Model,
-
+/*
 		fetch: function () {
 			console.log('[FAKE] FETCHING FB FRIENDS');
 			var that = this;
@@ -18,9 +19,9 @@ function($, _, Mustache, Backbone, app, UserPreview) {
 				that.reset(app.friends);
 			}, 100);
 		},
-
+*/
 		url: function () {
-			return app.api + 'users/' + this.options.userId + '/facebookfriends/';
+			return app.api + 'users/' + (this.options.id || 4) + '/facebookfriends/';
 		},
 
 		initialize: function(models, options) {
@@ -28,6 +29,8 @@ function($, _, Mustache, Backbone, app, UserPreview) {
 		}
 	});
 
+	Collections.Friends = Backbone.Collection.extend({
+	});
 
 
 	// VIEWS
@@ -77,7 +80,7 @@ function($, _, Mustache, Backbone, app, UserPreview) {
 
 	return {
 		Model: Model,
-		Collection: Collection,
+		Collections: Collections,
 		Views: Views
 	};
 });

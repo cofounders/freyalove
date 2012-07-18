@@ -93,7 +93,9 @@ define([
 		},
 
 		dashboard: function () {
-			var friends = new Friends.Collection(Dummy.getFriends());
+			var friends = new Friends.Collections.Friends(Dummy.getFriends());
+// SEB: can this line below be removed?			
+//			var fbFriends = new Friends.Collections.FacebookFriends([], {id: app.user});
 			app.useLayout('dashboard')
 				.setViews({
 					'.bblm-header-top': new Header.Views.Top(),
@@ -107,9 +109,9 @@ define([
 					'.bblm-user-preview-medium': new UserPreview.Views.Medium(),
 					'.bblm-user-preview-small': new UserPreview.Views.Small()
 				}).render();
-//			friends.fetch();
+//			fbFriends.fetch();
 		},
-		
+
 		faq: function (path) {
 			app.useLayout('faq')
 				.setViews({
@@ -152,6 +154,10 @@ define([
 				.setViews({
 					'.footer-end': new Footer.Views.End()
 				}).render();
+			require(['Facebook'], function (Facebook) {
+				console.log('XFBML');
+				Facebook.XFBML.parse();
+			});
 		},
 
 		leaderboard: function () {
