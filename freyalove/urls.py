@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     url(r'^grappelli/', include('grappelli.urls')),
 
     # App urls
-    url(r'^api/', include('freyalove.api.urls')),
+    url(r'^$', include('freyalove.api.urls')),
     
     # Other pages
     #url(r'^$', 'freyalove.views.homepage'),
