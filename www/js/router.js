@@ -66,7 +66,7 @@ define([
 			'logout': 'logout',
 			'matchmake': 'matchmake',
 			'message': 'message',
-			'profile': 'profile', // TODO: merge fof and friends into this
+			'profile/:id': 'profile', // TODO: merge fof and friends into this
 			'terms': 'terms',
 			'users': 'users',
 			'*path': '404'
@@ -212,11 +212,15 @@ define([
 				}).render();
 		},
 
-		profile: function () {
+		profile: function (id) {
+			var profile = new UserPreview.Model({id: id});
 			app.useLayout('profile')
 				.setViews({
 					'.bblm-header-top': new Header.Views.Top(),
 					'.bblm-footer-end': new Footer.Views.End(),
+					'.bblm-user-profile': new User.Views.FullProfile({
+						model: profile
+					}),
 					'.bblm-dates-upcoming': new Friends.Views.UpcomingDates(),
 					'.bblm-friends-list-right': new Friends.Views.ListRight(),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
