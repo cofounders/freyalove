@@ -20,5 +20,5 @@ urlpatterns = patterns('freyalove.api.views',
     url(r'users/(\d+)/profile/$', 'profile'),
     url(r'activities/sexytimes/$', 'fetch_sexytimes'),
 
-    url(r'/$', 'hello'),
+    url(r'', 'hello'),
 )
