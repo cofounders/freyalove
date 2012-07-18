@@ -6,6 +6,9 @@ def inject_cors(resp_obj):
 	resp_obj['Access-Control-Allow-Origin'] = '*'
 	resp_obj['Access-Control-Allow-Headers'] = 'Authorization'
 
+	# usually used in preflight, but we just give it all the time
+	resp_obj['Access-Control-Allow-Methods'] = 'GET, POST'
+
 	return resp_obj
 
 def is_registered_user(profile_dict):
