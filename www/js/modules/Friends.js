@@ -1,12 +1,10 @@
-define(['jQuery', 'Underscore', 'Mustache', 'Backbone', 'app'],
-function($, _, Mustache, Backbone, app) {
+define(['jQuery', 'Underscore', 'Mustache', 'Backbone', 'app', 'modules/UserPreview'],
+function($, _, Mustache, Backbone, app, UserPreview) {
 
 	var Collections = {},
 		Views = {};
 
 	var Model = Backbone.Model.extend({
-		defaults: {firstname: "Bette", lastname: "Porter", age: 35},
-
 		initialize: function(models, options) {
 		}
 	});
@@ -31,14 +29,23 @@ function($, _, Mustache, Backbone, app) {
 		}
 	});
 
+
+
+	// VIEWS
+
+
 	Views.LeaderboardTop = Backbone.View.extend({
 		template: 'friends/leaderboard-top'
 	});
 
+
+
 	Views.LeaderboardFull = Backbone.View.extend({
 		template: 'friends/leaderboard-full'
 	});
-
+	
+	
+	// Friend list on the right hand friend panel
 	Views.ListRight = Backbone.View.extend({
 		template: 'friends/list-right',
 
@@ -52,7 +59,7 @@ function($, _, Mustache, Backbone, app) {
 
 		render: function (manage) {
 			this.collection.each(function (user) {
-				this.insertView('ul', new Views.ListRightTile({
+				this.insertView('ul', new UserPreview.Views.Tiny({
 					model: user
 				}));
 			}, this);
@@ -60,15 +67,6 @@ function($, _, Mustache, Backbone, app) {
 		}
 	});
 
-	Views.ListRightTile = Backbone.View.extend({
-		template: 'friends/list-right-tile',
-
-		tagName: 'li',
-
-		serialize: function () {
-			return this.model.toJSON();
-		}
-	});
 
 	Views.ListRightCommon = Backbone.View.extend({
 		template: 'friends/list-right-common'
