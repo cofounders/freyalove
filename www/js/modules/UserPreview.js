@@ -1,32 +1,65 @@
 define(['jQuery', 'Underscore', 'Mustache', 'Backbone', 'app'],
 function($, _, Mustache, Backbone, app) {
-	return {
 
-		Model: Backbone.Model.extend({
-		}),
+	var Views = {};
 
-		Collection: Backbone.Collection.extend({
-		}),
+	var Model = Backbone.Model.extend({
 
-		Views: {
-
-			Medium: Backbone.View.extend({
-				template: 'userpreview/medium'
-			}),
-			Small: Backbone.View.extend({
-				template: 'userpreview/small'
-			}),
-			SexyTime: Backbone.View.extend({
-				template: 'userpreview/sexytime'
-			}),
-			Points: Backbone.View.extend({
-				template: 'userpreview/points'
-			}),
-			Tiny: Backbone.View.extend({
-				template: 'userpreview/tiny'
-			})
-
+		initialize: function(models, options) {
 		}
+	});
 
+	var Collection = Backbone.Collection.extend({
+	});
+
+
+	/*
+	 * DEFINITION OF VIEWS
+	 */
+	
+	
+	// Medium User Preview: Profile image, name and more information
+	Views.Medium = Backbone.View.extend({
+		template: 'userpreview/medium',
+		tagName: 'li',
+//		serialize: function () {return this.model.toJSON();}
+	});
+
+
+	// Small User Preview: Profile image and name
+	Views.Small = Backbone.View.extend({
+		template: 'userpreview/small',
+		tagName: 'li',
+//		serialize: function () {return this.model.toJSON();}
+	});
+
+
+	// SexyTime (Date) User Preview: Profile image and date invitation text
+	Views.SexyTime = Backbone.View.extend({
+		template: 'userpreview/sexytime',
+		tagName: 'li',
+//		serialize: function () {return this.model.toJSON();}
+	});
+
+
+	// Points User Preview: Profile image, name and points
+	Views.Points = Backbone.View.extend({
+		template: 'userpreview/points',
+		tagName: 'li',
+//		serialize: function () {return this.model.toJSON();}
+	});
+	
+	
+	// Tiny User Preview: Only the profile image
+	Views.Tiny = Backbone.View.extend({
+		template: 'userpreview/tiny',
+		tagName: 'li',
+		serialize: function () {return this.model.toJSON();}
+	});
+
+	return {
+		Model: Model,
+		Collection: Collection,
+		Views: Views
 	};
 });
