@@ -1,6 +1,6 @@
 <!-- TODO: merge into dashboard -->
 
-<div class="partial header-top"></div>
+<div class="bblm-header-top"></div>
 
 <!-- MAIN SECTION -->
 <section class="main">
@@ -9,26 +9,43 @@
 		<!-- LEFT COLUMN -->
 		<div id="column-left">
 			
-			<!-- WELCOME NOTE -->
-			<div id="welcome-message">
-				<h3>Welcome to Freya Love</h3>
-				<p>Intro text... Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Vestibulum id ligula porta felis euismod semper.
-Donec ullamcorper nulla non metus auctor fringilla. Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod.</p>
-				<p>Enjoy yourself, Karen</p>
+			<div id="welcome">
+				<!-- WELCOME NOTE -->
+				<div id="welcome-message">
+					<h1>Welcome to Freya Love</h1>
+					<p>Intro text... Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper. Vestibulum id ligula porta felis euismod semper.</p>
+					<p>Donec ullamcorper nulla non metus auctor fringilla. Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod.</p>
+					<p>Enjoy yourself, Karen</p>
+				</div>
+				<!-- INVITE FROM FACEBOOK AD -->
+				<div id="facebook-ad">
+					<h2>Invite Your Friends</h2>
+					<ul id="facebook-friends-list">
+						<li><img src="./dummy/user1.png" alt="Picture of Bette Porter" /></li>
+						<li><img src="./dummy/user2.png" alt="Picture of Helena Peabody" /></li>
+						<li><img src="./dummy/user1.png" alt="Picture of Bette Porter" /></li>
+						<li><img src="./dummy/user2.png" alt="Picture of Helena Peabody" /></li>
+						<li><img src="./dummy/user1.png" alt="Picture of Bette Porter" /></li>
+						<li><img src="./dummy/user2.png" alt="Picture of Helena Peabody" /></li>
+						<li><img src="./dummy/user1.png" alt="Picture of Bette Porter" /></li>
+						<li><img src="./dummy/user2.png" alt="Picture of Helena Peabody" /></li>
+						<li><img src="./dummy/user1.png" alt="Picture of Bette Porter" /></li>
+						<li><img src="./dummy/user2.png" alt="Picture of Helena Peabody" /></li>
+						<li><img src="./dummy/user1.png" alt="Picture of Bette Porter" /></li>
+						<li><img src="./dummy/user2.png" alt="Picture of Helena Peabody" /></li>
+					</ul>
+					
+					
+					<a class="invite" href="javascript:alert('opens the facebook invite popup');" type="button" title="Button to open Facebook Invitation popup">Invite others...</a>
+				</div>
 			</div>
 			
-			<!-- INVITE FROM FACEBOOK AD -->
-			<div id="facebook-ad">
-				<h3>Invite Your Facebook Friends</h3>
-				<img src="./dummy/user1.png" alt="Picture of Bette Porter" /><img src="./dummy/user2.png" alt="Picture of Helena Peabody" /><img src="./dummy/user1.png" alt="Picture of Bette Porter" /><img src="./dummy/user2.png" alt="Picture of Helena Peabody" /><img src="./dummy/user1.png" alt="Picture of Bette Porter" /><img src="./dummy/user2.png" alt="Picture of Helena Peabody" /><img src="./dummy/user1.png" alt="Picture of Bette Porter" /><img src="./dummy/user2.png" alt="Picture of Helena Peabody" /><img src="./dummy/user1.png" alt="Picture of Bette Porter" /><img src="./dummy/user2.png" alt="Picture of Helena Peabody" /><img src="./dummy/user1.png" alt="Picture of Bette Porter" /><img src="./dummy/user2.png" alt="Picture of Helena Peabody" />
-				<a class="button" href="javascript:alert('opens the facebook invite popup');" type="button" title="Button to open Facebook Invitation popup">Invite</a>
-			</div>
 			
 			<!-- POSSIBLE MATCHES -->
 			<h2>Possible Matches for You <a href="javascript:alert('opens a page that lists all possible matches for you');window.location.assign('user-list.html');" class="see-more" title="See all possible matches for you">browse all</a></h2>
 			
 			<!-- USER PREVIEW MODULE MEDIUM -->
-			<div class="user-preview medium">
+			<div class="user-preview-medium">
 				<img src="./dummy/user1.png" alt="Picture of Bette Porter" />
 				<a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Bette Porter">Bette Porter</a>
 				<p class="al">aged 41, in Singapore</p>
@@ -40,7 +57,7 @@ Donec ullamcorper nulla non metus auctor fringilla. Etiam porta sem malesuada ma
 			</div>
 
 			<!-- USER PREVIEW MODULE MEDIUM -->
-			<div class="user-preview medium">
+			<div class="user-preview-medium">
 				<img src="./dummy/user1.png" alt="Picture of Bette Porter" />
 				<a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Bette Porter">Bette Porter</a>
 				<p class="al">aged 41, in Singapore</p>
@@ -59,7 +76,7 @@ Donec ullamcorper nulla non metus auctor fringilla. Etiam porta sem malesuada ma
 			<h2>Match Your Friends <a href="javascript:alert('opens a page that lists all friends to match');window.location.assign('match.html');" class="see-more" title="See all friends you could match">browse all</a></h2>
 			
 			<!-- MATCH PREVIEW MODULE -->
-			<div class="match-preview small">
+			<div class="match-preview">
 				<img src="./dummy/user2.png" alt="Picture of Tina Kennard" />
 				<a href="javascript:alert('opens the matching page');window.location.assign('match.html');" title="Link to the matching page of Tina Kennard and Helena Peabody" class="button-match">match</a>
 				<img src="./dummy/user1.png" alt="Picture of Helena Peabody" />
@@ -68,7 +85,7 @@ Donec ullamcorper nulla non metus auctor fringilla. Etiam porta sem malesuada ma
 			</div>
 
 			<!-- MATCH PREVIEW MODULE -->
-			<div class="match-preview small">
+			<div class="match-preview">
 				<img src="./dummy/user2.png" alt="Picture of Tina Kennard" />
 				<a href="javascript:alert('opens the matching page');window.location.assign('match.html');" title="Link to the matching page of Tina Kennard and Helena Peabody" class="button-match">match</a>
 				<img src="./dummy/user1.png" alt="Picture of Helena Peabody" />
@@ -80,16 +97,18 @@ Donec ullamcorper nulla non metus auctor fringilla. Etiam porta sem malesuada ma
 		<!-- RIGHT COLUMN -->
 		<div id="column-right">
 		
-			<div class="partial dates-upcoming" />	
+			<!-- TODO move into module  snip -->
+			<div class="bblm-dates-upcoming" />	
 
-			<div class="partial friends-list-right" />
+			<div class="bblm-friends-list-right" />
 			
-			<div class="partial recent-activity" />
+			<div class="bblm-recent-activity" />
 			
-			<div class="partial top-leaderboard" />
+			<div class="bblm-top-leaderboard" />
+			<!-- /snip -->
 
 		</div>
 	</div>
 </section>
 
-<div class="partial footer-end"></div>
+<div class="bblm-footer-end"></div>

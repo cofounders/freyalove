@@ -16,9 +16,27 @@
 
         server {
           listen 80;
-          server_name www.freyalove.com;
+          server_name dev.freyalove.localhost;
+          root /var/www/freyalove.com/www;
+          index index.html;
+          # Proxy API calls to avoid CORS restriction
+          location /api {
+            proxy_pass http://api.freyalove.cofounders.sg;
+          }
+          # Let the Backbone.js router handle internal app paths
+          location ~ ^/(css|fonts|img|js|templates)/ {}
+          location / { try_files $uri $uri/ /index.html; }
+        }
+
+        server {
+          listen 80;
+          server_name freyalove.localhost;
           root /var/www/freyalove.com/www/publish;
           index index.html;
+          # Proxy API calls to avoid CORS restriction
+          location /api {
+            proxy_pass http://api.freyalove.cofounders.sg;
+          }
           # Let the Backbone.js router handle internal app paths
           location ~ ^/(css|fonts|img|js|templates)/ {}
           location / { try_files $uri $uri/ /index.html; }
@@ -51,7 +69,10 @@
 
 ## Development Guidelines
 
-- Don't forget to compile `./css/app.styl` with Stylus. Tip: Use Sublime Text 2 with the Stylus build plugin.
+- After any modificatoions to the `*.styl` files, or after a `git pull`, remember to compile the Stylus files.
+
+        stylus --watch ./styles/app.styl ./styles/app.styl
+
 - Learn these frameworks:
   - [RequireJS](http://requirejs.org/)
   - [Underscore.js](http://underscorejs.org/)

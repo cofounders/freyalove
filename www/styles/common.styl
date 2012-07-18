@@ -1,20 +1,35 @@
 *
-	font-family 'BariolRegular', Helvetica, Arial, sans-serif
+	font-family Bariol, Helvetica, Arial, sans-serif
 	box-sizing border-box
+	font-weight 400
+	
+html
+	font-size $base-font-size
 
 body
-	font-size $base-font-size
 	line-height 1.25  // 20 px
 	background url('../img/bg.jpg') #efefef repeat
+
+ul, ol 
+	padding 0
 
 .wrapper
 	position relative
 	width $page-width
 	margin 0 auto
 
-section.main
+.main
 	clear both
 	font-size 0
+	margin-top 35px
+
+hr
+	display block
+	outline 0
+	height 1px
+	background-color #e1e1e1
+	border none
+	box-shadow white 0px 1px 0px 0px
 
 #fb-root
 	display none
@@ -39,28 +54,7 @@ section.popup
 #popup-dates
 	left 680px
 
-div.user-preview
-	float left
-	width 328px
 
-div.user-preview img
-	float left
-	margin-bottom 20px
-
-div.small, div.medium
-	img
-		width 104px
-		height 104px
-
-div.dates, ul.dates
-	img
-		float left
-		width 60px
-		height 60px
-
-div.dates p
-	float left
-	width 196px
 
 div.match-preview
 	width 328px

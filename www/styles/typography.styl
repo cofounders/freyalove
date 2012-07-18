@@ -2,34 +2,41 @@ $base-font-size = 16px //12pt
 
 h1, h2, h3, h4, h5, h6
 	margin 0
+	display inline-block
 h1
-	font-size 1.875em //30px
+	font-size 1.875rem //30px
 	color #a63e00
-
 h2
-	font-size 2em //24px
+	font-size 1.5rem //24px
 	text-transform uppercase
 	color #62228f
-
 h3
-	font-size 1.25em //20px
+	font-size 1.25rem //20px
 	color #3f0a49
-
 h4
-	font-size 1.125em //18px
+	font-size 1.125rem //18px
 	color #000
-
 h5
-	font-size 1em //16px
+	font-size 1rem //16px
 	color #444
-
 h6
-	font-size 0.875em //14px
+	font-size 0.875rem //14px
 	color #666	
-
+p
+	font-size 1rem //16px
+	color #444
 a
 	color #a63e00
 	text-decoration none
+	&.see-more
+		text-transform none
+		margin 0.4rem 0 0 0.3rem
+		float right
+		font-size 0.875rem //14px
+		&:link, &:visited
+			text-decoration none
+		&:hover, &:active
+			text-decoration underline
 
 	.button
 		clear both
@@ -39,11 +46,12 @@ a
 		display block
 		background-color blue
 		border 1px solid black
-ul
 
+ul
+	display inline-block
 	li
 		display inline-block
-		float left
+
 
 	.carousel
 		width 100px
@@ -51,14 +59,3 @@ ul
 		height 20px
 		background-color grey
 		clear both		
-
-h2
-	
-	a.see-more
-		font-size 0.6em
-		text-transform none
-		margin-left 0.3em
-		font-weight normal
-
-h3
-	padding-top 10px
