@@ -1,7 +1,8 @@
 define(['jQuery', 'Underscore', 'Mustache', 'Backbone', 'app'],
 function($, _, Mustache, Backbone, app) {
 
-	var Views = {};
+	var Collections = {},
+		Views = {};
 
 	var Model = Backbone.Model.extend({
 		defaults: {firstname: "Bette", lastname: "Porter", age: 35},
@@ -10,9 +11,9 @@ function($, _, Mustache, Backbone, app) {
 		}
 	});
 
-	var Collection = Backbone.Collection.extend({
+	Collections.FacebookFriends = Backbone.Collection.extend({
 		model: Model,
-
+/*
 		fetch: function () {
 			console.log('[FAKE] FETCHING FB FRIENDS');
 			var that = this;
@@ -20,9 +21,9 @@ function($, _, Mustache, Backbone, app) {
 				that.reset(app.friends);
 			}, 100);
 		},
-
+*/
 		url: function () {
-			return app.api + 'users/' + this.options.userId + '/facebookfriends/';
+			return app.api + 'users/' + (this.options.id || 4) + '/facebookfriends/';
 		},
 
 		initialize: function(models, options) {
@@ -79,7 +80,7 @@ function($, _, Mustache, Backbone, app) {
 
 	return {
 		Model: Model,
-		Collection: Collection,
+		Collections: Collections,
 		Views: Views
 	};
 });

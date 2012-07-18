@@ -91,23 +91,23 @@ define([
 		},
 
 		dashboard: function () {
-			var fbFriends = new Friends.Collection();
+			var facebookFriends = new Friends.Collections.FacebookFriends([], {id: app.user});
 			app.useLayout('dashboard')
 				.setViews({
 					'.bblm-header-top': new Header.Views.Top(),
 					'.bblm-footer-end': new Footer.Views.End(),
 					'.bblm-dates-upcoming': new Friends.Views.UpcomingDates(),
 					'.bblm-friends-list-right': new Friends.Views.ListRight({
-						collection: fbFriends
+						collection: facebookFriends
 					}),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
 					'.bblm-top-leaderboard': new Friends.Views.LeaderboardTop(),
 					'.bblm-user-preview-medium': new UserPreview.Views.Medium(),
 					'.bblm-user-preview-small': new UserPreview.Views.Small()
 				}).render();
-			fbFriends.fetch();
+			facebookFriends.fetch();
 		},
-		
+
 		faq: function (path) {
 			app.useLayout('faq')
 				.setViews({
@@ -150,6 +150,10 @@ define([
 				.setViews({
 					'.footer-end': new Footer.Views.End()
 				}).render();
+			require(['Facebook'], function (Facebook) {
+				console.log('XFBML');
+				Facebook.XFBML.parse();
+			});
 		},
 
 		leaderboard: function () {
