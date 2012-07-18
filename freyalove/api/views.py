@@ -25,7 +25,6 @@ def hello(request):
 	resp = inject_cors(HttpResponse(resp_json, content_type="application/json"))
 	return resp
 
-
 def profile_summary(request, profile_id):
 	"""
 	Return summarized information on a user profile given an id/fb_id
