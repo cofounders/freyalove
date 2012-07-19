@@ -4,7 +4,7 @@ section#landing
 		display block
 		clear both
 #fb-login
-	background url('../img/fb-login.png') no-repeat 0 0
+	background url('../img/fb_login.png') no-repeat 0 0
 	width 231px
 	height 28px
 	display inline-block
@@ -44,3 +44,34 @@ section#landing
 			border-radius 5px
 			box-shadow 0 0 3px #BBB
 			text-shadow 0 0 3px #666
+#landing-details
+	overflow hidden
+	#landing-details-social 
+		display block
+		margin 20px 0
+		li 
+			padding 0
+			margin 0 0 0 20px
+			float right
+			a 
+				height 28px
+				display inline-block
+				box-shadow 0 0 3px #aaa
+			&:nth-child(1)
+				background url('../img/fb_like.png') no-repeat
+				a 	
+					width 140px
+			&:nth-child(2)
+				background url('../img/tw_like.png') no-repeat
+				a 	
+					width 160px
+	#landing-details-text
+		li 
+			padding 0
+			display inline-block
+			width 310px
+			vertical-align top
+			h2
+				font-weight 700
+			&:nth-child(2n)
+				margin 0 10px
