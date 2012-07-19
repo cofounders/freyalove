@@ -94,8 +94,7 @@ define([
 
 		dashboard: function () {
 			var friends = new Connections.Collections.Friends(Dummy.getFriends());
-// SEB: can this line below be removed?			
-//			var fbFriends = new Connections.Collections.FacebookFriends([], {id: app.user});
+			var fbFriends = new Connections.Collections.FacebookFriends([], {id: app.user});
 			app.useLayout('dashboard')
 				.setViews({
 					'.bblm-header-top': new Header.Views.Top(),
@@ -109,7 +108,7 @@ define([
 					'.bblm-user-preview-medium': new User.Views.Medium(),
 					'.bblm-user-preview-small': new User.Views.Small()
 				}).render();
-//			fbFriends.fetch();
+			fbFriends.fetch();
 		},
 
 		faq: function (path) {
