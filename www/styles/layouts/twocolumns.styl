@@ -87,29 +87,115 @@ ul#profile-snapshot-list
 		text-align center
 		display block
 		font-weight 700
+	a
+		color #9f3647
+		font-weight bold
+		font-size 0.875rem
+		&:link, &:visited
+			text-decoration none
+		&:hover, &:active
+			text-decoration underline
 #winked-list
 	padding 20px 30px 30px 30px
 	margin 20px 0 0 0
 	li
 		margin 0 10px
 
-.bblm-user-preview-small
-	display inline-block
+.bblm-user-preview-medium
+	.summary-info
+		display inline-block
+	.expanded-info
+		display none
+.middle 
+	.summary-info
+		display none
+	.expanded-info
+		display inline-block	
+.summary-info 
+	border 10px solid #f8f8f8
+	border-radius 5px
+	box-shadow 0 0 3px #aaa
+	img
+		width 200px
+		height 200px
+		-webkit-filter grayscale(100%) brightness(30%) contrast(65%)
+		border-radius 5px
 .expanded-info
-	display none
-.middle .expanded-info
-	display block	
+	background-color #f8f8f8
+	box-shadow 0 0 3px #aaa
+	width 330px
+	height 320px
+	padding 10px 10px 0 10px
+	img 
+		width 120px
+		height 120px
+		border-radius 5px
+		float left
+		margin 0 10px 20px 0 
+	a
+		color #9f3647
+		font-weight bold
+		font-size 1rem
+		display inline-block
+		&:link, &:visited
+			text-decoration none
+		&:hover, &:active
+			text-decoration underline	
+		&#name 
+			display inline-block
+			vertical-align top
+			color #3f0a49
+			font-size 1.25rem
+			font-weight 700
+			margin 0
+			&:link, &:visited
+				text-decoration none
+			&:hover, &:active
+				text-decoration underline
+		&#check-her-out
+			display block
+			text-align center
+			background url('../img/bg_cta.jpg') repeat-x
+			border-radius 5px
+			width 100%
+			color #fff
+			font-size 1.5rem
+			line-height 2.7rem	
+			margin 10px 0	
+	p	
+		margin 0
+		&.al, &.likes, &.about
+			vertical-align top
+			display inline-block
+		&.al 
+			font-size 0.875rem
+		&.likes, &.about
+			font-size 1rem
+
+	#expanded-info-right
+		display inline-block
+		width 180px
+		p 
+			margin 0 0 20px 0
+
+
+
 .user-preview-small
 	width 120px
 	height 155px
 	box-shadow 0 0 2px #aaa
 	background-color #fff
 	padding 8px
+	display inline-block
 	a
 		font-size 0.875rem
 		display block
 		text-align center
 		margin 5px 0 0 0
+	img
+		width 104px
+		height 104px
+		display inline-block
 
 #matches-for-you
 	margin-top 40px
@@ -121,12 +207,6 @@ ul#profile-snapshot-list
 
 div.user-preview-medium, div.user-preview-small, div.user-preview-tiny
 	display inline-block
-
-div.user-preview-small, div.user-preview-medium
-	img
-		width 104px
-		height 104px
-		display inline-block
 
 ul#winked-list
 	display block
@@ -213,8 +293,6 @@ ul#winked-list
 
 	.add-more
 		background url('../img/add.png') no-repeat center center
-
-#column-left, #column-right
 	a
 		color #9f3647
 		font-weight bold
