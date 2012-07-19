@@ -44,7 +44,7 @@
           location / { try_files $uri $uri/ /index.html; }
         }
 
-  **Apache** Update your http.conf to enable vhosts and update httpd-vhosts.config file and use this template (but change the paths). *TODO: Needs update to support `/api` redirect.
+  **Apache** Update your http.conf to enable vhosts and update httpd-vhosts.config file and use this template (but change the paths). *TODO: Needs update to support `/api` redirect.*
 
         <VirtualHost *:80>
           ServerName freyalove.localhost
