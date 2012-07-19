@@ -352,7 +352,15 @@ Answer: { #fixed format
 
 <category>: String <about|identity|looks|lifestyle|relationship|background|personality|sexuality>
 */
-		
+	
+	function randOrd(){
+		return (Math.round(Math.random())-0.5);
+	};
+	
+	function randArray(array) {
+		return array.sort(randOrd);
+	};
+	
 		
 // PUBLIC FUNCTIONS
 	return {
@@ -372,19 +380,19 @@ Answer: { #fixed format
 		
 	// CONNECTIONS
 		getFriends: function () {
-			return [user1, user2, user3, user4];
+			return randArray([user1, user2, user3, user4]);
 		},
 		
 		getMutualFriends: function () {
-			return [user2, user3];
+			return randArray([user2, user3]);
 		},
 		
 		getFriendsOfFriends: function () {
-			return [user10, user11, user12, user13, user14];
+			return randArray([user10, user11, user12, user13, user14]);
 		},
 		
 		getTopMatchmakers: function () {
-			return [user3, user1, user0, user2, user4];
+			return [user2, user1, user0, user4, user3];
 		},
 
 		getMyPossibleMatches: function () {

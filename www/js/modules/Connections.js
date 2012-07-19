@@ -53,6 +53,8 @@ function($, _, Mustache, Backbone, app, User) {
 
 		initialize: function () {
 			this.collection.on('reset', this.render, this);
+			
+			//hello
 
 			// this.collection.on('fetch', function () {
 			// 	this.$el.html('<img src="'"/assets/img/spinner.gif">'');

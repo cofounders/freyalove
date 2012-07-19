@@ -121,12 +121,15 @@ define([
 		},
 
 		fresh: function () { /* TODO: merge into dashboard */
+			var friends = new Connections.Collections.Friends(Dummy.getFriends());
 			app.useLayout('fresh')
 				.setViews({
 					'.bblm-header-top': new Header.Views.Top(),
 					'.bblm-footer-end': new Footer.Views.End(),
 					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
-					'.bblm-friends-list-right': new Connections.Views.ListRight(),
+					'.bblm-friends-list-right': new Connections.Views.ListRight({
+						collection: friends
+					}),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
 					'.bblm-user-preview-medium': new User.Views.Medium(),
@@ -135,12 +138,15 @@ define([
 		},
 
 		inbox: function () {
+			var friends = new Connections.Collections.Friends(Dummy.getFriends());
 			app.useLayout('inbox')
 				.setViews({
 					'.bblm-header-top': new Header.Views.Top(),
 					'.bblm-footer-end': new Footer.Views.End(),
 					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
-					'.bblm-friends-list-right': new Connections.Views.ListRight(),
+					'.bblm-friends-list-right': new Connections.Views.ListRight({
+						collection: friends
+					}),
 					'.bblm-message-summary': new Message.Views.Summary(),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
@@ -193,12 +199,15 @@ define([
 		},
 
 		matchmake: function () {
+			var friends = new Connections.Collections.Friends(Dummy.getFriends());
 			app.useLayout('matchmake')
 				.setViews({
 					'.bblm-header-top': new Header.Views.Top(),
 					'.bblm-footer-end': new Footer.Views.End(),
 					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
-					'.bblm-friends-list-right': new Connections.Views.ListRight(),
+					'.bblm-friends-list-right': new Connections.Views.ListRight({
+						collection: friends
+					}),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
 					'.bblm-user-preview-medium': new User.Views.Medium(),
@@ -207,12 +216,15 @@ define([
 		},
 
 		message: function () {
+			var friends = new Connections.Collections.Friends(Dummy.getFriends());
 			app.useLayout('message')
 				.setViews({
 					'.bblm-header-top': new Header.Views.Top(),
 					'.bblm-footer-end': new Footer.Views.End(),
 					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
-					'.bblm-friends-list-right': new Connections.Views.ListRight(),
+					'.bblm-friends-list-right': new Connections.Views.ListRight({
+						collection: friends
+					}),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
 					'.bblm-user-preview-medium': new User.Views.Medium(),
@@ -221,6 +233,7 @@ define([
 		},
 
 		profile: function (id) {
+			var friends = new Connections.Collections.Friends(Dummy.getFriends());
 			var profile = new User.Model({id: id});
 			app.useLayout('profile')
 				.setViews({
@@ -230,7 +243,9 @@ define([
 						model: profile
 					}),
 					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
-					'.bblm-friends-list-right': new Connections.Views.ListRight(),
+					'.bblm-friends-list-right': new Connections.Views.ListRight({
+						collection: friends
+					}),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
 					'.bblm-user-preview-medium': new User.Views.Medium(),
@@ -247,12 +262,15 @@ define([
 		},
 		
 		users: function () {
+			var friends = new Connections.Collections.Friends(Dummy.getFriends());
 			app.useLayout('users')
 				.setViews({
 					'.bblm-header-top': new Header.Views.Top(),
 					'.bblm-footer-end': new Footer.Views.End(),
 					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
-					'.bblm-friends-list-right': new Connections.Views.ListRight(),
+					'.bblm-friends-list-right': new Connections.Views.ListRight({
+						collection: friends
+					}),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
 					'.bblm-user-preview-small': new User.Views.Small()
