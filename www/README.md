@@ -21,6 +21,7 @@
           index index.html;
           # Proxy API calls to avoid CORS restriction
           location /api {
+            rewrite ^/api/(.*) /$1 break;
             proxy_pass http://api.freyalove.cofounders.sg;
           }
           # Let the Backbone.js router handle internal app paths
@@ -35,6 +36,7 @@
           index index.html;
           # Proxy API calls to avoid CORS restriction
           location /api {
+            rewrite ^/api/(.*) /$1 break;
             proxy_pass http://api.freyalove.cofounders.sg;
           }
           # Let the Backbone.js router handle internal app paths
@@ -42,7 +44,7 @@
           location / { try_files $uri $uri/ /index.html; }
         }
 
-  **Apache** Update your http.conf to enable vhosts and update httpd-vhosts.config file and use this template (but change the paths).
+  **Apache** Update your http.conf to enable vhosts and update httpd-vhosts.config file and use this template (but change the paths). *TODO: Needs update to support `/api` redirect.
 
         <VirtualHost *:80>
           ServerName freyalove.localhost
