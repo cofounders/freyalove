@@ -69,6 +69,8 @@ define([
 			'matchmake': 'matchmake',
 			'message': 'message',
 			'profile/:id': 'profile', // TODO: merge fof and friends into this
+			'friend/:id': 'friend', // TODO: merge up
+			'fof/:id': 'fof', // TODO: merge up
 			'terms': 'terms',
 			'users': 'users',
 			'*path': '404'
@@ -232,13 +234,58 @@ define([
 		},
 
 		profile: function (id) {
-			var friends = new Connections.Collections.Friends(Dummy.getFriends());
-			var profile = new User.Model({id: id});
+			app.useLayout('profile')
+				.setViews({
+					'.bblm-header-top': new Header.Views.Top({
+						model: new User.Model(Dummy.getMyProfile())
+					}),
+					'.bblm-footer-end': new Footer.Views.End(),
+					'.bblm-user-profile': new User.Views.MyFullProfile({
+						model: new User.Model(Dummy.getProfile(id))
+//						model: new User.Model({id: id})
+
+					}),
+					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
+					'.bblm-friends-list-right': new Connections.Views.ListRight({
+						collection: new Connections.Collections.Friends(Dummy.getFriends())
+					}),
+					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
+					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
+					'.bblm-user-preview-medium': new User.Views.Medium(),
+					'.bblm-user-preview-small': new User.Views.Small()
+				}).render();
+		},
+
+		// TODO: for testing purpose only, merge with profile
+		friend: function (id) {
+			var friends = new Connections.Collections.Friends(Dummy.getMutualFriends());
+			var profile = new User.Model(Dummy.getProfile(id));
 			app.useLayout('profile')
 				.setViews({
 					'.bblm-header-top': new Header.Views.Top(),
 					'.bblm-footer-end': new Footer.Views.End(),
-					'.bblm-user-profile': new User.Views.FullProfile({
+					'.bblm-user-profile': new User.Views.FriendFullProfile({
+						model: profile
+					}),
+					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
+					'.bblm-friends-list-common': new Connections.Views.ListRight({
+						collection: friends
+					}),
+					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
+					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
+					'.bblm-user-preview-medium': new User.Views.Medium(),
+					'.bblm-user-preview-small': new User.Views.Small()
+				}).render();
+		},
+
+		fof: function (id) {
+			var friends = new Connections.Collections.Friends(Dummy.getFriends());
+			var profile = new User.Model(Dummy.getProfile(id));
+			app.useLayout('profile')
+				.setViews({
+					'.bblm-header-top': new Header.Views.Top(),
+					'.bblm-footer-end': new Footer.Views.End(),
+					'.bblm-user-profile': new User.Views.FofFullProfile({
 						model: profile
 					}),
 					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
@@ -251,6 +298,7 @@ define([
 					'.bblm-user-preview-small': new User.Views.Small()
 				}).render();
 		},
+
 		
 		terms: function (path) {
 			app.useLayout('terms')

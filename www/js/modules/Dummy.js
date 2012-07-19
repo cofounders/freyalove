@@ -9,10 +9,10 @@ define([], function () {
 		"lastName": "Schecter",
 		"dateOfBirth": "1979-05-26",
 		"profileImage": "/dummy/user0.png",
-		"about": "Jennifer Schecter is a fictional character from the American Showtime television drama series The L Word, played by Mia Kirshner. Jenny debuted on-screen during the pilot episode and remained until the series' final episode. Jenny became well documented in the media for her outlandish plots. Jenny was created by series creator Ilene Chaiken, based on herself as a younger woman living in the lesbian community.",
+		"about": "Jennifer Schecter is a fictional character origin the American Showtime television drama series The L Word, played by Mia Kirshner. Jenny debuted on-screen during the pilot episode and remained until the series' final episode. Jenny became well documented in the media for her outlandish plots. Jenny was created by series creator Ilene Chaiken, based on herself as a younger woman living in the lesbian community.",
 		"points": "702",
 		"location": "Beijing, CN",
-		"from": "Los Angeles, US",
+		"origin": "Los Angeles, US",
 		"languages": "English, French",
 		"likes": "Michael Jackson, Angry Birds, Oracle Databases",
 		"likeActivities": "Sleeping, Reading, Commodo, Sit Elit Sem, Fusce",
@@ -35,7 +35,7 @@ define([], function () {
 		"about": "Bette Porter is a fictional character on the Showtime television network series The L Word, played by Jennifer Beals. While she is portrayed as the one true love of Tina Kennard, she is shown to be rather promiscuous and has had countless affairs with other women, whether or not she is with Tina. She was ranked No. 10 in AfterEllen.com's Top 50 Favorite Female TV Characters.",
 		"points": "975",
 		"location": "Los Angeles, US",
-		"from": "Los Angeles, US",
+		"origin": "Los Angeles, US",
 		"languages": "English, Spanish",
 		"likes": "Michael Jackson, Angry Birds, Oracle Databases",
 		"likeActivities": "Sleeping, Reading, Commodo, Sit Elit Sem, Fusce",
@@ -58,7 +58,7 @@ define([], function () {
 		"about": "Tina Kennard is a fictional character on the Showtime television network series The L Word, shown nationally in the United States. She is played by American actress Laurel Holloman. Tina lives in Los Angeles, California, and mostly hangs out in West Hollywood. She is the mother of Angelica Porter-Kennard and the on-off lover of Bette Porter.",
 		"points": "1205",
 		"location": "London, UK",
-		"from": "Los Angeles, US",
+		"origin": "Los Angeles, US",
 		"languages": "English",
 		"likes": "Michael Jackson, Angry Birds, Oracle Databases",
 		"likeActivities": "",
@@ -81,7 +81,7 @@ define([], function () {
 		"about": "Alice Pieszecki is a fictional character on the Showtime television network series The L Word, shown nationally in the United States. She is played by American actress Leisha Hailey. Alice lives in Los Angeles, California, and mostly hangs out in West Hollywood. During the first seasons, she is often seen with her best friends, Shane McCutcheon (Katherine Moennig) and Dana Fairbanks (Erin Daniels).",
 		"points": "201",
 		"location": "Cape Town, ZA",
-		"from": "Prague, CZ",
+		"origin": "Prague, CZ",
 		"languages": "English, Czech, Russian",
 		"likes": "Michael Jackson, Angry Birds, Oracle Databases",
 		"likeActivities": "Sleeping, Reading, Commodo, Sit Elit Sem, Fusce",
@@ -104,7 +104,7 @@ define([], function () {
 		"about": "About Anabelle... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porta sem malesuada magna mollis euismod. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.",
 		"points": "612",
 		"location": "Cartagena, CO",
-		"from": "San Juan, CR",
+		"origin": "San Juan, CR",
 		"languages": "Spanish, English, Italian",
 		"likes": "Michael Jackson, Angry Birds, Oracle Databases",
 		"likeActivities": "Sleeping, Reading, Commodo, Sit Elit Sem, Fusce",
@@ -130,7 +130,7 @@ define([], function () {
 		"about": "Kenny is a Python Wrangler... Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.",
 		"points": "502",
 		"location": "Singapore, SG",
-		"from": "Singapore, SG",
+		"origin": "Singapore, SG",
 		"languages": "English, Hokkien",
 		"likes": "Michael Jackson, Angry Birds, Oracle Databases",
 		"likeActivities": "",
@@ -153,7 +153,7 @@ define([], function () {
 		"about": "Sayanee is the Style Slinger... Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.",
 		"points": "234",
 		"location": "Bali, ID",
-		"from": "Chennai, IN",
+		"origin": "Chennai, IN",
 		"languages": "English, Tamil, Hindi",
 		"likes": "Michael Jackson, Angry Birds, Oracle Databases",
 		"likeActivities": "Sleeping, Reading, Commodo, Sit Elit Sem, Fusce",
@@ -176,7 +176,7 @@ define([], function () {
 		"about": "Seb is the Javascript Jockey... Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.",
 		"points": "371",
 		"location": "Melbourne, AU",
-		"from": "Bruxelles, BE",
+		"origin": "Bruxelles, BE",
 		"languages": "English, Flemish, French",
 		"likes": "Michael Jackson, Angry Birds, Oracle Databases",
 		"likeActivities": "Sleeping, Reading, Commodo, Sit Elit Sem, Fusce",
@@ -199,7 +199,7 @@ define([], function () {
 		"about": "Veronica is the UI Undertaker... Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.",
 		"points": "290",
 		"location": "Kota Kinabalu, MY",
-		"from": "Singapore, SG",
+		"origin": "Singapore, SG",
 		"languages": "English, Swahili",
 		"likes": "Michael Jackson, Angry Birds, Oracle Databases",
 		"likeActivities": "Sleeping, Reading, Commodo, Sit Elit Sem, Fusce",
@@ -222,7 +222,7 @@ define([], function () {
 		"about": "Wolf is the IXD Imp... Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.",
 		"points": "103",
 		"location": "Istambul, TR",
-		"from": "Vienna, AT",
+		"origin": "Vienna, AT",
 		"languages": "English, German",
 		"likes": "Michael Jackson, Angry Birds, Oracle Databases",
 		"likeActivities": "Sleeping, Reading, Commodo, Sit Elit Sem, Fusce",
@@ -255,6 +255,7 @@ define([], function () {
 		"profileImage": "/dummy/user22.png"};		
 	
 	var allUsers = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user14, user20, user21, user22];
+	var allUsersById = {0: user0, 1: user1, 2: user2, 3: user3, 4: user4, 10: user10, 11: user11, 12: user12, 13: user13, 14: user14, 20: user20, 21: user21, 22: user22};
 	var allProfiles = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user14];
 	var allFriends = [user1, user2, user3, user4];
 		
@@ -262,7 +263,7 @@ define([], function () {
 /* ACTIVITIES
 Activity: {
 	id: String
-	from: UserSummary,
+	origin: UserSummary,
 	to: UserSummary,
 	label: String, // For now just a text-only representation
 	type: ActivityType
@@ -282,18 +283,18 @@ Match > SexyTime: {
 
 Activity > Wink: {
 	id
-	from
+	origin
 	to
 	seen
 }
 
 MatchProposal {
-	from: UserSummary,
+	origin: UserSummary,
 	to: UserSummary
 }
 
 Note: {
-	from: UserID,
+	origin: UserID,
 	to: SexyTime,
 	body: Text
 }
@@ -302,7 +303,7 @@ Note: {
 
 /* MESSAGES
 Message: {
-	from: UserSummary,
+	origin: UserSummary,
 	to: UserSummary,
 	body: String,
 	status: ConversationStatus
@@ -371,11 +372,16 @@ Answer: { #fixed format
 		},
 
 		getMyProfile: function () {
-			return user0;
+//			return user0;
+			return allUsers[Math.floor((Math.random()*allUsers.length))];
+		},
+
+		getProfile: function (id) {
+			return allUsersById[id];
 		},
 		
 		getRandomProfile: function() {
-			return [allUsers[Math.floor((Math.random()*allUsers.length))]];
+			return allUsers[Math.floor((Math.random()*allUsers.length))];
 		},
 		
 	// CONNECTIONS

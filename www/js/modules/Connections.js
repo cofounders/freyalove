@@ -54,8 +54,6 @@ function($, _, Mustache, Backbone, app, User) {
 		initialize: function () {
 			this.collection.on('reset', this.render, this);
 			
-			//hello
-
 			// this.collection.on('fetch', function () {
 			// 	this.$el.html('<img src="'"/assets/img/spinner.gif">'');
 			// }, this);
@@ -63,7 +61,7 @@ function($, _, Mustache, Backbone, app, User) {
 
 		render: function (manage) {
 			this.collection.each(function (user) {
-				this.insertView('ul', new User.Views.Tiny({
+				this.insertView('ul.friends-list', new User.Views.Tiny({
 					model: user
 				}));
 			}, this);

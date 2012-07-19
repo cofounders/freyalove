@@ -4,7 +4,6 @@ function($, _, Mustache, Backbone, app) {
 	var Views = {};
 
 	var Model = Backbone.Model.extend({
-
 		initialize: function(models, options) {
 		}
 	});
@@ -17,8 +16,33 @@ function($, _, Mustache, Backbone, app) {
 	 * DEFINITION OF VIEWS
 	 */
 	
-	
-	// Medium User Preview: Profile image, name and more information
+
+	// My Full User Profile
+	Views.MyFullProfile = Backbone.View.extend({
+		template: 'user/profile',
+		render: function (manage) {
+			return manage(this).render(this.model.toJSON());
+		}
+	});
+
+	// Friend Full User Profile
+	Views.FriendFullProfile = Backbone.View.extend({
+		template: 'user/profile-friend',
+		render: function (manage) {
+			return manage(this).render(this.model.toJSON());
+		}
+	});
+
+	// FOF Full User Profile
+	Views.FofFullProfile = Backbone.View.extend({
+		template: 'user/profile-fof',
+		render: function (manage) {
+			return manage(this).render(this.model.toJSON());
+		}
+	});
+
+
+	// Medium User: Profile image, name and more information
 	Views.Medium = Backbone.View.extend({
 		template: 'user/medium',
 		tagName: 'li',
@@ -26,7 +50,7 @@ function($, _, Mustache, Backbone, app) {
 	});
 
 
-	// Small User Preview: Profile image and name
+	// Small User: Profile image and name
 	Views.Small = Backbone.View.extend({
 		template: 'user/small',
 		tagName: 'li',
@@ -34,7 +58,7 @@ function($, _, Mustache, Backbone, app) {
 	});
 
 
-	// SexyTime (Date) User Preview: Profile image and date invitation text
+	// SexyTime (Date) User: Profile image and date invitation text
 	Views.SexyTime = Backbone.View.extend({
 		template: 'user/sexytime',
 		tagName: 'li',
@@ -42,7 +66,7 @@ function($, _, Mustache, Backbone, app) {
 	});
 
 
-	// Points User Preview: Profile image, name and points
+	// Points User: Profile image, name and points
 	Views.Points = Backbone.View.extend({
 		template: 'user/points',
 		tagName: 'li',
@@ -50,11 +74,13 @@ function($, _, Mustache, Backbone, app) {
 	});
 	
 	
-	// Tiny User Preview: Only the profile image
+	// Tiny User: Only the profile image
 	Views.Tiny = Backbone.View.extend({
 		template: 'user/tiny',
 		tagName: 'li',
-		serialize: function () {return this.model.toJSON();}
+		serialize: function () {
+			return this.model.toJSON();
+		}
 	});
 
 	return {

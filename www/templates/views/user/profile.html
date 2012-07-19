@@ -1,24 +1,24 @@
 <!-- TODO: REPLACE DUMMY INFO -->
 
-<img id="profile-pic" src="/dummy/user0.png" alt="Your profile picture" />
+<img id="profile-pic" src="{{profileImage}}" alt="Your profile picture" />
 <div id="profile-snapshot">
-	<h1>Schecter {{firstName}}</h1>
+	<h1>{{firstName}} {{lastName}}</h1>
 	<a href="/profile-edit.html" class="see-more" type="button" title="Button to edit my profile">Edit Profile</a>
 	<ul id="profile-snapshot-list">
 		<li>
 				<input type="checkbox" id="toggle-1">
 				<label for="toggle-1"></label>
-				<p>Born March 7, 1971 (age 41)</p>
+				<p>Born {{dateOfBirth}}</p>
 		</li>
 		<li>
 				<input type="checkbox" id="toggle-2">
 				<label for="toggle-2"></label>
-				<p>Lives in Singapore, Singapore</p>
+				<p>Lives in {{location}}</p>
 		</li>
 		<li>
 				<input type="checkbox" id="toggle-3">
 				<label for="toggle-3"></label>
-				<p>From Singapore, Singapore</p>
+				<p>From {{origin}}</p>
 		</li>
 		<li>
 				<input type="checkbox" id="toggle-4">
@@ -28,12 +28,12 @@
 		<li>
 				<input type="checkbox" id="toggle-5">
 				<label for="toggle-5"></label>
-				<p>Speaks English, Hokkien, Mandarin, French</p>
+				<p>Speaks {{languages}}</p>
 		</li>
 		<li>
 				<input type="checkbox" id="toggle-6">
 				<label for="toggle-6"></label>
-				<p>About text... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas faucibus mollis interdum. Cras mattis consectetur purus sit amet fermentum. Donec ullamcorper nulla non metus auctor fringilla. Curabitur blandit tempus porttitor.</p>
+				<p>{{about}}</p>
 		</li>	
 	</ul>
 </div>
@@ -42,27 +42,27 @@
 <!-- MY FACEBOOK LIKES -->
 <h2>My Likes from Facebook</h2>
 
+<p>{{likes}}</p>
+
 <ul id="profile-likes">
-	<li><em>Music:</em> Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Commodo, Sit Elit Sem, Fusce</li>
-	<li><em>Books:</em> Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo</li>
-	<li><em>Movies:</em> Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo</li>
-	<li><em>Television:</em> Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo</li>
-	<li><em>Games:</em> Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo</li>
-	<li><em>Athletes:</em> Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo</li>
-	<li><em>Sports Teams:</em> Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo</li>
-	<li><em>Sports:</em> Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo</li>
-	<li><em>Activities:</em> Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo</li>
-	<li><em>Interests:</em> Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo</li>
-	<li><em>Inspirational People:</em> Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo</li>
+	<li><em>Music:</em>{{likeMusic}}</li>
+	<li><em>Books:</em>{{likeBooks}}</li>
+	<li><em>Movies:</em>{{likeMovies}}</li>
+	<li><em>Television:</em>{{likeTv}}</li>
+	<li><em>Games:</em>{{likeGames}}</li>
+	<li><em>Athletes:</em>{{likeAthletes}}</li>
+	<li><em>Sports Teams:</e{{likeSportsTeams}}</li>
+	<li><em>Sports:</em>{{likeSports}}</li>
+	<li><em>Activities:</em>{{likeActivities}}</li>
+	<li><em>Interests:</em>{{likeInterests}}</li>
+	<li><em>Inspirational People:</e{{likePeople}}</li>
 </ul>
 
 <!-- MY FACEBOOK QUOTES -->
 <h2>My Favourite Quotes from Facebook</h2>
 
 <ul id="profile-quotes">
-	<li>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam quis risus eget urna mollis ornare vel eu leo. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec sed odio dui. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Nulla vitae elit libero, a pharetra augue. Cras mattis consectetur purus sit amet fermentum. Maecenas faucibus mollis interdum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</li>
-	<li>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</li>
-	<li>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam quis risus eget urna mollis ornare vel eu leo. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec sed odio dui. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Nulla vitae elit libero, a pharetra augue. Cras mattis consectetur purus sit amet fermentum. Maecenas faucibus mollis interdum.</li>
+	<li>{{likeQuotes}}</li>
 </ul>
 
 <!-- MY QUESTIONNAIRE SUMMARY -->
