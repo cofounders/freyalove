@@ -19,6 +19,10 @@
           server_name dev.freyalove.localhost;
           root /var/www/freyalove.com/www;
           index index.html;
+          # Proxy API calls to avoid CORS restriction
+          location /api {
+            proxy_pass http://api.freyalove.cofounders.sg;
+          }
           # Let the Backbone.js router handle internal app paths
           location ~ ^/(css|fonts|img|js|templates)/ {}
           location / { try_files $uri $uri/ /index.html; }
@@ -29,6 +33,10 @@
           server_name freyalove.localhost;
           root /var/www/freyalove.com/www/publish;
           index index.html;
+          # Proxy API calls to avoid CORS restriction
+          location /api {
+            proxy_pass http://api.freyalove.cofounders.sg;
+          }
           # Let the Backbone.js router handle internal app paths
           location ~ ^/(css|fonts|img|js|templates)/ {}
           location / { try_files $uri $uri/ /index.html; }

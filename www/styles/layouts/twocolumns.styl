@@ -8,7 +8,7 @@
 		width 395px
 		h1
 			font-weight 400
-		
+
 	#facebook-ad
 		display inline-block
 		width 270px
@@ -27,7 +27,7 @@
 			border-bottom 1px solid #c6c8c9
 		ul#facebook-friends-list
 			padding 10px 7px
-			margin 0	
+			margin 0
 			li
 				display inline-block
 				margin 0 3px 3px
@@ -60,15 +60,15 @@ ul#profile-snapshot-list
 		display block
 		input[type=checkbox]
 			display none
-			&:checked 
-				~ p 
-					color black			
+			&:checked
+				~ p
+					color black
 					font-style normal
 				+ label
 					background url('../img/icn_visible.png') no-repeat center center
 			+ label
 				background url('../img/icn_invisible.png') no-repeat center center
-		label, p 
+		label, p
 			display inline-block
 		label
 			height 20px
@@ -77,21 +77,21 @@ ul#profile-snapshot-list
 			cursor pointer
 		p
 			color #aaa
-			font-style italic	
+			font-style italic
 			margin 0
 			vertical-align top
 			width 410px
-      		
+
 #wink
 	h2
 		text-align center
 		display block
 		font-weight 700
 #winked-list
-	padding 20px 30px 30px 30px	
-	margin 20px 0 0 0 
+	padding 20px 30px 30px 30px
+	margin 20px 0 0 0
 	li
-		margin 0 10px	
+		margin 0 10px
 
 .bblm-user-preview-small
 	display inline-block
@@ -126,12 +126,12 @@ div.user-preview-small, div.user-preview-medium
 	img
 		width 104px
 		height 104px
-		display inline-block			
+		display inline-block
 
 ul#winked-list
 	display block
 	border-radius 4px
-	box-shadow 0 0 3px white inset 
+	box-shadow 0 0 3px white inset
 	background-color rgba(226, 227, 228, 0.35)
 	border 1px #d2d3d3 solid
 
@@ -142,7 +142,7 @@ ul#winked-list
 	width $sidebar-width - @margin-left
 	h3
 		margin-bottom 10px
-	hr 
+	hr
 		margin-bottom 10px
 	> div
 		margin-bottom 15px
@@ -155,24 +155,24 @@ ul#winked-list
 		vertical-align top
 		display inline-block
 		margin 23px 0 0 8px
-	
-	ul.activity	
+
+	ul.activity
 		padding 0
 		margin 0
-		li 
+		li
 			margin 0 0 15px 10px
 	.bblm-top-leaderboard ol
 		padding 0
 		margin 0
 		list-style-position inside
-		display 
+		display
 		color #b2b3b3
 		font-weight 700
-		counter-reset item 
+		counter-reset item
 		img
 			height 54px
 			width 54px
-		li 
+		li
 			display block
 			font-size 2.25rem
 			margin 10px 0
@@ -185,31 +185,34 @@ ul#winked-list
 				vertical-align middle
 			.user-preview-points-info
 				display inline-block
-				a, p 
+				a, p
 					font-size 0.875rem
-					display block	
+					display block
 
-	ul.friends-list-dates
+	.friends-list-dates
 		padding 4px
 		background-color #e2e3e4
 		border-radius 4px
 		width 100%
-		border 1px #d2d3d3 solid 
-		box-shadow 0 0 2px #fff inset 
-		li 
+		border 1px #d2d3d3 solid
+		box-shadow 0 0 2px #fff inset
+		li
 			display inline-block
 			width 60px
 			height 60px
 			border 3px solid white
 			box-shadow 1px 1px 4px #b3b3b3
 			margin 0 3px 4px 0
-			a 
+			a
 				width 100%
 				height 100%
 				display inline-block
 		img
 			width 54px
 			height 54px
+
+	.add-more
+		background url('../img/add.png') no-repeat center center
 
 #column-left, #column-right
 	a
@@ -219,10 +222,4 @@ ul#winked-list
 		&:link, &:visited
 			text-decoration none
 		&:hover, &:active
-			text-decoration underline				
-	
-.add-more
-	background url('../img/add.png') no-repeat center center
-
-
-
+			text-decoration underline

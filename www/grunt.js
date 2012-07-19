@@ -94,6 +94,23 @@ module.exports = function(grunt) {
 				src: 'js/merged.js',
 				dest: 'js/build.js'
 			}
+		},
+
+		rjs: {
+			appDir: '.',
+			baseUrl: 'js',
+			dir: 'appdirectory-build',
+			modules: [{
+				name: 'main',
+				exclude: 'Backbone Facebook jQuery Mustache Underscore'.split(' ')
+			}],
+			paths: {
+				Backbone: 'empty:',
+				Facebook: 'empty:',
+				jQuery: 'empty:',
+				Mustache: 'empty:',
+				Underscore: 'empty:'
+			}
 		}
 
 	});

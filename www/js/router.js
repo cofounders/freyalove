@@ -1,23 +1,25 @@
 define([
 	'jQuery', 'Underscore', 'Backbone', 'app',
+	'modules/Connections',
 	'modules/Couple',
 	'modules/Dates',
+	'modules/Dummy', // TODO: remove dummy eventually
 	'modules/Footer',
-	'modules/Friends',
 	'modules/Header',
 	'modules/Message',
 	'modules/Notifications',
-	'modules/UserPreview'
+	'modules/User'
 ], function (
 	$, _, Backbone, app,
+	Connections,
 	Couple,
 	Dates,
+	Dummy, // TODO: remove dummy eventually
 	Footer,
-	Friends,
 	Header,
 	Message,
 	Notifications,
-	UserPreview
+	User
 ) {
 
 	var viewGroups = {
@@ -26,17 +28,17 @@ define([
 				'.bblm-footer-end': Footer.Views.End
 			},
 			userPreviews: {
-				'.bblm-user-preview-medium': UserPreview.Views.Medium,
-				'.bblm-user-preview-points': UserPreview.Views.Points,
-				'.bblm-user-preview-sexytime': UserPreview.Views.SexyTime,
-				'.bblm-user-preview-small': UserPreview.Views.Small,
-				'.bblm-user-preview-tiny': UserPreview.Views.Tiny
+				'.bblm-user-preview-medium': User.Views.Medium,
+				'.bblm-user-preview-points': User.Views.Points,
+				'.bblm-user-preview-sexytime': User.Views.SexyTime,
+				'.bblm-user-preview-small': User.Views.Small,
+				'.bblm-user-preview-tiny': User.Views.Tiny
 			},
 			rightColumn: {
-				'.bblm-dates-upcoming': Friends.Views.UpcomingDates,
-				'.bblm-friends-list-right': Friends.Views.ListRight,
+				'.bblm-dates-upcoming': Connections.Views.UpcomingDates,
+				'.bblm-friends-list-right': Connections.Views.ListRight,
 				'.bblm-recent-activity': Notifications.Views.RecentActivity,
-				'.bblm-top-leaderboard': Friends.Views.LeaderboardTop,
+				'.bblm-top-leaderboard': Connections.Views.LeaderboardTop,
 			}
 		},
 		draw = function (layout, views, presets) {
@@ -66,7 +68,7 @@ define([
 			'logout': 'logout',
 			'matchmake': 'matchmake',
 			'message': 'message',
-			'profile': 'profile', // TODO: merge fof and friends into this
+			'profile/:id': 'profile', // TODO: merge fof and friends into this
 			'terms': 'terms',
 			'users': 'users',
 			'*path': '404'
@@ -91,19 +93,25 @@ define([
 		},
 
 		dashboard: function () {
+			var friends = new Connections.Collections.Friends(Dummy.getFriends());
+// SEB: can this line below be removed?			
+//			var fbFriends = new Connections.Collections.FacebookFriends([], {id: app.user});
 			app.useLayout('dashboard')
 				.setViews({
 					'.bblm-header-top': new Header.Views.Top(),
 					'.bblm-footer-end': new Footer.Views.End(),
-					'.bblm-dates-upcoming': new Friends.Views.UpcomingDates(),
-					'.bblm-friends-list-right': new Friends.Views.ListRight(),
+					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
+					'.bblm-friends-list-right': new Connections.Views.ListRight({
+						collection: friends
+					}),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
-					'.bblm-top-leaderboard': new Friends.Views.LeaderboardTop(),
-					'.bblm-user-preview-medium': new UserPreview.Views.Medium(),
-					'.bblm-user-preview-small': new UserPreview.Views.Small()
+					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
+					'.bblm-user-preview-medium': new User.Views.Medium(),
+					'.bblm-user-preview-small': new User.Views.Small()
 				}).render();
+//			fbFriends.fetch();
 		},
-		
+
 		faq: function (path) {
 			app.useLayout('faq')
 				.setViews({
@@ -117,12 +125,12 @@ define([
 				.setViews({
 					'.bblm-header-top': new Header.Views.Top(),
 					'.bblm-footer-end': new Footer.Views.End(),
-					'.bblm-dates-upcoming': new Friends.Views.UpcomingDates(),
-					'.bblm-friends-list-right': new Friends.Views.ListRight(),
+					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
+					'.bblm-friends-list-right': new Connections.Views.ListRight(),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
-					'.bblm-top-leaderboard': new Friends.Views.LeaderboardTop(),
-					'.bblm-user-preview-medium': new UserPreview.Views.Medium(),
-					'.bblm-user-preview-small': new UserPreview.Views.Small()
+					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
+					'.bblm-user-preview-medium': new User.Views.Medium(),
+					'.bblm-user-preview-small': new User.Views.Small()
 				}).render();
 		},
 
@@ -131,13 +139,13 @@ define([
 				.setViews({
 					'.bblm-header-top': new Header.Views.Top(),
 					'.bblm-footer-end': new Footer.Views.End(),
-					'.bblm-dates-upcoming': new Friends.Views.UpcomingDates(),
-					'.bblm-friends-list-right': new Friends.Views.ListRight(),
+					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
+					'.bblm-friends-list-right': new Connections.Views.ListRight(),
 					'.bblm-message-summary': new Message.Views.Summary(),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
-					'.bblm-top-leaderboard': new Friends.Views.LeaderboardTop(),
-					'.bblm-user-preview-medium': new UserPreview.Views.Medium(),
-					'.bblm-user-preview-small': new UserPreview.Views.Small()
+					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
+					'.bblm-user-preview-medium': new User.Views.Medium(),
+					'.bblm-user-preview-small': new User.Views.Small()
 				}).render();
 		},
 
@@ -146,28 +154,32 @@ define([
 				.setViews({
 					'.footer-end': new Footer.Views.End()
 				}).render();
+			require(['Facebook'], function (Facebook) {
+				console.log('XFBML');
+				Facebook.XFBML.parse();
+			});
 		},
 
 		leaderboard: function () {
 			draw('leaderboard', {
-				'.bblm-leaderboard-full': new Friends.Views.LeaderboardFull({
+				'.bblm-leaderboard-full': new Connections.Views.LeaderboardFull({
 					views: {
-						'.bblm-user-preview-small': new UserPreview.Views.Small(), //sample how to load subviews… not very elegant.
+						'.bblm-user-preview-small': new User.Views.Small(), //sample how to load subviews… not very elegant.
 						'.bblm-couple-preview': new Couple.Views.Preview()
 					}
 				})
 			}, ['common', 'userPreviews', 'rightColumn']);
 /*			app.useLayout('leaderboard')
 				.setViews({
-					'.bblm-leaderboard-full': new Friends.Views.LeaderboardFull(),
+					'.bblm-leaderboard-full': new Connections.Views.LeaderboardFull(),
 					'.bblm-header-top': new Header.Views.Top(),
 					'.bblm-footer-end': new Footer.Views.End(),
-					'.bblm-user-preview-medium': new UserPreview.Views.Medium(),
-					'.bblm-user-preview-small': new UserPreview.Views.Small(),
-					'.bblm-dates-upcoming': new Friends.Views.UpcomingDates(),
-					'.bblm-friends-list-right': new Friends.Views.ListRight(),
+					'.bblm-user-preview-medium': new User.Views.Medium(),
+					'.bblm-user-preview-small': new User.Views.Small(),
+					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
+					'.bblm-friends-list-right': new Connections.Views.ListRight(),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
-					'.bblm-top-leaderboard': new Friends.Views.LeaderboardTop(),
+					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
 
 				});*/
 		},
@@ -185,12 +197,12 @@ define([
 				.setViews({
 					'.bblm-header-top': new Header.Views.Top(),
 					'.bblm-footer-end': new Footer.Views.End(),
-					'.bblm-dates-upcoming': new Friends.Views.UpcomingDates(),
-					'.bblm-friends-list-right': new Friends.Views.ListRight(),
+					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
+					'.bblm-friends-list-right': new Connections.Views.ListRight(),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
-					'.bblm-top-leaderboard': new Friends.Views.LeaderboardTop(),
-					'.bblm-user-preview-medium': new UserPreview.Views.Medium(),
-					'.bblm-user-preview-small': new UserPreview.Views.Small()
+					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
+					'.bblm-user-preview-medium': new User.Views.Medium(),
+					'.bblm-user-preview-small': new User.Views.Small()
 				}).render();
 		},
 
@@ -199,26 +211,30 @@ define([
 				.setViews({
 					'.bblm-header-top': new Header.Views.Top(),
 					'.bblm-footer-end': new Footer.Views.End(),
-					'.bblm-dates-upcoming': new Friends.Views.UpcomingDates(),
-					'.bblm-friends-list-right': new Friends.Views.ListRight(),
+					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
+					'.bblm-friends-list-right': new Connections.Views.ListRight(),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
-					'.bblm-top-leaderboard': new Friends.Views.LeaderboardTop(),
-					'.bblm-user-preview-medium': new UserPreview.Views.Medium(),
-					'.bblm-user-preview-small': new UserPreview.Views.Small()
+					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
+					'.bblm-user-preview-medium': new User.Views.Medium(),
+					'.bblm-user-preview-small': new User.Views.Small()
 				}).render();
 		},
 
-		profile: function () {
+		profile: function (id) {
+			var profile = new User.Model({id: id});
 			app.useLayout('profile')
 				.setViews({
 					'.bblm-header-top': new Header.Views.Top(),
 					'.bblm-footer-end': new Footer.Views.End(),
-					'.bblm-dates-upcoming': new Friends.Views.UpcomingDates(),
-					'.bblm-friends-list-right': new Friends.Views.ListRight(),
+					'.bblm-user-profile': new User.Views.FullProfile({
+						model: profile
+					}),
+					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
+					'.bblm-friends-list-right': new Connections.Views.ListRight(),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
-					'.bblm-top-leaderboard': new Friends.Views.LeaderboardTop(),
-					'.bblm-user-preview-medium': new UserPreview.Views.Medium(),
-					'.bblm-user-preview-small': new UserPreview.Views.Small()
+					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
+					'.bblm-user-preview-medium': new User.Views.Medium(),
+					'.bblm-user-preview-small': new User.Views.Small()
 				}).render();
 		},
 		
@@ -235,11 +251,11 @@ define([
 				.setViews({
 					'.bblm-header-top': new Header.Views.Top(),
 					'.bblm-footer-end': new Footer.Views.End(),
-					'.bblm-dates-upcoming': new Friends.Views.UpcomingDates(),
-					'.bblm-friends-list-right': new Friends.Views.ListRight(),
+					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
+					'.bblm-friends-list-right': new Connections.Views.ListRight(),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
-					'.bblm-top-leaderboard': new Friends.Views.LeaderboardTop(),
-					'.bblm-user-preview-small': new UserPreview.Views.Small()
+					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
+					'.bblm-user-preview-small': new User.Views.Small()
 				}).render();
 		}
 
