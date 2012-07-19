@@ -30,6 +30,17 @@ function($, _, Mustache, Backbone, app, User) {
 	});
 
 	Collections.Friends = Backbone.Collection.extend({
+		
+		// checks if e is in this collection
+		indexOf: function (e) {
+			var i = 0;
+			for (; i < this.length; i++) {
+				if (this.models[i].id == e.id)
+					return i;
+			}
+			return -1;
+		}
+	
 	});
 
 

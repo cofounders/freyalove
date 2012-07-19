@@ -3,29 +3,7 @@ define([], function () {
 /* USERS*/
 
 	// DIRECT FRIENDS
-	var user0 = {
-		"id": "0",
-		"firstName": "Jenny",
-		"lastName": "Schecter",
-		"dateOfBirth": "1979-05-26",
-		"profileImage": "/dummy/user0.png",
-		"about": "Jennifer Schecter is a fictional character origin the American Showtime television drama series The L Word, played by Mia Kirshner. Jenny debuted on-screen during the pilot episode and remained until the series' final episode. Jenny became well documented in the media for her outlandish plots. Jenny was created by series creator Ilene Chaiken, based on herself as a younger woman living in the lesbian community.",
-		"points": "702",
-		"location": "Beijing, CN",
-		"origin": "Los Angeles, US",
-		"languages": "English, French",
-		"likes": "Michael Jackson, Angry Birds, Oracle Databases",
-		"likeActivities": "Sleeping, Reading, Commodo, Sit Elit Sem, Fusce",
-		"likeAthletes": "Serena Williams, Lance Armstrong, Sit Elit Sem, Fusce, Commodo, Sit Elit",
-		"likeBooks": "",
-		"likeGames": "Uno, Fusce, Commodo, Sit Elit",
-		"likePeople": "Nelson Mandela, Angelina Jolie, Commodo, Sit Elit Sem, Fusce, Commodo, Sit",
-		"likeInterests": "",
-		"likeMovies": "The Dark Knight, 2001: A Space Odyssey, A Bugs Life",
-		"likeSportsTeams": "Barcelona, New York Yankees, Colorado Avalanche",
-		"likeSports": "Chess, Golf, Cycling, Minigolf, Pool, Darts, Rugby, Underwater Hockey",
-		"likeTv": "",
-		"likeQuotes": "Carpe Diem"};
+	
 	var user1 = {
 		"id": "1",
 		"firstName": "Bette",
@@ -98,7 +76,7 @@ define([], function () {
 	var user4 = {
 		"id": "4",
 		"firstName": "Anabelle",
-		"lastName": "Hernandez",
+		"lastName": "Hernandez-Herrara",
 		"dateOfBirth": "2/29/1984",
 		"profileImage": "/dummy/user4.png",
 		"about": "About Anabelle... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porta sem malesuada magna mollis euismod. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.",
@@ -253,12 +231,37 @@ define([], function () {
 		"firstName": "Greta",
 		"lastName": "Howell",
 		"profileImage": "/dummy/user22.png"};		
-	
+		
+	// MYSELF
+		var user0 = {
+		"id": "0",
+		"firstName": "Jenny",
+		"lastName": "Schecter",
+		"dateOfBirth": "1979-05-26",
+		"profileImage": "/dummy/user0.png",
+		"about": "Jennifer Schecter is a fictional character origin the American Showtime television drama series The L Word, played by Mia Kirshner. Jenny debuted on-screen during the pilot episode and remained until the series' final episode. Jenny became well documented in the media for her outlandish plots. Jenny was created by series creator Ilene Chaiken, based on herself as a younger woman living in the lesbian community.",
+		"points": "702",
+		"location": "Beijing, CN",
+		"origin": "Los Angeles, US",
+		"languages": "English, French",
+		"likes": "Michael Jackson, Angry Birds, Oracle Databases",
+		"likeActivities": "Sleeping, Reading, Commodo, Sit Elit Sem, Fusce",
+		"likeAthletes": "Serena Williams, Lance Armstrong, Sit Elit Sem, Fusce, Commodo, Sit Elit",
+		"likeBooks": "",
+		"likeGames": "Uno, Fusce, Commodo, Sit Elit",
+		"likePeople": "Nelson Mandela, Angelina Jolie, Commodo, Sit Elit Sem, Fusce, Commodo, Sit",
+		"likeInterests": "",
+		"likeMovies": "The Dark Knight, 2001: A Space Odyssey, A Bugs Life",
+		"likeSportsTeams": "Barcelona, New York Yankees, Colorado Avalanche",
+		"likeSports": "Chess, Golf, Cycling, Minigolf, Pool, Darts, Rugby, Underwater Hockey",
+		"likeTv": "",
+		"likeQuotes": "Carpe Diem",
+		"friends": [user1, user2, user3, user4]};
+		
 	var allUsers = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user14, user20, user21, user22];
 	var allUsersById = {0: user0, 1: user1, 2: user2, 3: user3, 4: user4, 10: user10, 11: user11, 12: user12, 13: user13, 14: user14, 20: user20, 21: user21, 22: user22};
 	var allProfiles = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user14];
-	var allFriends = [user1, user2, user3, user4];
-		
+
 		
 /* ACTIVITIES
 Activity: {
@@ -354,10 +357,19 @@ Answer: { #fixed format
 <category>: String <about|identity|looks|lifestyle|relationship|background|personality|sexuality>
 */
 	
+	// random integer generator 0 <= x < i | (i=1)
+	function randInt(i) {
+		if (isNaN(i))
+			i = 2;
+		return Math.floor(Math.random()*i);
+	};
+	
+	// randomiser sorting function
 	function randOrd(){
 		return (Math.round(Math.random())-0.5);
 	};
 	
+	// randomises an array
 	function randArray(array) {
 		return array.sort(randOrd);
 	};
@@ -372,8 +384,7 @@ Answer: { #fixed format
 		},
 
 		getMyProfile: function () {
-//			return user0;
-			return allUsers[Math.floor((Math.random()*allUsers.length))];
+			return user0;
 		},
 
 		getProfile: function (id) {
@@ -381,20 +392,20 @@ Answer: { #fixed format
 		},
 		
 		getRandomProfile: function() {
-			return allUsers[Math.floor((Math.random()*allUsers.length))];
+			return allUsers[randInt(allUsers.length)];
 		},
 		
 	// CONNECTIONS
 		getFriends: function () {
-			return randArray([user1, user2, user3, user4]);
+			return randArray(user0.friends);
 		},
 		
 		getMutualFriends: function () {
-			return randArray([user2, user3]);
+			return randArray(user0.friends).splice(0, randInt(user0.friends.length));
 		},
 		
 		getFriendsOfFriends: function () {
-			return randArray([user10, user11, user12, user13, user14]);
+			return randArray([user10, user11, user12, user13, user14, user20, user21, user22]);
 		},
 		
 		getTopMatchmakers: function () {

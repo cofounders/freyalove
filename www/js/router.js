@@ -69,8 +69,8 @@ define([
 			'matchmake': 'matchmake',
 			'message': 'message',
 			'profile/:id': 'profile', // TODO: merge fof and friends into this
-			'friend/:id': 'friend', // TODO: merge up
-			'fof/:id': 'fof', // TODO: merge up
+			'profile/': 'profile', // placeholder for random user
+			'profile': 'profile', // placeholder for random user
 			'terms': 'terms',
 			'users': 'users',
 			'*path': '404'
@@ -81,16 +81,20 @@ define([
 		404: function (path) {
 			app.useLayout('404')
 				.setViews({
-					'.bblm-header-top': new Header.Views.Top(),
-					'.bblm-footer-end': new Footer.Views.End(),
+					'.bblm-header-top': new Header.Views.Top({
+						model: new User.Model(Dummy.getMyProfile())
+					}),
+					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		},
 
 		about: function (path) {
 			app.useLayout('about')
 				.setViews({
-					'.bblm-header-top': new Header.Views.Top(),
-					'.bblm-footer-end': new Footer.Views.End(),
+					'.bblm-header-top': new Header.Views.Top({
+						model: new User.Model(Dummy.getMyProfile())
+					}),
+					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		},
 
@@ -99,7 +103,9 @@ define([
 			var fbFriends = new Connections.Collections.FacebookFriends([], {id: app.user});
 			app.useLayout('dashboard')
 				.setViews({
-					'.bblm-header-top': new Header.Views.Top(),
+					'.bblm-header-top': new Header.Views.Top({
+						model: new User.Model(Dummy.getMyProfile())
+					}),
 					'.bblm-footer-end': new Footer.Views.End(),
 					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
 					'.bblm-friends-list-right': new Connections.Views.ListRight({
@@ -116,8 +122,10 @@ define([
 		faq: function (path) {
 			app.useLayout('faq')
 				.setViews({
-					'.bblm-header-top': new Header.Views.Top(),
-					'.bblm-footer-end': new Footer.Views.End(),
+					'.bblm-header-top': new Header.Views.Top({
+						model: new User.Model(Dummy.getMyProfile())
+					}),
+					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		},
 
@@ -125,7 +133,9 @@ define([
 			var friends = new Connections.Collections.Friends(Dummy.getFriends());
 			app.useLayout('fresh')
 				.setViews({
-					'.bblm-header-top': new Header.Views.Top(),
+					'.bblm-header-top': new Header.Views.Top({
+						model: new User.Model(Dummy.getMyProfile())
+					}),
 					'.bblm-footer-end': new Footer.Views.End(),
 					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
 					'.bblm-friends-list-right': new Connections.Views.ListRight({
@@ -142,7 +152,9 @@ define([
 			var friends = new Connections.Collections.Friends(Dummy.getFriends());
 			app.useLayout('inbox')
 				.setViews({
-					'.bblm-header-top': new Header.Views.Top(),
+					'.bblm-header-top': new Header.Views.Top({
+						model: new User.Model(Dummy.getMyProfile())
+					}),
 					'.bblm-footer-end': new Footer.Views.End(),
 					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
 					'.bblm-friends-list-right': new Connections.Views.ListRight({
@@ -203,7 +215,9 @@ define([
 			var friends = new Connections.Collections.Friends(Dummy.getFriends());
 			app.useLayout('matchmake')
 				.setViews({
-					'.bblm-header-top': new Header.Views.Top(),
+					'.bblm-header-top': new Header.Views.Top({
+						model: new User.Model(Dummy.getMyProfile())
+					}),
 					'.bblm-footer-end': new Footer.Views.End(),
 					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
 					'.bblm-friends-list-right': new Connections.Views.ListRight({
@@ -220,7 +234,9 @@ define([
 			var friends = new Connections.Collections.Friends(Dummy.getFriends());
 			app.useLayout('message')
 				.setViews({
-					'.bblm-header-top': new Header.Views.Top(),
+					'.bblm-header-top': new Header.Views.Top({
+						model: new User.Model(Dummy.getMyProfile())
+					}),
 					'.bblm-footer-end': new Footer.Views.End(),
 					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
 					'.bblm-friends-list-right': new Connections.Views.ListRight({
@@ -234,60 +250,28 @@ define([
 		},
 
 		profile: function (id) {
+			var me = new User.Model(Dummy.getMyProfile());
+			// handle random profile
+			var profile = new User.Model(Dummy.getRandomProfile(id));
+			if (id)
+				profile = new User.Model(Dummy.getProfile(id));
+			var friends = new Connections.Collections.Friends(Dummy.getFriends());
+
+			// testing dynamic routing
+			var view = new User.Views.FofFullProfile({model: profile});
+			if (me.id == profile.id) {
+				view = new User.Views.MyFullProfile({model: profile});
+			} else if (friends.indexOf(profile) >= 0) {
+				view = new User.Views.FriendFullProfile({model: profile});
+			}
+			
 			app.useLayout('profile')
 				.setViews({
 					'.bblm-header-top': new Header.Views.Top({
-						model: new User.Model(Dummy.getMyProfile())
+						model: me
 					}),
 					'.bblm-footer-end': new Footer.Views.End(),
-					'.bblm-user-profile': new User.Views.MyFullProfile({
-						model: new User.Model(Dummy.getProfile(id))
-//						model: new User.Model({id: id})
-
-					}),
-					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
-					'.bblm-friends-list-right': new Connections.Views.ListRight({
-						collection: new Connections.Collections.Friends(Dummy.getFriends())
-					}),
-					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
-					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
-					'.bblm-user-preview-medium': new User.Views.Medium(),
-					'.bblm-user-preview-small': new User.Views.Small()
-				}).render();
-		},
-
-		// TODO: for testing purpose only, merge with profile
-		friend: function (id) {
-			var friends = new Connections.Collections.Friends(Dummy.getMutualFriends());
-			var profile = new User.Model(Dummy.getProfile(id));
-			app.useLayout('profile')
-				.setViews({
-					'.bblm-header-top': new Header.Views.Top(),
-					'.bblm-footer-end': new Footer.Views.End(),
-					'.bblm-user-profile': new User.Views.FriendFullProfile({
-						model: profile
-					}),
-					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
-					'.bblm-friends-list-common': new Connections.Views.ListRight({
-						collection: friends
-					}),
-					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
-					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
-					'.bblm-user-preview-medium': new User.Views.Medium(),
-					'.bblm-user-preview-small': new User.Views.Small()
-				}).render();
-		},
-
-		fof: function (id) {
-			var friends = new Connections.Collections.Friends(Dummy.getFriends());
-			var profile = new User.Model(Dummy.getProfile(id));
-			app.useLayout('profile')
-				.setViews({
-					'.bblm-header-top': new Header.Views.Top(),
-					'.bblm-footer-end': new Footer.Views.End(),
-					'.bblm-user-profile': new User.Views.FofFullProfile({
-						model: profile
-					}),
+					'.bblm-user-profile': view,
 					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
 					'.bblm-friends-list-right': new Connections.Views.ListRight({
 						collection: friends
@@ -299,12 +283,13 @@ define([
 				}).render();
 		},
 
-		
 		terms: function (path) {
 			app.useLayout('terms')
 				.setViews({
-					'.bblm-header-top': new Header.Views.Top(),
-					'.bblm-footer-end': new Footer.Views.End(),
+					'.bblm-header-top': new Header.Views.Top({
+						model: me
+					}),
+					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		},
 		
@@ -312,7 +297,9 @@ define([
 			var friends = new Connections.Collections.Friends(Dummy.getFriends());
 			app.useLayout('users')
 				.setViews({
-					'.bblm-header-top': new Header.Views.Top(),
+					'.bblm-header-top': new Header.Views.Top({
+						model: new User.Model(Dummy.getMyProfile())
+					}),
 					'.bblm-footer-end': new Footer.Views.End(),
 					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
 					'.bblm-friends-list-right': new Connections.Views.ListRight({
