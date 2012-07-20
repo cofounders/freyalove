@@ -20,24 +20,24 @@ function($, _, Mustache, Backbone, app) {
 	// My Full User Profile
 	Views.MyFullProfile = Backbone.View.extend({
 		template: 'user/profile',
-		render: function (manage) {
-			return manage(this).render(this.model.toJSON());
+		serialize: function () {
+			return this.model.toJSON();
 		}
 	});
 
 	// Friend Full User Profile
 	Views.FriendFullProfile = Backbone.View.extend({
 		template: 'user/profile-friend',
-		render: function (manage) {
-			return manage(this).render(this.model.toJSON());
+		serialize: function () {
+			return this.model.toJSON();
 		}
 	});
 
 	// FOF Full User Profile
 	Views.FofFullProfile = Backbone.View.extend({
 		template: 'user/profile-fof',
-		render: function (manage) {
-			return manage(this).render(this.model.toJSON());
+		serialize: function () {
+			return this.model.toJSON();
 		}
 	});
 
