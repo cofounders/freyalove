@@ -1,19 +1,50 @@
 <!-- TODO: REPLACE DUMMY INFO -->
 
 <img id="profile-pic" src="{{profileImage}}" alt="{{firstName}}'s profile picture" />
-<h3>{{firstName}} {{lastName}} (F)</h3>
+<div id="profile-snapshot">
+	<h1>{{firstName}} {{lastName}} (F)</h1>
 
-<a href="javascript:alert('opens the matchmake page');window.location.assign('matchmake.html');" type="button" title="Matchmake Tina Kennard">Matchmake</a>
-|
-<a href="javascript:alert('opens the date popup');" type="button" title="Invite Tina to a date">Invite to a date</a>
-|
-<a href="javascript:alert('opens a popup confirming disconnecting/blocking');" type="button" title="Disconnect from Tina">Disconnect</a>
-|
-<a href="javascript:alert('notifies the administrators to have a look at the profile');" type="button" title="Report Tina's profile">Report profile</a>
+	<a href="javascript:alert('opens the matchmake page');window.location.assign('matchmake.html');" type="button" title="Matchmake Tina Kennard">Matchmake</a>
+	|
+	<a href="javascript:alert('opens the date popup');" type="button" title="Invite Tina to a date">Invite to a date</a>
+	|
+	<a href="javascript:alert('opens a popup confirming disconnecting/blocking');" type="button" title="Disconnect from Tina">Disconnect</a>
+	|
+	<a href="javascript:alert('notifies the administrators to have a look at the profile');" type="button" title="Report Tina's profile">Report profile</a>
 
-<p>Born March 7, 1971 (age 41) in Singapore, Singapore, lives in Singapore, Singapore. 25 friends on FreyaLove</p>
-<p>Speaks English, Hokkien, Mandarin, French</p>
-<p>About text... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas faucibus mollis interdum. Cras mattis consectetur purus sit amet fermentum. Donec ullamcorper nulla non metus auctor fringilla. Curabitur blandit tempus porttitor.</p>
+	<ul id="profile-snapshot-list">
+		<li>
+			<input type="checkbox" id="toggle-1">
+			<label for="toggle-1"></label>
+			<p>Born March 7, 1971</p>
+		</li>
+		<li>
+			<input type="checkbox" id="toggle-2">
+			<label for="toggle-2"></label>
+			<p>Lives in in Singapore, Singapore</p>
+		</li>
+		<li>
+			<input type="checkbox" id="toggle-3">
+			<label for="toggle-3"></label>
+			<p>From Singapore, Singapore</p>
+		</li>
+		<li>
+			<input type="checkbox" id="toggle-4">
+			<label for="toggle-4"></label>
+			<p>25 friends on FreyaLove</p>
+		</li>
+		<li>
+			<input type="checkbox" id="toggle-5">
+			<label for="toggle-5"></label>
+			<p>Speaks English, Hokkien, Mandarin, French</p>
+		</li>
+		<li>
+			<input type="checkbox" id="toggle-6">
+			<label for="toggle-6"></label>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas faucibus mollis interdum. Cras mattis consectetur purus sit amet fermentum. Donec ullamcorper nulla non metus auctor fringilla. Curabitur blandit tempus porttitor</p>
+		</li>	
+	</ul>
+</div>
 
 <!-- MY FACEBOOK LIKES -->
 <h2>Tina's Likes from Facebook</h2>
