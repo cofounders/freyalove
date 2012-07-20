@@ -177,9 +177,6 @@ ul#profile-snapshot-list
 		width 180px
 		p 
 			margin 0 0 20px 0
-
-
-
 .user-preview-small
 	width 120px
 	height 155px
@@ -198,12 +195,23 @@ ul#profile-snapshot-list
 		display inline-block
 
 #matches-for-you
-	margin-top 40px
+	margin-top 60px
 	h2
 		text-align center
 		display block
 		font-weight 700
-
+.navNext, .navPrev
+	width 8px
+	height 12px
+	display inline-block
+	font-size 1.2rem
+	color #9F3647
+	text-decoration none
+	font-weight bold
+.navNext:after
+	content '>'
+.navPrev:after
+	content '<'
 
 div.user-preview-medium, div.user-preview-small, div.user-preview-tiny
 	display inline-block
@@ -214,6 +222,55 @@ ul#winked-list
 	box-shadow 0 0 3px white inset
 	background-color rgba(226, 227, 228, 0.35)
 	border 1px #d2d3d3 solid
+
+#match-your-friends
+	margin 20px 0 0 0
+	display block
+	clear both
+	h2
+		color #767676
+		font-weight 700
+		text-align center
+		display block
+#match-your-friends-list
+	border-radius 4px
+	box-shadow 0 0 3px white inset
+	background-color rgba(226, 227, 228, 0.35)
+	border 1px #D2D3D3 solid
+	padding 20px 10px 10px 10px
+
+.match-preview	
+	width 285px
+	height 145px
+	display inline-block
+	background-color #efefef
+	box-shadow 0 0 3px #aaa
+	padding 10px
+	margin 0 20px 0 0
+	&:last-of-type
+		margin 0
+	
+.match-preview-profile
+	display inline-block
+	img
+		width 100px
+		height 100px
+		border 1px solid #ddd
+	a
+		color #9f3647
+		font-size 0.875rem
+		font-weight 700
+		display block
+		text-align center
+.button-match
+	background url('../img/btn_match.png') no-repeat 0 0
+	width 45px
+	height 46px
+	vertical-align top
+	display inline-block
+	margin 25px 7px 0 7px
+	span
+		font-size 0
 
 #column-right
 	display inline-block
