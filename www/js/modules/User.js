@@ -21,23 +21,43 @@ function($, _, Mustache, Backbone, app) {
 	Views.MyFullProfile = Backbone.View.extend({
 		template: 'user/profile',
 		serialize: function () {
-			return this.model.toJSON();
+			return _.extend({
+				isMe: true
+			}, this.model.toJSON());
 		}
 	});
+
 
 	// Friend Full User Profile
 	Views.FriendFullProfile = Backbone.View.extend({
-		template: 'user/profile-friend',
+		template: 'user/profile',
+
 		serialize: function () {
-			return this.model.toJSON();
+			return _.extend({
+				isFriend: true
+			}, this.model.toJSON());
+		},
+		render: function (manage) {
+			// TODO: uncomment to use real data
+			//this.collection = new Connections.Collections.Friends(model.friends);
+			this.collection.each(function (user) {
+				this.insertView('ul.bblm-user-preview-small', new Views.Small({
+					model: user
+				}));
+			}, this);
+			return manage(this).render();
 		}
+
 	});
+
 
 	// FOF Full User Profile
 	Views.FofFullProfile = Backbone.View.extend({
-		template: 'user/profile-fof',
+		template: 'user/profile',
 		serialize: function () {
-			return this.model.toJSON();
+			return _.extend({
+				isFof: true
+			}, this.model.toJSON());
 		}
 	});
 
@@ -54,7 +74,7 @@ function($, _, Mustache, Backbone, app) {
 	Views.Small = Backbone.View.extend({
 		template: 'user/small',
 		tagName: 'li',
-//		serialize: function () {return this.model.toJSON();}
+		serialize: function () {return this.model.toJSON();}
 	});
 
 

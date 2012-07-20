@@ -1,6 +1,6 @@
 define([], function () {
 
-/* USERS*/
+/* USERS */
 
 	// DIRECT FRIENDS
 	
@@ -259,48 +259,142 @@ define([], function () {
 		"friends": [user1, user2, user3, user4]};
 		
 	var allUsers = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user14, user20, user21, user22];
+	var allOthers = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user14, user20, user21, user22];
 	var allUsersById = {0: user0, 1: user1, 2: user2, 3: user3, 4: user4, 10: user10, 11: user11, 12: user12, 13: user13, 14: user14, 20: user20, 21: user21, 22: user22};
 	var allProfiles = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user14];
 
 		
-/* ACTIVITIES
-Activity: {
-	id: String
-	origin: UserSummary,
-	to: UserSummary,
-	label: String, // For now just a text-only representation
-	type: ActivityType
-}
+/* ACTIVITIES */
+	
+/*
+	var activity = {
+		"id": "0",
+		"from": user0,
+		"to": user0,
+		"type": "match|sexytime|wink"}*/
 
-ActivityType: Number (SexyTime|Match|Wink)
+	var wink0 = {
+		"id": "0",
+		"from": user1,
+		"to": user0,
+		"type": "wink",
+		"seen": false};
+	var wink1 = {
+		"id": "1",
+		"from": user4,
+		"to": user0,
+		"type": "wink",
+		"seen": true};
+	var wink2 = {
+		"id": "2",
+		"from": user12,
+		"to": user0,
+		"type": "wink",
+		"seen": false};
+	var wink3 = {
+		"id": "3",
+		"from": user13,
+		"to": user0,
+		"type": "wink",
+		"seen": true};
+	var wink4 = {
+		"id": "4",
+		"from": user20,
+		"to": user0,
+		"type": "wink",
+		"seen": false};
+	
+	var allWinks = [wink0, wink1, wink2, wink3, wink4];
+		
+	var match0 = {
+		"id": "0",
+		"from": user2,
+		"to": user0,
+		"type": "match",
+		"matchmaker": user3};
+	var match1 = {
+		"id": "1",
+		"from": user3,
+		"to": user0,
+		"type": "match",
+		"matchmaker": user10};
+	var match2 = {
+		"id": "2",
+		"from": user11,
+		"to": user0,
+		"type": "match",
+		"matchmaker": user1};
+	var match3 = {
+		"id": "3",
+		"from": user14,
+		"to": user0,
+		"type": "match",
+		"matchmaker": user22};
+	var match4 = {
+		"id": "4",
+		"from": user21,
+		"to": user0,
+		"type": "match",
+		"matchmaker": user2};
 
-Activity > Match: {
-	matchmaker: UserSummary
-}
+	var allMatches = [match0, match1, match2, match3, match4];
 
-Match > SexyTime: {
-	notes: [Note],
-	when: Date,
-	where: String
-}
+	var sexytime0 = {
+		"id": "0",
+		"from": user2,
+		"to": user0,
+		"type": "sexytime",
+		"when": "THU, 19:00",
+		"where": "Somerset 313",
+		"notes": [{"from": user0, "body": "Great!"}, {"from": user2, "body": "See you! x"}],
+		"rsvp": false};
+	var sexytime1 = {
+		"id": "1",
+		"from": user3,
+		"to": user0,
+		"type": "sexytime",
+		"when": "FRI, 12:00",
+		"where": "Bugis MRT",
+		"notes": [],
+		"rsvp": true};
+	var sexytime2 = {
+		"id": "2",
+		"from": user11,
+		"to": user0,
+		"type": "sexytime",
+		"when": "SAT, 09:00",
+		"where": "Music Cafe at the Park",
+		"notes": [{"from": user11, "body": "Sorry, reschedule to 10:00 as it's really early for a Saturday?"}, {"from": user0, "body": "Or we just have breakfast in bed instead? ;)"}],
+		"rsvp": null};
+	var sexytime3 = {
+		"id": "3",
+		"from": user14,
+		"to": user0,
+		"type": "sexytime",
+		"when": "SUN, 21:00",
+		"where": "The Great Wall of China",
+		"notes": [{"from": user0, "body": "Always wanted  to see it! <3"}],
+		"rsvp": null};
+	var sexytime4 = {
+		"id": "4",
+		"from": user21,
+		"to": user0,
+		"type": "sexytime",
+		"when": "MON, 20:00",
+		"where": "Somerset 313",
+		"notes": [],
+		"rsvp": true};
 
-Activity > Wink: {
-	id
-	origin
-	to
-	seen
-}
+	var allSexytimes = [sexytime0, sexytime1, sexytime2, sexytime3, sexytime4];
+
+
+/*
 
 MatchProposal {
 	origin: UserSummary,
 	to: UserSummary
 }
 
-Note: {
-	origin: UserID,
-	to: SexyTime,
-	body: Text
-}
 */
 
 
@@ -413,19 +507,28 @@ Answer: { #fixed format
 		},
 
 		getMyPossibleMatches: function () {
-			// TODO
-			return [];
+			var winks = getWinks();
+			var matches = []
+			for (var i = 0; i < winks.length; i++) {
+				matches[i] = winks[i].from;
+			}
+			return randArray(matches);
 		},
 
 		getMatchingFriends: function () {
-			// TODO
-			return [];
+			var leftArr = randArray(allOthers);
+			var rightArr = randArray(allOthers);
+			var matchArr = []
+			for (var i = 0; i < leftArr.length; i++) {
+				matchArr[i] = [leftArr[i],rightArr[i]];
+			}
+			return matchArr;
 		},
 
 		getFacebookFriends: function () {
 			// TODO
 			console.log("TODO: bend over to Facebook");
-			return [];
+			return randArray([user20, user21, user22]);
 		},
 
 
@@ -436,8 +539,7 @@ Answer: { #fixed format
 		},
 
 		getSexyTimes: function () {
-			// TODO
-			return [];
+			return randArray(allSexytimes);
 		},
 		
 		getRecentActivities: function () {
@@ -446,8 +548,7 @@ Answer: { #fixed format
 		},
 		
 		getWinks: function () {
-			// TODO
-			return [];
+			return randArray(allWinks);
 		},
 
 		getRandomMatchIntro: function () {

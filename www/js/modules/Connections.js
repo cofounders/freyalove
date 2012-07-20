@@ -72,7 +72,7 @@ function($, _, Mustache, Backbone, app, User) {
 
 		render: function (manage) {
 			this.collection.each(function (user) {
-				this.insertView('ul.friends-list', new User.Views.Tiny({
+				this.insertView('ul.bblm-friends-list', new User.Views.Tiny({
 					model: user
 				}));
 			}, this);

@@ -1,5 +1,9 @@
 <!-- TODO: fill data -->
 <div class="user-preview-small">
-	<img src="/dummy/user1.png" alt="Picture of Bette Porter" />
-	<a href="/profile/{{id}}" title="Link to the profile page of Bette Porter">Bette<br>Porter</a>
+	<a href="/profile/{{id}}" title="Link to the profile page of {{firstName}} {{lastName}}">
+		<img src="{{profileImage}}" alt="{{firstName}} {{lastName}}" />
+	</a>
+	<a href="/profile/{{id}}" title="Link to the profile page of {{firstName}} {{lastName}}">
+		{{firstName}} {{lastName}}
+	</a>
 </div>

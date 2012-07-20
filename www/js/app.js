@@ -4,7 +4,8 @@ define([
 	'Mustache',
 	'Backbone',
 	'plugins/backbone.layoutmanager',
-], function ($, _, Mustache, Backbone, LayoutManager) {
+	'modules/Dummy'
+], function ($, _, Mustache, Backbone, LayoutManager, Dummy) {
 
 	var app = _.extend({
 		el: $('#app'),
@@ -26,7 +27,8 @@ define([
 			this.el.empty().append(this.layout.el);
 			// this.layout.render(); // Call render after setView(s)
 			return this.layout;
-		}
+		},
+		dummy: Dummy
 	}, Backbone.Events);
 
 	Backbone.LayoutManager.configure({

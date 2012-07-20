@@ -2,38 +2,87 @@
 
 <img id="profile-pic" src="{{profileImage}}" alt="Your profile picture" />
 <div id="profile-snapshot">
-	<h1>{{firstName}} {{lastName}} (Profile)</h1>
+	<h1>
+		{{firstName}} {{lastName}}
+		{{#isMe}}
+			<!-- TODO: remove after testing -->
+			me
+		{{/isMe}}
+		{{#isFriend}}
+			<!-- TODO: remove after testing -->
+			friend
+		{{/isFriend}}
+		{{#isFof}}
+			<!-- TODO: remove after testing -->
+			fof
+		{{/isFof}}
+	</h1>
 	<a href="/profile-edit.html" class="see-more" type="button" title="Button to edit my profile">Edit Profile</a>
 	<ul id="profile-snapshot-list">
 		<li>
-			<input type="checkbox" id="toggle-1">
-			<label for="toggle-1"></label>
-			<p>Born {{dateOfBirth}}</p>
+			{{#isMe}}
+				<input type="checkbox" id="toggle-1">
+				<label for="toggle-1"></label>
+				<p>
+			{{/isMe}}
+				Born {{dateOfBirth}}
+			{{#isMe}}
+				</p>
+			{{/isMe}}
 		</li>
 		<li>
-			<input type="checkbox" id="toggle-2">
-			<label for="toggle-2"></label>
-			<p>Lives in {{location}}</p>
+			{{#isMe}}
+				<input type="checkbox" id="toggle-2">
+				<label for="toggle-2"></label>
+			{{/isMe}}
+				<!-- FIXME(Sayanee): Change CSS not to require p tag - see above/below -Wolf -->
+				<p>Lives in {{location}}</p>
+			{{#isMe}}
+			{{/isMe}}
 		</li>
 		<li>
-			<input type="checkbox" id="toggle-3">
-			<label for="toggle-3"></label>
-			<p>From {{origin}}</p>
+			{{#isMe}}
+				<input type="checkbox" id="toggle-3">
+				<label for="toggle-3"></label>
+				<p>
+			{{/isMe}}
+				From {{origin}}
+			{{#isMe}}
+				</p>
+			{{/isMe}}
 		</li>
 		<li>
-			<input type="checkbox" id="toggle-4">
-			<label for="toggle-4"></label>
-			<p>25 friends on FreyaLove</p>
+			{{#isMe}}
+				<input type="checkbox" id="toggle-4">
+				<label for="toggle-4"></label>
+				<p>
+			{{/isMe}}
+				25 friends on FreyaLove
+			{{#isMe}}
+				</p>
+			{{/isMe}}
 		</li>
 		<li>
-			<input type="checkbox" id="toggle-5">
-			<label for="toggle-5"></label>
-			<p>Speaks {{languages}}</p>
+			{{#isMe}}
+				<input type="checkbox" id="toggle-5">
+				<label for="toggle-5"></label>
+				<p>
+			{{/isMe}}
+				Speaks {{languages}}
+			{{#isMe}}
+				</p>
+			{{/isMe}}
 		</li>
 		<li>
-			<input type="checkbox" id="toggle-6">
-			<label for="toggle-6"></label>
-			<p>{{about}}</p>
+			{{#isMe}}
+				<input type="checkbox" id="toggle-6">
+				<label for="toggle-6"></label>
+				<p>
+			{{/isMe}}
+				{{about}}
+			{{#isMe}}
+				</p>
+			{{/isMe}}
 		</li>	
 	</ul>
 </div>
@@ -63,6 +112,13 @@
 <ul id="profile-quotes">
 	<li>{{likeQuotes}}</li>
 </ul>
+
+{{#isFriend}}
+	<!-- FRIENDS ON FL -->
+	<h2>Tina's Friends on FreyaLove: 25 <a href="javascript:alert('opens a page that lists all the users friends');window.location.assign('user-list.html');" class="see-more" title="See all of Tina's friends on FreyaLove">see all</a></h2>
+	
+	<ul class="bblm-user-preview-small"><!-- TODO: BBLM iterate --></ul>
+{{/isFriend}}
 
 <!-- MY QUESTIONNAIRE SUMMARY -->
 <h2>My Questionnaire</h2>
