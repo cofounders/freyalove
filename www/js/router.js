@@ -273,7 +273,7 @@ define([
 					'.bblm-user-profile': view,
 
 					// right column
-					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates({
+					'.bblm-dates-upcoming': new Dates.Views.UpcomingDates({
 						collection: new Dates.Collections.UpcomingDates(app.dummy.getSexyTimes())
 					}),
 					'.bblm-friends-list-right': new Connections.Views.ListRight({

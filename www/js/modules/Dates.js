@@ -17,33 +17,18 @@ function($, _, Mustache, Backbone, app, User) {
 
 	// VIEWS
 
-
 	// Date list on the right hand friend panel
-	Views.ListRight = Backbone.View.extend({
+	Views.UpcomingDates = Backbone.View.extend({
 		template: 'friends/dates-upcoming',
-
-		initialize: function () {
-			this.collection.on('reset', this.render, this);
-			
-		},
-
 		render: function (manage) {
-			this.collection.each(function (user) {
+			this.collection.each(function (date) {
 				this.insertView('ul.bblm-user-preview-sexytime', new User.Views.SexyTime({
-					model: user
+					model: date
 				}));
 			}, this);
 			return manage(this).render();
 		}
-	});
 
-
-	Views.ListRightCommon = Backbone.View.extend({
-		template: 'friends/list-right-common'
-	});
-
-	Views.UpcomingDates = Backbone.View.extend({
-		template: 'friends/dates-upcoming'
 	});
 
 	return {

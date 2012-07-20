@@ -82,7 +82,7 @@ function($, _, Mustache, Backbone, app) {
 	Views.SexyTime = Backbone.View.extend({
 		template: 'user/sexytime',
 		tagName: 'li',
-//		serialize: function () {return this.model.toJSON();}
+		serialize: function () {return this.model.toJSON();}
 	});
 
 

@@ -1,6 +1,6 @@
-<!-- TODO: REPLACE DUMMY INFO -->
-
 <div class="user-preview-sexytime">
-	<img src="/dummy/user1.png" alt="Picture of Bette Porter" />
-	<p class="text">Meet <a href="/profile/{{id}}" title="Link to the profile page of Bette Porter">Bette Porter</a> today at 3pm at Somerset 313.</p>
+	<a href="/profile/{{from.id}}" title="Link to the profile page of {{from.firstName}} {{from.lastName}}">
+		<img src="{{from.profileImage}}" alt="{{from.firstName}} {{from.lastName}}" />
+	</a>
+	<p class="text">Meet <a href="/profile/{{from.id}}" title="Link to the profile page of {{from.firstName}} {{from.lastName}}">{{from.firstName}} {{from.lastName}} Porter</a> {{when}} at {{where}}.</p>
 </div>
