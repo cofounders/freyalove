@@ -80,7 +80,6 @@ function($, _, Mustache, Backbone, app, User) {
 		}
 	});
 
-
 	Views.ListRightCommon = Backbone.View.extend({
 		template: 'friends/list-right-common'
 	});
@@ -88,6 +87,21 @@ function($, _, Mustache, Backbone, app, User) {
 	Views.UpcomingDates = Backbone.View.extend({
 		template: 'friends/dates-upcoming'
 	});
+
+	// Friend list on the right hand friend panel
+	Views.ListWinks = Backbone.View.extend({
+//		template: 'friends/list-right',
+
+		render: function (manage) {
+			this.collection.each(function (user) {
+				this.insertView('ul', new User.Views.Small({
+					model: user
+				}));
+			}, this);
+			return manage(this).render();
+		}
+	});
+
 
 	return {
 		Model: Model,

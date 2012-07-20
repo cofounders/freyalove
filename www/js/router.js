@@ -20,37 +20,6 @@ define([
 	User
 ) {
 
-	var viewGroups = {
-			common: {
-				'.bblm-header-top': Header.Views.Top,
-				'.bblm-footer-end': Footer.Views.End
-			},
-			userPreviews: {
-				'.bblm-user-preview-medium': User.Views.Medium,
-				'.bblm-user-preview-points': User.Views.Points,
-				'.bblm-user-preview-sexytime': User.Views.SexyTime,
-				'.bblm-user-preview-small': User.Views.Small,
-				'.bblm-user-preview-tiny': User.Views.Tiny
-			},
-			rightColumn: {
-				'.bblm-dates-upcoming': Connections.Views.UpcomingDates,
-				'.bblm-friends-list-right': Connections.Views.ListRight,
-				'.bblm-recent-activity': Notifications.Views.RecentActivity,
-				'.bblm-top-leaderboard': Connections.Views.LeaderboardTop,
-			}
-		},
-		draw = function (layout, views, presets) {
-			var selectedPresets = _.map(presets, function (preset) {
-					var instantiatedPresets = {};
-					_.each(viewGroups[preset], function (signature, selector) {
-						instantiatedPresets[selector] = new signature();
-					});
-					return instantiatedPresets;
-				}),
-				selectedViews = _.extend.apply(null, [{}, views].concat(selectedPresets));
-			app.useLayout(layout).setViews(selectedViews).render();
-		};
-
 	return Backbone.Router.extend({
 
 		// Paths
@@ -97,22 +66,32 @@ define([
 		},
 
 		dashboard: function () {
-			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
 			var fbFriends = new Connections.Collections.FacebookFriends([], {id: app.user});
 			app.useLayout('dashboard')
 				.setViews({
-					'.bblm-header-top': new Header.Views.Top({
-						model: new User.Model(app.dummy.getMyProfile())
+					// left column
+					'.bblm-user-preview-medium': new User.Views.Medium({
+						collection: new Dates.Collections.UpcomingDates(app.dummy.getMyPossibleMatches())
 					}),
-					'.bblm-footer-end': new Footer.Views.End(),
-					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
+					'.bblm-user-preview-small': new Connections.Views.ListWinks({
+						collection: new Dates.Collections.UpcomingDates(app.dummy.getWinks())
+					}),
+
+					// right column
+					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates({
+						collection: new Dates.Collections.UpcomingDates(app.dummy.getSexyTimes())
+					}),
 					'.bblm-friends-list-right': new Connections.Views.ListRight({
-						collection: friends
+						collection: new Connections.Collections.Friends(app.dummy.getFriends())
 					}),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
-					'.bblm-user-preview-medium': new User.Views.Medium(),
-					'.bblm-user-preview-small': new User.Views.Small()
+
+					// header & footer
+					'.bblm-header-top': new Header.Views.Top({
+						model: new User.Model(app.dummy.getMyProfile())
+					}),
+					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 			fbFriends.fetch();
 		},
@@ -131,18 +110,29 @@ define([
 			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
 			app.useLayout('fresh')
 				.setViews({
-					'.bblm-header-top': new Header.Views.Top({
-						model: new User.Model(app.dummy.getMyProfile())
+					// left column
+					'.bblm-user-preview-medium': new User.Views.Medium({
+						collection: new Dates.Collections.UpcomingDates(app.dummy.getMyPossibleMatches())
 					}),
-					'.bblm-footer-end': new Footer.Views.End(),
-					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
+					'.bblm-user-preview-small': new Connections.Views.ListWinks({
+						collection: new Dates.Collections.UpcomingDates(app.dummy.getWinks())
+					}),
+
+					// right column
+					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates({
+						collection: new Dates.Collections.UpcomingDates(app.dummy.getSexyTimes())
+					}),
 					'.bblm-friends-list-right': new Connections.Views.ListRight({
-						collection: friends
+						collection: new Connections.Collections.Friends(app.dummy.getFriends())
 					}),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
-					'.bblm-user-preview-medium': new User.Views.Medium(),
-					'.bblm-user-preview-small': new User.Views.Small()
+
+					// header & footer
+					'.bblm-header-top': new Header.Views.Top({
+						model: new User.Model(app.dummy.getMyProfile())
+					}),
+					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		},
 
@@ -150,19 +140,23 @@ define([
 			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
 			app.useLayout('inbox')
 				.setViews({
+					// left column
+
+					// right column
+					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates({
+						collection: new Dates.Collections.UpcomingDates(app.dummy.getSexyTimes())
+					}),
+					'.bblm-friends-list-right': new Connections.Views.ListRight({
+						collection: new Connections.Collections.Friends(app.dummy.getFriends())
+					}),
+					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
+					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
+
+					// header & footer
 					'.bblm-header-top': new Header.Views.Top({
 						model: new User.Model(app.dummy.getMyProfile())
 					}),
-					'.bblm-footer-end': new Footer.Views.End(),
-					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
-					'.bblm-friends-list-right': new Connections.Views.ListRight({
-						collection: friends
-					}),
-					'.bblm-message-summary': new Message.Views.Summary(),
-					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
-					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
-					'.bblm-user-preview-medium': new User.Views.Medium(),
-					'.bblm-user-preview-small': new User.Views.Small()
+					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		},
 
@@ -178,27 +172,28 @@ define([
 		},
 
 		leaderboard: function () {
-			draw('leaderboard', {
-				'.bblm-leaderboard-full': new Connections.Views.LeaderboardFull({
-					views: {
-						'.bblm-user-preview-small': new User.Views.Small(), //sample how to load subviews… not very elegant.
-						'.bblm-couple-preview': new Couple.Views.Preview()
-					}
-				})
-			}, ['common', 'userPreviews', 'rightColumn']);
-/*			app.useLayout('leaderboard')
+			app.useLayout('leaderboard')
 				.setViews({
+					// left column
 					'.bblm-leaderboard-full': new Connections.Views.LeaderboardFull(),
-					'.bblm-header-top': new Header.Views.Top(),
-					'.bblm-footer-end': new Footer.Views.End(),
-					'.bblm-user-preview-medium': new User.Views.Medium(),
-					'.bblm-user-preview-small': new User.Views.Small(),
-					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
-					'.bblm-friends-list-right': new Connections.Views.ListRight(),
+
+					// right column
+					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates({
+						collection: new Dates.Collections.UpcomingDates(app.dummy.getSexyTimes())
+					}),
+					'.bblm-friends-list-right': new Connections.Views.ListRight({
+						collection: new Connections.Collections.Friends(app.dummy.getFriends())
+					}),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
 
-				});*/
+					// header & footer
+					'.bblm-header-top': new Header.Views.Top({
+						model: new User.Model(app.dummy.getMyProfile())
+					}),
+					'.bblm-footer-end': new Footer.Views.End()
+
+				});
 		},
 
 		logout: function () {
@@ -213,18 +208,14 @@ define([
 			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
 			app.useLayout('matchmake')
 				.setViews({
+					// main column
+
+
+					// header & footer
 					'.bblm-header-top': new Header.Views.Top({
 						model: new User.Model(app.dummy.getMyProfile())
 					}),
-					'.bblm-footer-end': new Footer.Views.End(),
-					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
-					'.bblm-friends-list-right': new Connections.Views.ListRight({
-						collection: friends
-					}),
-					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
-					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
-					'.bblm-user-preview-medium': new User.Views.Medium(),
-					'.bblm-user-preview-small': new User.Views.Small()
+					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		},
 
@@ -232,18 +223,23 @@ define([
 			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
 			app.useLayout('message')
 				.setViews({
-					'.bblm-header-top': new Header.Views.Top({
-						model: new User.Model(app.dummy.getMyProfile())
+					// left column
+
+					// right column
+					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates({
+						collection: new Dates.Collections.UpcomingDates(app.dummy.getSexyTimes())
 					}),
-					'.bblm-footer-end': new Footer.Views.End(),
-					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
 					'.bblm-friends-list-right': new Connections.Views.ListRight({
-						collection: friends
+						collection: new Connections.Collections.Friends(app.dummy.getFriends())
 					}),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
-					'.bblm-user-preview-medium': new User.Views.Medium(),
-					'.bblm-user-preview-small': new User.Views.Small()
+
+					// header & footer
+					'.bblm-header-top': new Header.Views.Top({
+						model: new User.Model(app.dummy.getMyProfile())
+					}),
+					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		},
 
@@ -268,7 +264,6 @@ define([
 			}
 			app.useLayout('profile')
 				.setViews({
-
 					// left colum
 					'.bblm-user-profile': view,
 
@@ -303,17 +298,26 @@ define([
 			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
 			app.useLayout('users')
 				.setViews({
-					'.bblm-header-top': new Header.Views.Top({
-						model: new User.Model(app.dummy.getMyProfile())
+					// left column
+					'.bblm-user-preview-small': new Connections.Views.ListWinks({
+						collection: new Dates.Collections.UpcomingDates(app.dummy.getAllUsers())
 					}),
-					'.bblm-footer-end': new Footer.Views.End(),
-					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates(),
+
+					// right column
+					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates({
+						collection: new Dates.Collections.UpcomingDates(app.dummy.getSexyTimes())
+					}),
 					'.bblm-friends-list-right': new Connections.Views.ListRight({
-						collection: friends
+						collection: new Connections.Collections.Friends(app.dummy.getFriends())
 					}),
 					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
-					'.bblm-user-preview-small': new User.Views.Small()
+
+					// header & footer
+					'.bblm-header-top': new Header.Views.Top({
+						model: new User.Model(app.dummy.getMyProfile())
+					}),
+					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		}
 

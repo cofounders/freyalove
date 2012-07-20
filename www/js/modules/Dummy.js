@@ -507,10 +507,9 @@ Answer: { #fixed format
 		},
 
 		getMyPossibleMatches: function () {
-			var winks = getWinks();
 			var matches = []
-			for (var i = 0; i < winks.length; i++) {
-				matches[i] = winks[i].from;
+			for (var i = 0; i < allWinks.length; i++) {
+				matches[i] = allWinks[i].from;
 			}
 			return randArray(matches);
 		},
