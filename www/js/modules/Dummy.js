@@ -451,7 +451,7 @@ Answer: { #fixed format
 <category>: String <about|identity|looks|lifestyle|relationship|background|personality|sexuality>
 */
 	
-	// random integer generator 0 <= x < i | (i=1)
+	// random integer generator 0 <= x <= i | (i=1)
 	function randInt(i) {
 		if (isNaN(i))
 			i = 2;
@@ -539,7 +539,9 @@ Answer: { #fixed format
 		},
 
 		getSexyTimes: function () {
-			return randArray(allSexytimes);
+			if (randInt() > 0)
+				return randArray(allSexytimes);
+			return [];
 		},
 		
 		getRecentActivities: function () {

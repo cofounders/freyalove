@@ -34,7 +34,8 @@ function($, _, Mustache, Backbone, app) {
 
 		serialize: function () {
 			return _.extend({
-				isFriend: true
+				isFriend: true,
+				friendCount: this.collection.length
 			}, this.model.toJSON());
 		},
 		render: function (manage) {

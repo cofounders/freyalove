@@ -20,6 +20,11 @@ function($, _, Mustache, Backbone, app, User) {
 	// Date list on the right hand friend panel
 	Views.UpcomingDates = Backbone.View.extend({
 		template: 'friends/dates-upcoming',
+		serialize: function () {
+			return _.extend({
+				hasDates: (this.collection.length > 0)
+			}, this.collection.toJSON());
+		},
 		render: function (manage) {
 			this.collection.each(function (date) {
 				this.insertView('ul.bblm-user-preview-sexytime', new User.Views.SexyTime({

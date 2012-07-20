@@ -115,9 +115,9 @@
 
 {{#isFriend}}
 	<!-- FRIENDS ON FL -->
-	<h2>Tina's Friends on FreyaLove: 25 <a href="javascript:alert('opens a page that lists all the users friends');window.location.assign('user-list.html');" class="see-more" title="See all of Tina's friends on FreyaLove">see all</a></h2>
+	<h2>{{firstName}}'s Friends on FreyaLove: {{friendCount}} <a href="/profile/{{from.id}}/friends" class="see-more" title="See all of {{firstName}}'s friends on FreyaLove">see all</a></h2>
 	
-	<ul class="bblm-user-preview-small"><!-- TODO: BBLM iterate --></ul>
+	<ul class="bblm-user-preview-small"><!-- BBLM inserts here --></ul>
 {{/isFriend}}
 
 <!-- MY QUESTIONNAIRE SUMMARY -->
