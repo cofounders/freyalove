@@ -201,6 +201,27 @@ def fetch_sexytimes(request):
     resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
     return resp
 
+def fetch_winks(request):
+    # parse for token in cookie
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    if not cookie:
+        resp = HttpResponse("Cookie not set", status=404)
+        return resp
+
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
+
+    winks = Wink.objects.get(to_profile=profile)
+
+    resp_data = {}
+    resp_data["winks"] = []
+    for w in winks:
+        resp_data.append({"from": w.from_profile.first_name})
+        # we write a generator for throwing up a UserSummary next
+
+    resp_json = json.JSONEncoder().encode(resp_data)
+    resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
+    return resp
+
 # POST
 @csrf_exempt
 def update_profile(request, profile_id):

@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^users/(\d+)/profile/summary/$', 'freyalove.api.views.profile_summary'),
     url(r'^users/(\d+)/profile/$', 'freyalove.api.views.profile'), # POST/GET 2-in-1
     url(r'^activities/sexytimes/$', 'freyalove.api.views.fetch_sexytimes'), 
+    url(r'^activities/winks/$', 'freyalove.api.views.fetch_winks'),
 
     # post routes
     url(r'^activities/sexytimes/create/$', 'freyalove.api.views.create_sexytime'), # create SexyTime
