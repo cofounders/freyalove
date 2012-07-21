@@ -27,4 +27,4 @@ class SexyTimeManager(models.Manager):
 		sexytimes_1 = super(SexyTimeManager, self).get_query_set().filter(p1=profile)
 		sexytimes_2 = super(SexyTimeManager, self).get_query_set().filter(p2=profile)
 
-		return sexytimes_1 + sexytimes_2
+		return list(sexytimes_1) + list(sexytimes_2)
