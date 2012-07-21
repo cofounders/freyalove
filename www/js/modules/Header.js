@@ -1,5 +1,5 @@
-define(['jQuery', 'Underscore', 'Mustache', 'Backbone', 'app'],
-function($, _, Mustache, Backbone, app) {
+define(['jQuery', 'Underscore', 'Mustache', 'Backbone', 'app', 'Facebook'],
+function($, _, Mustache, Backbone, app, Facebook) {
 
 	var Views = {};
 
@@ -11,20 +11,25 @@ function($, _, Mustache, Backbone, app) {
 	var Collection = Backbone.Collection.extend({
 	});
 
-
-	/*
-	 * DEFINITION OF VIEWS
-	 */
-	
-
-	// Show Header
-	Views.Top = Backbone.View.extend({
-		template: 'header',
+	Views.Menu = Backbone.View.extend({
+		template: 'header-menu',
 		render: function (manage) {
 			return manage(this).render(this.model.toJSON());
 		}
 	});
 
+	Views.Public = Backbone.View.extend({
+		template: 'header-public',
+		events: {
+			'click .button.facebook': function (event) {
+				Facebook.login(function () {
+					console.log('[Header] LOGGED IN');
+				});
+				event.stopPropagation();
+				event.preventDefault();
+			}
+		}
+	});
 
 	return {
 		Model: Model,

@@ -48,9 +48,7 @@ define([
 		404: function (path) {
 			app.useLayout('404')
 				.setViews({
-					'.bblm-header-top': new Header.Views.Top({
-						model: new User.Model(app.dummy.getMyProfile())
-					}),
+					'.bblm-header-public': new Header.Views.Public(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		},
@@ -58,9 +56,7 @@ define([
 		about: function (path) {
 			app.useLayout('about')
 				.setViews({
-					'.bblm-header-top': new Header.Views.Top({
-						model: new User.Model(app.dummy.getMyProfile())
-					}),
+					'.bblm-header-public': new Header.Views.Public(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		},
@@ -88,7 +84,7 @@ define([
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
 
 					// header & footer
-					'.bblm-header-top': new Header.Views.Top({
+					'.bblm-header-menu': new Header.Views.Menu({
 						model: new User.Model(app.dummy.getMyProfile())
 					}),
 					'.bblm-footer-end': new Footer.Views.End()
@@ -99,9 +95,7 @@ define([
 		faq: function (path) {
 			app.useLayout('faq')
 				.setViews({
-					'.bblm-header-top': new Header.Views.Top({
-						model: new User.Model(app.dummy.getMyProfile())
-					}),
+					'.bblm-header-public': new Header.Views.Public(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		},
@@ -129,7 +123,7 @@ define([
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
 
 					// header & footer
-					'.bblm-header-top': new Header.Views.Top({
+					'.bblm-header-menu': new Header.Views.Menu({
 						model: new User.Model(app.dummy.getMyProfile())
 					}),
 					'.bblm-footer-end': new Footer.Views.End()
@@ -153,7 +147,7 @@ define([
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
 
 					// header & footer
-					'.bblm-header-top': new Header.Views.Top({
+					'.bblm-header-menu': new Header.Views.Menu({
 						model: new User.Model(app.dummy.getMyProfile())
 					}),
 					'.bblm-footer-end': new Footer.Views.End()
@@ -163,7 +157,8 @@ define([
 		landing: function () {
 			app.useLayout('landing')
 				.setViews({
-					'.footer-end': new Footer.Views.End()
+					'.bblm-header-public': new Header.Views.Public(),
+					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 			require(['Facebook'], function (Facebook) {
 				console.log('XFBML');
@@ -188,7 +183,7 @@ define([
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
 
 					// header & footer
-					'.bblm-header-top': new Header.Views.Top({
+					'.bblm-header-menu': new Header.Views.Menu({
 						model: new User.Model(app.dummy.getMyProfile())
 					}),
 					'.bblm-footer-end': new Footer.Views.End()
@@ -212,7 +207,7 @@ define([
 
 
 					// header & footer
-					'.bblm-header-top': new Header.Views.Top({
+					'.bblm-header-menu': new Header.Views.Menu({
 						model: new User.Model(app.dummy.getMyProfile())
 					}),
 					'.bblm-footer-end': new Footer.Views.End()
@@ -236,7 +231,7 @@ define([
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
 
 					// header & footer
-					'.bblm-header-top': new Header.Views.Top({
+					'.bblm-header-menu': new Header.Views.Menu({
 						model: new User.Model(app.dummy.getMyProfile())
 					}),
 					'.bblm-footer-end': new Footer.Views.End()
@@ -278,7 +273,7 @@ define([
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
 
 					// header & footer
-					'.bblm-header-top': new Header.Views.Top({model: me}),
+					'.bblm-header-menu': new Header.Views.Menu({model: me}),
 					'.bblm-footer-end': new Footer.Views.End()
 					
 				}).render();
@@ -287,9 +282,7 @@ define([
 		terms: function (path) {
 			app.useLayout('terms')
 				.setViews({
-					'.bblm-header-top': new Header.Views.Top({
-						model: me
-					}),
+					'.bblm-header-public': new Header.Views.Public(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		},
@@ -314,7 +307,7 @@ define([
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
 
 					// header & footer
-					'.bblm-header-top': new Header.Views.Top({
+					'.bblm-header-menu': new Header.Views.Menu({
 						model: new User.Model(app.dummy.getMyProfile())
 					}),
 					'.bblm-footer-end': new Footer.Views.End()
