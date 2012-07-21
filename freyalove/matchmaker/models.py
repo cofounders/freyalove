@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 
 from freyalove.users.models import Profile
-from freyalove.matchmaker.managers import MatchManager
+from freyalove.matchmaker.managers import MatchManager, SexyTimeManager
 
 MATCHMAKE_RESPONSES = (
     ('Pending', 'Pending'),
@@ -88,6 +88,8 @@ class SexyTime(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
+
+    objects = SexyTimeManager()
 
     def __unicode__(self):
         return "%s <-> %s on %s" % (self.p1.first_name, self.p2.first_name, str(self.when))
