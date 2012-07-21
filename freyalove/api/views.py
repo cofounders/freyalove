@@ -368,7 +368,7 @@ def create_wink(request, from_profile_id, to_profile_id):
         profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
         if profile.id != from_profile_id:
-            resp = HttpResponse("Bad request - from user must match current profile", status=400)
+            resp = HttpResponse("Bad request - from user must match current profile (current %d, from %d)" % (profile.id, from_profile_id), status=400)
             return resp
 
         try:
