@@ -1,20 +1,20 @@
 <section class="header-menu">
 	<div class="wrapper">
 		<h1><a href="/dashboard" title="Go to the FreyaLove home">FreyaLove</a></h1>
-	
+
 		<form id="nav-search" method="get" name="nav-search" action="#" role="search">
 			<input type="text" maxlength="100" placeholder="Search"/>
 		</form>
-		
+
 		<ul id="nav-popups">
 			<li><a href="javascript:toggle('popup-notifications');" title="Show Notifications"></a></li>
 			<li><a href="javascript:toggle('popup-messages');" title="Show Messages"></a></li>
 			<li><a href="javascript:toggle('popup-dates');" title="Show Dates"></a></li>
 		</ul>
-		
+
 		<a id="nav-name" href="/profile/{{id}}" title="Go to my profile">{{firstName}} {{lastName}}</a>
-		
-		<a id="nav-logout" href="/logout" title="Log out from Freya Love"></a>
+
+		<a id="nav-logout" href="#" title="Log out from Freya Love"></a>
 	</div>
 </section>
 
@@ -53,7 +53,7 @@
 		</li>
 	</ul>
 </section>
-		
+
 <section class="popup" id="popup-dates">
 	<ul>
 		<li><a href="/profile/{{id}}" title="Link to the profile page of Bette Porter">Bette Porter</a> wants to meet on Thursday at 3pm at Somerset 313. <a href="javascript:alert('opens the direct reply form below');" title="RSVP to Bette Porter's invitation">RSVP now.</li>

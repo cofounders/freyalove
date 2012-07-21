@@ -1,5 +1,5 @@
 define([
-	'jQuery', 'Underscore', 'Backbone', 'app',
+	'jQuery', 'Underscore', 'Backbone', 'app', 'Facebook',
 	'modules/Connections',
 	'modules/Couple',
 	'modules/Dates',
@@ -9,7 +9,7 @@ define([
 	'modules/Notifications',
 	'modules/User'
 ], function (
-	$, _, Backbone, app,
+	$, _, Backbone, app, Facebook,
 	Connections,
 	Couple,
 	Dates,
@@ -32,7 +32,6 @@ define([
  			'fresh': 'fresh', // TODO: merge into dashboard
 			'inbox': 'inbox',
 			'leaderboard': 'leaderboard',
-			'logout': 'logout',
 			'matchmake': 'matchmake',
 			'message': 'message',
 			'profile/:id': 'profile', // TODO: merge fof and friends into this
@@ -62,6 +61,7 @@ define([
 		},
 
 		dashboard: function () {
+			console.log('DASHBOARD');
 			var fbFriends = new Connections.Collections.FacebookFriends([], {id: app.user});
 			app.useLayout('dashboard')
 				.setViews({
@@ -155,15 +155,12 @@ define([
 		},
 
 		landing: function () {
+			console.log('LANDING');
 			app.useLayout('landing')
 				.setViews({
 					'.bblm-header-public': new Header.Views.Public(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
-			require(['Facebook'], function (Facebook) {
-				console.log('XFBML');
-				Facebook.XFBML.parse();
-			});
 		},
 
 		leaderboard: function () {
@@ -189,14 +186,6 @@ define([
 					'.bblm-footer-end': new Footer.Views.End()
 
 				});
-		},
-
-		logout: function () {
-			require(['Facebook'], function (Facebook) {
-				Facebook.logout(function (response) {
-				});
-				Backbone.history.navigate('', true);
-			});
 		},
 
 		matchmake: function () {
