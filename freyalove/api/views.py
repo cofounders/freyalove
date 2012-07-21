@@ -285,6 +285,7 @@ def create_sexytime(request):
 @csrf_exempt
 def rsvp_sexytime(request, sexytime_id):
     if request.method == "POST":
+        sexytime_id = int(sexytime_id)
         resp_data = {}
 
         # parse for token in cookie
@@ -322,6 +323,7 @@ def rsvp_sexytime(request, sexytime_id):
 @csrf_exempt
 def update_sexytime_note(request, sexytime_id):
     if request.method == "POST":
+        sexytime_id = int(sexytime_id)
         resp_data = {}
 
         # parse for token in cookie
@@ -333,7 +335,7 @@ def update_sexytime_note(request, sexytime_id):
         profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
         try:
-            sexytime = SexyTime.objects.get(id=sexytime_id)
+            sexytime = SexyTime.objects.get(id=int(sexytime_id))
         except SexyTime.DoesNotExist:
             resp = HttpResponse("SexyTime requested does not exist!", status=404)
             return resp
