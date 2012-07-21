@@ -71,7 +71,7 @@ class Match(models.Model):
 
 
 class SexyTime(models.Model):
-    match = models.ForeignKey(Match)
+    match = models.ForeignKey(Match, null=True)
     p1 = models.ForeignKey(Profile, related_name="date1")
     p2 = models.ForeignKey(Profile, related_name="date2")
 
@@ -82,6 +82,9 @@ class SexyTime(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
+
+    def __unicode__(self):
+        return "%s <-> %s on %s" % (self.p1.first_name, self.p2.first_name, str(self.when))
 
 #class MatchMaker(models.Model):
 #    matchmaker = models.ForeignKey(Profile)

@@ -1,6 +1,8 @@
 from freyalove.users.models import Profile, Blocked, Friendship
 from freyalove.matchmaker.models import Match
 
+import datetime
+
 # Utils
 def inject_cors(resp_obj):
 	resp_obj['Access-Control-Allow-Origin'] = '*'
@@ -35,3 +37,6 @@ def create_freya_profile(profile_dict):
 	profile.email = profile_dict["email"]
 	profile.save()
 	return profile
+
+def convert_to_dtobj(txt_date):
+	return datetime.datetime.now()
