@@ -215,7 +215,7 @@ def fetch_winks(request):
     resp_data = {}
     resp_data["winks"] = []
     for w in winks:
-        resp_data.append({"from": w.from_profile.first_name})
+        resp_data["winks"].append({"from": w.from_profile.first_name})
         # we write a generator for throwing up a UserSummary next
 
     resp_json = json.JSONEncoder().encode(resp_data)
