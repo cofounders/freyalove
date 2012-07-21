@@ -24,7 +24,7 @@ class MatchManager(models.Manager):
 class SexyTimeManager(models.Manager):
 	def fetch_sexytimes(self, profile):
 		now = datetime.datetime.now()
-		sexytimes_1 = super(MatchManager, self).get_query_set().filter(p1=profile, when__gte=now)
-		sexytimes_2 = super(MatchManager, self).get_query_set().filter(p2=profile, when__gte=now)
+		sexytimes_1 = super(SexyTimeManager, self).get_query_set().filter(p1=profile)
+		sexytimes_2 = super(SexyTimeManager, self).get_query_set().filter(p2=profile)
 
 		return sexytimes_1 + sexytimes_2
