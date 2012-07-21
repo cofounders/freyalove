@@ -15,7 +15,7 @@ except ImportError:
 import facebook
 
 #from freyalove.matchmaker.models import MatchMaker
-from freyalove.users.models import Profile, Blocked, Friendship
+from freyalove.users.models import Profile, Blocked, Friendship, Wink
 from freyalove.matchmaker.models import Match, SexyTime
 
 from freyalove.api.utils import *
@@ -330,6 +330,8 @@ def update_sexytime_note(request, sexytime_id):
             resp = HttpResponse("Cookie not set", status=404)
             return resp
 
+        profile = is_registered_user(fetch_profile(cookie["access_token"]))
+
         try:
             sexytime = SexyTime.objects.get(id=sexytime_id)
         except SexyTime.DoesNotExist:
@@ -345,6 +347,42 @@ def update_sexytime_note(request, sexytime_id):
             resp_data["status"] = "Successfully updated note for sexytime %d" % sexytime.id
             resp_data["note"] = sexytime.notes
 
+        resp_json = json.JSONEncoder().encode(resp_data)
+        resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
+        return resp
+    else:
+        resp = HttpResponse("Bad request", status=400)
+        return resp
+
+def create_wink(request, from_profile_id, to_profile_id):
+    if request.method == "POST":
+        resp_data = {}
+
+        # parse for token in cookie
+        cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+
+        if not cookie:
+            resp = HttpResponse("Cookie not set", status=404)
+            return resp
+        profile = is_registered_user(fetch_profile(cookie["access_token"]))
+
+        if profile.id != from_profile_id:
+            resp = HttpResponse("Bad request - from user must match current profile", status=400)
+            return resp
+
+        try:
+            to_profile = Profile.objects.get(id=to_profile_id)
+        except Profile.DoesNotExist:
+            to_profile = None
+            resp = HttpResponse("Bad request - to user doesn't exist!", status=400)
+            return resp
+
+        wink = Wink()
+        wink.to_profile = to_profile
+        wink.from_profile = profile
+        wink.save()
+        resp_data = {}
+        resp_data["status"] = "Successfully create a wink from %d to %d" % (wink.from_profile.id, wink.to_profile.id)
         resp_json = json.JSONEncoder().encode(resp_data)
         resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
         return resp

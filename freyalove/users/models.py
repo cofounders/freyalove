@@ -57,3 +57,6 @@ class Wink(models.Model):
     to_profile = models.ForeignKey(Profile, related_name="wink_to")
     from_profile = models.ForeignKey(Profile, related_name="wink_from")
     received = models.BooleanField(default=False) # denotes read/received
+
+    def __unicode__(self):
+        return "wink from %s to %s" % (from_profile.first_name, to_profile.first_name)

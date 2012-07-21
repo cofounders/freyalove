@@ -16,14 +16,14 @@ urlpatterns = patterns('',
     url(r'^users/(\d+)/friends/$', 'freyalove.api.views.friends_in_freya'),
     url(r'^users/(\d+)/facebookfriends/$', 'freyalove.api.views.fb_friends'),
     url(r'^users/(\d+)/profile/summary/$', 'freyalove.api.views.profile_summary'),
-    url(r'^users/(\d+)/profile/$', 'freyalove.api.views.profile'), # dual
-
+    url(r'^users/(\d+)/profile/$', 'freyalove.api.views.profile'), # POST/GET 2-in-1
     url(r'^activities/sexytimes/$', 'freyalove.api.views.fetch_sexytimes'), 
 
     # post routes
     url(r'^activities/sexytimes/create/$', 'freyalove.api.views.create_sexytime'), # create SexyTime
     url(r'^activities/sexytimes/(\d+)/rsvp/$', 'freyalove.api.views.rsvp_sexytime'), # rsvp for a SexyTime
     url(r'^activities/sexytimes/(\d+)/notes/$', 'freyalove.api.views.update_sexytime_note'),
+    url(r'^activities/winks/from/(\d+)/to/(\d+)/$', 'freyalove.api.views.create_wink'),
 
     # Index
     url(r'^$', 'freyalove.api.views.hello'),
