@@ -241,7 +241,7 @@ def fetch_activities(request):
         resp_data["activities"].append({"type": "wink", "from": w.from_profile.id, "to": w.to_profile.id})
 
     for s in sexytimes:
-        resp_data["activities"].append({"type": "sexytime", "from": s.from_profile.id, "to": s.to_profile.id, "when": s.when, "where": s.where})
+        resp_data["activities"].append({"type": "sexytime", "p2": s.p2.id, "p1": s.p1.id, "when": s.when, "where": s.where})
 
     resp_json = json.JSONEncoder().encode(resp_data)
     resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
