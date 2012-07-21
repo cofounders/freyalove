@@ -1,38 +1,49 @@
-section#landing
-	min-height 700px
-	#landing-header
-		display block
-		clear both
-#fb-login
-	background url('../img/fb_login.png') no-repeat 0 0
-	width 231px
-	height 28px
-	display inline-block
-	float right
-	margin 20px 0 0 0
-#landing-intro
-	margin 20px 0 0 0
-	background-color rgba(226, 227, 228, 0.3)
-	border-radius 4px
-	width 100%
-	border 1px #d2d3d3 solid
-	box-shadow 0 0 2px #bbb inset
-	padding 4px
-	video
-		border 1px solid #aaa
-		display inline-block
-	#intro-text
-		display inline-block
-		vertical-align top
-		width 500px
-		margin 0 0 0 20px	
+#landing
+
+	> header
+		padding 10px 0 20px 0
+		position relative
+		width 100%
+		h1
+			background url('/img/logo.png') no-repeat
+			height 50px
+			overflow hidden
+			width 214px
+			a
+				color transparent
+				display inline-block
+				height 100%
+				width 100%
+		.button
+			position absolute
+			right 0
+			top 30px
+
+	> article.splash
+		background rgba(0, 0, 0, 0.03)
+		border-radius 4px
+		box-shadow inset 0px 0px 0px 1px #d0d0d0,
+			0px 1px 0px 0px rgba(255, 255, 255, 1),
+			inset 0px 1px 3px 0px rgba(0, 0, 0, 0.2)
+		overflow hidden
+		padding 20px
+		width 100%
+		figure
+			border 1px solid #aaa
+			display inline-block
+			float left
+			font-size 0
+			height 300px
+			margin 0 20px 0 0
+			width 400px
+			video
+				background #666
+				height 100%
+				width 100%
 		h1
 			text-transform uppercase
 			font-weight 700
 			margin 15px 0
-		h4
-			margin 0 0 15px 0
-			color #444
 		#call-to-action
 			background url('../img/bg_btn_orange.png') repeat-x
 			color white
@@ -44,30 +55,14 @@ section#landing
 			border-radius 5px
 			box-shadow 0 0 3px #BBB
 			text-shadow 0 0 3px #666
-#landing-details
-	overflow hidden
-	#landing-details-social 
-		display block
-		margin 20px 0
-		li 
-			padding 0
-			margin 0 0 0 20px
-			float right
-			a 
-				height 28px
-				display inline-block
-				box-shadow 0 0 3px #aaa
-			&:nth-child(1)
-				background url('../img/fb_like.png') no-repeat
-				a 	
-					width 140px
-			&:nth-child(2)
-				background url('../img/tw_like.png') no-repeat
-				a 	
-					width 160px
-	#landing-details-text
-		li 
-			padding 0
+
+	> address
+		padding 20px 0
+		text-align right
+
+	> article.about
+		padding 0 0 20px 0
+		div
 			display inline-block
 			width 310px
 			vertical-align top
