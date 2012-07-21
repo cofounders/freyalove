@@ -210,7 +210,7 @@ def fetch_winks(request):
 
     profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
-    winks = Wink.objects.get(to_profile=profile)
+    winks = Wink.objects.filter(to_profile=profile)
 
     resp_data = {}
     resp_data["winks"] = []
