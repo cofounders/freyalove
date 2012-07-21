@@ -354,6 +354,7 @@ def update_sexytime_note(request, sexytime_id):
         resp = HttpResponse("Bad request", status=400)
         return resp
 
+@csrf_exempt
 def create_wink(request, from_profile_id, to_profile_id):
     if request.method == "POST":
         resp_data = {}
