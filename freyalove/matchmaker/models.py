@@ -80,6 +80,12 @@ class SexyTime(models.Model):
     when = models.DateTimeField(null=True)
     notes = models.TextField(blank=True)
 
+    # RSVP
+    p1_attending = models.BooleanField(default=False)
+    p2_attending = models.BooleanField(default=False)
+    p1_responded = models.BooleanField(default=False)
+    p2_responded = models.BooleanField(default=False)
+
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
 

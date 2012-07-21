@@ -18,9 +18,12 @@ urlpatterns = patterns('',
     url(r'^users/(\d+)/profile/summary/$', 'freyalove.api.views.profile_summary'),
     url(r'^users/(\d+)/profile/$', 'freyalove.api.views.profile'), # dual
 
-    url(r'^activities/sexytimes/$', 'freyalove.api.views.fetch_sexytimes'),
+    url(r'^activities/sexytimes/$', 'freyalove.api.views.fetch_sexytimes'), 
 
     # post routes
+    url(r'^activities/sexytimes/create/$', 'freyalove.api.views.create_sexytime'), # create SexyTime
+    url(r'^activities/sexytimes/(\d+)/rsvp/$', 'freyalove.api.views.rsvp_sexytime'), # rsvp for a SexyTime
+    url(r'^activities/sexytimes/(\d+)/notes/$', 'freyalove.api.views.update_sexytime_note'),
 
     # Index
     url(r'^$', 'freyalove.api.views.hello'),

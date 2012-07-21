@@ -282,6 +282,75 @@ def create_sexytime(request):
         resp = HttpResponse("Bad request", status=400)
         return resp
 
+@csrf_exempt
+def rsvp_sexytime(request, sexytime_id):
+    if request.method == "POST":
+        resp_data = {}
+
+        # parse for token in cookie
+        cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+        if not cookie:
+            resp = HttpResponse("Cookie not set", status=404)
+            return resp
+
+        profile = is_registered_user(fetch_profile(cookie["access_token"]))
+        try:
+            sexytime = SexyTime.objects.get(id=sexytime_id)
+        except SexyTime.DoesNotExist:
+            resp = HttpResponse("SexyTime requested does not exist!", status=404)
+            return resp
+
+        if sexytime.p1.id == profile.id or sexytime.p2.id == profile.id:
+            if sexytime.p1.id == profile.id:
+                sexytime.p1_attending = True
+                sexytime.p1_responded = True
+            else:
+                sexytime.p2_attending = True
+                sexytime.p2_responded = True
+            sexytime.save()
+            resp_data["status"] = "RSVP for event %d, participant %d successful!" % (sexytime.id, profile.id)
+            resp_json = json.JSONEncoder().encode(resp_data)
+            resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
+            return resp
+        else:
+            resp = HttpResponse("You are trying to RSVP for a sexytime you're not part of!", status=400)
+            return resp
+    else:
+        resp = HttpResponse("Bad request", status=400)
+        return resp
+
+@csrf_exempt
+def update_sexytime_note(request, sexytime_id):
+    if request.method == "POST":
+        resp_data = {}
+
+        # parse for token in cookie
+        cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+        if not cookie:
+            resp = HttpResponse("Cookie not set", status=404)
+            return resp
+
+        try:
+            sexytime = SexyTime.objects.get(id=sexytime_id)
+        except SexyTime.DoesNotExist:
+            resp = HttpResponse("SexyTime requested does not exist!", status=404)
+            return resp
+
+        note = request.POST.get("notes", None)
+        if not note:
+            resp_data["status"] = "Fail"
+        else:
+            sexytime.notes = note
+            sexytime.save()
+            resp_data["status"] = "Successfully updated note for sexytime %d" % sexytime.id
+            resp_data["note"] = sexytime.notes
+
+        resp_json = json.JSONEncoder().encode(resp_data)
+        resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
+        return resp
+    else:
+        resp = HttpResponse("Bad request", status=400)
+        return resp
 
 # Direct calls to Open Graph API
 
