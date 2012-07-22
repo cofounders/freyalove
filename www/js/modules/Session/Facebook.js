@@ -2,31 +2,28 @@ define(['Underscore', 'Facebook', 'modules/Session/Base'],
 function(_, Facebook, Session) {
 	return Session.extend({
 		signIn: function (options) {
+			options = options || {};
 			Facebook.login(_.bind(function(response) {
 				if (response.authResponse) {
-					this.save({id: response.authResponse.userID});
-					Facebook.api('/me', _.bind(function (response) {
-						if (response && !response.error) {
-							this.save({
-								email: response.email,
-								name: response.name,
-								username: response.username
-							}, options);
-						} else {
-							return options.error();
-						}
-					}, this));
+					this.save({userID: response.authResponse.userID}, {
+						error: options.error,
+						success: _.bind(function () {
+							this.trigger('signIn');
+							if (_.isFunction(options.success)) options.success();
+						}, this)
+					});
 				} else {
-					options.error();
+					if (_.isFunction(options.error)) options.error();
 				}
 			}, this));
 		},
 		getAuthStatus: function (options) {
+			options = options || {};
 			Facebook.getLoginStatus(_.bind(function(response) {
 				if (response.status === 'connected') {
-					options.success();
+					if (_.isFunction(options.success)) options.success();
 				} else {
-					options.error();
+					if (_.isFunction(options.error)) options.error();
 				}
 			}, this));
 		}

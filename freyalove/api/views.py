@@ -49,7 +49,7 @@ def profile_summary(request, profile_id):
     # Determine if we need to fetch the actual image object
     #cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
     #if not cookie:
-    #   resp = HttpResponse("Cookie not set", status=404)
+    #   resp = HttpResponse("Missing authentication cookie", status=403)
     #   return resp
 
     #token = cookie["access_token"]
@@ -102,7 +102,7 @@ def init(request):
     # parse for token in cookie
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
     if not cookie:
-        resp = HttpResponse("Cookie not set", status=404)
+        resp = HttpResponse("Missing authentication cookie", status=403)
         return resp
 
     profile = is_registered_user(fetch_profile(cookie["access_token"]))
@@ -123,7 +123,7 @@ def fb_friends(request, profile_id):
     # parse for token in cookie
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
     if not cookie:
-        resp = HttpResponse("Cookie not set", status=404)
+        resp = HttpResponse("Missing authentication cookie", status=403)
         return resp
 
     token = cookie["access_token"]
@@ -141,7 +141,7 @@ def friends_in_freya(request, profile_id):
     # parse for token in cookie
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
     if not cookie:
-        resp = HttpResponse("Cookie not set", status=404)
+        resp = HttpResponse("Missing authentication cookie", status=403)
         return resp
 
     token = cookie["access_token"]
@@ -177,7 +177,7 @@ def fetch_sexytimes(request):
 
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
     if not cookie:
-        resp = HttpResponse("Cookie not set", status=404)
+        resp = HttpResponse("Missing authentication cookie", status=403)
         return resp
 
     profile = is_registered_user(fetch_profile(cookie["access_token"]))
@@ -205,7 +205,7 @@ def fetch_winks(request):
     # parse for token in cookie
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
     if not cookie:
-        resp = HttpResponse("Cookie not set", status=404)
+        resp = HttpResponse("Missing authentication cookie", status=403)
         return resp
 
     profile = is_registered_user(fetch_profile(cookie["access_token"]))
@@ -226,7 +226,7 @@ def fetch_activities(request):
     # parse for token in cookie
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
     if not cookie:
-        resp = HttpResponse("Cookie not set", status=404)
+        resp = HttpResponse("Missing authentication cookie", status=403)
         return resp
 
     profile = is_registered_user(fetch_profile(cookie["access_token"]))
@@ -337,7 +337,7 @@ def rsvp_sexytime(request, sexytime_id):
         # parse for token in cookie
         cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
         if not cookie:
-            resp = HttpResponse("Cookie not set", status=404)
+            resp = HttpResponse("Missing authentication cookie", status=403)
             return resp
 
         profile = is_registered_user(fetch_profile(cookie["access_token"]))
@@ -375,7 +375,7 @@ def update_sexytime_note(request, sexytime_id):
         # parse for token in cookie
         cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
         if not cookie:
-            resp = HttpResponse("Cookie not set", status=404)
+            resp = HttpResponse("Missing authentication cookie", status=403)
             return resp
 
         profile = is_registered_user(fetch_profile(cookie["access_token"]))
@@ -411,7 +411,7 @@ def create_wink(request, from_profile_id, to_profile_id):
         cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
 
         if not cookie:
-            resp = HttpResponse("Cookie not set", status=404)
+            resp = HttpResponse("Missing authentication cookie", status=403)
             return resp
         profile = is_registered_user(fetch_profile(cookie["access_token"]))
 

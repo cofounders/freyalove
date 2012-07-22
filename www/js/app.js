@@ -11,7 +11,6 @@ define([
 		el: $('#app'),
 		root: '/',
 		api: '/api/', // http://api.freyalove.cofounders.sg/',
-		fb_app_id: '415866361791508',
 		useLayout: function (name) {
 			if (this.layout) {
 				if (this.layout.options.template === name) {

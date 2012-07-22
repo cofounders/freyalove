@@ -7,15 +7,29 @@ function ($,  app, Router, Facebook, Session) {
 	app.router = new Router();
 	app.session = new Session();
 
+	app.session
+		.on('signIn', function () {
+			var url = app.api + 'users/' + app.session.get('userID') + '/profile/summary/';
+			$.get(url).success(function (response) {
+				app.session.save(response);
+			});
+		})
+		.on('signOut', function () {
+			Backbone.history.navigate(app.root, true);
+		})
+		.on('signIn', function () {
+			Backbone.history.navigate('/dashboard', true);
+		});
+
 	Facebook.init({
-		appId      : app.fb_app_id, // App ID
+		appId      : '415866361791508', // App ID
 		channelUrl : 'http://freyalove.cofounders.sg/channel.html', // Channel File
 		status     : false, // check login status
 		cookie     : true, // enable cookies to allow the server to access the session
 		xfbml      : false  // parse XFBML
 	});
 
-	if (app.session.get('id')) {
+	if (app.session.id) {
 		if (targetUrl === app.root) {
 			history.replaceState(null, '', '/dashboard');
 		}
@@ -24,6 +38,13 @@ function ($,  app, Router, Facebook, Session) {
 	Backbone.history.start({
 		pushState: true,
 		root: app.root
+	});
+
+	$(document).ajaxError(function (event, request, settings, exception) {
+		console.log('ajaxError', arguments);
+		if (+request.status === 403 && settings.url.indexOf(app.api) !== -1) {
+			app.session.signOut();
+		}
 	});
 
 	$(document).on('click', 'a:not([data-bypass])', function (event) {

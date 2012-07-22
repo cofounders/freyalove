@@ -18,9 +18,7 @@ function($, _, Mustache, Backbone, app, Facebook) {
 		},
 		events: {
 			'click #nav-logout': function (event) {
-				app.session.signOut({success: function () {
-					Backbone.history.navigate(app.root, true);
-				}});
+				app.session.signOut();
 				event.stopPropagation();
 				event.preventDefault();
 			}
@@ -31,9 +29,7 @@ function($, _, Mustache, Backbone, app, Facebook) {
 		template: 'header-public',
 		events: {
 			'click .button.facebook': function (event) {
-				app.session.signIn({success: function () {
-					Backbone.history.navigate('/dashboard', true);
-				}});
+				app.session.signIn();
 				event.stopPropagation();
 				event.preventDefault();
 			}
