@@ -83,9 +83,7 @@ define([
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
 
 					// header & footer
-					'.bblm-header-menu': new Header.Views.Menu({
-						model: new User.Model(app.dummy.getMyProfile())
-					}),
+					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 			fbFriends.fetch();
@@ -122,9 +120,7 @@ define([
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
 
 					// header & footer
-					'.bblm-header-menu': new Header.Views.Menu({
-						model: new User.Model(app.dummy.getMyProfile())
-					}),
+					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		},
@@ -146,9 +142,8 @@ define([
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
 
 					// header & footer
-					'.bblm-header-menu': new Header.Views.Menu({
-						model: new User.Model(app.dummy.getMyProfile())
-					}),
+					'.bblm-header-menu': new Header.Views.Menu(
+						),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		},
@@ -178,9 +173,7 @@ define([
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
 
 					// header & footer
-					'.bblm-header-menu': new Header.Views.Menu({
-						model: new User.Model(app.dummy.getMyProfile())
-					}),
+					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 
 				});
@@ -194,9 +187,7 @@ define([
 
 
 					// header & footer
-					'.bblm-header-menu': new Header.Views.Menu({
-						model: new User.Model(app.dummy.getMyProfile())
-					}),
+					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		},
@@ -218,15 +209,12 @@ define([
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
 
 					// header & footer
-					'.bblm-header-menu': new Header.Views.Menu({
-						model: new User.Model(app.dummy.getMyProfile())
-					}),
+					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		},
 
 		profile: function (id) {
-			var me = new User.Model(app.dummy.getMyProfile());
 			// handle random profile
 			var profile = new User.Model(app.dummy.getRandomProfile(id));
 			if (id)
@@ -238,7 +226,7 @@ define([
 
 			// testing dynamic routing
 			var view = new User.Views.FofFullProfile({model: profile});
-			if (me.id == profile.id) {
+			if (app.session.id === profile.id) {
 				view = new User.Views.MyFullProfile({model: profile});
 			} else if (friends.indexOf(profile) >= 0) {
 				view = new User.Views.FriendFullProfile({model: profile, collection: friends});
@@ -260,7 +248,7 @@ define([
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
 
 					// header & footer
-					'.bblm-header-menu': new Header.Views.Menu({model: me}),
+					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 					
 				}).render();
@@ -294,9 +282,7 @@ define([
 					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
 
 					// header & footer
-					'.bblm-header-menu': new Header.Views.Menu({
-						model: new User.Model(app.dummy.getMyProfile())
-					}),
+					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		}

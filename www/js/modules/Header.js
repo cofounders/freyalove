@@ -12,9 +12,16 @@ function($, _, Mustache, Backbone, app, Facebook) {
 	});
 
 	Views.Menu = Backbone.View.extend({
-		template: 'header-menu',
+		template: 'header/menu',
+		initialize: function (options) {
+			app.session.on('change', this.render);
+		},
+		serialize: function () {
+			return app.session.toJSON();
+		},
 		render: function (manage) {
-			return manage(this).render(this.model.toJSON());
+			// new User.Model(app.dummy.getMyProfile())
+			return manage(this).render();
 		},
 		events: {
 			'click #nav-logout': function (event) {
@@ -26,7 +33,7 @@ function($, _, Mustache, Backbone, app, Facebook) {
 	});
 
 	Views.Public = Backbone.View.extend({
-		template: 'header-public',
+		template: 'header/public',
 		events: {
 			'click .button.facebook': function (event) {
 				app.session.signIn();
