@@ -14,13 +14,17 @@ function($, _, Mustache, Backbone, app, Facebook) {
 	Views.Menu = Backbone.View.extend({
 		template: 'header/menu',
 		initialize: function (options) {
-			app.session.on('change', this.render);
+			app.session.on('change:name', function () {
+				$(this.el).find('#nav-name').text(app.session.get('name'));
+			}, this);
+		},
+		cleanup: function () {
+			app.session.off(null, null, this);
 		},
 		serialize: function () {
 			return app.session.toJSON();
 		},
 		render: function (manage) {
-			// new User.Model(app.dummy.getMyProfile())
 			return manage(this).render();
 		},
 		events: {
