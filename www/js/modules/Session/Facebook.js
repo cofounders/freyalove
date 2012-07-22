@@ -3,19 +3,28 @@ function(_, Facebook, Session) {
 	return Session.extend({
 		signIn: function (options) {
 			options = options || {};
-			Facebook.login(_.bind(function(response) {
-				if (response.authResponse) {
-					this.save({userID: response.authResponse.userID}, {
+			var that = this,
+				authResponse = Facebook.getAuthResponse(),
+				onSuccess = function (authResponse) {
+					that.save(authResponse, {
 						error: options.error,
-						success: _.bind(function () {
-							this.trigger('signIn');
+						success: function () {
+							that.trigger('signIn');
 							if (_.isFunction(options.success)) options.success();
-						}, this)
+						}
 					});
-				} else {
-					if (_.isFunction(options.error)) options.error();
-				}
-			}, this));
+				};
+			if (authResponse) {
+				onSuccess(authResponse);
+			} else {
+				Facebook.login(function (response) {
+					if (response.authResponse) {
+						onSuccess(response.authResponse);
+					} else {
+						if (_.isFunction(options.error)) options.error();
+					}
+				});
+			}
 		},
 		getAuthStatus: function (options) {
 			options = options || {};
