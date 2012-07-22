@@ -1,19 +1,12 @@
 define(
-['jQuery', 'app', 'router', 'Facebook'],
-function ($,  app, Router, Facebook) {
+['jQuery', 'app', 'router', 'Facebook', 'modules/Session/Facebook'],
+function ($,  app, Router, Facebook, Session) {
+
+	var targetUrl = location.href.substr(location.href.indexOf('/', 8));
 
 	app.router = new Router();
+	app.session = new Session();
 
-	Facebook.Event.subscribe('auth.authResponseChange', function (response) {
-		console.log('[auth.authResponseChange] The status of the session is: ' + response.status);
-		if (response.status === 'connected') {
-			Backbone.history.navigate('/dashboard', true);
-		}
-	});
-	Facebook.Event.subscribe('auth.login', function (response) {
-		console.log('[auth.login] The status of the session is: ' + response.status);
-		// Backbone.history.navigate('/dashboard', true);
-	});
 	Facebook.init({
 		appId      : app.fb_app_id, // App ID
 		channelUrl : 'http://freyalove.cofounders.sg/channel.html', // Channel File
@@ -21,21 +14,13 @@ function ($,  app, Router, Facebook) {
 		cookie     : true, // enable cookies to allow the server to access the session
 		xfbml      : false  // parse XFBML
 	});
-	/*
-	Facebook.getLoginStatus(function (response) {
-		if (response.status === 'connected') {
-			var target = location.href.substr(location.href.indexOf('/', 8));
-			if (target === app.root) {
-				console.log('REDIRECTING TO DASHBOARD');
-				history.replaceState(null, '', '/dashboard');
-			}
+
+	if (app.session.get('id')) {
+		if (targetUrl === app.root) {
+			history.replaceState(null, '', '/dashboard');
 		}
-		Backbone.history.start({
-			pushState: true,
-			root: app.root
-		});
-	});
-	*/
+	}
+
 	Backbone.history.start({
 		pushState: true,
 		root: app.root

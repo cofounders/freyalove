@@ -61,7 +61,6 @@ define([
 		},
 
 		dashboard: function () {
-			console.log('DASHBOARD');
 			var fbFriends = new Connections.Collections.FacebookFriends([], {id: app.user});
 			app.useLayout('dashboard')
 				.setViews({
@@ -155,7 +154,6 @@ define([
 		},
 
 		landing: function () {
-			console.log('LANDING');
 			app.useLayout('landing')
 				.setViews({
 					'.bblm-header-public': new Header.Views.Public(),

@@ -18,20 +18,9 @@ function($, _, Mustache, Backbone, app, Facebook) {
 		},
 		events: {
 			'click #nav-logout': function (event) {
-				/*
-				var facebookPattern = new RegExp('^\\s*fb[^=]*' + app.fb_app_id),
-					isFacebookCookie = function (cookie) { return facebookPattern.test(cookie); };
-				document.cookie.split(';')
-					.filter(isFacebookCookie)
-					.forEach(function (cookie) {
-						var name = cookie.substr(0, cookie.indexOf('=')),
-							expires = (new Date(0)).toGMTString();
-						console.log('name', name, 'expires', expires);
-						document.cookie = name + '=; expires=' + expires
-					});
-				console.log('Reset cookies to', document.cookie);
-				*/
-				Backbone.history.navigate(app.root, true);
+				app.session.signOut({success: function () {
+					Backbone.history.navigate(app.root, true);
+				}});
 				event.stopPropagation();
 				event.preventDefault();
 			}
@@ -42,10 +31,9 @@ function($, _, Mustache, Backbone, app, Facebook) {
 		template: 'header-public',
 		events: {
 			'click .button.facebook': function (event) {
-				Facebook.login(function () {
-					console.log('[Header] LOGGED IN');
+				app.session.signIn({success: function () {
 					Backbone.history.navigate('/dashboard', true);
-				});
+				}});
 				event.stopPropagation();
 				event.preventDefault();
 			}
