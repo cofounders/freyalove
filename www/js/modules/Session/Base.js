@@ -16,13 +16,13 @@ function(_, Backbone) {
 			switch (method) {
 				case 'create':
 				case 'update':
-					response = sessionStorage.setItem(key, JSON.stringify(this.toJSON()));
+					response = localStorage.setItem(key, JSON.stringify(this.toJSON()));
 					break;
 				case 'delete':
-					response = sessionStorage.removeItem(key);
+					response = localStorage.removeItem(key);
 					break;
 				case 'read':
-					response = JSON.parse(sessionStorage.getItem(key));
+					response = JSON.parse(localStorage.getItem(key));
 					break;
 			}
 			if (_.isFunction(options.success)) { options.success(response); }
