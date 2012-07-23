@@ -15,7 +15,9 @@ function($, _, Mustache, Backbone, app, Facebook) {
 		template: 'header/menu',
 		initialize: function (options) {
 			app.session.on('change:name', function () {
-				$(this.el).find('#nav-name').text(app.session.get('name'));
+				$(this.el).find('#nav-name')
+					.text(app.session.get('name'))
+					.attr('href', '/profile/' + app.session.get('id'));
 			}, this);
 		},
 		cleanup: function () {
