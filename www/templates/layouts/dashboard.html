@@ -4,98 +4,14 @@
 	<div class="wrapper">
 
 		<div id="column-left">
-		
-			<div id="wink">
-				<!-- PEOPLE THAT SMILED AT ME -->
-				<h2>Hey, somebody winked at you!</h2>
+			<div class="bblm-winks-received" id="wink"> <!-- View: Winks.Received --> </div>
 
-				<ul id="winked-list">
-					<!-- TODO: iterate -->
-					<li><div class="bblm-user-preview-small" /></li>
-					<li><div class="bblm-user-preview-small" /></li>
-					<li><div class="bblm-user-preview-small" /></li>
-					<li><div class="bblm-user-preview-small" /></li>
-					<li><div class="bblm-user-preview-small" /></li>
-					<li><div class="bblm-user-preview-small" /></li>
-				</ul>
-				<a href="#" class="navPrev"/></a>
-				<a href="#" class="navNext"/></a>
+			<div class="bblm-matches-singles" id="matches-for-you"> <!-- View: Matches.Singles --> </div>
 
-				<a href="javascript:alert('opens a page that lists all people that smiled at me');window.location.assign('user-list.html');" class="see-more" title="See all people that smiled at me">View All</a>
-			</div>
-			
-			<div id="matches-for-you">
-				<h2>Hmmm... These Girls Look Good For You...</h2>
-
-				<!-- TODO: iterate -->
-				<div class="bblm-user-preview-medium" />
-				<div class="bblm-user-preview-medium middle" />
-				<div class="bblm-user-preview-medium" />
-				
-				<a href="#" class="navPrev"/></a>
-				<a href="#" class="navNext"/></a>				
-				<!-- CAROUSEL -->
-				<ul class="carousel"><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li></ul>
-
-				<a href="javascript:alert('opens a page that lists all possible matches for you');window.location.assign('user-list.html');" class="see-more" title="See all possible matches for you">browse all</a>
-			</div>
-
-			<div id="match-your-friends">
-				<!-- MATCH FRIENDS -->
-				<h2>Aren’t they just cute together? Introduce them!</h2>
-				<div id="match-your-friends-list">
-					<!-- POSSIBLE MATCHES -->
-
-					<!-- MATCH PREVIEW MODULE -->
-					<div class="match-preview small">
-						<div class="match-preview-profile">
-							<img src="/dummy/user2.png" alt="Picture of Tina Kennard" />
-							<a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Tina Kennard">Tina<br>Kennard</a>
-						</div>
-						
-						<a href="javascript:alert('opens the matching page');window.location.assign('match.html');" title="Link to the matching page of Tina Kennard and Helena Peabody" class="button-match"><span>match</span></a>
-
-						<div class="match-preview-profile">
-							<img src="/dummy/user1.png" alt="Picture of Helena Peabody" />
-							<a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Helena Peabody">Helena<br>Peabody</a>
-						</div>
-					</div>
-
-					<!-- MATCH PREVIEW MODULE -->
-					<div class="match-preview small">
-						<div class="match-preview-profile">
-							<img src="/dummy/user2.png" alt="Picture of Tina Kennard" />
-							<a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Tina Kennard">Tina<br>Kennard</a>
-						</div>
-						
-						<a href="javascript:alert('opens the matching page');window.location.assign('match.html');" title="Link to the matching page of Tina Kennard and Helena Peabody" class="button-match"><span>match</span></a>
-
-						<div class="match-preview-profile">
-							<img src="/dummy/user1.png" alt="Picture of Helena Peabody" />
-							<a href="javascript:alert('opens the user profile page');window.location.assign('profile-friend.html');" title="Link to the profile page of Helena Peabody">Helena<br>Peabody</a>
-						</div>
-					</div>
-					<a href="javascript:alert('opens a page that lists all friends to match');window.location.assign('match.html');" class="see-more" title="See all friends you could match">view all</a>
-				</div>
-				<a href="#" class="navPrev"/></a>
-				<a href="#" class="navNext"/></a>
-
-			</div>
-			
+			<div class="bblm-matches-couples" id="match-your-friends"> <!-- View: Matches.Couples --> </div>
 		</div>
 
-		<div id="column-right">
-			<!-- TODO move into module  snip -->
-			
-			<div class="bblm-dates-upcoming" />	
-
-			<div class="bblm-friends-list-right" />
-			
-			<div class="bblm-recent-activity" />
-						
-			<div class="bblm-top-leaderboard" />
-			<!-- /snip -->
-		</div>
+		<div class="bblm-sidebar-panels" id="column-right"></div>
 	</div>
 </section>
 

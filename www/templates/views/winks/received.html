@@ -1,0 +1,23 @@
+<section class="panel winks-received">
+	<header>
+		<h2>Hey, somebody winked at you!</h2>
+	</header>
+
+	<article>
+
+		<ul id="winked-list">
+			{{#winks}}
+			<li>
+				<a href="/profile/{{id}}" title="View the profile of {{name}}">
+					<img src="{{photo}}" alt="{{name}}" />
+				</a>
+				<a href="/profile/{{id}}" title="View the profile of {{name}}">{{name}}</a>
+			</li>
+			{{/winks}}
+		</ul>
+
+		<a href="#" class="button flat previous"/>Previous</a>
+		<a href="#" class="button flat next"/>Next</a>
+
+	</article>
+</section>
