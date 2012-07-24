@@ -426,6 +426,13 @@ def create_wink(request, from_profile_id, to_profile_id):
             resp = HttpResponse("Bad request - to user doesn't exist!", status=400)
             return resp
 
+        try:
+            wink = Wink.objects.get(from_profile=profile, to_profile=to_profile, received=False)
+            resp = HttpResponse("Bad request - a wink already exists!", status=400)
+            return resp
+        except Wink.DoesNotExist:
+            pass
+
         wink = Wink()
         wink.to_profile = to_profile
         wink.from_profile = profile
