@@ -1,0 +1,24 @@
+[
+	{
+		"model": "users.profile",
+		"pk": 101,
+		"fields": {
+			"first_name": "Michelle",
+			"last_name": "Jong",
+			"email": "michelle_test@cofounders.sg",
+			"age": "27",
+			"profile": "Hi there, my name is Michelle and I don't exist. But I really like Jamie."
+		}
+	},
+	{
+		"model": "users.profile",
+		"pk": 102,
+		"fields": {
+			"first_name": "Jamie",
+			"last_name": "Phua",
+			"email": "jamie_test@cofounders.sg",
+			"age": "31",
+			"profile": "My name is Jamie and I'm a test fixture. I think Michelle is interested in me!"
+		}
+	}
+]
