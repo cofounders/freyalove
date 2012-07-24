@@ -4,8 +4,10 @@ define([
 	'modules/Connections',
 	'modules/Couple',
 	'modules/Footer',
+	'modules/Friends',
 	'modules/Header',
 	'modules/Matches',
+	'modules/Matchmakers',
 	'modules/Message',
 	'modules/Notifications',
 	'modules/SexyTimes',
@@ -18,8 +20,10 @@ define([
 	Connections,
 	Couple,
 	Footer,
+	Friends,
 	Header,
 	Matches,
+	Matchmakers,
 	Message,
 	Notifications,
 	SexyTimes,
@@ -72,7 +76,9 @@ define([
 			var fbFriends = new Connections.Collections.FacebookFriends([], {id: app.user}),
 				winksReceived = new Winks.Collections.Received(),
 				matchesSingles = new Matches.Collections.Singles(),
-				matchesCouples = new Matches.Collections.Couples();
+				matchesCouples = new Matches.Collections.Couples(),
+				friendsAll = new Friends.Collections.All(),
+				friendsCommon = new Friends.Collections.Common();
 			app.useLayout('dashboard')
 				.setViews({
 					'.bblm-winks-received': new Winks.Views.Received({
@@ -84,8 +90,7 @@ define([
 					'.bblm-matches-couples': new Matches.Views.Couples({
 						collection: matchesCouples
 					}),
-					'.bblm-sidebar-panels': new Sidebar.Views.Panels({
-					}),
+					'.bblm-sidebar-panels': new Sidebar.Views.Panels(),
 					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
