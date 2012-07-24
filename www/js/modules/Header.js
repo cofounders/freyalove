@@ -1,5 +1,5 @@
-define(['jQuery', 'Underscore', 'Mustache', 'Backbone', 'app', 'Facebook'],
-function($, _, Mustache, Backbone, app, Facebook) {
+define(['jQuery', 'Underscore', 'Mustache', 'Backbone', 'app'],
+function($, _, Mustache, Backbone, app) {
 
 	var Views = {};
 
