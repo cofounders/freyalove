@@ -25,7 +25,8 @@ urlpatterns = patterns('',
     url(r'^activities/sexytimes/create/$', 'freyalove.api.views.create_sexytime'), # create SexyTime
     url(r'^activities/sexytimes/(\d+)/rsvp/$', 'freyalove.api.views.rsvp_sexytime'), # rsvp for a SexyTime
     url(r'^activities/sexytimes/(\d+)/notes/$', 'freyalove.api.views.update_sexytime_note'),
-    url(r'^activities/winks/from/(\d+)/to/(\d+)/$', 'freyalove.api.views.create_wink'),
+    url(r'^activities/winks/from/(\d+)/to/(\d+)/$', 'freyalove.api.views.create_wink'), # send Wink
+    url(r'^conversations/messages/send/to/(\d+)/$)', 'freyalove.api.views.send_message'), # send Message, a conversation will be created if it doesn't exist
 
     # Index
     url(r'^$', 'freyalove.api.views.hello'),
