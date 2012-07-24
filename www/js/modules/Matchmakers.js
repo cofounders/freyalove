@@ -17,7 +17,7 @@ function($, _, Backbone, app) {
 		}
 	});
 
-	Views.Upcoming = Backbone.View.extend({
+	Views.Top = Backbone.View.extend({
 		template: 'matchmakers/top',
 		initialize: function () {
 			this.collection.on('reset', function () {

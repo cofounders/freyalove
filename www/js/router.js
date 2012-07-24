@@ -1,27 +1,31 @@
 define([
 	'jQuery', 'Underscore', 'Backbone', 'app', 'Facebook',
+	'modules/Activities',
 	'modules/Connections',
 	'modules/Couple',
-	'modules/Dates',
 	'modules/Footer',
 	'modules/Header',
+	'modules/Matches',
 	'modules/Message',
 	'modules/Notifications',
+	'modules/SexyTimes',
+	'modules/Sidebar',
 	'modules/User',
-	'modules/Winks',
-	'modules/Matches'
+	'modules/Winks'
 ], function (
 	$, _, Backbone, app, Facebook,
+	Activities,
 	Connections,
 	Couple,
-	Dates,
 	Footer,
 	Header,
+	Matches,
 	Message,
 	Notifications,
+	SexyTimes,
+	Sidebar,
 	User,
-	Winks,
-	Matches
+	Winks
 ) {
 
 	return Backbone.Router.extend({
@@ -71,7 +75,6 @@ define([
 				matchesCouples = new Matches.Collections.Couples();
 			app.useLayout('dashboard')
 				.setViews({
-					// left column
 					'.bblm-winks-received': new Winks.Views.Received({
 						collection: winksReceived
 					}),
@@ -81,26 +84,8 @@ define([
 					'.bblm-matches-couples': new Matches.Views.Couples({
 						collection: matchesCouples
 					}),
-					/* * /
-					'.bblm-user-preview-medium': new User.Views.Medium({
-						collection: new Dates.Collections.UpcomingDates(app.dummy.getMyPossibleMatches())
+					'.bblm-sidebar-panels': new Sidebar.Views.Panels({
 					}),
-					'.bblm-user-preview-small': new Connections.Views.ListWinks({
-						collection: new Dates.Collections.UpcomingDates(app.dummy.getWinks())
-					}),
-
-					// right column
-					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates({
-						collection: new Dates.Collections.UpcomingDates(app.dummy.getSexyTimes())
-					}),
-					'.bblm-friends-list-right': new Connections.Views.ListRight({
-						collection: new Connections.Collections.Friends(app.dummy.getFriends())
-					}),
-					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
-					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
-					/* */
-
-					// header & footer
 					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();

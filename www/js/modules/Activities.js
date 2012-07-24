@@ -17,7 +17,7 @@ function($, _, Backbone, app) {
 		}
 	});
 
-	Views.Upcoming = Backbone.View.extend({
+	Views.Recent = Backbone.View.extend({
 		template: 'activities/upcoming',
 		initialize: function () {
 			this.collection.on('reset', function () {
