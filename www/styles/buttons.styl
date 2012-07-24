@@ -1,0 +1,98 @@
+/*
+	Generic UI buttons: .button
+	Variants: .cta, .highlight, .flat
+
+	Narrower buttons: .button.social
+	Optional icon area: .icon
+	Available icons: .facebook, .twitter, .like
+
+	Example Usage:
+	<a class='button cta' href='/demo'>View a Demo</a>
+	<a class='button highlight' href='/edit'>Edit</a>
+	<a class='button social facebook' href='#'>Sign In with Facebook</a>
+	<a class='button facebook icon like' href='#'>Like</a>
+	<a class='button twitter icon' href='#'>Follow on Twitter</a>
+ */
+
+button-glow(dim = rgba(255, 255, 255, 0.2), bright = rgba(255, 255, 255, 0.5))
+	text-shadow 0px 1px 0px dim
+	&:hover
+		text-shadow 0px 0px 6px bright,
+			0px 1px 0px dim
+
+button-border(stroke, inner-shadow, drop-shadow)
+	box-shadow inset 0px 0px 0px 1px stroke,
+		inset 0px 2px 0px 0px inner-shadow,
+		0px 1px 3px 0px drop-shadow
+
+button-border-raised(stroke, inner-shadow, drop-shadow)
+	box-shadow inset 0px 0px 0px 1px stroke,
+		inset 0px 2px 0px 0px inner-shadow,
+		0px 2px 4px 0px drop-shadow
+
+button-face(base, pattern, color)
+	background-color base
+	background-image pattern
+	color color
+
+.button
+	background-repeat repeat-x
+	border-radius 3px
+	display inline-block
+	text-align center
+	vertical-align middle
+	margin 0 0 1px 0
+	&:active
+		margin 1px 0 0 0
+	&.social
+		height 28px
+		padding 5px 14px
+		button-face(#dddddd, url('../img/bg_btn_white.jpg'), black)
+		button-border(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1), rgba(0, 0, 0, 0.25))
+		button-glow(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.75))
+		&.facebook
+			button-face(#3e578d, url('../img/bg_btn_fb.jpg'), white)
+			button-border(rgba(63, 88, 142, 1), rgba(255, 255, 255, 0.33), rgba(0, 0, 0, 0.29))
+			button-glow()
+		&.twitter
+			button-face(#1e99d8, url('../img/bg_btn_tw.jpg'), white)
+			button-border(rgba(75, 165, 200, 1), rgba(160, 221, 236, 1), rgba(0, 0, 0, 0.29))
+			button-glow()
+		&.icon
+			padding-left 3px
+			&.facebook:before
+				background-image url('../img/icn_fb.png')
+			&.twitter:before
+				background-image url('../img/icn_tw.png')
+			&.like:before
+				background-image url('../img/icn_like.png')
+		&.icon:before
+			/* glow, shadow */
+			box-shadow 1px 0px 0px 0px rgba(255, 255, 255, 0.15),
+				2px 0px 0px 0px rgba(0, 0, 0, 0.1)
+			background center no-repeat
+			content ' '
+			display inline-block
+			height 14px
+			margin -2px 11px 0 0
+			vertical-align middle
+			width 21px
+.button
+	height 35px
+	padding 8px 12px
+	button-face(#dddddd, url('../img/bg_btn_white.jpg'), black)
+	button-border-raised(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1), rgba(0, 0, 0, 0.16))
+	button-glow(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.75))
+	&.cta
+		button-face(#db4648, url('../img/bg_btn_red.jpg'), white)
+		button-border-raised(rgba(159, 54, 71, 1), rgba(255, 255, 255, 0.22), rgba(0, 0, 0, 0.16))
+		button-glow()
+	&.highlight
+		button-face(#62228f, url('../img/bg_btn_purple.jpg'), white)
+		button-border-raised(rgba(98, 34, 143, 1), rgba(255, 255, 255, 0.22), rgba(0, 0, 0, 0.16))
+		button-glow()
+	&.flat
+		background transparent
+		box-shadow none
+		color #9f3646
+		button-glow(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.75))
