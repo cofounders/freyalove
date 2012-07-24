@@ -5,16 +5,16 @@
 	font-weight 200
 	height 50px
 
-	h1, form, ul, a#nav-name, a#nav-logout
+	h1, form, menu, .name, .signout
 		position absolute
 
-	h1 a, a#nav-name
+	h1 a, .name
 		display block
 		top 9px
 		line-height 32px
 
-	ul li, a#nav-logout
-		display block
+	menu li, .signout
+		display inline-block
 		top 11px
 		width 28px
 		height 28px
@@ -25,10 +25,7 @@
 		//	color rgba(255, 255, 255, 0.0)
 
 	a
-		color #fff
 		color rgba(255, 255, 255, 0.7)
-		:hover
-			color #ff9f00
 
 	h1
 		width 440px
@@ -40,7 +37,6 @@
 	form
 		top 10px
 		left 392px
-
 		input
 			background url('../img/icn_search.png') #fff no-repeat 246px 7px
 			border-radius 5px
@@ -55,38 +51,33 @@
 
 	menu
 		left 680px
-		&#nav-popups
-			padding 0
-			margin 0
-			li
-				border none
-				width 35px
-				height 46px
-				border-radius 0
-				margin-top 2px
-				a
-					width 100%
-					height 100%
-					display block
-				&:nth-child(1), &:nth-child(2), &:nth-child(3)
-					&:hover
-						background-color rgba(98, 34, 143, 0.5)
-				&:nth-child(1)
-					background url('../img/icn_global.png') no-repeat 6px 12px
-				&:nth-child(2)
-					background url('../img/icn_messages.png') no-repeat 6px 12px
-				&:nth-child(3)
-					background url('../img/icn_dates.png') no-repeat 6px 12px
-				
-
+		padding 0
+		margin 0
 		li
+			border none
+			width 35px
+			height 46px
+			border-radius 0
+			margin-top 2px
 			margin-right 5px
 			float left
-
-			:last-child
+			&:last-child
 				margin-right 0px
+			a
+				width 100%
+				height 100%
+				display block
+			&:nth-child(1), &:nth-child(2), &:nth-child(3)
+				&:hover
+					background-color rgba(98, 34, 143, 0.5)
+			&:nth-child(1)
+				background url('../img/icn_global.png') no-repeat 6px 12px
+			&:nth-child(2)
+				background url('../img/icn_messages.png') no-repeat 6px 12px
+			&:nth-child(3)
+				background url('../img/icn_dates.png') no-repeat 6px 12px
 
-	a#nav-name
+	.name
 		left 800px
 		margin 0 5px
 		padding 0 10px 0 0
@@ -98,7 +89,7 @@
 		&:hover
 			text-decoration underline
 
-	a#nav-logout
+	.signout
 		right 0px
 		width 35px
 		height 46px

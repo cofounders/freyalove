@@ -2,23 +2,23 @@
 	<div class="wrapper">
 		<h1><a href="/dashboard" title="Go to the FreyaLove home">FreyaLove</a></h1>
 
-		<form id="nav-search" method="get" name="nav-search" action="#" role="search">
-			<input type="text" maxlength="100" placeholder="Search"/>
+		<form method="get" action="/search">
+			<input type="text" maxlength="100" placeholder="Search friends on FreyaLove..."/>
 		</form>
 
-		<menu id="nav-popups">
-			<li><a href="#" class="notifications" title="View notifications"></a></li>
-			<li><a href="#" class="conversations" title="View conversations"></a></li>
-			<li><a href="#" class="sexytimes" title="View dates"></a></li>
+		<menu>
+			<li><a href="#" class="notifications" title="View notifications">Notifications</a></li>
+			<li><a href="#" class="conversations" title="View conversations">Conversations</a></li>
+			<li><a href="#" class="sexytimes" title="View dates">Dates</a></li>
 		</menu>
 
-		<a id="nav-name" href="/profile/{{id}}" title="Go to my profile">{{name}}</a>
+		<a class="name" href="/profile/{{id}}" title="Go to my profile">{{name}}</a>
 
-		<a id="nav-logout" href="#" title="Log out from Freya Love"></a>
+		<a class="signout" href="#" title="Sign out from FreyaLove"></a>
 	</div>
 </section>
 
-<section class="popup" id="popup-notifications">
+<section hidden class="popup" id="popup-notifications">
 	<h2>Notifications</h2>
 	<ul>
 		<li><a href="/profile/{{id}}" title="Link to the profile page of Bette Porter">Bette Porter</a> smiled at you. Smile back.</li>
@@ -28,7 +28,7 @@
 	</ul>
 </section>
 
-<section class="popup" id="popup-messages">
+<section hidden class="popup" id="popup-messages">
 	<h2>Messages <a href="/inbox" class="see-all" title="See all messages">see all</a></h2>
 	<ul>
 		<li>
@@ -54,7 +54,7 @@
 	</ul>
 </section>
 
-<section class="popup" id="popup-dates">
+<section hidden class="popup" id="popup-dates">
 	<ul>
 		<li><a href="/profile/{{id}}" title="Link to the profile page of Bette Porter">Bette Porter</a> wants to meet on Thursday at 3pm at Somerset 313. <a href="javascript:alert('opens the direct reply form below');" title="RSVP to Bette Porter's invitation">RSVP now.</li>
 		<li>

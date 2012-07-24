@@ -15,7 +15,7 @@ function($, _, Backbone, app) {
 		template: 'header/menu',
 		initialize: function (options) {
 			app.session.on('change:name', function () {
-				$(this.el).find('#nav-name')
+				$(this.el).find('.name')
 					.text(app.session.get('name'))
 					.attr('href', '/profile/' + app.session.get('id'));
 			}, this);
@@ -30,10 +30,15 @@ function($, _, Backbone, app) {
 			return manage(this).render();
 		},
 		events: {
-			'click #nav-logout': function (event) {
-				app.session.signOut();
+			'click .signout': function (event) {
 				event.stopPropagation();
 				event.preventDefault();
+				app.session.signOut();
+			},
+			'click menu a': function (event) {
+				event.stopPropagation();
+				event.preventDefault();
+
 			}
 		}
 	});
@@ -42,9 +47,9 @@ function($, _, Backbone, app) {
 		template: 'header/public',
 		events: {
 			'click .button.facebook': function (event) {
-				app.session.signIn();
 				event.stopPropagation();
 				event.preventDefault();
+				app.session.signIn();
 			}
 		}
 	});
