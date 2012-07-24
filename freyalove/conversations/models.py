@@ -4,14 +4,14 @@ from freyalove.users.models import Profile
 from freyalove.conversation.managers import ConversationManager
 
 class Conversation(models.Model):
-	owner = models.ForeignKey(Profile, related_name='owner_set')
-	participant = models.ForeignKey(Profile, related_name='participant_set')
-	created_at = models.DateTimeField(auto_now_add=True, null=True)
+    owner = models.ForeignKey(Profile, related_name='owner_set')
+    participant = models.ForeignKey(Profile, related_name='participant_set')
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
 
     objects = ConversationManager()
 
-	def __unicode__(self):
-		return "%s <-> %s" % (owner, participant)
+    def __unicode__(self):
+        return "%s <-> %s" % (owner, participant)
 
 class Msg(models.Model):
     conversation = models.ForeignKey(Conversation)
