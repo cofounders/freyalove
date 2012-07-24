@@ -7,5 +7,7 @@ Thumbs.db
 .settings
 .tmproj
 nbproject
+*.pyc
 *.sublime-project
 *.sublime-workspace
+local_settings.py
