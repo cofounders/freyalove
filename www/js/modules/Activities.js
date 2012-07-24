@@ -18,7 +18,7 @@ function($, _, Backbone, app) {
 	});
 
 	Views.Recent = Backbone.View.extend({
-		template: 'activities/upcoming',
+		template: 'activities/recent',
 		initialize: function () {
 			this.collection.on('reset', function () {
 				this.render();
