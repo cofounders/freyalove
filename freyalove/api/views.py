@@ -17,6 +17,7 @@ import facebook
 #from freyalove.matchmaker.models import MatchMaker
 from freyalove.users.models import Profile, Blocked, Friendship, Wink
 from freyalove.matchmaker.models import Match, SexyTime
+from freyalove.conversations.models import Conversation, Msg
 
 from freyalove.api.utils import *
 
@@ -426,6 +427,13 @@ def create_wink(request, from_profile_id, to_profile_id):
             resp = HttpResponse("Bad request - to user doesn't exist!", status=400)
             return resp
 
+        try:
+            wink = Wink.objects.get(from_profile=profile, to_profile=to_profile, received=False)
+            resp = HttpResponse("Bad request - a wink already exists!", status=400)
+            return resp
+        except Wink.DoesNotExist:
+            pass
+
         wink = Wink()
         wink.to_profile = to_profile
         wink.from_profile = profile
@@ -435,6 +443,46 @@ def create_wink(request, from_profile_id, to_profile_id):
         resp_json = json.JSONEncoder().encode(resp_data)
         resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
         return resp
+    else:
+        resp = HttpResponse("Bad request", status=400)
+        return resp
+
+def send_message(request, to_profile_id):
+    if request.method == "POST":
+        resp_data = {}
+        message = request.POST.get('message', None)
+
+        if not message:
+            resp = HttpResponse("Bad request - message submission missing.", status=400)
+            return resp
+        # parse for token in cookie
+        cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+
+        if not cookie:
+            resp = HttpResponse("Missing authentication cookie", status=403)
+            return resp
+        profile = is_registered_user(fetch_profile(cookie["access_token"]))
+
+        try:
+            to_profile = Profile.objects.get(id=int(to_profile_id))
+        except Profile.DoesNotExist:
+            resp = HttpResponse("Bad request - user requested to send message to doesn't exist.", status=400)
+            return resp
+
+        conversation = has_conversation(profile, to_profile)
+
+        msg = Msg()
+        msg.message = message
+        msg.sender = profile
+        msg.receiver = to_profile
+        msg.conversation = conversation
+        msg.save()
+
+        resp_data["status"] = "Successfully saved message from %d to %d: %s" % (msg.sender.id, msg.receiver.id, msg.message)
+        resp_json = json.JSONEncoder().encode(resp_data)
+        resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
+        return resp
+
     else:
         resp = HttpResponse("Bad request", status=400)
         return resp
