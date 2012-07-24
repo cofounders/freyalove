@@ -11,7 +11,7 @@ class Conversation(models.Model):
 		return "%s <-> %s" % (owner, participant)
 
 class Msg(models.Model):
-    # should we bundle the messages to a conversation?
+    conversation = models.ForeignKey(Conversation)
     message = models.TextField(blank=True)
     sender = models.ForeignKey(Profile,related_name='sender_set')
     receiver = models.ForeignKey(Profile, related_name='receiver_set')
