@@ -1,7 +1,7 @@
 from django.db import models
 
 from freyalove.users.models import Profile
-from freyalove.conversation.managers import ConversationManager
+from freyalove.conversations.managers import ConversationManager
 
 class Conversation(models.Model):
     owner = models.ForeignKey(Profile, related_name='owner_set')
