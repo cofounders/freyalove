@@ -8,7 +8,8 @@ define([
 	'modules/Message',
 	'modules/Notifications',
 	'modules/User',
-	'modules/Winks'
+	'modules/Winks',
+	'modules/Matches'
 ], function (
 	$, _, Backbone, app, Facebook,
 	Connections,
@@ -19,7 +20,8 @@ define([
 	Message,
 	Notifications,
 	User,
-	Winks
+	Winks,
+	Matches
 ) {
 
 	return Backbone.Router.extend({
@@ -64,12 +66,20 @@ define([
 
 		dashboard: function () {
 			var fbFriends = new Connections.Collections.FacebookFriends([], {id: app.user}),
-				winksReceived = new Winks.Collections.Received();
+				winksReceived = new Winks.Collections.Received(),
+				matchesSingles = new Matches.Collections.Singles(),
+				matchesCouples = new Matches.Collections.Couples();
 			app.useLayout('dashboard')
 				.setViews({
 					// left column
 					'.bblm-winks-received': new Winks.Views.Received({
 						collection: winksReceived
+					}),
+					'.bblm-matches-singles': new Matches.Views.Singles({
+						collection: matchesSingles
+					}),
+					'.bblm-matches-couples': new Matches.Views.Couples({
+						collection: matchesCouples
 					}),
 					/* * /
 					'.bblm-user-preview-medium': new User.Views.Medium({
@@ -96,6 +106,8 @@ define([
 				}).render();
 			fbFriends.fetch();
 			winksReceived.fetch();
+			matchesSingles.fetch();
+			matchesCouples.fetch();
 		},
 
 		faq: function (path) {
