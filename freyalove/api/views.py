@@ -17,6 +17,7 @@ import facebook
 #from freyalove.matchmaker.models import MatchMaker
 from freyalove.users.models import Profile, Blocked, Friendship, Wink
 from freyalove.matchmaker.models import Match, SexyTime
+from freyalove.conversations.models import Conversation, Msg
 
 from freyalove.api.utils import *
 
@@ -247,6 +248,161 @@ def fetch_activities(request):
     resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
     return resp
 
+def fetch_conversations(request):
+    # parse for token in cookie
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    if not cookie:
+        resp = HttpResponse("Missing authentication cookie", status=403)
+        return resp
+
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
+
+    conversations = Conversation.objects.fetch_conversations(profile)
+
+    resp_data = {}
+    resp_data["conversations"] = []
+
+    for c in conversations:
+        last_message = Msg.objects.filter(conversation=c).order_by('-created_at')
+        from_profile = {}
+        to_profile = {}
+
+        from_profile["name"] = last_message.sender.first_name + " " + last_message.sender.last_name
+        from_profile["id"] = last_message.sender.id
+        from_profile["photo"] = "http://graph.facebook.com/%s/picture" % last_message.sender.fb_username
+
+        to_profile["name"] = last_message.receiver.first_name + " " + last_message.receiver.last_name
+        to_profile["id"] = last_message.receiver.id
+        to_profile["photo"] = "http://graph.facebook.com/%s/picture" % last_message.receiver.fb_username
+
+        resp_data["conversations"].append({
+            "status":"N/A", 
+            "lastMessage": 
+            {
+                "from": from_profile,
+                "to": to_profile,
+                "body": last_message.message,
+                "status": "N/A",
+            }
+        })
+    # return the following
+    # [ConversationSummary]
+    """
+    ConversationSummary: {
+        status: ConversationStatus,
+        lastMessage: Message
+    }
+
+    @kenny: for additional info::
+    Message: {
+        from: UserSummary,
+        to: UserSummary,
+        body: String,
+        status: ConversationStatus
+    }
+
+    UserSummary: {
+        name: String,
+        id: String,
+        photo: String
+    }
+    """
+
+    resp_json = json.JSONEncoder().encode(resp_data)
+    resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
+    return resp
+
+def fetch_unread_conversations(request):
+    # parse for token in cookie
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    if not cookie:
+        resp = HttpResponse("Missing authentication cookie", status=403)
+        return resp
+
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
+
+    conversations = Conversation.objects.fetch_unread_conversations(profile)
+
+    resp_data = {}
+    resp_data["conversations"] = []
+
+    for c in conversations:
+        last_message = Msg.objects.filter(conversation=c).order_by('-created_at')
+        from_profile = {}
+        to_profile = {}
+
+        from_profile["name"] = last_message.sender.first_name + " " + last_message.sender.last_name
+        from_profile["id"] = last_message.sender.id
+        from_profile["photo"] = "http://graph.facebook.com/%s/picture" % last_message.sender.fb_username
+
+        to_profile["name"] = last_message.receiver.first_name + " " + last_message.receiver.last_name
+        to_profile["id"] = last_message.receiver.id
+        to_profile["photo"] = "http://graph.facebook.com/%s/picture" % last_message.receiver.fb_username
+
+        resp_data["conversations"].append({
+            "status":"N/A", 
+            "lastMessage": 
+            {
+                "from": from_profile,
+                "to": to_profile,
+                "body": last_message.message,
+                "status": "N/A",
+            }
+        })
+
+    resp_json = json.JSONEncoder().encode(resp_data)
+    resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
+    return resp
+
+def fetch_messages(request, conversation_id):
+    # parse for token in cookie
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    if not cookie:
+        resp = HttpResponse("Missing authentication cookie", status=403)
+        return resp
+
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
+
+    try:
+        conversation = Conversation.objects.get(id=int(conversation_id))
+    except Conversation.DoesNotExist:
+        resp = HttpResponse("Conversation does not exist!", status=404)
+        return resp
+
+    if conversation.owner == profile or conversation.participant == profile:
+        pass
+    else:
+        resp = HttpResponse("Invalid profile.", status=400)
+        return resp
+
+    resp_data = {}
+    resp_data["messages"] = []
+
+    messages = Msg.objects.get(conversation=conversation).order_by('-created_at')
+
+    for m in messages:
+        from_profile = {}
+        to_profile = {}
+
+        from_profile["name"] = m.sender.first_name + " " + m.sender.last_name
+        from_profile["id"] = m.sender.id
+        from_profile["photo"] = "http://graph.facebook.com/%s/picture" % m.sender.fb_username
+
+        to_profile["name"] = m.receiver.first_name + " " + m.receiver.last_name
+        to_profile["id"] = m.receiver.id
+        to_profile["photo"] = "http://graph.facebook.com/%s/picture" % m.receiver.fb_username
+
+        resp_data["messages"].append({
+            "from": from_profile,
+            "to": to_profile,
+            "body": m.message,
+            "status": "N/A",
+        })
+
+    resp_json = json.JSONEncoder().encode(resp_data)
+    resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
+    return resp 
+
 # POST
 @csrf_exempt
 def update_profile(request, profile_id):
@@ -426,6 +582,13 @@ def create_wink(request, from_profile_id, to_profile_id):
             resp = HttpResponse("Bad request - to user doesn't exist!", status=400)
             return resp
 
+        try:
+            wink = Wink.objects.get(from_profile=profile, to_profile=to_profile, received=False)
+            resp = HttpResponse("Bad request - a wink already exists!", status=400)
+            return resp
+        except Wink.DoesNotExist:
+            pass
+
         wink = Wink()
         wink.to_profile = to_profile
         wink.from_profile = profile
@@ -435,6 +598,46 @@ def create_wink(request, from_profile_id, to_profile_id):
         resp_json = json.JSONEncoder().encode(resp_data)
         resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
         return resp
+    else:
+        resp = HttpResponse("Bad request", status=400)
+        return resp
+
+def send_message(request, to_profile_id):
+    if request.method == "POST":
+        resp_data = {}
+        message = request.POST.get('message', None)
+
+        if not message:
+            resp = HttpResponse("Bad request - message submission missing.", status=400)
+            return resp
+        # parse for token in cookie
+        cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+
+        if not cookie:
+            resp = HttpResponse("Missing authentication cookie", status=403)
+            return resp
+        profile = is_registered_user(fetch_profile(cookie["access_token"]))
+
+        try:
+            to_profile = Profile.objects.get(id=int(to_profile_id))
+        except Profile.DoesNotExist:
+            resp = HttpResponse("Bad request - user requested to send message to doesn't exist.", status=400)
+            return resp
+
+        conversation = has_conversation(profile, to_profile)
+
+        msg = Msg()
+        msg.message = message
+        msg.sender = profile
+        msg.receiver = to_profile
+        msg.conversation = conversation
+        msg.save()
+
+        resp_data["status"] = "Successfully saved message from %d to %d: %s" % (msg.sender.id, msg.receiver.id, msg.message)
+        resp_json = json.JSONEncoder().encode(resp_data)
+        resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
+        return resp
+
     else:
         resp = HttpResponse("Bad request", status=400)
         return resp

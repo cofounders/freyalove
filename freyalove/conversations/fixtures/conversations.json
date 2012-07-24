@@ -1,0 +1,43 @@
+[
+    {
+        "model": "conversations.conversation",
+        "pk": 101,
+        "fields": {
+            "owner": 101,
+            "participant": 102
+        }
+    },
+    {
+        "model": "conversations.msg",
+        "pk": 101,
+        "fields": {
+            "conversation": 101,
+            "message": "Hello Jamie, this is Michelle, we met at Awesome Anonymous, remember me? :D",
+            "sender": 101,
+            "receiver": 102,
+            "read": true
+        }
+    },
+    {
+        "model": "conversations.msg",
+        "pk": 102,
+        "fields": {
+            "conversation": 101,
+            "message": "Oh hi michelle, ofc I remember! how are you doing? still up for that lunch we talked about?",
+            "sender": 102,
+            "receiver": 101,
+            "read": true
+        }
+    },
+    {
+        "model": "conversations.msg",
+        "pk": 103,
+        "fields": {
+            "conversation": 101,
+            "message": "lunch sounds great! where?",
+            "sender": 101,
+            "receiver": 102,
+            "read": false
+        }
+    }
+]

@@ -1,5 +1,6 @@
 from freyalove.users.models import Profile, Blocked, Friendship
 from freyalove.matchmaker.models import Match
+from freyalove.conversations.models import Conversation
 
 import datetime
 
@@ -40,3 +41,14 @@ def create_freya_profile(profile_dict):
 
 def convert_to_dtobj(txt_date):
 	return datetime.datetime.now()
+
+def has_conversation(from_profile, to_profile):
+	try:
+		conversation = Conversation.objects.get(owner=from_profile, participant=to_profile)
+	except Conversation.DoesNotExist:
+		conversation = Conversation()
+		conversation.owner = from_profile
+		conversation.participant = to_profile
+		conversation.save()
+
+	return conversation

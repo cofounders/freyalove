@@ -66,6 +66,17 @@ The Django app generally relies on [facebook-sdk][1] as the only third party lib
 
 1. please add *.pyc to your gitignore.
 
+## server notes
+
+To update any changes to the API, you need to simply restart Apache:
+
+        sudo /etc/init.d/httpd restart
+
+To load any fixtures manually,
+
+        python manage.py loaddata <fixture name>
+
+
 [1]: https://github.com/pythonforfacebook/facebook-sdk
 [2]: http://www.python.org
 [3]: http://stackoverflow.com/questions/4486589/should-i-learn-python-3-or-2-x/4486603#4486603

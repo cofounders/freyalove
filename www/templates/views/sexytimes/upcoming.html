@@ -1,0 +1,24 @@
+<section class="panel sexytimes-upcoming">
+  <header>
+    <h3>Upcoming Dates</h3>
+  </header>
+  <article>
+    <ul>
+      {{#dates}}
+        <li>
+          <a href="/profile/{{id}}" title="Profile of {{name}}">
+            <img src="{{from.profileImage}}" alt="{{from.firstName}} {{from.lastName}}" />
+          </a>
+          <p class="text">Meet <a href="/profile/{{from.id}}" title="Profile of {{name}}">{{name}}</a> {{when}} at {{where}}.</p>
+        </li>
+      {{/dates}}
+      {{^dates}}
+        <li class="empty">
+          <p>
+            You have no dates for now. Why not <a href="javascript:alert('opens the date invitation popup');" title="Invite someone to a date">create one</a>?
+          </p>
+        </li>
+      {{/dates}}
+    </ul>
+  </article>
+</section>
