@@ -1,0 +1,10 @@
+[
+	{
+		"model": "users.friendship",
+		"pk": 101,
+		"fields": {
+			"to_profile": 102,
+			"from_profile": 101
+		}
+	}
+]

@@ -1,0 +1,10 @@
+[
+	{
+		"model": "users.wink",
+		"pk": 101,
+		"fields": {
+			"to_profile": 101,
+			"from_profile": 102
+		}
+	}
+]
