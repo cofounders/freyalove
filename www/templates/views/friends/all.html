@@ -1,0 +1,17 @@
+<section class="panel friends-all">
+  <header>
+    <h3>Your Friends ({{count}})</h3>
+  </header>
+  <article class="tray">
+    <ul>
+      {{#friends}}
+      <li>
+        <a href="/profile/{{id}}" title="Profile of {{name}}">
+          <img src="{{photo}}" alt="{{name}}" />
+        </a>
+      </li>
+      {{/friends}}
+    </ul>
+    <a class="invite-more" href="#">Invite more Facebook friends</a>
+  </article>
+</section>
