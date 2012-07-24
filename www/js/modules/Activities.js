@@ -7,18 +7,18 @@ function($, _, Backbone, app) {
 	var Model = Backbone.Model.extend({
 	});
 
-	Collections.Received = Backbone.Collection.extend({
+	Collections.Recent = Backbone.Collection.extend({
 		model: Model,
 		url: function () {
-			return app.api + 'activities/winks/';
+			return app.api + 'activities/';
 		},
 		parse: function (response) {
-			return response.winks;
+			return response.activities;
 		}
 	});
 
-	Views.Received = Backbone.View.extend({
-		template: 'winks/received',
+	Views.Upcoming = Backbone.View.extend({
+		template: 'activities/upcoming',
 		initialize: function () {
 			this.collection.on('reset', function () {
 				this.render();
@@ -28,7 +28,7 @@ function($, _, Backbone, app) {
 			this.collection.off(null, null, this);
 		},
 		serialize: function () {
-			return {winks: this.collection.toJSON()};
+			return {activities: this.collection.toJSON()};
 		}
 	});
 

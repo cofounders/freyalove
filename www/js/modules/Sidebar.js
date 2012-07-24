@@ -1,11 +1,11 @@
 define(['jQuery', 'Underscore', 'Backbone', 'app',
-	'modules/Dates',
+	'modules/Sexytimes',
 	'modules/Friends',
 	'modules/Activities',
 	'modules/Matchmakers'
 ],
 function($, _, Backbone, app,
-	Dates,
+	Sexytimes,
 	Friends,
 	Activities,
 	Matchmakers
@@ -22,11 +22,11 @@ function($, _, Backbone, app,
 			}));
 			commonFriends.fetch();
 
-			var upcomingDates = new Dates.Collections.Upcoming();
-			this.insertView('.bblm-dates-upcoming', new Dates.Views.Upcoming({
-				collection: upcomingDates
+			var upcomingSexytimes = new Sexytimes.Collections.Upcoming();
+			this.insertView('.bblm-sexytimes-upcoming', new Sexytimes.Views.Upcoming({
+				collection: upcomingSexytimes
 			}));
-			upcomingDates.fetch();
+			upcomingSexytimes.fetch();
 
 			var allFriends = new Friends.Collections.All();
 			this.insertView('.bblm-friends-all', new Friends.Views.All({
