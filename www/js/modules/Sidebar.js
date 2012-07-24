@@ -15,7 +15,6 @@ function($, _, Backbone, app,
 	Views.Panels = Backbone.View.extend({
 		template: 'sidebar/panels',
 		render: function (manage) {
-
 			var commonFriends = new Friends.Collections.Common();
 			this.insertView('.bblm-friends-common', new Friends.Views.Common({
 				collection: commonFriends
