@@ -12,13 +12,11 @@ function ($,  app, Router, Facebook, Session) {
 			var url = app.api + 'users/' + app.session.get('userID') + '/profile/summary/';
 			$.get(url).success(function (response) {
 				app.session.save(response);
+				Backbone.history.navigate('/dashboard', true);
 			});
 		})
 		.on('signOut', function () {
 			Backbone.history.navigate(app.root, true);
-		})
-		.on('signIn', function () {
-			Backbone.history.navigate('/dashboard', true);
 		});
 
 	Facebook.init({
