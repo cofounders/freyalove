@@ -4,96 +4,107 @@
 	background url('../img/bg_header.jpg') $purple repeat-x
 	font-weight 200
 	height 50px
-
-	h1, form, menu, .name, .signout
-		position absolute
-
-	h1 a, .name
-		display block
-		top 9px
-		line-height 32px
-
-	menu li, .signout
-		display inline-block
-		top 11px
-		width 28px
-		height 28px
-		line-height 28px
-		//border 1px solid rgba(255, 255, 255, 0.7)
-		border-radius 3px
-		text-align center
-		//	color rgba(255, 255, 255, 0.0)
-
-	a
-		color rgba(255, 255, 255, 0.7)
+	text-align right
 
 	h1
-		width 440px
-		margin 0.3em 0
+		display inline-block
+		height 100%
+		left 0
+		overflow hidden
+		position absolute
+		width 143px
 		a
-			color rgba(255, 255, 255, 0.0)
-			background url('../img/logo_modified.png') no-repeat
+			background url('../img/logo_modified.png') no-repeat center
+			color transparent
+			display inline-block
+			height 100%
+			width 100%
 
-	form
-		top 10px
-		left 392px
-		input
-			background url('../img/icn_search.png') #fff no-repeat 246px 7px
-			border-radius 5px
-			height 30px
-			width 272px
-			box-shadow inset 0px 0px 2px 2px rgba(0, 0, 0, 0.1)
-			outline 0
-			padding 5px
-			font-size 0.8em
-			&:focus
-				box-shadow lighten($purple, 70%) 0px 0px 5px
-
-	menu
-		left 680px
-		padding 0
-		margin 0
-		li
-			border none
-			width 35px
-			height 46px
-			border-radius 0
-			margin-top 2px
-			margin-right 5px
-			float left
-			&:last-child
-				margin-right 0px
-			a
-				width 100%
-				height 100%
-				display block
-			&:nth-child(1), &:nth-child(2), &:nth-child(3)
-				&:hover
-					background-color rgba(98, 34, 143, 0.5)
-			&:nth-child(1)
-				background url('../img/icn_global.png') no-repeat 6px 12px
-			&:nth-child(2)
-				background url('../img/icn_messages.png') no-repeat 6px 12px
-			&:nth-child(3)
-				background url('../img/icn_dates.png') no-repeat 6px 12px
-
-	.name
-		left 800px
-		margin 0 5px
-		padding 0 10px 0 0
+	nav
+		font-size 0
+		height 50px
 		text-align right
-		width 113px
-		color #d0c0dd
-		font-size 0.8em
-		background url('../img/ln.png') no-repeat right 0
-		&:hover
-			text-decoration underline
+		width 100%
+		> *
+			display inline-block
+			vertical-align middle
 
-	.signout
-		right 0px
-		width 35px
-		height 46px
-		top 4px
-		background url('../img/icn_power.png') no-repeat 6px 12px
-		&:hover
-			background-color rgba(98, 34, 143, 0.5)
+		> menu
+			height 46px
+			margin 2px 0
+			padding 0
+			margin 0 20px 0 0
+			> li
+				border none
+				border-radius 3px
+				display inline-block
+				font-size 1rem
+				height 100%
+				line-height 28px
+				margin 0
+				overflow hidden
+				text-align center
+				top 11px
+				width 40px
+				&:last-child
+					margin-right 0px
+				a
+					background no-repeat center
+					color transparent
+					display inline-block
+					height 100%
+					width 100%
+					&:hover
+						background-color rgba(98, 34, 143, 0.5)
+					&.notifications
+						background-image url('../img/icn_global.png')
+					&.conversations
+						background-image url('../img/icn_messages.png')
+					&.sexytimes
+						background-image url('../img/icn_dates.png')
+
+		> form
+			input
+				background url('../img/icn_search.png') #fff no-repeat 246px 7px
+				border-radius 5px
+				height 30px
+				width 272px
+				box-shadow inset 0px 0px 2px 2px rgba(0, 0, 0, 0.1)
+				outline 0
+				padding 5px
+				font-size 0.8rem
+				&:focus
+					box-shadow lighten($purple, 70%) 0px 0px 5px
+
+		> .name
+			color #d0c0dd
+			font-size 0.8rem
+			min-width 233px
+			line-height 50px
+			padding 0 20px 0 0
+			text-align right
+			&:hover
+				text-decoration underline
+			&:after
+				// background url('../img/ln.png') no-repeat right 0
+				/* glow, shadow */
+				box-shadow 1px 0px 0px 0px rgba(255, 255, 255, 0.15),
+					2px 0px 0px 0px rgba(0, 0, 0, 0.1)
+				content ' '
+				display inline-block
+				height 28px
+				overflow hidden
+				position absolute
+				top 11px
+				width 19px
+
+
+		> .signout
+			background url('../img/icn_power.png') no-repeat center
+			color transparent
+			font-size 1rem
+			height 46px
+			margin 2px 0
+			width 40px
+			&:hover
+				background-color rgba(98, 34, 143, 0.5)

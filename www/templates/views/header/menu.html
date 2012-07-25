@@ -1,20 +1,20 @@
 <section class="header-menu">
 	<div class="wrapper">
-		<h1><a href="/dashboard" title="Go to the FreyaLove home">FreyaLove</a></h1>
-
-		<form method="get" action="/search">
-			<input type="text" maxlength="100" placeholder="Search friends on FreyaLove..."/>
-		</form>
-
-		<menu>
-			<li><a href="#" class="notifications" title="View notifications">Notifications</a></li>
-			<li><a href="#" class="conversations" title="View conversations">Conversations</a></li>
-			<li><a href="#" class="sexytimes" title="View dates">Dates</a></li>
-		</menu>
-
-		<a class="name" href="/profile/{{id}}" title="Go to my profile">{{name}}</a>
-
-		<a class="signout" href="#" title="Sign out from FreyaLove"></a>
+		<h1>
+			<a href="/dashboard" title="Home">FreyaLove</a>
+		</h1>
+		<nav>
+			<menu>
+				<li><a href="#" class="notifications" title="Notifications">Notifications</a></li>
+				<li><a href="#" class="conversations" title="Conversations">Conversations</a></li>
+				<li><a href="#" class="sexytimes" title="Dates">Dates</a></li>
+			</menu>
+			<form method="get" action="/search">
+				<input type="text" maxlength="100" placeholder="Search friends on FreyaLove..." />
+			</form>
+			<a class="name" href="/profile/{{id}}" title="View my profile">{{name}}</a>
+			<a class="signout" href="#" title="Sign out from FreyaLove">Sign out</a>
+		</nav>
 	</div>
 </section>
 
