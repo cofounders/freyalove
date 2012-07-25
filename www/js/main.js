@@ -39,7 +39,6 @@ function ($,  app, Router, Facebook, Session) {
 	});
 
 	$(document).ajaxError(function (event, request, settings, exception) {
-		console.log('ajaxError', arguments);
 		if (+request.status === 403 && settings.url.indexOf(app.api) !== -1) {
 			app.session.signOut();
 		}
