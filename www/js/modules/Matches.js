@@ -10,7 +10,7 @@ function($, _, Mustache, Backbone, app) {
 	Collections.Singles = Backbone.Collection.extend({
 		model: Model,
 		url: function () {
-			return app.api + '/users/' + app.session.id + '/matches/recommendations';
+			return app.api + 'users/' + app.session.id + '/matches/recommendations';
 		},
 		parse: function (response) {
 			return response.matches;
@@ -20,7 +20,7 @@ function($, _, Mustache, Backbone, app) {
 	Collections.Couples = Backbone.Collection.extend({
 		model: Model,
 		url: function () {
-			return app.api + '/matchmaker/recommendations';
+			return app.api + 'matchmaker/recommendations';
 		},
 		parse: function (response) {
 			return response.matches;
