@@ -6,10 +6,9 @@ define([], function () {
 	
 	var user1 = {
 		"id": "1",
-		"firstName": "Bette",
-		"lastName": "Porter",
+		"name": "Bette Porter",
 		"dateOfBirth": "1975-04-12",
-		"profileImage": "/dummy/user1.png",
+		"photo": "/dummy/user1.png",
 		"about": "Bette Porter is a fictional character on the Showtime television network series The L Word, played by Jennifer Beals. While she is portrayed as the one true love of Tina Kennard, she is shown to be rather promiscuous and has had countless affairs with other women, whether or not she is with Tina. She was ranked No. 10 in AfterEllen.com's Top 50 Favorite Female TV Characters.",
 		"points": "975",
 		"location": "Los Angeles, US",
@@ -29,10 +28,9 @@ define([], function () {
 		"likeQuotes": "Carpe Diem"};
 	var user2 = {
 		"id": "2",
-		"firstName": "Tina",
-		"lastName": "Kennard",
+		"name": "Tina Kennard",
 		"dateOfBirth": "1972-12-08",
-		"profileImage": "/dummy/user2.png",
+		"photo": "/dummy/user2.png",
 		"about": "Tina Kennard is a fictional character on the Showtime television network series The L Word, shown nationally in the United States. She is played by American actress Laurel Holloman. Tina lives in Los Angeles, California, and mostly hangs out in West Hollywood. She is the mother of Angelica Porter-Kennard and the on-off lover of Bette Porter.",
 		"points": "1205",
 		"location": "London, UK",
@@ -52,10 +50,9 @@ define([], function () {
 		"likeQuotes": "Carpe Diem"};
 	var user3 = {
 		"id": "3",
-		"firstName": "Alice",
-		"lastName": "Pieszecki",
+		"name": "Alice Pieszecki",
 		"dateOfBirth": "11/25/1976",
-		"profileImage": "/dummy/user3.png",
+		"photo": "/dummy/user3.png",
 		"about": "Alice Pieszecki is a fictional character on the Showtime television network series The L Word, shown nationally in the United States. She is played by American actress Leisha Hailey. Alice lives in Los Angeles, California, and mostly hangs out in West Hollywood. During the first seasons, she is often seen with her best friends, Shane McCutcheon (Katherine Moennig) and Dana Fairbanks (Erin Daniels).",
 		"points": "201",
 		"location": "Cape Town, ZA",
@@ -75,10 +72,9 @@ define([], function () {
 		"likeQuotes": ""};
 	var user4 = {
 		"id": "4",
-		"firstName": "Anabelle",
-		"lastName": "Hernandez-Herrara",
+		"name": "Anabelle Hernandez-Herrara",
 		"dateOfBirth": "2/29/1984",
-		"profileImage": "/dummy/user4.png",
+		"photo": "/dummy/user4.png",
 		"about": "About Anabelle... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porta sem malesuada magna mollis euismod. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.",
 		"points": "612",
 		"location": "Cartagena, CO",
@@ -101,10 +97,9 @@ define([], function () {
 	
 	var user10 = {
 		"id": "10",
-		"firstName": "Kenny",
-		"lastName": "Shen",
+		"name": "Kenny Shen",
 		"dateOfBirth": "9/11/1982",
-		"profileImage": "/dummy/user10.png",
+		"photo": "/dummy/user10.png",
 		"about": "Kenny is a Python Wrangler... Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.",
 		"points": "502",
 		"location": "Singapore, SG",
@@ -124,10 +119,9 @@ define([], function () {
 		"likeQuotes": "Do or do not, there is no try.\n\nLike is a circle to cycle around on."}
 	var user11 = {
 		"id": "11",
-		"firstName": "Sayanee",
-		"lastName": "Basu",
+		"name": "Sayanee Basu",
 		"dateOfBirth": "1985-03-22",
-		"profileImage": "/dummy/user11.png",
+		"photo": "/dummy/user11.png",
 		"about": "Sayanee is the Style Slinger... Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.",
 		"points": "234",
 		"location": "Bali, ID",
@@ -147,10 +141,9 @@ define([], function () {
 		"likeQuotes": "Carpe Diem.\n\nThe early bird catches the early worm."};
 	var user12 = {
 		"id": "12",
-		"firstName": "Sebastiaan",
-		"lastName": "Deckers",
+		"name": "Sebastiaan Deckers",
 		"dateOfBirth": "1/19/1983",
-		"profileImage": "/dummy/user12.png",
+		"photo": "/dummy/user12.png",
 		"about": "Seb is the Javascript Jockey... Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.",
 		"points": "371",
 		"location": "Melbourne, AU",
@@ -170,10 +163,9 @@ define([], function () {
 		"likeQuotes": "Ceterum censeo Carthaginem deletam esse."};
 	var user13 = {
 		"id": "13",
-		"firstName": "Veronica",
-		"lastName": "Ng",
+		"name": "Veronica Ng",
 		"dateOfBirth": "8/1/1983",
-		"profileImage": "/dummy/user13.png",
+		"photo": "/dummy/user13.png",
 		"about": "Veronica is the UI Undertaker... Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.",
 		"points": "290",
 		"location": "Kota Kinabalu, MY",
@@ -193,10 +185,9 @@ define([], function () {
 		"likeQuotes": "All for one, one for all."};
 	var user14 = {
 		"id": "14",
-		"firstName": "Wolfgang",
-		"lastName": "Maehr",
+		"name": "Wolfgang Maehr",
 		"dateOfBirth": "7/25/1982",
-		"profileImage": "/dummy/user14.png",
+		"photo": "/dummy/user14.png",
 		"about": "Wolf is the IXD Imp... Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.",
 		"points": "103",
 		"location": "Istambul, TR",
@@ -218,27 +209,23 @@ define([], function () {
 	// OTHER USERS - Profile Summary
 	var user20 = {
 		"id": "20",
-		"firstName": "Amy",
-		"lastName": "Hunting",
-		"profileImage": "/dummy/user20.png"};
+		"name": "Amy Hunting",
+		"photo": "/dummy/user20.png"};
 	var user21 = {
 		"id": "21",
-		"firstName": "Adrianna",
-		"lastName": "Svitak",
-		"profileImage": "/dummy/user21.png"};
+		"name": "Adrianna Svitak",
+		"photo": "/dummy/user21.png"};
 	var user22 = {
 		"id": "22",
-		"firstName": "Greta",
-		"lastName": "Howell",
-		"profileImage": "/dummy/user22.png"};		
+		"name": "Greta Howell",
+		"photo": "/dummy/user22.png"};		
 		
 	// MYSELF
 		var user0 = {
 		"id": "0",
-		"firstName": "Jenny",
-		"lastName": "Schecter",
+		"name": "Jenny Schecter",
 		"dateOfBirth": "1979-05-26",
-		"profileImage": "/dummy/user0.png",
+		"photo": "/dummy/user0.png",
 		"about": "Jennifer Schecter is a fictional character origin the American Showtime television drama series The L Word, played by Mia Kirshner. Jenny debuted on-screen during the pilot episode and remained until the series' final episode. Jenny became well documented in the media for her outlandish plots. Jenny was created by series creator Ilene Chaiken, based on herself as a younger woman living in the lesbian community.",
 		"points": "702",
 		"location": "Beijing, CN",
@@ -256,7 +243,7 @@ define([], function () {
 		"likeSports": "Chess, Golf, Cycling, Minigolf, Pool, Darts, Rugby, Underwater Hockey",
 		"likeTv": "",
 		"likeQuotes": "Carpe Diem",
-		"friends": [user1, user2, user3, user4]};
+		"friends": [user1, user2, user3, user4, user10, user11, user12, user12]};
 		
 	var allUsers = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user14, user20, user21, user22];
 	var allOthers = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user14, user20, user21, user22];
@@ -387,6 +374,7 @@ define([], function () {
 
 	var allSexytimes = [sexytime0, sexytime1, sexytime2, sexytime3, sexytime4];
 
+	
 
 /*
 

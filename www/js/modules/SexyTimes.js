@@ -1,5 +1,5 @@
-define(['jQuery', 'Underscore', 'Backbone', 'app'],
-function($, _, Backbone, app) {
+define(['jQuery', 'Underscore', 'Backbone', 'app', 'modules/Dummy'],
+function($, _, Backbone, app, Dummy) {
 
 	var Collections = {},
 		Views = {};
@@ -14,6 +14,9 @@ function($, _, Backbone, app) {
 		},
 		parse: function (response) {
 			return response.sexytimes;
+		},
+		fetch: function () {
+			this.reset(Dummy.getSexyTimes());
 		}
 	});
 
@@ -28,18 +31,10 @@ function($, _, Backbone, app) {
 			this.collection.off(null, null, this);
 		},
 		serialize: function () {
-			return _.extend({
-				hasDates: (this.collection.length > 0)
-			}, this.collection.toJSON());
-		},
-		// render: function (manage) {
-		// 	this.collection.each(function (date) {
-		// 		this.insertView('ul.bblm-user-preview-sexytime', new User.Views.SexyTime({
-		// 			model: date
-		// 		}));
-		// 	}, this);
-		// 	return manage(this).render();
-		// }
+			return {
+				sexyTimes: this.collection.toJSON()
+			};
+		}
 	});
 
 	return {
