@@ -1,0 +1,30 @@
+.matchmakers-top
+  sidebar-spacings()
+  header
+    h3
+      sidebar-spacing-bottom()
+    &:after
+      sidebar-heading-underline(20px)
+  article
+    ol
+      list-ordered()
+      li
+        list-item-ordered()
+        &:last-child
+          margin 0 0 10px 0
+        img 
+          profile-image()
+          margin -10px 0 0 10px
+        &:first-child img 
+          margin -10px 0 0 15px
+        
+        .matchmaker-points
+          content-beside-list(145px, 5px, 10px)
+          p 
+            sidebar-content()
+            a 
+              sidebar-hyperlinks()
+    p 
+      sidebar-content()
+      a 
+        sidebar-hyperlinks()
