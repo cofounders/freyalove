@@ -4,21 +4,21 @@
   </header>
   <article>
     <ul>
-      {{#dates}}
+      {{#sexyTimes}}
         <li>
           <a href="/profile/{{id}}" title="Profile of {{name}}">
-            <img src="{{from.profileImage}}" alt="{{from.firstName}} {{from.lastName}}" />
+            <img src="{{#from}}{{photo}}{{/from}}" alt="{{#from}}{{name}}{{/from}}" />
           </a>
-          <p class="text">Meet <a href="/profile/{{from.id}}" title="Profile of {{name}}">{{name}}</a> {{when}} at {{where}}.</p>
+          <p>You're meeting <a href="/profile/{{#from}}{{id}}{{/from}}" title="Profile of {{#from}}{{name}}{{/from}}">{{#from}}{{name}}{{/from}}</a> <strong>{{when}}</strong> at <strong>{{where}}</strong>.</p>
         </li>
-      {{/dates}}
-      {{^dates}}
+      {{/sexyTimes}}
+      {{^sexyTimes}}
         <li class="empty">
           <p>
-            You have no dates for now. Why not <a href="javascript:alert('opens the date invitation popup');" title="Invite someone to a date">create one</a>?
+            You have no dates for now. Why not <a href="#" title="Invite someone to a date">create one</a>?
           </p>
         </li>
-      {{/dates}}
+      {{/sexyTimes}}
     </ul>
   </article>
 </section>

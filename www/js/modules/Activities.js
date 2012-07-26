@@ -1,5 +1,5 @@
-define(['jQuery', 'Underscore', 'Backbone', 'app'],
-function($, _, Backbone, app) {
+define(['jQuery', 'Underscore', 'Backbone', 'app', 'modules/Dummy'],
+function($, _, Backbone, app, Dummy) {
 	var Collections = {},
 		Views = {};
 
@@ -13,6 +13,9 @@ function($, _, Backbone, app) {
 		},
 		parse: function (response) {
 			return response.activities;
+		},
+		fetch: function () {
+			this.reset(Dummy.getRecentActivities());
 		}
 	});
 

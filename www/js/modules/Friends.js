@@ -1,5 +1,5 @@
-define(['jQuery', 'Underscore', 'Backbone', 'app'],
-function($, _, Backbone, app) {
+define(['jQuery', 'Underscore', 'Backbone', 'app', 'modules/Dummy'],
+function($, _, Backbone, app, Dummy) {
 
 	var Collections = {},
 		Views = {};
@@ -18,6 +18,9 @@ function($, _, Backbone, app) {
 		},
 		parse: function (response) {
 			return response.friends;
+		},
+		fetch: function () {
+			this.reset(Dummy.getMutualFriends());
 		}
 	});
 
@@ -28,6 +31,9 @@ function($, _, Backbone, app) {
 		},
 		parse: function (response) {
 			return response.friends;
+		},
+		fetch: function () {
+			this.reset(Dummy.getFriends());
 		}
 	});
 
@@ -42,7 +48,7 @@ function($, _, Backbone, app) {
 			this.collection.off(null, null, this);
 		},
 		serialize: function () {
-			return {winks: this.collection.toJSON()};
+			return {friends: this.collection.toJSON()};
 		}
 	});
 
@@ -57,7 +63,7 @@ function($, _, Backbone, app) {
 			this.collection.off(null, null, this);
 		},
 		serialize: function () {
-			return {winks: this.collection.toJSON()};
+			return {friends: this.collection.toJSON()};
 		}
 	});
 
