@@ -1,0 +1,21 @@
+<section class="popup conversations-menu">
+  <header>
+    <h3>Conversations</h3>
+  </header>
+  <article>
+    <ul>
+      {{#conversations}}
+        <li>
+          Conversation
+        </li>
+      {{/conversations}}
+      {{^conversations}}
+        <li class="empty">
+          <p>
+            No conversations
+          </p>
+        </li>
+      {{/conversations}}
+    </ul>
+  </article>
+</section>

@@ -1,0 +1,21 @@
+<section class="popup notifications-menu">
+  <header>
+    <h3>Notifications</h3>
+  </header>
+  <article>
+    <ul>
+      {{#notifications}}
+        <li>
+          Notification
+        </li>
+      {{/notifications}}
+      {{^notifications}}
+        <li class="empty">
+          <p>
+            No notifications
+          </p>
+        </li>
+      {{/notifications}}
+    </ul>
+  </article>
+</section>

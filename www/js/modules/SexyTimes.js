@@ -31,15 +31,24 @@ function($, _, Backbone, app) {
 			return _.extend({
 				hasDates: (this.collection.length > 0)
 			}, this.collection.toJSON());
+		}
+	});
+
+	Views.Menu = Backbone.View.extend({
+		template: 'sexytimes/menu',
+		initialize: function () {
+			this.collection.on('reset', function () {
+				this.render();
+			}, this);
 		},
-		// render: function (manage) {
-		// 	this.collection.each(function (date) {
-		// 		this.insertView('ul.bblm-user-preview-sexytime', new User.Views.SexyTime({
-		// 			model: date
-		// 		}));
-		// 	}, this);
-		// 	return manage(this).render();
-		// }
+		cleanup: function () {
+			this.collection.off(null, null, this);
+		},
+		serialize: function () {
+			return _.extend({
+				hasDates: (this.collection.length > 0)
+			}, this.collection.toJSON());
+		}
 	});
 
 	return {

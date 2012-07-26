@@ -9,15 +9,15 @@ function($, _, Backbone, app) {
 	Collections.Recent = Backbone.Collection.extend({
 		model: Model,
 		url: function () {
-			return app.api + 'activities/';
+			return app.api + 'conversations/unread/';
 		},
 		parse: function (response) {
-			return response.activities;
+			return response.conversations;
 		}
 	});
 
-	Views.Recent = Backbone.View.extend({
-		template: 'activities/recent',
+	Views.Menu = Backbone.View.extend({
+		template: 'conversations/menu',
 		initialize: function () {
 			this.collection.on('reset', function () {
 				this.render();
@@ -27,7 +27,7 @@ function($, _, Backbone, app) {
 			this.collection.off(null, null, this);
 		},
 		serialize: function () {
-			return {activities: this.collection.toJSON()};
+			return {conversations: this.collection.toJSON()};
 		}
 	});
 

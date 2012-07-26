@@ -1,15 +1,31 @@
-define(['jQuery', 'Underscore', 'Backbone', 'app'],
-function($, _, Backbone, app) {
-
+define(['jQuery', 'Underscore', 'Backbone', 'app',
+	'modules/Conversations',
+	'modules/Notifications',
+	'modules/SexyTimes',
+],
+function($, _, Backbone, app,
+	Conversations,
+	Notifications,
+	SexyTimes
+) {
 	var Views = {};
 
-	var Model = Backbone.Model.extend({
-		initialize: function(models, options) {
-		}
-	});
+	var activeMenuView = null;
 
-	var Collection = Backbone.Collection.extend({
-	});
+	var closeMenu = function () {
+		if (activeMenuView) {
+			// $(activeMenuView.el).closest('.opened').removeClass('opened');
+			$(this.el).find('section.opened').removeClass('opened');
+
+			// activeMenuView.removeView();
+			// activeMenuView.remove();
+
+			// this.remove();
+			this.removeView();
+
+			activeMenuView = null;
+		}
+	};
 
 	Views.Menu = Backbone.View.extend({
 		template: 'header/menu',
@@ -19,9 +35,15 @@ function($, _, Backbone, app) {
 					.text(app.session.get('name'))
 					.attr('href', '/profile/' + app.session.get('id'));
 			}, this);
+			$(document).on('click', _.bind(function () {
+				if (activeMenuView) {
+					closeMenu.call(this);
+				}
+			}, this));
 		},
 		cleanup: function () {
 			app.session.off(null, null, this);
+			// $(document).off('click');
 		},
 		serialize: function () {
 			return app.session.toJSON();
@@ -35,10 +57,40 @@ function($, _, Backbone, app) {
 				event.preventDefault();
 				app.session.signOut();
 			},
-			'click menu a': function (event) {
+			'click nav > menu > li > a': function (event) {
 				event.stopPropagation();
 				event.preventDefault();
+				var menus = {
+						notifications: {
+							collection: Notifications.Collections.Recent,
+							view: Notifications.Views.Menu
+						},
+						conversations: {
+							collection: Conversations.Collections.Recent,
+							view: Conversations.Views.Menu
+						},
+						sexytimes: {
+							collection: SexyTimes.Collections.Upcoming,
+							view: SexyTimes.Views.Menu
+						}
+					},
+					el = $(event.target).next('section'),
+					section = $(event.target).attr('class'),
+					data = new menus[section].collection(),
+					selector = '.' + section + ' + section';
 
+				if (activeMenuView) {
+					closeMenu.call(this);
+				}
+
+				activeMenuView = new menus[section].view({
+					collection: data
+				});
+
+				this.setView(selector, activeMenuView);
+				activeMenuView.render();
+				el.addClass('opened');
+				data.fetch();
 			}
 		}
 	});
@@ -55,8 +107,6 @@ function($, _, Backbone, app) {
 	});
 
 	return {
-		Model: Model,
-		Collection: Collection,
 		Views: Views
 	};
 });
