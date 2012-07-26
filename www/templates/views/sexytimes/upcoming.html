@@ -9,7 +9,7 @@
           <a href="/profile/{{id}}" title="Profile of {{name}}">
             <img src="{{#from}}{{photo}}{{/from}}" alt="{{#from}}{{name}}{{/from}}" />
           </a>
-          <p class="text">You're meeting <a href="/profile/{{#from}}{{id}}{{/from}}" title="Profile of {{#from}}{{name}}{{/from}}">{{#from}}{{name}}{{/from}}</a> {{when}} at {{where}}.</p>
+          <p>You're meeting <a href="/profile/{{#from}}{{id}}{{/from}}" title="Profile of {{#from}}{{name}}{{/from}}">{{#from}}{{name}}{{/from}}</a> <strong>{{when}}</strong> at <strong>{{where}}</strong>.</p>
         </li>
       {{/sexyTimes}}
       {{^sexyTimes}}
