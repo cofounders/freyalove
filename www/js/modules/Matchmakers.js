@@ -1,5 +1,5 @@
-define(['jQuery', 'Underscore', 'Backbone', 'app'],
-function($, _, Backbone, app) {
+define(['jQuery', 'Underscore', 'Backbone', 'app', 'modules/Dummy'],
+function($, _, Backbone, app, Dummy) {
 
 	var Collections = {},
 		Views = {};
@@ -14,6 +14,9 @@ function($, _, Backbone, app) {
 		},
 		parse: function (response) {
 			return response.matchmakers;
+		},
+		fetch: function () {
+			this.reset(Dummy.getTopMatchmakers());
 		}
 	});
 
@@ -29,20 +32,6 @@ function($, _, Backbone, app) {
 		},
 		serialize: function () {
 			return {matchmakers: this.collection.toJSON()};
-		},
-		events: {
-			'click .invite-more': function (event) {
-				event.stopPropagation();
-				event.preventDefault();
-				Facebook.ui({
-					method: 'apprequests',
-					message: 'Matchmaking for lesbians',
-					title: 'Join FreyaLove',
-					filters: ['app_non_users']
-				},
-				function (response) {
-				});
-			}
 		}
 	});
 

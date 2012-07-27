@@ -68,7 +68,7 @@ function($, _, Backbone, app, Facebook, Dummy) {
 		serialize: function () {
 			return {
 				count: this.collection.length,
-				friends: []//this.collection.toJSON()
+				friends: this.collection.toJSON()
 			};
 		},
 		events: {

@@ -1,39 +1,21 @@
 <section class="panel matchmakers-top">
-	
 	<header>
 		<h3>Top Matchmakers</h3>
 	</header>
-
 	<article>
 		<ol>
+			{{#matchmakers}}
 			<li>
-				<img src="/dummy/user1.png" alt="Picture of Bette Porter" />
+				<img src="{{photo}}" alt="Picture of {{name}}" />
 				<div class="matchmaker-points">
-					<p><a href="/profile/{{id}}" title="Profile of Alice Pieszecki">Alice Pieszecki</a></p>
-					<p>905 points</p>
+					<p><a href="/profile/{{id}}" title="Profile of {{name}}">{{name}}</a></p>
+					<p>{{points}} points</p>
 				</div>
 			</li>
-			<li>
-				<img src="/dummy/user2.png" alt="Picture of Bette Porter" />
-				<div class="matchmaker-points">
-					<p><a href="/profile/{{id}}" title="Profile of Alice Pieszecki">Alice Pieszecki</a></p>
-					<p>105 points</p>
-				</div>
-			</li>
-			<li>
-				<img src="/dummy/user3.png" alt="Picture of Bette Porter" />
-				<div class="matchmaker-points">
-					<p><a href="/profile/{{id}}" title="Profile of Alice Pieszecki">Alice Pieszecki</a></p>
-					<p>832 points</p>
-				</div>
-			</li>
-			<li>
-				<img src="/dummy/user1.png" alt="Picture of Bette Porter" />
-				<div class="matchmaker-points">
-					<p><a href="/profile/{{id}}" title="Profile of Alice Pieszecki">Alice Pieszecki</a></p>
-					<p>99 points</p>
-				</div>
-			</li>
+			{{/matchmakers}}
+			{{^matchmakers}}
+			<p>No matchmakers ranked yet</p>
+			{{/matchmakers}}
 		</ol>
 	</article>
 </section>
