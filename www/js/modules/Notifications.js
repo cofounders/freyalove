@@ -1,5 +1,5 @@
-define(['jQuery', 'Underscore', 'Backbone', 'app'],
-function($, _, Backbone, app) {
+define(['jQuery', 'Underscore', 'Backbone', 'app', 'modules/Dummy'],
+function($, _, Backbone, app, Dummy) {
 	var Collections = {},
 		Views = {};
 
