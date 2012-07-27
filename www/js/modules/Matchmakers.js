@@ -29,6 +29,20 @@ function($, _, Backbone, app) {
 		},
 		serialize: function () {
 			return {matchmakers: this.collection.toJSON()};
+		},
+		events: {
+			'click .invite-more': function (event) {
+				event.stopPropagation();
+				event.preventDefault();
+				Facebook.ui({
+					method: 'apprequests',
+					message: 'Matchmaking for lesbians',
+					title: 'Join FreyaLove',
+					filters: ['app_non_users']
+				},
+				function (response) {
+				});
+			}
 		}
 	});
 

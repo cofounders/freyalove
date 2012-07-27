@@ -12,6 +12,9 @@
 			</li>
 			{{/friends}}
 		</ul>
-		<a class="invite-more" href="#">Invite more Facebook friends</a>
+		{{^friends}}
+		<p>New here? You should make some friends.</p>
+		{{/friends}}
+		<a class="invite-more" href="#">Add more friends</a>
 	</article>
 </section>
