@@ -1,6 +1,6 @@
 define(
 ['jQuery', 'app', 'router', 'Facebook', 'modules/Session/Facebook'],
-function ($,  app, Router, Facebook, Session) {
+function ($, app, Router, Facebook, Session) {
 
 	var targetUrl = location.href.substr(location.href.indexOf('/', 8));
 
@@ -20,11 +20,11 @@ function ($,  app, Router, Facebook, Session) {
 		});
 
 	Facebook.init({
-		appId      : '415866361791508', // App ID
-		channelUrl : 'http://freyalove.cofounders.sg/channel.html', // Channel File
-		status     : false, // check login status
-		cookie     : true, // enable cookies to allow the server to access the session
-		xfbml      : false  // parse XFBML
+		appId: '415866361791508', // App ID
+		channelUrl: 'http://freyalove.cofounders.sg/channel.html', // Channel File
+		status: false, // check login status
+		cookie: true, // enable cookies to allow the server to access the session
+		xfbml: false // parse XFBML
 	});
 
 	if (app.session.id) {

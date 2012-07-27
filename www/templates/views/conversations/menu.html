@@ -1,23 +1,22 @@
 <section class="popup conversations-menu">
-  <header>
-    <h3>Conversations</h3>
-  </header>
-  <article>
-    <ul>
-      {{#conversations}}
-        <li>
-          <a href="/profile/{{id}}" title="Link to the profile page of Bette Porter">Bette Porter</a>:
-           Hey Freya, how…
-      <span class="timestamp">2 days ago</span>
-        </li>
-      {{/conversations}}
-      {{^conversations}}
-        <li class="empty">
-          <p>
-            No conversations
-          </p>
-        </li>
-      {{/conversations}}
-    </ul>
-  </article>
+	<header>
+		<h3>Conversations</h3>
+	</header>
+	<article>
+		<ul>
+			{{#conversations}}
+				<li>
+					<a href="/profile/{{id}}" title="Link to the profile page of Bette Porter">Bette Porter</a>: Hey Freya, how…
+					<span class="timestamp">2 days ago</span>
+				</li>
+			{{/conversations}}
+			{{^conversations}}
+				<li class="empty">
+					<p>
+						No conversations
+					</p>
+				</li>
+			{{/conversations}}
+		</ul>
+	</article>
 </section>

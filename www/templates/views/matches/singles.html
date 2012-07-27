@@ -1,37 +1,32 @@
 <section class="panel matches-singles">
-  <header>
-    <h2>Hmmm... These Girls Look Good For You...</h2>
-  </header>
-
-  <article>
-
-    <ul id="matches-singles-list">
-      {{#singles}}
-      <div class="summary-info">
-        <img src="{{photo}}" alt="{{name}}" />    
-      </div>
-      <div class="expanded-info">
-        <img src="{{photo}}" alt="{{name}}" />
-        <div id="expanded-info-right">
-          <a href="/profile/{{id}}" id="name" title="Profile of {{name}}">{{name}}</a>
-          <p class="al">aged {{age}}, in {{location}}</p>
-          <p class="likes">
-            <strong>Likes:</strong>{{likes}}
-          </p>
-        </div>
-        <p class="about">
-          <strong>You wanna know more about me?</strong><br>
-          {{about}}...  <a href="/profile/{{id}}">see more</a>
-        </p>
-        
-        <a href="/profile/{{id}}" class="button cta" title="Read more about Jenny Schecter">Check her out!</a>
-      </div>
-      {{/singles}}
-
-    </ul>
-
-    <a href="#" class="button flat previous"/>Previous</a>
-    <a href="#" class="button flat next"/>Next</a>
-
-  </article>
+	<header>
+		<h2>Hmmm... These Girls Look Good For You...</h2>
+	</header>
+	<article>
+		<ul id="matches-singles-list">
+			{{#singles}}
+			<div class="summary-info">
+				<img src="{{photo}}" alt="{{name}}" />
+			</div>
+			<div class="expanded-info">
+				<img src="{{photo}}" alt="{{name}}" />
+				<div id="expanded-info-right">
+					<a href="/profile/{{id}}" id="name" title="Profile of {{name}}">{{name}}</a>
+					<p class="al">aged {{age}}, in {{location}}</p>
+					<p class="likes">
+						<strong>Likes:</strong>{{likes}}
+					</p>
+				</div>
+				<p class="about">
+					<strong>You wanna know more about me?</strong><br>
+					{{about}}... <a href="/profile/{{id}}">see more</a>
+				</p>
+				
+				<a href="/profile/{{id}}" class="button cta" title="Read more about Jenny Schecter">Check her out!</a>
+			</div>
+			{{/singles}}
+		</ul>
+		<a href="#" class="button flat previous"/>Previous</a>
+		<a href="#" class="button flat next"/>Next</a>
+	</article>
 </section>

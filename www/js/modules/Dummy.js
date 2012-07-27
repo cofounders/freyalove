@@ -360,7 +360,7 @@ define([], function () {
 		"type": "sexytime",
 		"when": "SUN, 21:00",
 		"where": "The Great Wall of China",
-		"notes": [{"from": user0, "body": "Always wanted  to see it! <3"}],
+		"notes": [{"from": user0, "body": "Always wanted to see it! <3"}],
 		"rsvp": null};
 	var sexytime4 = {
 		"id": "4",

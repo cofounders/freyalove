@@ -1,24 +1,24 @@
 <section class="panel sexytimes-upcoming">
-  <header>
-    <h3>Upcoming Dates</h3>
-  </header>
-  <article>
-    <ul>
-      {{#sexyTimes}}
-        <li>
-          <a href="/profile/{{id}}" title="Profile of {{name}}">
-            <img src="{{#from}}{{photo}}{{/from}}" alt="{{#from}}{{name}}{{/from}}" />
-          </a>
-          <p>You're meeting <a href="/profile/{{#from}}{{id}}{{/from}}" title="Profile of {{#from}}{{name}}{{/from}}">{{#from}}{{name}}{{/from}}</a> <strong>{{when}}</strong> at <strong>{{where}}</strong>.</p>
-        </li>
-      {{/sexyTimes}}
-      {{^sexyTimes}}
-        <li class="empty">
-          <p>
-            You have no dates for now. Why not <a href="#" title="Invite someone to a date">create one</a>?
-          </p>
-        </li>
-      {{/sexyTimes}}
-    </ul>
-  </article>
+	<header>
+		<h3>Upcoming Dates</h3>
+	</header>
+	<article>
+		<ul>
+			{{#sexyTimes}}
+				<li>
+					<a href="/profile/{{id}}" title="Profile of {{name}}">
+						<img src="{{#from}}{{photo}}{{/from}}" alt="{{#from}}{{name}}{{/from}}" />
+					</a>
+					<p>You're meeting <a href="/profile/{{#from}}{{id}}{{/from}}" title="Profile of {{#from}}{{name}}{{/from}}">{{#from}}{{name}}{{/from}}</a> <strong>{{when}}</strong> at <strong>{{where}}</strong>.</p>
+				</li>
+			{{/sexyTimes}}
+			{{^sexyTimes}}
+				<li class="empty">
+					<p>
+						You have no dates for now. Why not <a href="#" title="Invite someone to a date">create one</a>?
+					</p>
+				</li>
+			{{/sexyTimes}}
+		</ul>
+	</article>
 </section>
