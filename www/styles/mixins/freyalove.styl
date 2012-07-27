@@ -1,86 +1,86 @@
 //sidebar
 sidebar-spacings()
-  display block
-  margin 0 0 20px 0
+	display block
+	margin 0 0 20px 0
 
 sidebar-heading-underline(margin-bottom = 10px)
-  content " "
-  display block
-  width 100%
-  outline 0
-  height 1px
-  background-color #e1e1e1
-  border none
-  box-shadow white 0px 1px 0px 0px
-  margin 0 0 margin-bottom 0
+	content " "
+	display block
+	width 100%
+	outline 0
+	height 1px
+	background-color #e1e1e1
+	border none
+	box-shadow white 0px 1px 0px 0px
+	margin 0 0 margin-bottom 0
 
 sidebar-spacing-bottom(length = 10px)
-  margin 0 0 length 0
+	margin 0 0 length 0
 
 sidebar-hyperlinks()
-  font-weight 700
-  color #9f3647
-  &:link, &:visited
-    text-decoration none
-  &:hover, &:active
-    text-decoration underline
+	font-weight 700
+	color #9f3647
+	&:link, &:visited
+		text-decoration none
+	&:hover, &:active
+		text-decoration underline
 
 sidebar-content()
-  font-size 0.875rem
-  margin 0
-  color #666666
+	font-size 0.875rem
+	margin 0
+	color #666666
 
 profile-image()
-  width 60px 
-  height 60px
-  border 3px solid white
-  box-shadow 1px 1px 4px #b3b3b3
+	width 60px 
+	height 60px
+	border 3px solid white
+	box-shadow 1px 1px 4px #b3b3b3
 
 tray()
-  display block
-  border-radius 4px
-  box-shadow 0 0 3px white inset
-  background-color rgba(226, 227, 228, 0.35)
-  border 1px #d2d3d3 solid
-  padding 5px
+	display block
+	border-radius 4px
+	box-shadow 0 0 3px white inset
+	background-color rgba(226, 227, 228, 0.35)
+	border 1px #d2d3d3 solid
+	padding 5px
 
 photo-spacing(spacing, pics-per-line)
-  margin 0 spacing spacing 0
-  &:nth-child(pics-per-line)
-    margin 0 0 spacing 0
+	margin 0 spacing spacing 0
+	&:nth-child(pics-per-line)
+		margin 0 0 spacing 0
 
 add-more-link()
-  background url('../img/add.png') no-repeat left
-  display block
-  height 62px
-  width 100%
-  font-size 0.875rem
-  padding: 21px 0 0 75px
+	background url('../img/add.png') no-repeat left
+	display block
+	height 62px
+	width 100%
+	font-size 0.875rem
+	padding: 21px 0 0 75px
 
 single-line-list-spacing()
-  margin 0 0 10px 0
+	margin 0 0 10px 0
 
 content-beside-list(width, margintop, marginleft)
-  display inline-block
-  width width
-  vertical-align top
-  margin margintop 0 0 marginleft
+	display inline-block
+	width width
+	vertical-align top
+	margin margintop 0 0 marginleft
 
 content-one-line()
-  margin 0
-  width 100%
+	margin 0
+	width 100%
 
 list-ordered()
-  list-style-position inside
-  counter-reset item
+	list-style-position inside
+	counter-reset item
 
 list-item-ordered()
-  display block
-  font-size 2.25rem
-  margin 0 0 20px 0
-  color rgba(0,0,0,0.3)
-  font-weight 700
-  &:before
-    content counter(item) " "
-    counter-increment item
-    vertical-align top
+	display block
+	font-size 2.25rem
+	margin 0 0 20px 0
+	color rgba(0,0,0,0.3)
+	font-weight 700
+	&:before
+		content counter(item) " "
+		counter-increment item
+		vertical-align top
