@@ -4,8 +4,9 @@ define([
 	'Mustache',
 	'Backbone',
 	'plugins/backbone.layoutmanager',
+	'constants',
 	'modules/Dummy'
-], function ($, _, Mustache, Backbone, LayoutManager, Dummy) {
+], function ($, _, Mustache, Backbone, LayoutManager, constants, Dummy) {
 
 	var app = _.extend({
 		el: $('#app'),
@@ -28,6 +29,7 @@ define([
 			// this.layout.render(); // Call render after setView(s)
 			return this.layout;
 		},
+		constants: constants,
 		dummy: Dummy
 	}, Backbone.Events);
 

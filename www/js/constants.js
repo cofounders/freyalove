@@ -1,0 +1,11 @@
+define([], function () {return {
+	ACTIVITY_TYPE: {
+		FRIEND_JOIN: 1,
+		ARRANGED_SEXYTIME: 2,
+		PERSONAL_SEXYTIME: 3
+	},
+	NOTIFICATION_TYPE: {
+		WINK_RECEIVED: 1,
+		MATCH_INTRODUCTION: 2
+	}
+};});

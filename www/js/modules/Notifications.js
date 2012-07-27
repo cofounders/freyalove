@@ -12,7 +12,19 @@ function($, _, Backbone, app) {
 			return app.api + 'notifications/unread/';
 		},
 		parse: function (response) {
-			return response.notifications;
+			var types = app.constants.NOTIFICATION_TYPE,
+				typeById = _.reduce(types, function (result, value, key) {
+					result[value] = key;
+					return result;
+				}, {});
+			return _.map(response.notifications || [], function (activity) {
+				var label = typeById[activity.type];
+				activity[label] = true;
+				return activity;
+			});
+		},
+		fetch: function () {
+			this.reset(Dummy.getNotifications());
 		}
 	});
 

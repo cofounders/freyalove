@@ -12,7 +12,16 @@ function($, _, Backbone, app, Dummy) {
 			return app.api + 'activities/';
 		},
 		parse: function (response) {
-			return response.activities;
+			var types = app.constants.ACTIVITY_TYPE,
+				typeById = _.reduce(types, function (result, value, key) {
+					result[value] = key;
+					return result;
+				}, {});
+			return _.map(response.activities || [], function (activity) {
+				var label = typeById[activity.type];
+				activity[label] = true;
+				return activity;
+			});
 		},
 		fetch: function () {
 			this.reset(Dummy.getRecentActivities());

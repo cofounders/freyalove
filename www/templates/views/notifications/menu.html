@@ -5,16 +5,22 @@
 	<article>
 		<ul>
 			{{#notifications}}
-				<li>
-					<a href="/profile/{{id}}" title="Link to the profile page of Bette Porter">Bette Porter</a> smiled at you. Smile back.
-				</li>
+			<li>
+				{{#WINK_RECEIVED}}
+				{{#from}}<a href="/profile/{{id}}" title="Profile of {{name}}">{{name}}</a> smiled at you. <a href="#" class="smile_back">Smile back.</a>{{/from}}
+				{{/WINK_RECEIVED}}
+
+				{{#MATCH_INTRODUCTION}}
+				{{#matchmaker}}<a href="/profile/{{id}}" title="Profile of {{name}}">{{name}}</a>{{/matchmaker}}
+				introduced you to
+				{{#to}}<a href="/profile/{{id}}" title="Profile of {{name}}">{{name}}</a>{{/to}}
+				{{/MATCH_INTRODUCTION}}
+			</li>
 			{{/notifications}}
 			{{^notifications}}
-				<li class="empty">
-					<p>
-						No notifications
-					</p>
-				</li>
+			<li class="empty">
+				<p>Nothing going on yet, go make some noise.</p>
+			</li>
 			{{/notifications}}
 		</ul>
 	</article>
