@@ -48,7 +48,10 @@ function($, _, Backbone, app, Facebook, Dummy) {
 			this.collection.off(null, null, this);
 		},
 		serialize: function () {
-			return {friends: this.collection.toJSON()};
+			return {
+				count: this.collection.length,
+				friends: this.collection.toJSON()
+			};
 		}
 	});
 
@@ -63,7 +66,10 @@ function($, _, Backbone, app, Facebook, Dummy) {
 			this.collection.off(null, null, this);
 		},
 		serialize: function () {
-			return {friends: this.collection.toJSON()};
+			return {
+				count: this.collection.length,
+				friends: []//this.collection.toJSON()
+			};
 		},
 		events: {
 			'click .invite-more': function (event) {
