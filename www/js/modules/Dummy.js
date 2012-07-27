@@ -386,9 +386,12 @@ MatchProposal {
 */
 
 
-/* MESSAGES
+/* MESSAGES */
+
+/* Schemas:
+
 Message: {
-	origin: UserSummary,
+	from: UserSummary,
 	to: UserSummary,
 	body: String,
 	status: ConversationStatus
@@ -406,6 +409,56 @@ ConversationSummary: {
 
 ConversationStatus: Number
 */
+
+var ConversationStatus = {
+	UNREAD: 1,
+	READ: 2
+};
+var message1 = {
+		from: user20,
+		to: user21,
+		body: 'Stop talking, brain thinking. Hush.',
+		status: ConversationStatus.UNREAD
+	},
+	message2 = {
+		from: user21,
+		to: user20,
+		body: 'I won\'t stand for it. Not now, not ever, do you understand me?!',
+		status: ConversationStatus.READ
+	},
+	message3 = {
+		from: user22,
+		to: user21,
+		body: 'Well, they call me the Doctor. I don\'t know why.',
+		status: ConversationStatus.UNREAD
+	},
+	message4 = {
+		from: user22,
+		to: user21,
+		body: 'All I\'ve got to do is pass as an ordinary human being. Simple. What could possibly go wrong?',
+		status: ConversationStatus.UNREAD
+	},
+	message5 = {
+		from: user22,
+		to: user21,
+		body: 'Simple.',
+		status: ConversationStatus.UNREAD
+	},
+	message6 = {
+		from: user22,
+		to: user21,
+		body: 'What could possibly go wrong?',
+		status: ConversationStatus.UNREAD
+	};
+
+var conversationSummary1 = {
+		status: ConversationStatus.UNREAD,
+		lastMessage: message6
+	},
+	conversationSummary2 = {
+		status: ConversationStatus.READ,
+		lastMessage: message2
+	};
 
 
 /* QUESTIONNAIRE
@@ -551,8 +604,7 @@ Answer: { #fixed format
 		},
 
 		getMessages: function () {
-			// TODO
-			return [];
+			return [conversationSummary1, conversationSummary2];
 		},
 
 		getUnreadMessages: function () {

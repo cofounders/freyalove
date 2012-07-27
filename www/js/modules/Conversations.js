@@ -1,5 +1,5 @@
-define(['jQuery', 'Underscore', 'Backbone', 'app'],
-function($, _, Backbone, app) {
+define(['jQuery', 'Underscore', 'Backbone', 'app', 'modules/Dummy'],
+function($, _, Backbone, app, Dummy) {
 	var Collections = {},
 		Views = {};
 
@@ -9,10 +9,22 @@ function($, _, Backbone, app) {
 	Collections.Recent = Backbone.Collection.extend({
 		model: Model,
 		url: function () {
-			return app.api + 'conversations/unread/';
+			return app.api + 'conversations/';
 		},
 		parse: function (response) {
-			return response.conversations;
+			var types = app.constants.CONVERSATION_STATUS,
+				typeById = _.reduce(types, function (result, value, key) {
+					result[value] = key;
+					return result;
+				}, {});
+			return _.map(response.conversations || [], function (conversation) {
+				var label = typeById[conversation.status];
+				conversation[label] = true;
+				return conversation;
+			});
+		},
+		fetch: function () {
+			this.reset(Dummy.getMessages());
 		}
 	});
 

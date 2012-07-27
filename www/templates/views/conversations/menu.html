@@ -5,17 +5,18 @@
 	<article>
 		<ul>
 			{{#conversations}}
-				<li>
-					<a href="/profile/{{id}}" title="Link to the profile page of Bette Porter">Bette Porter</a>: Hey Freya, how…
-					<span class="timestamp">2 days ago</span>
-				</li>
+			<li class="{{#UNREAD}}un{{/UNREAD}}read">
+				{{#lastMessage}}
+				{{#from}}<a href="/profile/{{id}}" title="Profile of {{name}}">{{name}}</a> says:{{/from}}
+				<span class="body">{{body}}</span>
+				<span class="when">{{when}}</span>
+				{{/lastMessage}}
+			</li>
 			{{/conversations}}
 			{{^conversations}}
-				<li class="empty">
-					<p>
-						No conversations
-					</p>
-				</li>
+			<li class="empty">
+				<p>No conversations</p>
+			</li>
 			{{/conversations}}
 		</ul>
 	</article>

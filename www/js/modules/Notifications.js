@@ -17,19 +17,15 @@ function($, _, Backbone, app, Dummy) {
 					result[value] = key;
 					return result;
 				}, {});
-			return _.map(response.notifications || [], function (activity) {
-				var label = typeById[activity.type];
-				activity[label] = true;
-				return activity;
+			return _.map(response.notifications || [], function (notification) {
+				var label = typeById[notification.type];
+				notification[label] = true;
+				return notification;
 			});
 		},
 		fetch: function () {
 			this.reset(Dummy.getNotifications());
 		}
-	});
-
-	Views.RecentActivity = Backbone.View.extend({
-		template: 'recent-activity'
 	});
 
 	Views.Menu = Backbone.View.extend({

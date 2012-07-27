@@ -7,5 +7,9 @@ define([], function () {return {
 	NOTIFICATION_TYPE: {
 		WINK_RECEIVED: 1,
 		MATCH_INTRODUCTION: 2
+	},
+	CONVERSATION_STATUS: {
+		UNREAD: 1,
+		READ: 2
 	}
 };});
