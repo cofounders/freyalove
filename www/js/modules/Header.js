@@ -12,7 +12,7 @@ function($, _, Backbone, app,
 
 	var activeMenuView = null;
 
-	var closeMenu = function () {
+	var cleanupMenu = function () {
 		if (activeMenuView) {
 			// $(activeMenuView.el).closest('.opened').removeClass('opened');
 			$(this.el).find('section.opened').removeClass('opened');
@@ -35,15 +35,18 @@ function($, _, Backbone, app,
 					.text(app.session.get('name'))
 					.attr('href', '/profile/' + app.session.get('id'));
 			}, this);
-			$(document).on('click', _.bind(function () {
-				if (activeMenuView) {
-					closeMenu.call(this);
-				}
-			}, this));
+			$(document).on('click', this.closeMenu = _.bind(this.closeMenu, this));
+		},
+		closeMenu: function (event) {
+			var menu = $(this.el).find('menu').get(0),
+				clickedInsideMenu = $.contains(menu, event.target);
+			if (activeMenuView && !clickedInsideMenu) {
+				cleanupMenu.call(this);
+			}
 		},
 		cleanup: function () {
 			app.session.off(null, null, this);
-			// $(document).off('click');
+			$(document).off('click', this.closeMenu);
 		},
 		serialize: function () {
 			return app.session.toJSON();
@@ -80,7 +83,7 @@ function($, _, Backbone, app,
 					selector = '.' + section + ' + section';
 
 				if (activeMenuView) {
-					closeMenu.call(this);
+					cleanupMenu.call(this);
 				}
 
 				activeMenuView = new menus[section].view({
