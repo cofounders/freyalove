@@ -1,5 +1,5 @@
-define(['jQuery', 'Underscore', 'Backbone', 'app', 'modules/Dummy'],
-function($, _, Backbone, app, Dummy) {
+define(['jQuery', 'Underscore', 'Backbone', 'app', 'Facebook', 'modules/Dummy'],
+function($, _, Backbone, app, Facebook, Dummy) {
 
 	var Collections = {},
 		Views = {};
@@ -64,6 +64,20 @@ function($, _, Backbone, app, Dummy) {
 		},
 		serialize: function () {
 			return {friends: this.collection.toJSON()};
+		},
+		events: {
+			'click .invite-more': function (event) {
+				event.stopPropagation();
+				event.preventDefault();
+				Facebook.ui({
+					method: 'apprequests',
+					message: 'Matchmaking for lesbians',
+					title: 'Join FreyaLove',
+					filters: ['app_non_users']
+				},
+				function (response) {
+				});
+			}
 		}
 	});
 
