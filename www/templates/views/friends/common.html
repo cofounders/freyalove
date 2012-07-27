@@ -12,6 +12,8 @@
 			</li>
 			{{/friends}}
 		</ul>
-		<p>You were introduced by <a href="#">Jenny Scheter</a></p>
+		{{#matchmaker}}
+		<p>You were introduced by <a href="/profile/{{id}}" title="Profile of {{name}}">{{name}}</a></p>
+		{{/matchmaker}}
 	</article>
 </section>
