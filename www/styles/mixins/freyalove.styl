@@ -85,3 +85,35 @@ list-item-ordered()
 		content counter(item) " "
 		counter-increment item
 		vertical-align top
+
+//popup
+popup()
+	> header
+		font-size 1rem
+		height 36px
+		h3
+			padding 10px 0 0 13px
+			color #3f0a49
+			font-size 1.125rem //18px
+			font-weight bold
+	> article
+		font-size 1rem
+		height 400px - 36px
+		overflow auto
+		> ul
+			margin 0
+			> li
+				padding 0 0 0 10px
+				sidebar-content()
+				single-line-list-spacing()
+				a
+					img
+						profile-image()
+				p
+					sidebar-content()
+					content-beside-list(190px, 10px, 10px)
+					a
+						sidebar-hyperlinks()
+				&.empty
+					p
+						content-one-line()

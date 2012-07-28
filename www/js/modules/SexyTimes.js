@@ -31,9 +31,7 @@ function($, _, Backbone, app, Dummy) {
 			this.collection.off(null, null, this);
 		},
 		serialize: function () {
-			return {
-				sexyTimes: this.collection.toJSON()
-			};
+			return {sexyTimes: this.collection.toJSON()};
 		}
 	});
 
@@ -48,9 +46,7 @@ function($, _, Backbone, app, Dummy) {
 			this.collection.off(null, null, this);
 		},
 		serialize: function () {
-			return _.extend({
-				hasDates: (this.collection.length > 0)
-			}, this.collection.toJSON());
+			return {sexyTimes: this.collection.toJSON()};
 		}
 	});
 
