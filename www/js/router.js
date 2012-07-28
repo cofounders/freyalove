@@ -42,9 +42,8 @@ define([
 			'leaderboard': 'leaderboard',
 			'matchmake': 'matchmake',
 			'message': 'message',
-			'profile/:id': 'profile', // TODO: merge fof and friends into this
-			'profile/': 'profile', // placeholder for random user
-			'profile': 'profile', // placeholder for random user
+			'profile/:id': 'profile',
+			'profile': 'profile',
 			'terms': 'terms',
 			'users': 'users',
 			'*path': '404'
@@ -81,9 +80,7 @@ define([
 					'.bblm-matches-couples': new Matches.Views.Couples({
 						collection: matchesCouples
 					}),
-					'.bblm-sidebar-panels': new Sidebar.Views.Panels({
-						friend: new Friends.Model({id: 5})
-					}),
+					'.bblm-sidebar-panels': new Sidebar.Views.Panels(),
 					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
@@ -104,21 +101,8 @@ define([
 			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
 			app.useLayout('inbox')
 				.setViews({
-					// left column
-
-					// right column
-					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates({
-						collection: new Dates.Collections.UpcomingDates(app.dummy.getSexyTimes())
-					}),
-					'.bblm-friends-list-right': new Connections.Views.ListRight({
-						collection: new Connections.Collections.Friends(app.dummy.getFriends())
-					}),
-					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
-					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
-
-					// header & footer
-					'.bblm-header-menu': new Header.Views.Menu(
-						),
+					'.bblm-sidebar-panels': new Sidebar.Views.Panels(),
+					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		},
@@ -134,23 +118,10 @@ define([
 		leaderboard: function () {
 			app.useLayout('leaderboard')
 				.setViews({
-					// left column
 					'.bblm-leaderboard-full': new Connections.Views.LeaderboardFull(),
-
-					// right column
-					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates({
-						collection: new Dates.Collections.UpcomingDates(app.dummy.getSexyTimes())
-					}),
-					'.bblm-friends-list-right': new Connections.Views.ListRight({
-						collection: new Connections.Collections.Friends(app.dummy.getFriends())
-					}),
-					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
-					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
-
-					// header & footer
+					'.bblm-sidebar-panels': new Sidebar.Views.Panels(),
 					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
-
 				});
 		},
 
@@ -158,10 +129,7 @@ define([
 			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
 			app.useLayout('matchmake')
 				.setViews({
-					// main column
-
-
-					// header & footer
+					'.bblm-sidebar-panels': new Sidebar.Views.Panels(),
 					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
@@ -171,61 +139,28 @@ define([
 			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
 			app.useLayout('message')
 				.setViews({
-					// left column
-
-					// right column
-					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates({
-						collection: new Dates.Collections.UpcomingDates(app.dummy.getSexyTimes())
-					}),
-					'.bblm-friends-list-right': new Connections.Views.ListRight({
-						collection: new Connections.Collections.Friends(app.dummy.getFriends())
-					}),
-					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
-					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
-
-					// header & footer
+					'.bblm-sidebar-panels': new Sidebar.Views.Panels(),
 					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		},
 
 		profile: function (id) {
-			// handle random profile
-			var profile = new User.Model(app.dummy.getRandomProfile(id));
-			if (id)
-				profile = new User.Model(app.dummy.getProfile(id));
-			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
-
-			var isMe = false;
-			var isFriend = false;
-
-			// testing dynamic routing
-			var view = new User.Views.FofFullProfile({model: profile});
-			if (app.session.id === profile.id) {
-				view = new User.Views.MyFullProfile({model: profile});
-			} else if (friends.indexOf(profile) >= 0) {
-				view = new User.Views.FriendFullProfile({model: profile, collection: friends});
-				// TODO: remove collection once we have live data: friends, as that should be loaded in the module
-			}
+			var friends = new Backbone.Collection(),
+				profile = id
+					? new User.Model(app.dummy.getRandomProfile(id))
+					: new User.Model(app.dummy.getProfile(id)),
+				view = (app.session.id === profile.id) ? new User.Views.MyFullProfile({model: profile})
+					: friends.contains(profile) ? new User.Views.FriendFullProfile({model: profile, collection: friends})
+					: new User.Views.FofFullProfile({model: profile});
 			app.useLayout('profile')
 				.setViews({
-					// left colum
 					'.bblm-user-profile': view,
-
-					// right column
-					'.bblm-dates-upcoming': new Dates.Views.UpcomingDates({
-						collection: new Dates.Collections.UpcomingDates(app.dummy.getSexyTimes())
+					'.bblm-sidebar-panels': new Sidebar.Views.Panels({
+						friend: profile
 					}),
-					'.bblm-friends-list-right': new Connections.Views.ListRight({
-						collection: friends
-					}),
-					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
-					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
-
-					// header & footer
 					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
-					
 				}).render();
 		},
 
@@ -236,27 +171,15 @@ define([
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		},
-		
+
 		users: function () {
 			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
 			app.useLayout('users')
 				.setViews({
-					// left column
 					'.bblm-user-preview-small': new Connections.Views.ListWinks({
 						collection: new Dates.Collections.UpcomingDates(app.dummy.getAllUsers())
 					}),
-
-					// right column
-					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates({
-						collection: new Dates.Collections.UpcomingDates(app.dummy.getSexyTimes())
-					}),
-					'.bblm-friends-list-right': new Connections.Views.ListRight({
-						collection: new Connections.Collections.Friends(app.dummy.getFriends())
-					}),
-					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
-					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
-
-					// header & footer
+					'.bblm-sidebar-panels': new Sidebar.Views.Panels(),
 					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
