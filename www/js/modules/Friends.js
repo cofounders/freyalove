@@ -10,7 +10,7 @@ function($, _, Backbone, app, Facebook, Dummy) {
 	Collections.Common = Backbone.Collection.extend({
 		model: Model,
 		initialize: function (models, options) {
-			this.options = options || { friend: new Model() };
+			this.options = options || {friend: new Model()};
 		},
 		url: function () {
 			return app.api + 'users/' + app.session.id + '/friends/'

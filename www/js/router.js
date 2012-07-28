@@ -31,17 +31,13 @@ define([
 	User,
 	Winks
 ) {
-
 	return Backbone.Router.extend({
-
-		// Paths
 
 		routes: {
 			'': 'landing',
 			'about': 'about',
 			'dashboard': 'dashboard',
 			'faq': 'faq',
- 			'fresh': 'fresh', // TODO: merge into dashboard
 			'inbox': 'inbox',
 			'leaderboard': 'leaderboard',
 			'matchmake': 'matchmake',
@@ -53,8 +49,6 @@ define([
 			'users': 'users',
 			'*path': '404'
 		},
-
-		// Handlers
 
 		404: function (path) {
 			app.useLayout('404')
@@ -73,12 +67,9 @@ define([
 		},
 
 		dashboard: function () {
-			var fbFriends = new Connections.Collections.FacebookFriends([], {id: app.user}),
-				winksReceived = new Winks.Collections.Received(),
+			var winksReceived = new Winks.Collections.Received(),
 				matchesSingles = new Matches.Collections.Singles(),
-				matchesCouples = new Matches.Collections.Couples(),
-				friendsAll = new Friends.Collections.All(),
-				friendsCommon = new Friends.Collections.Common();
+				matchesCouples = new Matches.Collections.Couples();
 			app.useLayout('dashboard')
 				.setViews({
 					'.bblm-winks-received': new Winks.Views.Received({
@@ -90,11 +81,12 @@ define([
 					'.bblm-matches-couples': new Matches.Views.Couples({
 						collection: matchesCouples
 					}),
-					'.bblm-sidebar-panels': new Sidebar.Views.Panels(),
+					'.bblm-sidebar-panels': new Sidebar.Views.Panels({
+						friend: new Friends.Model({id: 5})
+					}),
 					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
-			fbFriends.fetch();
 			winksReceived.fetch();
 			matchesSingles.fetch();
 			matchesCouples.fetch();
@@ -104,34 +96,6 @@ define([
 			app.useLayout('faq')
 				.setViews({
 					'.bblm-header-public': new Header.Views.Public(),
-					'.bblm-footer-end': new Footer.Views.End()
-				}).render();
-		},
-
-		fresh: function () { /* TODO: merge into dashboard */
-			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
-			app.useLayout('fresh')
-				.setViews({
-					// left column
-					'.bblm-user-preview-medium': new User.Views.Medium({
-						collection: new Dates.Collections.UpcomingDates(app.dummy.getMyPossibleMatches())
-					}),
-					'.bblm-user-preview-small': new Connections.Views.ListWinks({
-						collection: new Dates.Collections.UpcomingDates(app.dummy.getWinks())
-					}),
-
-					// right column
-					'.bblm-dates-upcoming': new Connections.Views.UpcomingDates({
-						collection: new Dates.Collections.UpcomingDates(app.dummy.getSexyTimes())
-					}),
-					'.bblm-friends-list-right': new Connections.Views.ListRight({
-						collection: new Connections.Collections.Friends(app.dummy.getFriends())
-					}),
-					'.bblm-recent-activity': new Notifications.Views.RecentActivity(),
-					'.bblm-top-leaderboard': new Connections.Views.LeaderboardTop(),
-
-					// header & footer
-					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		},

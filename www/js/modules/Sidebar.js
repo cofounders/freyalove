@@ -14,12 +14,27 @@ function($, _, Backbone, app,
 
 	Views.Panels = Backbone.View.extend({
 		template: 'sidebar/panels',
+		initialize: function (options) {
+			this.options = _.extend({
+				friend: new Friends.Model(),
+			}, options);
+		},
 		render: function (manage) {
-			var commonFriends = new Friends.Collections.Common();
-			this.insertView('.bblm-friends-common', new Friends.Views.Common({
-				collection: commonFriends
+			if (this.options.friend.id) {
+				var commonFriends = new Friends.Collections.Common(null, {
+					friend: this.options.friend
+				});
+				this.insertView('.bblm-friends-common', new Friends.Views.Common({
+					collection: commonFriends
+				}));
+				commonFriends.fetch();
+			}
+
+			var recentActivities = new Activities.Collections.Recent();
+			this.insertView('.bblm-activities-recent', new Activities.Views.Recent({
+				collection: recentActivities
 			}));
-			commonFriends.fetch();
+			recentActivities.fetch();
 
 			var upcomingSexyTimes = new SexyTimes.Collections.Upcoming();
 			this.insertView('.bblm-sexytimes-upcoming', new SexyTimes.Views.Upcoming({
@@ -27,17 +42,13 @@ function($, _, Backbone, app,
 			}));
 			upcomingSexyTimes.fetch();
 
-			var allFriends = new Friends.Collections.All();
-			this.insertView('.bblm-friends-all', new Friends.Views.All({
-				collection: allFriends
-			}));
-			allFriends.fetch();
-
-			var recentActivities = new Activities.Collections.Recent();
-			this.insertView('.bblm-activities-recent', new Activities.Views.Recent({
-				collection: recentActivities
-			}));
-			recentActivities.fetch();
+			if (!this.options.friend.id) {
+				var allFriends = new Friends.Collections.All();
+				this.insertView('.bblm-friends-all', new Friends.Views.All({
+					collection: allFriends
+				}));
+				allFriends.fetch();
+			}
 
 			var topMatchmakers = new Matchmakers.Collections.Top();
 			this.insertView('.bblm-matchmakers-top', new Matchmakers.Views.Top({
