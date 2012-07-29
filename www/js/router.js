@@ -129,7 +129,6 @@ define([
 			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
 			app.useLayout('matchmake')
 				.setViews({
-					'.bblm-sidebar-panels': new Sidebar.Views.Panels(),
 					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();

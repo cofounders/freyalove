@@ -1,30 +1,25 @@
 <div class="bblm-header-menu" />
-	
-<!-- MAIN SECTION -->
 <section class="main">
 	<div class="wrapper">
-
-		<!-- LEFT COLUMN -->
 		<div class="column-left">
-		
+
 			<!-- MESSAGING TABS -->
 			<ul id="messaging-tabs">
 				<li>Inbox</li>
 				<li>Archive</li>
 				<li>Sent Messages</li>
 			</ul>
-			
+
 			<a class="button" href="javascript:alert('opens the new message popup');" type="button" title="Create a new message">Create New Message</a>
-			
+
 			<div id="messaging-controls">
 				<form id="messaging-search" method="get" name="messaging-search" action="#" role="search" />
 					<input type="text" maxlength="100">
 				</form>
 			</div>
-			
+
 			<!-- MESSAGE LIST -->
-			
-				
+
 				<!-- DUMMY -->
 				<div class="message-summary">
 					<a href="/profile/{{id}}" title="Link to the page of Tina Kennard"><img src="/dummy/user2.png" alt="Picture of Tina Kennard" /></a>
@@ -46,30 +41,15 @@
 					</p>
 				</div>
 
-			<!-- TODO TODO FOREACH -->
+				<!-- TODO TODO FOREACH -->
 
 				<div class="bblm-message-summary" />
 
 			<!-- END FOREACH -->
-					
-
 		</div>
-
-		<!-- RIGHT COLUMN -->
-		<div id="column-right">
-		
-			<!-- TODO move into module snip -->
-			<div class="bblm-dates-upcoming" />	
-
-			<div class="bblm-friends-list-right" />
-			
-			<div class="bblm-recent-activity" />
-			
-			<div class="bblm-top-leaderboard" />
-			<!-- /snip -->
-					
-		</div>
+		<div class="bblm-sidebar-panels"></div>
 	</div>
 </section>
+<div class="bblm-footer-end"/>
 
-<div class="bblm-footer-end" />
+<div class="bblm-header-menu" />
