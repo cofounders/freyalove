@@ -1,32 +1,16 @@
 define([
-	'jQuery', 'Underscore', 'Backbone', 'app', 'Facebook',
-	'modules/Activities',
-	'modules/Connections',
-	'modules/Couple',
+	'jQuery', 'Underscore', 'Backbone', 'app',
 	'modules/Footer',
-	'modules/Friends',
 	'modules/Header',
 	'modules/Matches',
-	'modules/Matchmakers',
-	'modules/Message',
-	'modules/Notifications',
-	'modules/SexyTimes',
 	'modules/Sidebar',
 	'modules/User',
 	'modules/Winks'
 ], function (
-	$, _, Backbone, app, Facebook,
-	Activities,
-	Connections,
-	Couple,
+	$, _, Backbone, app,
 	Footer,
-	Friends,
 	Header,
 	Matches,
-	Matchmakers,
-	Message,
-	Notifications,
-	SexyTimes,
 	Sidebar,
 	User,
 	Winks
@@ -65,7 +49,6 @@ define([
 		},
 
 		conversation: function (id) {
-			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
 			app.useLayout('conversation')
 				.setViews({
 					'.bblm-sidebar-panels': new Sidebar.Views.Panels(),
@@ -75,7 +58,6 @@ define([
 		},
 
 		conversations: function () {
-			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
 			app.useLayout('conversations')
 				.setViews({
 					'.bblm-sidebar-panels': new Sidebar.Views.Panels(),
@@ -125,7 +107,6 @@ define([
 		},
 
 		matchmaker: function () {
-			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
 			app.useLayout('matchmaker')
 				.setViews({
 					'.bblm-header-menu': new Header.Views.Menu(),
@@ -153,7 +134,6 @@ define([
 		},
 
 		search: function (query) {
-			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
 			app.useLayout('search')
 				.setViews({
 					'.bblm-user-preview-small': new Connections.Views.ListWinks({
