@@ -36,16 +36,15 @@ define([
 		routes: {
 			'': 'landing',
 			'about': 'about',
+			'conversations/:id': 'conversation',
+			'conversations': 'conversations',
 			'dashboard': 'dashboard',
 			'faq': 'faq',
-			'inbox': 'inbox',
-			'leaderboard': 'leaderboard',
-			'matchmake': 'matchmake',
-			'message': 'message',
+			'matchmaker': 'matchmaker',
 			'profile/:id': 'profile',
 			'profile': 'profile',
+			'search/:query': 'search',
 			'terms': 'terms',
-			'users': 'users',
 			'*path': '404'
 		},
 
@@ -61,6 +60,26 @@ define([
 			app.useLayout('about')
 				.setViews({
 					'.bblm-header-public': new Header.Views.Public(),
+					'.bblm-footer-end': new Footer.Views.End()
+				}).render();
+		},
+
+		conversation: function (id) {
+			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
+			app.useLayout('conversation')
+				.setViews({
+					'.bblm-sidebar-panels': new Sidebar.Views.Panels(),
+					'.bblm-header-menu': new Header.Views.Menu(),
+					'.bblm-footer-end': new Footer.Views.End()
+				}).render();
+		},
+
+		conversations: function () {
+			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
+			app.useLayout('conversations')
+				.setViews({
+					'.bblm-sidebar-panels': new Sidebar.Views.Panels(),
+					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		},
@@ -97,16 +116,6 @@ define([
 				}).render();
 		},
 
-		inbox: function () {
-			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
-			app.useLayout('inbox')
-				.setViews({
-					'.bblm-sidebar-panels': new Sidebar.Views.Panels(),
-					'.bblm-header-menu': new Header.Views.Menu(),
-					'.bblm-footer-end': new Footer.Views.End()
-				}).render();
-		},
-
 		landing: function () {
 			app.useLayout('landing')
 				.setViews({
@@ -115,30 +124,10 @@ define([
 				}).render();
 		},
 
-		leaderboard: function () {
-			app.useLayout('leaderboard')
-				.setViews({
-					'.bblm-leaderboard-full': new Connections.Views.LeaderboardFull(),
-					'.bblm-sidebar-panels': new Sidebar.Views.Panels(),
-					'.bblm-header-menu': new Header.Views.Menu(),
-					'.bblm-footer-end': new Footer.Views.End()
-				});
-		},
-
-		matchmake: function () {
+		matchmaker: function () {
 			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
-			app.useLayout('matchmake')
+			app.useLayout('matchmaker')
 				.setViews({
-					'.bblm-header-menu': new Header.Views.Menu(),
-					'.bblm-footer-end': new Footer.Views.End()
-				}).render();
-		},
-
-		message: function () {
-			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
-			app.useLayout('message')
-				.setViews({
-					'.bblm-sidebar-panels': new Sidebar.Views.Panels(),
 					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
@@ -163,23 +152,23 @@ define([
 				}).render();
 		},
 
-		terms: function (path) {
-			app.useLayout('terms')
-				.setViews({
-					'.bblm-header-public': new Header.Views.Public(),
-					'.bblm-footer-end': new Footer.Views.End()
-				}).render();
-		},
-
-		users: function () {
+		search: function (query) {
 			var friends = new Connections.Collections.Friends(app.dummy.getFriends());
-			app.useLayout('users')
+			app.useLayout('search')
 				.setViews({
 					'.bblm-user-preview-small': new Connections.Views.ListWinks({
 						collection: new Dates.Collections.UpcomingDates(app.dummy.getAllUsers())
 					}),
 					'.bblm-sidebar-panels': new Sidebar.Views.Panels(),
 					'.bblm-header-menu': new Header.Views.Menu(),
+					'.bblm-footer-end': new Footer.Views.End()
+				}).render();
+		},
+
+		terms: function (path) {
+			app.useLayout('terms')
+				.setViews({
+					'.bblm-header-public': new Header.Views.Public(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
 		}
