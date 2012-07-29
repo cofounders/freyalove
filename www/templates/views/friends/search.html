@@ -1,0 +1,22 @@
+<section class="panel friends-search">
+	<header>
+		<h2>Found {{count}} Search Results for "<span class="query">{{query}}</span>"</h2>
+	</header>
+	<article>
+		<ol>
+			{{#friends}}
+			<li>
+				<a href="/profile/{{id}}" title="Profile of {{name}}">
+					<img src="{{photo}}" alt="{{name}}" />
+				</a>
+				<p>
+					<a href="/profile/{{id}}" class="name" title="Profile of {{name}}">{{name}}</a>
+				</p>
+			</li>
+			{{/friends}}
+		</ol>
+		{{^friends}}
+		<p>No results found</p>
+		{{/friends}}
+	</article>
+</section>

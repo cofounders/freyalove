@@ -152,15 +152,17 @@ define([
 		},
 
 		search: function (query) {
+			var searchResults = new Friends.Collections.Search(null, {query: query});
 			app.useLayout('search')
 				.setViews({
-					'.bblm-user-preview-small': new Connections.Views.ListWinks({
-						collection: new Dates.Collections.UpcomingDates(app.dummy.getAllUsers())
+					'.bblm-friends-search': new Friends.Views.Search({
+						collection: searchResults
 					}),
 					'.bblm-sidebar-panels': new Sidebar.Views.Panels(),
 					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
+			searchResults.fetch();
 		},
 
 		terms: function (path) {

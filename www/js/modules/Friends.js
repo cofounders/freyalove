@@ -7,6 +7,19 @@ function($, _, Backbone, app, Facebook, Dummy) {
 	var Model = Backbone.Model.extend({
 	});
 
+	Collections.All = Backbone.Collection.extend({
+		model: Model,
+		url: function () {
+			return app.api + 'users/' + app.session.id + '/friends/';
+		},
+		parse: function (response) {
+			return response.friends;
+		},
+		fetch: function () {
+			this.reset(Dummy.getFriends());
+		}
+	});
+
 	Collections.Common = Backbone.Collection.extend({
 		model: Model,
 		initialize: function (models, options) {
@@ -24,34 +37,19 @@ function($, _, Backbone, app, Facebook, Dummy) {
 		}
 	});
 
-	Collections.All = Backbone.Collection.extend({
+	Collections.Search = Backbone.Collection.extend({
 		model: Model,
+		initialize: function (models, options) {
+			this.options = options || {query: ''};
+		},
 		url: function () {
-			return app.api + 'users/' + app.session.id + '/friends/';
+			return app.api + 'users/search/' + this.options.query;
 		},
 		parse: function (response) {
 			return response.friends;
 		},
 		fetch: function () {
 			this.reset(Dummy.getFriends());
-		}
-	});
-
-	Views.Common = Backbone.View.extend({
-		template: 'friends/common',
-		initialize: function () {
-			this.collection.on('reset', function () {
-				this.render();
-			}, this);
-		},
-		cleanup: function () {
-			this.collection.off(null, null, this);
-		},
-		serialize: function () {
-			return {
-				count: this.collection.length,
-				friends: this.collection.toJSON()
-			};
 		}
 	});
 
@@ -84,6 +82,43 @@ function($, _, Backbone, app, Facebook, Dummy) {
 				function (response) {
 				});
 			}
+		}
+	});
+
+	Views.Common = Backbone.View.extend({
+		template: 'friends/common',
+		initialize: function () {
+			this.collection.on('reset', function () {
+				this.render();
+			}, this);
+		},
+		cleanup: function () {
+			this.collection.off(null, null, this);
+		},
+		serialize: function () {
+			return {
+				count: this.collection.length,
+				friends: this.collection.toJSON()
+			};
+		}
+	});
+
+	Views.Search = Backbone.View.extend({
+		template: 'friends/search',
+		initialize: function () {
+			this.collection.on('reset', function () {
+				this.render();
+			}, this);
+		},
+		cleanup: function () {
+			this.collection.off(null, null, this);
+		},
+		serialize: function () {
+			return {
+				count: this.collection.length,
+				friends: this.collection.toJSON(),
+				query: this.collection.options.query
+			};
 		}
 	});
 
