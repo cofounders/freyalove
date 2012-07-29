@@ -1,0 +1,35 @@
+<section class="conversations-conversation">
+	<header>
+		<h2>Conversation with {{#to}}{{name}}{{/to}}</h2>
+		<menu>
+			<li><a href="#" class="mark-read" title="Mark conversation read">Mark as Read</a></li>
+			<li><a href="#" class="archive" title="Archive conversation">Archive</a></li>
+			<li><a href="#" class="delete" title="Delete conversation">Delete</a></li>
+		</menu>
+	</header>
+	<article>
+		<ul>
+			{{#messages}}
+			<li class="{{#UNREAD}}un{{/UNREAD}}read">
+				{{#from}}
+				<a href="/profile/{{id}}" title="Profile of {{name}}">
+					<img src="{{photo}}" alt="{{name}}" />
+				</a> says:
+				<a href="/profile/{{id}}" title="Profile of {{name}}">{{name}}</a> says:
+				{{/from}}
+				<span class="when">{{when}}</span>
+				<p class="body">{{body}}</p>
+			</li>
+			{{/conversations}}
+			{{^conversations}}
+			<li class="empty">
+				<p>Enter a message and press <em>Send</em> to start the conversation.</p>
+			</li>
+			{{/conversations}}
+		</ul>
+		<form>
+			<textarea placeholder="Enter a message..."></textarea>
+			<input type="submit" name="Send" />
+		</form>
+	</article>
+</section>

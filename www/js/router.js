@@ -1,6 +1,7 @@
 define([
 	'jQuery', 'Underscore', 'Backbone', 'app',
 	'modules/Footer',
+	'modules/Friends',
 	'modules/Header',
 	'modules/Matches',
 	'modules/Sidebar',
@@ -9,6 +10,7 @@ define([
 ], function (
 	$, _, Backbone, app,
 	Footer,
+	Friends,
 	Header,
 	Matches,
 	Sidebar,
@@ -49,12 +51,17 @@ define([
 		},
 
 		conversation: function (id) {
+			var conversation = new Conversations.Collections.Conversation(new Friends.Model({id: id}));
 			app.useLayout('conversation')
 				.setViews({
+					'.bblm-conversations-conversation': new Conversations.Views.Conversation({
+						collection: conversation
+					}),
 					'.bblm-sidebar-panels': new Sidebar.Views.Panels(),
 					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
+			conversation.fetch();
 		},
 
 		conversations: function () {
