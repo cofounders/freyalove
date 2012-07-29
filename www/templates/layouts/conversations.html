@@ -2,50 +2,7 @@
 <section class="main">
 	<div class="wrapper">
 		<div class="column-left">
-
-			<!-- MESSAGING TABS -->
-			<ul id="messaging-tabs">
-				<li>Inbox</li>
-				<li>Archive</li>
-				<li>Sent Messages</li>
-			</ul>
-
-			<a class="button" href="javascript:alert('opens the new message popup');" type="button" title="Create a new message">Create New Message</a>
-
-			<div id="messaging-controls">
-				<form id="messaging-search" method="get" name="messaging-search" action="#" role="search" />
-					<input type="text" maxlength="100">
-				</form>
-			</div>
-
-			<!-- MESSAGE LIST -->
-
-				<!-- DUMMY -->
-				<div class="message-summary">
-					<a href="/profile/{{id}}" title="Link to the page of Tina Kennard"><img src="/dummy/user2.png" alt="Picture of Tina Kennard" /></a>
-					<p>
-						<a href="/profile/{{id}}" title="Link to the page of Tina Kennard">Tina Kennard</a>,
-						<a href="/profile/{{id}}" title="Link to the page of Bette Porter">Bette Porter</a> and
-						<a href="/profile/{{id}}" title="Link to the page of Alice Pieszecki">Alice Pieszecki</a>
-						<span class="timestamp">7 hours ago</span>
-					</p>
-					<ul class="message-actions">
-						<li><a href="javascript:alert('mark unread');" title="Mark message unread">U</a></li>
-						<li><a href="javascript:alert('archive');" title="Archive message">A</a></li>
-						<li><a href="javascript:alert('delete');" title="Delete message">D</a></li>
-					</ul>
-					<p>
-						<a href="javascript:alert('opens the message page');window.location.assign('message.html');" title="Link to the message of Bette Porter">
-							Maecenas faucibus mollis interdum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean eu leo quam. Pellentesque ornare sem lacinia quam...
-						</a>
-					</p>
-				</div>
-
-				<!-- TODO TODO FOREACH -->
-
-				<div class="bblm-message-summary" />
-
-			<!-- END FOREACH -->
+			<div class="bblm-conversations-recent"></div>
 		</div>
 		<div class="bblm-sidebar-panels"></div>
 	</div>

@@ -59,6 +59,21 @@ function($, _, Backbone, app,
 		}
 	});
 
+	Views.Conversation = Backbone.View.extend({
+		template: 'conversations/conversation',
+		initialize: function () {
+			this.collection.on('reset', function () {
+				this.render();
+			}, this);
+		},
+		cleanup: function () {
+			this.collection.off(null, null, this);
+		},
+		serialize: function () {
+			return {messages: this.collection.toJSON()};
+		}
+	});
+
 	Views.Menu = Backbone.View.extend({
 		template: 'conversations/menu',
 		initialize: function () {
@@ -74,8 +89,8 @@ function($, _, Backbone, app,
 		}
 	});
 
-	Views.Conversation = Backbone.View.extend({
-		template: 'conversations/conversation',
+	Views.Recent = Backbone.View.extend({
+		template: 'conversations/recent',
 		initialize: function () {
 			this.collection.on('reset', function () {
 				this.render();
@@ -85,7 +100,7 @@ function($, _, Backbone, app,
 			this.collection.off(null, null, this);
 		},
 		serialize: function () {
-			return {messages: this.collection.toJSON()};
+			return {conversations: this.collection.toJSON()};
 		}
 	});
 

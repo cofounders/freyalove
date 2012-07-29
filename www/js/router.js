@@ -71,12 +71,17 @@ define([
 		},
 
 		conversations: function () {
+			var recentConversations = new Conversations.Collections.Recent();
 			app.useLayout('conversations')
 				.setViews({
+					'.bblm-conversations-recent': new Conversations.Views.Recent({
+						collection: recentConversations
+					}),
 					'.bblm-sidebar-panels': new Sidebar.Views.Panels(),
 					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
+			recentConversations.fetch();
 		},
 
 		dashboard: function () {
