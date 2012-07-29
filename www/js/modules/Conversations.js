@@ -51,7 +51,7 @@ function($, _, Backbone, app,
 			}, options);
 		},
 		url: function () {
-			return app.api + '/conversations/' + this.options.to.id + '/messages/';
+			return app.api + 'conversations/' + this.options.to.id + '/messages/';
 		},
 		parse: checkType,
 		fetch: function () {

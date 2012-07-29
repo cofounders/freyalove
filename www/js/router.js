@@ -1,5 +1,6 @@
 define([
 	'jQuery', 'Underscore', 'Backbone', 'app',
+	'modules/Conversations',
 	'modules/Footer',
 	'modules/Friends',
 	'modules/Header',
@@ -9,6 +10,7 @@ define([
 	'modules/Winks'
 ], function (
 	$, _, Backbone, app,
+	Conversations,
 	Footer,
 	Friends,
 	Header,
@@ -51,7 +53,9 @@ define([
 		},
 
 		conversation: function (id) {
-			var conversation = new Conversations.Collections.Conversation(new Friends.Model({id: id}));
+			var conversation = new Conversations.Collections.Conversation(null, {
+					to: new Friends.Model({id: id})
+				});
 			app.useLayout('conversation')
 				.setViews({
 					'.bblm-conversations-conversation': new Conversations.Views.Conversation({
