@@ -91,10 +91,21 @@ popup()
 	> header
 		font-size 1rem
 		height 36px
-		h3
+		> h3
 			padding 10px 0 0 13px
 			font-size 1.125rem //18px
 			font-weight bold
+		> menu
+			display inline-block
+			font-size 0.875rem //14px
+			margin 10px 13px 0 0
+			padding 0
+			position absolute
+			right 0
+			> li
+				display inline-block
+				> a
+					sidebar-hyperlinks()
 	> article
 		font-size 1rem
 		height 400px - 36px
