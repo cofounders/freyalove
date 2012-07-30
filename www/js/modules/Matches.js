@@ -1,8 +1,8 @@
-define(['jQuery', 'Underscore', 'Mustache', 'Backbone', 'app'],
-function($, _, Mustache, Backbone, app) {
+define(['jQuery', 'Underscore', 'Backbone', 'app'],
+function($, _, Backbone, app) {
 
-	var Views = {},
-		Collections = {};
+	var Collections = {},
+		Views = {};
 
 	var Model = Backbone.Model.extend({
 	});
@@ -42,7 +42,6 @@ function($, _, Mustache, Backbone, app) {
 		}
 	});
 
-
 	Views.Couples = Backbone.View.extend({
 		template: 'matches/couples',
 		initialize: function () {
@@ -55,6 +54,25 @@ function($, _, Mustache, Backbone, app) {
 		},
 		serialize: function () {
 			return {matches: this.collection.toJSON()};
+		}
+	});
+
+	Views.Matchmaker = Backbone.View.extend({
+		template: 'matches/matchmaker',
+		initialize: function () {
+			this.collection.on('reset', function () {
+				this.render();
+			}, this);
+		},
+		cleanup: function () {
+			this.collection.off(null, null, this);
+		},
+		serialize: function () {
+			return {
+				candidates: this.collection.toJSON(),
+				first: this.options.first,
+				second: this.options.second
+			};
 		}
 	});
 

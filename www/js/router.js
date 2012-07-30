@@ -29,6 +29,8 @@ define([
 			'conversations': 'conversations',
 			'dashboard': 'dashboard',
 			'faq': 'faq',
+			'matchmaker/:firstId/with/:secondId': 'matchmaker',
+			'matchmaker/:firstId': 'matchmaker',
 			'matchmaker': 'matchmaker',
 			'profile/:id': 'profile',
 			'profile/': 'profile',
@@ -124,12 +126,19 @@ define([
 				}).render();
 		},
 
-		matchmaker: function () {
+		matchmaker: function (firstId, secondId) {
+			var candidates = new Friends.Collections.All();
 			app.useLayout('matchmaker')
 				.setViews({
+					'.bblm-matches-matchmaker': new Matches.Views.Matchmaker({
+						collection: candidates,
+						first: new Friends.Model({id: firstId}),
+						second: new Friends.Model({id: secondId})
+					}),
 					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
+			candidates.fetch();
 		},
 
 		profile: function (id) {
