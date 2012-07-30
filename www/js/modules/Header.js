@@ -59,8 +59,7 @@ function($, _, Backbone, app,
 				event.stopPropagation();
 				event.preventDefault();
 				var query = $(this.el).find('input[name="query"]').val();
-				console.log('submitted!', query);
-				Backbone.history.navigate('/search/' + query, true);
+				Backbone.history.navigate('/search/' + encodeURIComponent(query), true);
 			},
 			'click .signout': function (event) {
 				event.stopPropagation();

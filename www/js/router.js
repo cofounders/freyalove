@@ -152,7 +152,9 @@ define([
 		},
 
 		search: function (query) {
-			var searchResults = new Friends.Collections.Search(null, {query: query});
+			var searchResults = new Friends.Collections.Search(null, {
+				query: decodeURIComponent(query)
+			});
 			app.useLayout('search')
 				.setViews({
 					'.bblm-friends-search': new Friends.Views.Search({
