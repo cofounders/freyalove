@@ -1,5 +1,5 @@
-define(['jQuery', 'Underscore', 'Mustache', 'Backbone', 'app'],
-function($, _, Mustache, Backbone, app) {
+define(['jQuery', 'Underscore', 'Backbone', 'app'],
+function($, _, Backbone, app) {
 	return {
 
 		Model: Backbone.Model.extend({
