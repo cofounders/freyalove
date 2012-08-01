@@ -7,12 +7,14 @@
 
 		<ul id="winked-list">
 			{{#winks}}
+			{{#from}}
 			<li>
 				<a href="/profile/{{id}}" title="View the profile of {{name}}">
 					<img src="{{photo}}" alt="{{name}}" />
 				</a>
 				<a href="/profile/{{id}}" title="View the profile of {{name}}">{{name}}</a>
 			</li>
+			{{/from}}
 			{{/winks}}
 		</ul>
 
