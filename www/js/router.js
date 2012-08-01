@@ -6,7 +6,6 @@ define([
 	'modules/Header',
 	'modules/Matches',
 	'modules/Sidebar',
-	'modules/User',
 	'modules/Winks'
 ], function (
 	$, _, Backbone, app,
@@ -16,7 +15,6 @@ define([
 	Header,
 	Matches,
 	Sidebar,
-	User,
 	Winks
 ) {
 	return Backbone.Router.extend({
@@ -58,7 +56,7 @@ define([
 
 		conversation: function (id) {
 			var conversation = new Conversations.Collections.Conversation(null, {
-					to: new Friends.Model({id: id})
+					to: new Friends.Models.UserSummary({id: id})
 				});
 			app.useLayout('conversation')
 				.setViews({
@@ -132,8 +130,8 @@ define([
 				.setViews({
 					'.bblm-matches-matchmaker': new Matches.Views.Matchmaker({
 						collection: candidates,
-						first: new Friends.Model({id: firstId}),
-						second: new Friends.Model({id: secondId})
+						first: new Friends.Models.User({id: firstId}),
+						second: new Friends.Models.User({id: secondId})
 					}),
 					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
@@ -142,22 +140,27 @@ define([
 		},
 
 		profile: function (id) {
-			var friends = new Backbone.Collection(),
-				profile = id
-					? new User.Model(app.dummy.getRandomProfile(id))
-					: new User.Model(app.dummy.getProfile(id)),
-				view = (app.session.id === profile.id) ? new User.Views.MyFullProfile({model: profile})
-					: friends.contains(profile) ? new User.Views.FriendFullProfile({model: profile, collection: friends})
-					: new User.Views.FofFullProfile({model: profile});
+			var profile = new Friends.Models.User({id: id || app.session.id});
+			// var friends = new Backbone.Collection(),
+			// 	profile = id
+			// 		? new User.Model(app.dummy.getRandomProfile(id))
+			// 		: new User.Model(app.dummy.getProfile(id)),
+			// 	view = (app.session.id === profile.id) ? new User.Views.MyFullProfile({model: profile})
+			// 		: friends.contains(profile) ? new User.Views.FriendFullProfile({model: profile, collection: friends})
+			// 		: new User.Views.FofFullProfile({model: profile});
+
 			app.useLayout('profile')
 				.setViews({
-					'.bblm-user-profile': view,
+					'.bblm-user-profile': new Friends.Views.Profile({
+						model: profile
+					}),
 					'.bblm-sidebar-panels': new Sidebar.Views.Panels({
 						friend: profile
 					}),
 					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
+			profile.fetch();
 		},
 
 		search: function (query) {

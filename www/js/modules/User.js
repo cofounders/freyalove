@@ -1,5 +1,5 @@
-define(['jQuery', 'Underscore', 'Backbone', 'app'],
-function($, _, Backbone, app) {
+define(['jQuery', 'Underscore', 'Backbone', 'app', 'modules/Dummy'],
+function($, _, Backbone, app, Dummy) {
 
 	var Views = {};
 
@@ -9,6 +9,16 @@ function($, _, Backbone, app) {
 	});
 
 	var Collection = Backbone.Collection.extend({
+		model: Model,
+		url: function () {
+			return app.api + 'users/sexytimes/';
+		},
+		parse: function (response) {
+			return response.sexytimes;
+		},
+		fetch: function () {
+			this.reset(Dummy.getMyProfile());
+		}
 	});
 
 

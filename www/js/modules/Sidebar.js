@@ -16,7 +16,7 @@ function($, _, Backbone, app,
 		template: 'sidebar/panels',
 		initialize: function (options) {
 			this.options = _.extend({
-				friend: new Friends.Model(),
+				friend: new Friends.Models.UserSummary(),
 			}, options);
 		},
 		render: function (manage) {

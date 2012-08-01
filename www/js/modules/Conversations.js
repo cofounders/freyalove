@@ -47,7 +47,7 @@ function($, _, Backbone, app,
 		model: Models.Message,
 		initialize: function (models, options) {
 			this.options = _.extend({
-				to: new Friends.Model(),
+				to: new Friends.Models.UserSummary(),
 			}, options);
 		},
 		url: function () {

@@ -1,14 +1,27 @@
 define(['jQuery', 'Underscore', 'Backbone', 'app', 'Facebook', 'modules/Dummy'],
 function($, _, Backbone, app, Facebook, Dummy) {
 
-	var Collections = {},
+	var Models = {},
+		Collections = {},
 		Views = {};
 
-	var Model = Backbone.Model.extend({
+	Models.User = Backbone.Model.extend({
+		url: function () {
+			return app.api + 'users/' + this.id + '/profile/';
+		},
+		fetch: function () {
+			this.reset(+this.id === +app.session.id
+				? Dummy.getMyProfile()
+				: Dummy.getRandomProfile()
+			);
+		}
+	});
+	
+	Models.UserSummary = Backbone.Model.extend({
 	});
 
 	Collections.All = Backbone.Collection.extend({
-		model: Model,
+		model: Models.UserSummary,
 		url: function () {
 			return app.api + 'users/' + app.session.id + '/friends/';
 		},
@@ -21,9 +34,9 @@ function($, _, Backbone, app, Facebook, Dummy) {
 	});
 
 	Collections.Common = Backbone.Collection.extend({
-		model: Model,
+		model: Models.UserSummary,
 		initialize: function (models, options) {
-			this.options = options || {friend: new Model()};
+			this.options = options || {friend: new Models.UserSummary()};
 		},
 		url: function () {
 			return app.api + 'users/' + app.session.id + '/friends/'
@@ -38,7 +51,7 @@ function($, _, Backbone, app, Facebook, Dummy) {
 	});
 
 	Collections.Search = Backbone.Collection.extend({
-		model: Model,
+		model: Models.UserSummary,
 		initialize: function (models, options) {
 			this.options = options || {query: ''};
 		},
@@ -122,8 +135,30 @@ function($, _, Backbone, app, Facebook, Dummy) {
 		}
 	});
 
+	Views.Profile = Backbone.View.extend({
+		template: 'friends/profile',
+		initialize: function () {
+			this.model.on('change', function () {
+				this.render();
+			}, this);
+		},
+		cleanup: function () {
+			this.model.off(null, null, this);
+		},
+		serialize: function () {
+			return {
+				friend: _.extend({
+					isMe: app.session.id === this.model.id,
+					isFriend: !!this.model.get('isFriend'),
+					isFof: !this.model.get('isFriend')
+						&& app.session.id !== this.model.id
+				}, this.model.toJSON())
+			};
+		}
+	});
+
 	return {
-		Model: Model,
+		Models: Models,
 		Collections: Collections,
 		Views: Views
 	};
