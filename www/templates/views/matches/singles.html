@@ -2,30 +2,40 @@
 	<header>
 		<h2>Hmmm... These Girls Look Good For You...</h2>
 	</header>
-	<article>
-		<ul id="matches-singles-list">
-			{{#singles}}
-			<div class="summary-info">
-				<img src="{{photo}}" alt="{{name}}" />
-			</div>
-			<div class="expanded-info">
-				<img src="{{photo}}" alt="{{name}}" />
-				<div id="expanded-info-right">
-					<a href="/profile/{{id}}" id="name" title="Profile of {{name}}">{{name}}</a>
-					<p class="al">aged {{age}}, in {{location}}</p>
-					<p class="likes">
-						<strong>Likes:</strong>{{likes}}
+	<article class="carousel">
+		<div class="canvas">
+			<ol class="matches-singles-list">
+				{{#singles}}
+				<li{{#selected}} class="selected"{{/selected}}>
+					<img src="{{photo}}" alt="{{name}}" />
+
+					<h3><a href="/profile/{{id}}" id="name" title="Profile of {{name}}">{{name}}</a></h3>
+
+					{{#age}}
+					<p class="age">Age {{age}}</p>
+					{{/age}}
+
+					{{#location}}
+					<p class="location">in {{location}}</p>
+					{{/location}}
+
+					{{#likes}}
+					<h4>Likes</h4>
+					<p class="likes">{{likes}}</p>
+					{{/likes}}
+
+					{{#about}}
+					<h4>You wanna know more about me?</h4>
+					<p class="about">{{about}}... <a href="/profile/{{id}}">see more</a>
 					</p>
-				</div>
-				<p class="about">
-					<strong>You wanna know more about me?</strong><br>
-					{{about}}... <a href="/profile/{{id}}">see more</a>
-				</p>
-				
-				<a href="/profile/{{id}}" class="button cta" title="Read more about Jenny Schecter">Check her out!</a>
-			</div>
-			{{/singles}}
-		</ul>
+					{{/about}}
+
+					<a href="/profile/{{id}}" class="button cta" title="Profile of {{name}}">Check her out!</a>
+				</li>
+				{{/singles}}
+			</ol>
+			<ol class="bookmarks"></ol>
+		</div>
 		<a href="#" class="button flat previous"/>Previous</a>
 		<a href="#" class="button flat next"/>Next</a>
 	</article>
