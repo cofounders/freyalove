@@ -23,9 +23,7 @@ function($, _, Backbone, app, Dummy) {
 	Views.Upcoming = Backbone.View.extend({
 		template: 'sexytimes/upcoming',
 		initialize: function () {
-			this.collection.on('reset', function () {
-				this.render();
-			}, this);
+			this.collection.on('reset', this.render, this);
 		},
 		cleanup: function () {
 			this.collection.off(null, null, this);
@@ -38,9 +36,7 @@ function($, _, Backbone, app, Dummy) {
 	Views.Menu = Backbone.View.extend({
 		template: 'sexytimes/menu',
 		initialize: function () {
-			this.collection.on('reset', function () {
-				this.render();
-			}, this);
+			this.collection.on('reset', this.render, this);
 		},
 		cleanup: function () {
 			this.collection.off(null, null, this);

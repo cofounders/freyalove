@@ -69,9 +69,7 @@ function($, _, Backbone, app, Facebook, Dummy) {
 	Views.All = Backbone.View.extend({
 		template: 'friends/all',
 		initialize: function () {
-			this.collection.on('reset', function () {
-				this.render();
-			}, this);
+			this.collection.on('reset', this.render, this);
 		},
 		cleanup: function () {
 			this.collection.off(null, null, this);
@@ -101,9 +99,7 @@ function($, _, Backbone, app, Facebook, Dummy) {
 	Views.Common = Backbone.View.extend({
 		template: 'friends/common',
 		initialize: function () {
-			this.collection.on('reset', function () {
-				this.render();
-			}, this);
+			this.collection.on('reset', this.render, this);
 		},
 		cleanup: function () {
 			this.collection.off(null, null, this);
@@ -119,9 +115,7 @@ function($, _, Backbone, app, Facebook, Dummy) {
 	Views.Search = Backbone.View.extend({
 		template: 'friends/search',
 		initialize: function () {
-			this.collection.on('reset', function () {
-				this.render();
-			}, this);
+			this.collection.on('reset', this.render, this);
 		},
 		cleanup: function () {
 			this.collection.off(null, null, this);

@@ -23,9 +23,7 @@ function($, _, Backbone, app, Dummy) {
 	Views.Top = Backbone.View.extend({
 		template: 'matchmakers/top',
 		initialize: function () {
-			this.collection.on('reset', function () {
-				this.render();
-			}, this);
+			this.collection.on('reset', this.render, this);
 		},
 		cleanup: function () {
 			this.collection.off(null, null, this);

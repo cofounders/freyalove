@@ -62,9 +62,7 @@ function($, _, Backbone, app,
 	Views.Conversation = Backbone.View.extend({
 		template: 'conversations/conversation',
 		initialize: function () {
-			this.collection.on('reset', function () {
-				this.render();
-			}, this);
+			this.collection.on('reset', this.render, this);
 		},
 		cleanup: function () {
 			this.collection.off(null, null, this);
@@ -77,9 +75,7 @@ function($, _, Backbone, app,
 	Views.Menu = Backbone.View.extend({
 		template: 'conversations/menu',
 		initialize: function () {
-			this.collection.on('reset', function () {
-				this.render();
-			}, this);
+			this.collection.on('reset', this.render, this);
 		},
 		cleanup: function () {
 			this.collection.off(null, null, this);
@@ -92,9 +88,7 @@ function($, _, Backbone, app,
 	Views.Recent = Backbone.View.extend({
 		template: 'conversations/recent',
 		initialize: function () {
-			this.collection.on('reset', function () {
-				this.render();
-			}, this);
+			this.collection.on('reset', this.render, this);
 		},
 		cleanup: function () {
 			this.collection.off(null, null, this);

@@ -23,9 +23,7 @@ function($, _, Backbone, app, Dummy) {
 	Views.Received = Backbone.View.extend({
 		template: 'winks/received',
 		initialize: function () {
-			this.collection.on('reset', function () {
-				this.render();
-			}, this);
+			this.collection.on('reset', this.render, this);
 		},
 		cleanup: function () {
 			this.collection.off(null, null, this);
