@@ -1,14 +1,16 @@
 define(
-['jQuery', 'app', 'router', 'Facebook', 'modules/Session/Facebook'],
-function ($, app, Router, Facebook, Session) {
+['jQuery', 'app', 'router', 'Facebook', 'modules/Session/Facebook', 'modules/Stream'],
+function ($, app, Router, Facebook, Session, Stream) {
 
 	var targetUrl = location.href.substr(location.href.indexOf('/', 8));
 
 	app.router = new Router();
 	app.session = new Session();
+	app.stream = new Stream();
 
 	app.session
 		.on('signIn', function () {
+			app.stream.go();
 			var url = app.api + 'users/' + app.session.get('userID') + '/profile/summary/';
 			$.get(url).success(function (response) {
 				app.session.save(response);
@@ -16,6 +18,7 @@ function ($, app, Router, Facebook, Session) {
 			});
 		})
 		.on('signOut', function () {
+			app.stream.pause();
 			Backbone.history.navigate(app.root, true);
 		});
 
@@ -28,6 +31,7 @@ function ($, app, Router, Facebook, Session) {
 	});
 
 	if (app.session.id) {
+		app.stream.go();
 		if (targetUrl === app.root) {
 			history.replaceState(null, '', '/dashboard');
 		}

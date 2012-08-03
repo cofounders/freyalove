@@ -30,6 +30,17 @@ function($, _, Backbone, app,
 	Views.Menu = Backbone.View.extend({
 		template: 'header/menu',
 		initialize: function (options) {
+			app.stream.on('change', function () {
+				app.stream.get('unreadNotifications')
+					? $(this.el).find('.notifications').attr('data-unread', app.stream.get('unreadNotifications'))
+					: $(this.el).find('.notifications').removeAttr('data-unread');
+				app.stream.get('unreadConversations')
+					? $(this.el).find('.conversations').attr('data-unread', app.stream.get('unreadConversations'))
+					: $(this.el).find('.conversations').removeAttr('data-unread');
+				app.stream.get('unreadSexyTimes')
+					? $(this.el).find('.sexytimes').attr('data-unread', app.stream.get('unreadSexyTimes'))
+					: $(this.el).find('.sexytimes').removeAttr('data-unread');
+			}, this);
 			app.session.on('change:name', function () {
 				$(this.el).find('.name')
 					.text(app.session.get('name'))
@@ -45,14 +56,15 @@ function($, _, Backbone, app,
 			}
 		},
 		cleanup: function () {
+			app.stream.off(null, null, this);
 			app.session.off(null, null, this);
 			$(document).off('click', this.closeMenu);
 		},
 		serialize: function () {
-			return app.session.toJSON();
-		},
-		render: function (manage) {
-			return manage(this).render();
+			return _.extend(
+				app.session.toJSON(),
+				app.stream.toJSON()
+			);
 		},
 		events: {
 			'submit nav > form.search': function (event) {
@@ -72,15 +84,18 @@ function($, _, Backbone, app,
 				var menus = {
 						notifications: {
 							collection: Notifications.Collections.Recent,
-							view: Notifications.Views.Menu
+							view: Notifications.Views.Menu,
+							unread: 'unreadNotifications'
 						},
 						conversations: {
 							collection: Conversations.Collections.Recent,
-							view: Conversations.Views.Menu
+							view: Conversations.Views.Menu,
+							unread: 'unreadConversations'
 						},
 						sexytimes: {
 							collection: SexyTimes.Collections.Upcoming,
-							view: SexyTimes.Views.Menu
+							view: SexyTimes.Views.Menu,
+							unread: 'unreadSexyTimes'
 						}
 					},
 					el = $(event.target).next('section'),
@@ -95,6 +110,8 @@ function($, _, Backbone, app,
 				activeMenuView = new menus[section].view({
 					collection: data
 				});
+
+				app.stream.set(menus[section].unread, 0);
 
 				this.setView(selector, activeMenuView);
 				activeMenuView.render();

@@ -51,6 +51,8 @@
 					display inline-block
 					font-size 1rem
 					height 100%
+					text-decoration none
+					position relative
 					width 100%
 					&:hover
 						background-color rgba(98, 34, 143, 0.5)
@@ -60,6 +62,25 @@
 						background-image url('../img/icn_messages.png')
 					&.sexytimes
 						background-image url('../img/icn_dates.png')
+					&[data-unread]:after
+						background-repeat repeat-x
+						border-radius 8px
+						content attr(data-unread)
+						display inline-block
+						font-family 'Anonymous Pro', sans-serif
+						font-size 11px
+						height 15px
+						line-height 150%
+						overflow hidden
+						padding 0px 3px 0 4px
+						position absolute
+						right 5px
+						text-align center
+						top 27px
+						vertical-align middle
+						button-face(#db4648, url('../img/bg_btn_red.jpg'), white)
+						button-border-raised(rgba(159, 54, 71, 1), rgba(255, 255, 255, 0.22), rgba(0, 0, 0, 0.16))
+						button-glow()
 				> section
 					background-color white
 					box-shadow 0px 1px 3px 0px rgba(0, 0, 0, 0.44)
@@ -120,7 +141,6 @@
 				position absolute
 				top 11px
 				width 19px
-
 
 		> .signout
 			background url('../img/icn_power.png') no-repeat center

@@ -6,15 +6,24 @@
 		<nav>
 			<menu>
 				<li>
-					<a href="#" class="notifications" title="Notifications">Notifications</a>
+					<a href="#" class="notifications" title="Notifications"
+						{{#unreadNotifications}}data-unread="{{unreadNotifications}}"{{/unreadNotifications}}>
+						Notifications
+					</a>
 					<section class="bblm-notifications-menu"></section>
 				</li>
 				<li>
-					<a href="#" class="conversations" title="Conversations">Conversations</a>
+					<a href="#" class="conversations" title="Conversations"
+						{{#unreadConversations}}data-unread="{{unreadConversations}}"{{/unreadConversations}}>
+						Conversations
+					</a>
 					<section class="bblm-conversations-menu"></section>
 				</li>
 				<li>
-					<a href="#" class="sexytimes" title="Dates">Dates</a>
+					<a href="#" class="sexytimes" title="Dates"
+						{{#unreadSexyTimes}}data-unread="{{unreadSexyTimes}}"{{/unreadSexyTimes}}>
+						Dates
+					</a>
 					<section class="bblm-sexytimes-menu"></section>
 				</li>
 			</menu>

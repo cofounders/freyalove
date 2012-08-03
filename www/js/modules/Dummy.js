@@ -3,7 +3,7 @@ define([], function () {
 /* USERS */
 
 	// DIRECT FRIENDS
-	
+
 	var user1 = {
 		"id": "1",
 		"name": "Bette Porter",
@@ -92,9 +92,9 @@ define([], function () {
 		"likeSports": "",
 		"likeTv": "The L Word, Tom and Jerry, The Colbert Report, Knitting with Edna",
 		"likeQuotes": "La vida es un carnaval."};
-	
+
 	// FRIENDS OF FRIENDS
-	
+
 	var user10 = {
 		"id": "10",
 		"name": "Kenny Shen",
@@ -205,7 +205,7 @@ define([], function () {
 		"likeSports": "Chess, Golf, Cycling, Minigolf, Pool, Darts, Rugby, Underwater Hockey",
 		"likeTv": "The L Word, Tom and Jerry, The Colbert Report, Knitting with Edna",
 		"likeQuotes": "Jedem Tierchen sein Pläsierchen."};
-	
+
 	// OTHER USERS - Profile Summary
 	var user20 = {
 		"id": "20",
@@ -218,8 +218,8 @@ define([], function () {
 	var user22 = {
 		"id": "22",
 		"name": "Greta Howell",
-		"photo": "/dummy/user22.png"};		
-		
+		"photo": "/dummy/user22.png"};
+
 	// MYSELF
 		var user0 = {
 		"id": "0",
@@ -244,15 +244,15 @@ define([], function () {
 		"likeTv": "",
 		"likeQuotes": "Carpe Diem",
 		"friends": [user1, user2, user3, user4, user10, user11, user12, user12]};
-		
+
 	var allUsers = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user14, user20, user21, user22];
 	var allOthers = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user14, user20, user21, user22];
 	var allUsersById = {0: user0, 1: user1, 2: user2, 3: user3, 4: user4, 10: user10, 11: user11, 12: user12, 13: user13, 14: user14, 20: user20, 21: user21, 22: user22};
 	var allProfiles = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user14];
 
-		
+
 /* ACTIVITIES */
-	
+
 /*
 	var activity = {
 		"id": "0",
@@ -290,9 +290,9 @@ define([], function () {
 		"to": user0,
 		"type": "wink",
 		"seen": false};
-	
+
 	var allWinks = [wink0, wink1, wink2, wink3, wink4];
-		
+
 	var match0 = {
 		"id": "0",
 		"from": user2,
@@ -374,7 +374,7 @@ define([], function () {
 
 	var allSexytimes = [sexytime0, sexytime1, sexytime2, sexytime3, sexytime4];
 
-	
+
 
 /*
 
@@ -479,7 +479,7 @@ Question: { #fixed format
 	answer1: String,
 	answer2: String,
 	answer3: String,
-	answer4: String	
+	answer4: String
 }
 
 Answer: { #fixed format
@@ -491,25 +491,25 @@ Answer: { #fixed format
 
 <category>: String <about|identity|looks|lifestyle|relationship|background|personality|sexuality>
 */
-	
+
 	// random integer generator 0 <= x <= i | (i=1)
 	function randInt(i) {
 		if (isNaN(i))
 			i = 2;
 		return Math.floor(Math.random()*i);
 	};
-	
+
 	// randomiser sorting function
 	function randOrd(){
 		return (Math.round(Math.random())-0.5);
 	};
-	
+
 	// randomises an array
 	function randArray(array) {
 		return array.sort(randOrd);
 	};
-	
-		
+
+
 // PUBLIC FUNCTIONS
 	return {
 
@@ -525,24 +525,24 @@ Answer: { #fixed format
 		getProfile: function (id) {
 			return allUsersById[id];
 		},
-		
+
 		getRandomProfile: function() {
 			return allUsers[randInt(allUsers.length)];
 		},
-		
+
 	// CONNECTIONS
 		getFriends: function () {
 			return randArray(user0.friends);
 		},
-		
+
 		getMutualFriends: function () {
 			return randArray(user0.friends).splice(0, randInt(user0.friends.length));
 		},
-		
+
 		getFriendsOfFriends: function () {
 			return randArray([user10, user11, user12, user13, user14, user20, user21, user22]);
 		},
-		
+
 		getTopMatchmakers: function () {
 			return [user2, user1, user0, user4, user3];
 		},
@@ -583,12 +583,12 @@ Answer: { #fixed format
 				return randArray(allSexytimes);
 			return [];
 		},
-		
+
 		getRecentActivities: function () {
 			// TODO
 			return [];
 		},
-		
+
 		getWinks: function () {
 			return randArray(allWinks);
 		},
@@ -623,6 +623,14 @@ Answer: { #fixed format
 			return [];
 		},
 
+	// STREAM
+		getStreamUnread: function () {
+			return {
+				unreadNotifications: randInt(20),
+				unreadConversations: randInt(),
+				unreadSexyTimes: randInt(5)
+			};
+		}
 
 	};
 
