@@ -1,6 +1,6 @@
 {{#friend}}
-<img id="profile-pic" src="{{photo}}" alt="Your profile picture" />
-<div id="profile-snapshot">
+<img id="profile-pic" src="{{photo}}../dummy/user1.png" alt="My profile picture" />
+	<div id="profile-snapshot">
 	<h1>
 		{{name}}
 		{{#isMe}}
@@ -19,11 +19,9 @@
 			{{#isMe}}
 				<input type="checkbox" id="toggle-1">
 				<label for="toggle-1"></label>
-				<p>
 			{{/isMe}}
-				Born {{dateOfBirth}}
+				<p>Born {{dateOfBirth}}</p>
 			{{#isMe}}
-				</p>
 			{{/isMe}}
 		</li>
 		<li>
@@ -39,50 +37,41 @@
 			{{#isMe}}
 				<input type="checkbox" id="toggle-3">
 				<label for="toggle-3"></label>
-				<p>
 			{{/isMe}}
-				From {{origin}}
+				<p>From {{origin}}</p>
 			{{#isMe}}
-				</p>
 			{{/isMe}}
 		</li>
 		<li>
 			{{#isMe}}
 				<input type="checkbox" id="toggle-4">
 				<label for="toggle-4"></label>
-				<p>
 			{{/isMe}}
-				25 friends on FreyaLove
+				<p>25 friends on FreyaLove</p>
 			{{#isMe}}
-				</p>
 			{{/isMe}}
 		</li>
 		<li>
 			{{#isMe}}
 				<input type="checkbox" id="toggle-5">
 				<label for="toggle-5"></label>
-				<p>
 			{{/isMe}}
-				Speaks {{languages}}
+				<p>Speaks {{languages}}</p>
 			{{#isMe}}
-				</p>
 			{{/isMe}}
 		</li>
 		<li>
 			{{#isMe}}
 				<input type="checkbox" id="toggle-6">
 				<label for="toggle-6"></label>
-				<p>
 			{{/isMe}}
-				{{about}}
+				<p>About Me: {{about}}</p>
 			{{#isMe}}
-				</p>
 			{{/isMe}}
 		</li>	
 	</ul>
 </div>
 
-<!-- MY FACEBOOK LIKES -->
 <h2>My Likes from Facebook</h2>
 
 <p>{{likes}}</p>
@@ -101,7 +90,6 @@
 	<li><em>Inspirational People:</e{{likePeople}}</li>
 </ul>
 
-<!-- MY FACEBOOK QUOTES -->
 <h2>My Favourite Quotes from Facebook</h2>
 
 <ul id="profile-quotes">
@@ -109,13 +97,11 @@
 </ul>
 
 {{#isFriend}}
-	<!-- FRIENDS ON FL -->
 	<h2>{{firstName}}'s Friends on FreyaLove: {{friendCount}} <a href="/profile/{{from.id}}/friends" class="see-more" title="See all of {{firstName}}'s friends on FreyaLove">see all</a></h2>
 	
-	<ul class="bblm-user-preview-small"><!-- BBLM inserts here --></ul>
+	<ul class="bblm-user-preview-small"></ul>
 {{/isFriend}}
 
-<!-- MY QUESTIONNAIRE SUMMARY -->
 <h2>My Questionnaire</h2>
 <ul id="profile-questionnaire">
 	<li><em>About:</em> Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Fusce, Commodo, Sit Elit Sem, Commodo, Sit Elit Sem, Fusce</li>
