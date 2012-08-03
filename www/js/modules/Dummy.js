@@ -492,6 +492,24 @@ Answer: { #fixed format
 <category>: String <about|identity|looks|lifestyle|relationship|background|personality|sexuality>
 */
 
+	// Calculate years of age from a date to current time
+	function getAge(dateString) {
+		var today = new Date();
+		var birthDate = new Date(dateString);
+		var age = today.getFullYear() - birthDate.getFullYear();
+		var m = today.getMonth() - birthDate.getMonth();
+		if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+			age--;
+		}
+		return age;
+	}
+
+	allProfiles.forEach(function(profile) {
+		if (!profile.age) {
+			profile.age = getAge(profile.dateOfBirth);
+		}
+	});
+
 	// random integer generator 0 <= x <= i | (i=1)
 	function randInt(i) {
 		if (isNaN(i))
@@ -548,11 +566,7 @@ Answer: { #fixed format
 		},
 
 		getMyPossibleMatches: function () {
-			var matches = []
-			for (var i = 0; i < allWinks.length; i++) {
-				matches[i] = allWinks[i].from;
-			}
-			return randArray(matches);
+			return randArray(allProfiles).slice(0, 6);
 		},
 
 		getMatchingFriends: function () {

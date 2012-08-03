@@ -1,5 +1,5 @@
-define(['jQuery', 'Underscore', 'Backbone', 'app'],
-function($, _, Backbone, app) {
+define(['jQuery', 'Underscore', 'Backbone', 'app', 'modules/Dummy'],
+function($, _, Backbone, app, Dummy) {
 
 	var Collections = {},
 		Views = {};
@@ -14,6 +14,9 @@ function($, _, Backbone, app) {
 		},
 		parse: function (response) {
 			return response.matches;
+		},
+		fetch: function () {
+			this.reset(Dummy.getMyPossibleMatches());
 		}
 	});
 
@@ -24,6 +27,9 @@ function($, _, Backbone, app) {
 		},
 		parse: function (response) {
 			return response.matches;
+		},
+		fetch: function () {
+			this.reset(Dummy.getMatchingFriends());
 		}
 	});
 
