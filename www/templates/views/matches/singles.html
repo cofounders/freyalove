@@ -3,11 +3,11 @@
 		<h2>Hmmm... These Girls Look Good For You...</h2>
 	</header>
 	<article class="carousel">
-		<div class="canvas">
+		<div class="viewport">
 			<ol class="matches-singles-list">
 				{{#singles}}
 				<li{{#selected}} class="selected"{{/selected}}>
-					<img src="{{photo}}" alt="{{name}}" />
+					<img src="{{photo}}" alt="{{name}}" style="background-image: url({{photo}})" />
 
 					<h3><a href="/profile/{{id}}" id="name" title="Profile of {{name}}">{{name}}</a></h3>
 
@@ -20,14 +20,17 @@
 					{{/location}}
 
 					{{#likes}}
-					<h4>Likes</h4>
-					<p class="likes">{{likes}}</p>
+					<div class="likes">
+						<h5>Likes</h5>
+						<p>{{likes}}</p>
+					</div>
 					{{/likes}}
 
 					{{#about}}
-					<h4>About</h4>
-					<p class="about">{{about}}... <a href="/profile/{{id}}">see more</a>
-					</p>
+					<div class="about">
+						<h5>About</h5>
+						<p>{{about}}... <a href="/profile/{{id}}">see more</a></p>
+					</div>
 					{{/about}}
 
 					<a href="/profile/{{id}}" class="button cta" title="Profile of {{name}}">Check her out!</a>
@@ -36,7 +39,7 @@
 			</ol>
 		</div>
 		<ol class="bookmarks"></ol>
-		<a href="#" class="button flat previous"/>Previous</a>
-		<a href="#" class="button flat next"/>Next</a>
+		<a href="#" class="button flat previous">Previous</a>
+		<a href="#" class="button flat next">Next</a>
 	</article>
 </section>

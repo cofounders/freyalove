@@ -10,7 +10,7 @@ function($, _, Backbone, app, Dummy) {
 	Collections.Upcoming = Backbone.Collection.extend({
 		model: Model,
 		url: function () {
-			return app.api + 'users/sexytimes/';
+			return app.api + 'activities/sexytimes/';
 		},
 		parse: function (response) {
 			return response.sexytimes;

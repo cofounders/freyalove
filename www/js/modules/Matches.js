@@ -41,8 +41,43 @@ function($, _, Backbone, app, Dummy) {
 		cleanup: function () {
 			this.collection.off(null, null, this);
 		},
+		events: {
+			'click .previous': function (event) {
+				event.stopPropagation();
+				event.preventDefault();
+				if ($(event.target).is('.disabled')) return;
+				this.$('ol > .selected').removeClass()
+					.prev().addClass('selected')
+					.filter(':first-child').addClass('disabled');
+				this.slide();
+			},
+			'click .next': function (event) {
+				event.stopPropagation();
+				event.preventDefault();
+				if ($(event.target).is('.disabled')) return;
+				this.$('.selected').removeClass()
+					.next().addClass('selected')
+					.filter(':last-child').addClass('disabled');
+				this.slide();
+			}
+		},
+		// render: function (manage) {
+		// 	return manage(this).render();
+		// },
+		width: 230,
+		slide: function () {
+			var index = this.$('ol > .selected').index();
+
+			this.$('.viewport > ol').css('margin-left', (-1 * (index - 1) * this.width) + 'px');
+			// this.$('.viewport > ol').css('transform', 'translateX(' + (-1 * (index - 1) * this.width) + 'px)');
+
+			this.$('.previous')[index === 0 ? 'addClass' : 'removeClass']('disabled');
+			this.$('.next')[index === this.collection.length - 1 ? 'addClass' : 'removeClass']('disabled');
+		},
 		serialize: function () {
-			return {singles: this.collection.toJSON()};
+			var singles = this.collection.toJSON();
+			singles[1].selected = true;
+			return {singles: singles};
 		}
 	});
 

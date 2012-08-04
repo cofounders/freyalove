@@ -1,0 +1,113 @@
+.carousel
+	position relative
+
+	> .previous,
+	> .next
+		padding-top 240px
+		position absolute
+		text-transform uppercase
+		top 70px
+		width 150px
+		&:after, &:before
+			line-height 110%
+			vertical-align top
+		&.disabled
+			display none
+
+	> .previous
+		text-align left
+		left -5px
+		&:before
+			content '<'
+			padding 0 15px 0 0
+
+	> .next
+		text-align right
+		right -5px
+		&:after
+			content '>'
+			padding 0 0 0 15px
+
+	// > .bookmarks
+
+	> .viewport
+
+		> ol
+			padding 3px
+			translateX
+			-webkit-transform translateZ(0)
+			transition margin-left .5s ease-in-out
+			> li
+				background-color (rgba(246, 246, 246, 0.69)/2 + #dadada/2)
+				background-image linear-gradient(bottom, @background-color, (rgba(246, 246, 246, 0.69)/2 + white/2))
+				box-shadow inset 0px 1px 0px 0px white,
+					0px 1px 3px 0px rgba(0, 0, 0, 0.29)
+				margin 70px 10px 0 0
+				padding 10px
+				> *
+					display none
+				> img
+					background-size cover
+					background-repeat no-repeat
+					border-radius 2px
+					content ' '
+					display inline-block
+					-webkit-filter grayscale(1)
+					filter grayscale(1)
+					height 200px
+					vertical-align: top
+					width 200px
+
+				&.selected
+					height 400px
+					padding 15px
+					position absolute
+					width 440px
+					margin 0 0 0 (@width / -4)
+					z-index 1
+					> *
+						display inline-block
+					> img
+						-webkit-filter none
+						filter none
+						float left
+						margin -5px 15px 15px -5px
+					> h3
+						display block
+						> a
+							color #9f3647
+							display inline
+							font-weight bold
+					> div
+						display block
+						font-size 1rem
+						margin 1em 0
+						> h5
+							display inline
+							font-weight bold
+							&:after
+								content ': '
+						> p
+							display inline
+							margin 0
+							> a
+								font-weight bold
+					> .age, > .location
+						font-size 0.875rem //14px
+						margin: 0
+					> .age + .location:before
+						content: ', '
+					> h3 + .location:first-letter
+						text-transform uppercase
+					> .about
+						> p
+							height 50px
+							overflow hidden
+					> .button
+						bottom 10px
+						left 10%
+						position absolute
+						right 10%
+
+			> .selected + li
+				margin-left 220px
