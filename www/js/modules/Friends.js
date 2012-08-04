@@ -10,13 +10,14 @@ function($, _, Backbone, app, Facebook, Dummy) {
 			return app.api + 'users/' + this.id + '/profile/';
 		},
 		fetch: function () {
-			this.reset(+this.id === +app.session.id
+			this.clear({silent: true});
+			this.set(+this.id === +app.session.id
 				? Dummy.getMyProfile()
 				: Dummy.getRandomProfile()
 			);
 		}
 	});
-	
+
 	Models.UserSummary = Backbone.Model.extend({
 	});
 
