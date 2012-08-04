@@ -7,10 +7,18 @@
 
 	> .viewport
 		overflow hidden
+
+		> .empty
+			text-align center
+
 		> ol
+			// -webkit-transform translateZ(0)
+			transition margin-left .25s ease-in-out
 			white-space nowrap
+
 			> li
 				white-space normal
 				display inline-block
 				vertical-align top
+
 			// &.selected

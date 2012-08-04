@@ -1,4 +1,13 @@
-.carousel
+// @keyframes fadeIn {
+// 	from {
+// 		opacity: 0
+// 	}
+// 	to {
+// 		opacity: 1
+// 	}
+// }
+
+.matches-singles > .carousel
 	position relative
 
 	> .previous,
@@ -32,11 +41,10 @@
 
 	> .viewport
 
+		// > .empty
+
 		> ol
 			padding 3px
-			translateX
-			-webkit-transform translateZ(0)
-			transition margin-left .5s ease-in-out
 			> li
 				background-color (rgba(246, 246, 246, 0.69)/2 + #dadada/2)
 				background-image linear-gradient(bottom, @background-color, (rgba(246, 246, 246, 0.69)/2 + white/2))
@@ -59,7 +67,9 @@
 					width 200px
 
 				&.selected
+					// animation fadeIn .25s ease-in-out
 					height 400px
+					left 220px
 					padding 15px
 					position absolute
 					width 440px

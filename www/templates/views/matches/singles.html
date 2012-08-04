@@ -37,9 +37,12 @@
 				</li>
 				{{/singles}}
 			</ol>
+			{{^singles}}
+			<p class="empty">No suitable girls found yet. Try filling out your profile or inviting more friends.</p>
+			{{/singles}}
 		</div>
 		<ol class="bookmarks"></ol>
-		<a href="#" class="button flat previous">Previous</a>
-		<a href="#" class="button flat next">Next</a>
+		<a href="#" class="button flat previous {{^showPrevious}}disabled{{/showPrevious}}">Previous</a>
+		<a href="#" class="button flat next {{^showNext}}disabled{{/showNext}}">Next</a>
 	</article>
 </section>

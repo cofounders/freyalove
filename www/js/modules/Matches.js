@@ -61,9 +61,6 @@ function($, _, Backbone, app, Dummy) {
 				this.slide();
 			}
 		},
-		// render: function (manage) {
-		// 	return manage(this).render();
-		// },
 		width: 230,
 		slide: function () {
 			var index = this.$('ol > .selected').index();
@@ -72,12 +69,17 @@ function($, _, Backbone, app, Dummy) {
 			// this.$('.viewport > ol').css('transform', 'translateX(' + (-1 * (index - 1) * this.width) + 'px)');
 
 			this.$('.previous')[index === 0 ? 'addClass' : 'removeClass']('disabled');
-			this.$('.next')[index === this.collection.length - 1 ? 'addClass' : 'removeClass']('disabled');
+			this.$('.next')[(index === this.collection.length - 1) ? 'addClass' : 'removeClass']('disabled');
 		},
 		serialize: function () {
 			var singles = this.collection.toJSON();
-			singles[1].selected = true;
-			return {singles: singles};
+			if (singles.length === 1) singles[0].selected = true;
+			else if (singles.length > 1) singles[1].selected = true;
+			return {
+				showPrevious: singles.length > 1,
+				showNext: singles.length > 2,
+				singles: singles
+			};
 		}
 	});
 
