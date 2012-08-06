@@ -1,25 +1,27 @@
-<section class="panel winks-received" hidden>
+<section class="panel winks-received">
 	<header>
 		<h2>Hey, somebody winked at you!</h2>
 	</header>
-
-	<article>
-
-		<ul id="winked-list">
-			{{#winks}}
-			{{#from}}
-			<li>
-				<a href="/profile/{{id}}" title="View the profile of {{name}}">
-					<img src="{{photo}}" alt="{{name}}" />
-				</a>
-				<a href="/profile/{{id}}" title="View the profile of {{name}}">{{name}}</a>
-			</li>
-			{{/from}}
-			{{/winks}}
-		</ul>
-
-		<a href="#" class="button flat previous"/>Previous</a>
-		<a href="#" class="button flat next"/>Next</a>
-
+	<article class="carousel">
+		<div class="viewport">
+			<ol>
+				{{#items}}
+				{{#from}}
+				<li{{#selected}} class="selected"{{/selected}}>
+					<a href="/profile/{{id}}" title="Profile of {{name}}">
+						<img src="{{photo}}" alt="{{name}}" />
+						<h6>{{name}}</h6>
+					</a>
+				</li>
+				{{/from}}
+				{{/items}}
+			</ol>
+			{{^items}}
+			<p class="empty">No winks received. Go get your flirt on!</p>
+			{{/items}}
+		</div>
+		<ol class="bookmarks"></ol>
+		<a href="#" class="button flat previous {{^showPrevious}}disabled{{/showPrevious}}">Previous</a>
+		<a href="#" class="button flat next {{^showNext}}disabled{{/showNext}}">Next</a>
 	</article>
 </section>

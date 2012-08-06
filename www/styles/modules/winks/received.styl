@@ -1,8 +1,4 @@
-.matches-couples > header > h2
-	color darken(rgba(121, 121, 121, 0.92), 10%)
-	margin 1em 0 0.25em 0
-
-.matches-couples > .carousel
+.winks-received > .carousel
 	background-color rgba(0, 0, 0, 0.03)
 	border-radius 3px
 	box-shadow inset 0px 0px 1px 0px rgba(0, 0, 0, 0.3),
@@ -51,51 +47,33 @@
 			transition-duration .4s
 			> li
 				background-color (rgba(246, 246, 246, 0.69)/2 + #dadada/2)
-				background-image url(../img/btn_match.png),
-					linear-gradient(bottom, @background-color, (rgba(246, 246, 246, 0.69)/2 + white/2))
-				background-position center 40px, center
-				background-repeat no-repeat
+				background-image linear-gradient(bottom, @background-color, (rgba(246, 246, 246, 0.69)/2 + white/2))
 				box-shadow inset 0px 1px 0px 0px white,
 					0px 1px 3px 0px rgba(0, 0, 0, 0.29)
 				height 145px
-				margin-bottom 1px
-				margin-top 1px
+				margin 1px 31px 1px 0
 				position relative
-				width 285px
+				width 120px
 				> a
 					display inline-block
 					height 100%
 					width 100%
-					> .first,
-					> .second
-						display inline-block
-						position absolute
-						width 120px
-						vertical-align top
-						> img
-							height 100px
-							margin 10px 10px 0 10px
-							width 100px
-						> h5
-							color #9f3647
-							display block
-							font-weight bold
-							margin 5px 0 0 0
-							overflow hidden
-							padding 0 4px
-							text-align center
-							text-overflow ellipsis
-							white-space nowrap
-					> .first
-						left 0
-					> .second
-						right 0
-				&:nth-child(even)
-					margin-left 11px
-					margin-right 31px
-				&:nth-child(odd)
-					margin-left 31px
-					margin-right 11px
+					> img
+						height 100px
+						margin 10px 10px 0 10px
+						width 100px
+					> h6
+						color #9f3647
+						display block
+						font-weight bold
+						line-height 1
+						margin 5px 0 0 0
+						padding 0 4px
+						text-align center
+				&:nth-child(4n+1) // 1st, 5th, 9th, ...
+					margin-left 41px
+				&:nth-child(4n) // 4th, 8th, 12th, ...
+					margin-right 40px
 				&:hover
 					box-shadow inset 0px 1px 0px 0px white,
 						0px 2px 3px 0px rgba(0, 0, 0, 0.49)

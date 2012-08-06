@@ -1,5 +1,5 @@
-define(['jQuery', 'Underscore', 'Backbone', 'app', 'modules/Dummy'],
-function($, _, Backbone, app, Dummy) {
+define(['jQuery', 'Underscore', 'Backbone', 'app', 'modules/Carousel', 'modules/Dummy'],
+function($, _, Backbone, app, Carousel, Dummy) {
 
 	var Collections = {},
 		Views = {};
@@ -20,17 +20,11 @@ function($, _, Backbone, app, Dummy) {
 		}
 	});
 
-	Views.Received = Backbone.View.extend({
+	Views.Received = Carousel.extend({
 		template: 'winks/received',
-		initialize: function () {
-			this.collection.on('reset', this.render, this);
-		},
-		cleanup: function () {
-			this.collection.off(null, null, this);
-		},
-		serialize: function () {
-			return {winks: this.collection.toJSON()};
-		}
+		begin: 0,
+		span: 4,
+		width: 654 / 4
 	});
 
 	return {

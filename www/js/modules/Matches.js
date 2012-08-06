@@ -40,14 +40,14 @@ function($, _, Backbone, app, Carousel, Dummy) {
 		offset: function (index) {
 			return -1 * (index - 1) * 230;
 		}
-	}),
+	});
 
 	Views.Couples = Carousel.extend({
 		template: 'matches/couples',
 		begin: 0,
 		span: 2,
 		width: 654 / 2
-	}),
+	});
 
 	Views.Matchmaker = Backbone.View.extend({
 		template: 'matches/matchmaker',
