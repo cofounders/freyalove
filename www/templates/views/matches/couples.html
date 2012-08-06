@@ -2,7 +2,38 @@
 	<header>
 		<h2>Aren’t they just cute together? Introduce them!</h2>
 	</header>
-	<article>
+	<article class="carousel">
+		<div class="viewport">
+			<ol class="matches-couples-list">
+				{{#items}}
+				<li{{#selected}} class="selected"{{/selected}}>
+					<a href="/matchmaker/{{#first}}{{id}}{{/first}}/with/{{#second}}{{id}}{{/second}}"
+						title="Compare the profiles of {{#first}}{{name}}{{/first}} and {{#second}}{{name}}{{/second}}">
+						{{#first}}
+						<div class="first">
+							<img src="{{photo}}" alt="{{name}}" />
+							<h5>{{name}}</h5>
+						</div>
+						{{/first}}
+						{{#second}}
+						<div class="second">
+							<img src="{{photo}}" alt="{{name}}" />
+							<h5>{{name}}</h5>
+						</div>
+						{{/second}}
+					</a>
+				</li>
+				{{/items}}
+			</ol>
+			{{^items}}
+			<p class="empty">No suitable matches found. Try adding a few more friends.</p>
+			{{/items}}
+		</div>
+		<ol class="bookmarks"></ol>
+		<a href="#" class="button flat previous {{^showPrevious}}disabled{{/showPrevious}}">Previous</a>
+		<a href="#" class="button flat next {{^showNext}}disabled{{/showNext}}">Next</a>
+	</article>
+	<article hidden>
 		<ul id="matches-couples-list">
 			<div class="match-preview small">
 				<div class="match-preview-profile">

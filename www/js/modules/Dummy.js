@@ -1,4 +1,4 @@
-define([], function () {
+define(['Underscore'], function (_) {
 
 /* USERS */
 
@@ -250,6 +250,17 @@ define([], function () {
 	var allUsersById = {0: user0, 1: user1, 2: user2, 3: user3, 4: user4, 10: user10, 11: user11, 12: user12, 13: user13, 14: user14, 20: user20, 21: user21, 22: user22};
 	var allProfiles = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user14];
 
+	var userToUserSummary = function (user) {
+			return {
+				id: user.id,
+				name: user.name,
+				photo: user.photo
+			};
+		}
+	var allUsersSummary = allUsers.map(userToUserSummary);
+	var allOthersSummary = allOthers.map(userToUserSummary);
+	// var allUsersByIdSummary = allUsersById.map(userToUserSummary);
+	var allProfilesSummary = allProfiles.map(userToUserSummary);
 
 /* ACTIVITIES */
 
@@ -524,7 +535,7 @@ Answer: { #fixed format
 
 	// randomises an array
 	function randArray(array) {
-		return array.sort(randOrd);
+		return _.shuffle(array);
 	};
 
 
@@ -570,8 +581,8 @@ Answer: { #fixed format
 		},
 
 		getMatchingFriends: function () {
-			var first = randArray(allOthers),
-				second = randArray(allOthers),
+			var first = randArray(allOthersSummary),
+				second = randArray(allOthersSummary),
 				matchProposals = [];
 			for (var i = 0; i < first.length; i++) {
 				matchProposals.push({
