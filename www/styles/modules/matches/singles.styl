@@ -8,7 +8,7 @@
 // }
 
 .matches-singles > .carousel
-	height 400px
+	height 435px
 	position relative
 
 	> .previous,
@@ -76,6 +76,15 @@
 					width 440px
 					margin 0 0 0 (@width / -4)
 					z-index 1
+					&:after
+						background -webkit-radial-gradient(center, ellipse closest-side, rgba(0, 0, 0, 0.225) 0%, rgba(0, 0, 0, 0) 100%);
+						background radial-gradient(ellipse at center,  rgba(0, 0, 0, 0.225) 0%, rgba(0, 0, 0, 0) 100%);
+						bottom -35px
+						content ' '
+						height 30px
+						left 0
+						position absolute
+						width 100%
 					> *
 						display inline-block
 					> img
