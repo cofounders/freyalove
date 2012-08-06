@@ -570,13 +570,16 @@ Answer: { #fixed format
 		},
 
 		getMatchingFriends: function () {
-			var leftArr = randArray(allOthers);
-			var rightArr = randArray(allOthers);
-			var matchArr = []
+			var first = randArray(allOthers),
+				second = randArray(allOthers),
+				matchProposals = [];
 			for (var i = 0; i < leftArr.length; i++) {
-				matchArr[i] = [leftArr[i],rightArr[i]];
+				matchProposals.push({
+					first: first[i],
+					second: second[i]
+				});
 			}
-			return matchArr;
+			return matchProposals;
 		},
 
 		getFacebookFriends: function () {
