@@ -33,7 +33,6 @@ button-border-raised(stroke, inner-shadow, drop-shadow)
 button-face(base, pattern, color)
 	background-color base
 	background-image pattern
-	background-size contain
 	color color
 
 .button
@@ -89,6 +88,7 @@ button-face(base, pattern, color)
 		button-face(#db4648, url('../img/bg_btn_red.jpg'), white)
 		button-border-raised(rgba(159, 54, 71, 1), rgba(255, 255, 255, 0.22), rgba(0, 0, 0, 0.16))
 		button-glow()
+		background-size contain
 		border-radius 5px
 		height 45px
 		font-size 25px
