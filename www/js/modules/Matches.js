@@ -36,11 +36,15 @@ function($, _, Backbone, app, Carousel, Dummy) {
 	Views.Singles = Carousel.extend({
 		template: 'matches/singles',
 		width: 230,
+		span: 1,
+		begin: 1
 	}),
 
 	Views.Couples = Carousel.extend({
 		template: 'matches/couples',
-		width: 230,
+		width: 215,
+		span: 2,
+		begin: 0
 	}),
 
 	Views.Matchmaker = Backbone.View.extend({

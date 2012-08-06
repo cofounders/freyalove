@@ -28,21 +28,26 @@ function($, _, Backbone) {
 			}
 		},
 		slide: function () {
-			var index = this.$('ol > .selected').index();
-
-			this.$('.viewport > ol').css('margin-left', (-1 * (index - 1) * this.width) + 'px');
-			// this.$('.viewport > ol').css('transform', 'translateX(' + (-1 * (index - 1) * this.width) + 'px)');
-
-			this.$('.previous')[index === 0 ? 'addClass' : 'removeClass']('disabled');
-			this.$('.next')[(index === this.collection.length - 1) ? 'addClass' : 'removeClass']('disabled');
+			var index = this.$('ol > .selected').index(),
+				offsetLeft = -1 * (index - 1) * this.width,
+				setDisabled = function (element, state) {
+					element[state ? 'addClass' : 'removeClass']('disabled');
+				};
+			this.$('.viewport > ol').css('margin-left', offsetLeft + 'px');
+			// this.$('.viewport > ol').css('transform', 'translateX(' + offsetLeft + 'px)');
+			setDisabled(this.$('.previous'), index === 0);
+			setDisabled(this.$('.next'), index === this.collection.length - 1);
 		},
 		serialize: function () {
 			var items = this.collection.toJSON();
-			if (items.length === 1) items[0].selected = true;
-			else if (items.length > 1) items[1].selected = true;
+				selectItem = function (item) { item.selected = true; },
+				forumula = function (a, b) { return b * (Math.ceil(a/b) - 1); },
+				lastAllowed = forumula(items.length, this.span),
+				begin = Math.max(0, Math.min(this.begin, lastAllowed));
+			items.slice(begin, begin + this.span).forEach(selectItem);
 			return {
-				showPrevious: items.length > 1,
-				showNext: items.length > 2,
+				showPrevious: begin > 0,
+				showNext: begin < items.length - 2,
 				items: items
 			};
 		}
