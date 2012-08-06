@@ -573,7 +573,7 @@ Answer: { #fixed format
 			var first = randArray(allOthers),
 				second = randArray(allOthers),
 				matchProposals = [];
-			for (var i = 0; i < leftArr.length; i++) {
+			for (var i = 0; i < first.length; i++) {
 				matchProposals.push({
 					first: first[i],
 					second: second[i]
