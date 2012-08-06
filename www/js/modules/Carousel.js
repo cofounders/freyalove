@@ -13,7 +13,7 @@ function($, _, Backbone) {
 				event.preventDefault();
 				if ($(event.target).is('.disabled')) return;
 				this.$('ol > .selected').removeClass()
-					.prev().addClass('selected')
+					.first().prevAll().slice(0, this.span).addClass('selected')
 					.filter(':first-child').addClass('disabled');
 				this.slide();
 			},
@@ -22,14 +22,17 @@ function($, _, Backbone) {
 				event.preventDefault();
 				if ($(event.target).is('.disabled')) return;
 				this.$('.selected').removeClass()
-					.next().addClass('selected')
+					.last().nextAll().slice(0, this.span).addClass('selected')
 					.filter(':last-child').addClass('disabled');
 				this.slide();
 			}
 		},
+		offset: function (index) {
+			return -1 * index * this.width;
+		},
 		slide: function () {
-			var index = this.$('ol > .selected').index(),
-				offsetLeft = -1 * (index - 1) * this.width,
+			var index = this.$('ol > .selected').first().index(),
+				offsetLeft = this.offset(index),
 				setDisabled = function (element, state) {
 					element[state ? 'addClass' : 'removeClass']('disabled');
 				};

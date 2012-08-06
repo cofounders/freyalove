@@ -1,5 +1,106 @@
+.matches-couples > header > h2
+	color darken(rgba(121, 121, 121, 0.92), 10%)
+	margin 1em 0 0.25em 0
+
 .matches-couples > .carousel
 	background-color rgba(0, 0, 0, 0.03)
 	border-radius 3px
+	box-shadow inset 0px 0px 1px 0px rgba(0, 0, 0, 0.3),
+		0px 1px 3px 0px rgba(255, 255, 255, 0.7)
 	height 210px
+	margin 0 0 34px 0
 	position relative
+	width 654px
+
+	> .previous,
+	> .next
+		height 100%
+		overflow hidden
+		position absolute
+		text-indent -999em
+		top 0
+		width 40px
+		&:after, &:before
+			font-size 1.5em
+			padding-top 60px
+			position absolute
+			text-indent 0
+		&.disabled
+			display none
+
+	> .previous
+		left -10px
+		&:before
+			content '<'
+			left 21px
+
+	> .next
+		right -10px
+		&:after
+			content '>'
+			right 21px
+
+	// > .bookmarks
+
+	> .viewport
+
+		// > .empty
+
+		> ol
+			margin 21px 0 4px 0
+			transition-duration .4s
+			> li
+				background-color (rgba(246, 246, 246, 0.69)/2 + #dadada/2)
+				background-image url(../img/btn_match.png),
+					linear-gradient(bottom, @background-color, (rgba(246, 246, 246, 0.69)/2 + white/2))
+				background-position center 40px, center
+				background-repeat no-repeat
+				box-shadow inset 0px 1px 0px 0px white,
+					0px 1px 3px 0px rgba(0, 0, 0, 0.29)
+				height 145px
+				margin-top 1px
+				margin-bottom 1px
+				position relative
+				width 285px
+				> a
+					display inline-block
+					height 100%
+					width 100%
+					> .first,
+					> .second
+						display inline-block
+						position absolute
+						width 120px
+						vertical-align top
+						> img
+							height 100px
+							margin 10px 10px 0 10px
+							width 100px
+						> h5
+							color #9f3647
+							display block
+							font-weight bold
+							margin 5px 0 0 0
+							overflow hidden
+							padding 0 4px
+							text-align center
+							text-overflow ellipsis
+							white-space nowrap
+					> .first
+						left 0
+					> .second
+						right 0
+				&:nth-child(even)
+					margin-left 11px
+					margin-right 31px
+				&:nth-child(odd)
+					margin-left 31px
+					margin-right 11px
+				&:hover
+					box-shadow inset 0px 1px 0px 0px white,
+						0px 2px 3px 0px rgba(0, 0, 0, 0.49)
+					margin-top 0px
+					margin-bottom 2px
+				&:active
+					margin-top 2px
+					margin-bottom 0px
