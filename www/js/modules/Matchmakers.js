@@ -15,7 +15,7 @@ function($, _, Backbone, app, Dummy) {
 		parse: function (response) {
 			return response.matchmakers;
 		},
-		fetch: function () {
+		dummy: function () {
 			this.reset(Dummy.getTopMatchmakers());
 		}
 	});

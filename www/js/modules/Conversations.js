@@ -38,7 +38,7 @@ function($, _, Backbone, app,
 			return app.api + 'conversations/';
 		},
 		parse: checkType,
-		fetch: function () {
+		dummy: function () {
 			this.reset(Dummy.getMessages());
 		}
 	});
@@ -54,7 +54,7 @@ function($, _, Backbone, app,
 			return app.api + 'conversations/' + this.options.to.id + '/messages/';
 		},
 		parse: checkType,
-		fetch: function () {
+		dummy: function () {
 			this.reset(Dummy.getMessages());
 		}
 	});
