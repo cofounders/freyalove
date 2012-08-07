@@ -6,22 +6,24 @@
 	<article>
 		<ol>
 			{{#conversations}}
-			<li class="{{#UNREAD}}un{{/UNREAD}}read">
-				{{#lastMessage}}
-				{{#from}}
-				<a href="/profile/{{id}}" class="photo" title="Profile of {{name}}">
+			{{#lastMessage}}{{#from}}
+			<a href="/conversations/{{id}}">
+			{{/from}}{{/lastMessage}}
+				<li class="{{#UNREAD}}un{{/UNREAD}}read">
+					{{#lastMessage}}
+					{{#from}}
 					<img src="{{photo}}" alt="{{name}}" />
-				</a>
-				{{/from}}
-				<div class="conversation-content">
-					<p>
-						{{#from}}<a href="/profile/{{id}}" class="name" title="Profile of {{name}}">{{name}}</a>{{/from}}
-						<span class="when">{{when}}</span>
-					</p>
-					<p>{{body}}</p>
-				</div>
-				{{/lastMessage}}
-			</li>
+					{{/from}}
+					<div class="conversation-content">
+						<p>
+							{{#from}}{{name}}{{/from}}
+							<span class="when">{{when}}</span>
+						</p>
+						<p>{{body}}</p>
+					</div>
+					{{/lastMessage}}
+				</li>
+			</a>
 			{{/conversations}}
 			{{^conversations}}
 			<li class="empty">
