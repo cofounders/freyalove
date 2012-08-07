@@ -44,8 +44,8 @@ function($, _, Backbone) {
 		serialize: function () {
 			var items = this.collection.toJSON();
 				selectItem = function (item) { item.selected = true; },
-				forumula = function (a, b) { return b * (Math.ceil(a/b) - 1); },
-				lastAllowed = forumula(items.length, this.span),
+				formula = function (a, b) { return b * (Math.ceil(a/b) - 1); },
+				lastAllowed = formula(items.length, this.span),
 				begin = Math.max(0, Math.min(this.begin, lastAllowed));
 			items.slice(begin, begin + this.span).forEach(selectItem);
 			return {
