@@ -15,7 +15,7 @@ function($, _, Backbone, app, Carousel, Dummy) {
 		parse: function (response) {
 			return response.winks;
 		},
-		fetch: function () {
+		dummy: function () {
 			this.reset(Dummy.getWinks());
 		}
 	});

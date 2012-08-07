@@ -1,12 +1,14 @@
 define(
-['jQuery', 'app', 'router', 'Facebook', 'modules/Session/Facebook', 'modules/Stream'],
-function ($, app, Router, Facebook, Session, Stream) {
+['jQuery', 'app', 'router', 'Facebook', 'modules/Session/Facebook', 'modules/Stream', 'plugins/backbone.dummysync'],
+function ($, app, Router, Facebook, Session, Stream, DummySync) {
 
 	var targetUrl = location.href.substr(location.href.indexOf('/', 8));
 
 	app.router = new Router();
 	app.session = new Session();
 	app.stream = new Stream();
+
+	DummySync.intercept = app.session.get('dummy');
 
 	app.session
 		.on('signIn', function () {
@@ -20,6 +22,9 @@ function ($, app, Router, Facebook, Session, Stream) {
 		.on('signOut', function () {
 			app.stream.pause();
 			Backbone.history.navigate(app.root, true);
+		})
+		.on('change:dummy', function () {
+			DummySync.intercept = app.session.get('dummy');
 		});
 
 	Facebook.init({

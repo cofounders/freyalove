@@ -73,7 +73,11 @@
 
 - After any modificatoions to the `*.styl` files, or after a `git pull`, remember to compile the Stylus files.
 
-        stylus --watch ./styles/app.styl ./styles/app.styl
+        stylus --watch ./styles/app.styl
+
+- Use the Backbone.DummySync plugin to load mock data while building the UI styling. To activate DummySync, run this in your browser console:
+
+        require('app').session.save('dummy', true)
 
 - Learn these frameworks:
   - [RequireJS](http://requirejs.org/)

@@ -15,7 +15,7 @@ function($, _, Backbone, app, Carousel, Dummy) {
 		parse: function (response) {
 			return response.matches;
 		},
-		fetch: function () {
+		dummy: function () {
 			this.reset(Dummy.getMyPossibleMatches());
 		}
 	});
@@ -28,7 +28,7 @@ function($, _, Backbone, app, Carousel, Dummy) {
 		parse: function (response) {
 			return response.matches;
 		},
-		fetch: function () {
+		dummy: function () {
 			this.reset(Dummy.getMatchingFriends());
 		}
 	});

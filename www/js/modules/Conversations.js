@@ -57,6 +57,22 @@ function($, _, Backbone, app,
 		}
 	});
 
+	Collections.Conversation = Backbone.Collection.extend({
+		model: Models.Message,
+		initialize: function (models, options) {
+			this.options = _.extend({
+				to: new Friends.Models.UserSummary()
+			}, options);
+		},
+		url: function () {
+			return app.api + 'conversations/' + this.options.to.id + '/messages/';
+		},
+		parse: checkType,
+		dummy: function () {
+			this.reset(Dummy.getMessages());
+		}
+	});
+
 	Views.Conversation = Backbone.View.extend({
 		template: 'conversations/conversation',
 		initialize: function () {

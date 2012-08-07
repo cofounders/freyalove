@@ -9,7 +9,7 @@ function($, _, Backbone, app, Facebook, Dummy) {
 		url: function () {
 			return app.api + 'users/' + this.id + '/profile/';
 		},
-		fetch: function () {
+		dummy: function () {
 			this.clear({silent: true});
 			this.set(+this.id === +app.session.id
 				? Dummy.getMyProfile()
@@ -29,7 +29,7 @@ function($, _, Backbone, app, Facebook, Dummy) {
 		parse: function (response) {
 			return response.friends;
 		},
-		fetch: function () {
+		dummy: function () {
 			this.reset(Dummy.getFriends());
 		}
 	});
@@ -46,7 +46,7 @@ function($, _, Backbone, app, Facebook, Dummy) {
 		parse: function (response) {
 			return response.friends;
 		},
-		fetch: function () {
+		dummy: function () {
 			this.reset(Dummy.getMutualFriends());
 		}
 	});
@@ -62,7 +62,7 @@ function($, _, Backbone, app, Facebook, Dummy) {
 		parse: function (response) {
 			return response.friends;
 		},
-		fetch: function () {
+		dummy: function () {
 			this.reset(Dummy.getFriends());
 		}
 	});

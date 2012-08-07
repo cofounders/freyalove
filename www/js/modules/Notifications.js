@@ -23,7 +23,7 @@ function($, _, Backbone, app, Dummy) {
 				return notification;
 			});
 		},
-		fetch: function () {
+		dummy: function () {
 			this.reset(Dummy.getNotifications());
 		}
 	});

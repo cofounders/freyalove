@@ -17,7 +17,7 @@ function($, _, Backbone, app, Dummy) {
 		parse: function (response) {
 			return response.unread;
 		},
-		fetch: function () {
+		dummy: function () {
 			this.set(Dummy.getStreamUnread());
 		}
 	});
