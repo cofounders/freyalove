@@ -1,35 +1,51 @@
 .conversations-conversation
 	header
-		position: relative
+		position relative
 		&:after
 			sidebar-heading-underline()
 		h2
-			text-align: left
-			text-transform: none
-			display: inline-block
-			margin: 0 0 10px 0
+			text-align left
+			text-transform none
+			display inline-block
+			margin 0 0 10px 0
 		a
-			right: 0
-			display: inline-block
-			top: 0
-			position: absolute
+			right 0
+			display inline-block
+			top 0
+			position absolute
 	article
+		font-size 1rem
+		ol
+			margin 0 0 20px 0
 		li
-			margin: 20px 0 0 0
-			font-size: 1rem
-			list-style-type: none
+			margin 20px 0 0 0
+			font-size 1rem
+			list-style-type none
 			&.unread
 				tray()
 			.conversation-content
-				display: inline-block
-				width: 585px
-				vertical-align: top
+				display inline-block
+				width 585px
+				vertical-align top
 				p
-					vertical-align: top
-					margin: 0
+					vertical-align top
+					margin 0
 					span.when
-						font-style: italic
+						font-style italic
 		img
 			profile-image()
-			display: inline-block
-			margin: 0 10px 0 0
+			display inline-block
+			margin 0 10px 0 0
+		textarea
+			width 595px
+			height 100px
+			resize vertical
+			border 1px solid #ccc
+			outline none
+			padding 10px
+			border-radius 3px
+			font 1rem Bariol, Helvetica, Arial, sans-serif
+			color #444
+			margin: 0 5px 0 0
+		.button
+			border: none
