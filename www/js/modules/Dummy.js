@@ -459,7 +459,8 @@ var message1 = {
 		from: user22,
 		to: user21,
 		body: 'What could possibly go wrong?',
-		status: ConversationStatus.UNREAD
+		status: ConversationStatus.UNREAD,
+		when: '2 days ago'
 	};
 
 var conversationSummary1 = {
