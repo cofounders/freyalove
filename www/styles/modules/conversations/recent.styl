@@ -1,0 +1,31 @@
+.conversations-conversation
+	header
+		position: relative
+		&:after
+			sidebar-heading-underline()
+		h2
+			text-align: left
+			text-transform: none
+			display: inline-block
+			margin: 0 0 10px 0
+		a
+			right: 0
+			display: inline-block
+			top: 0
+			position: absolute
+	article
+		li
+			margin: 20px 0 0 0
+		img
+			profile-image()
+			display: inline-block
+			margin: 0 10px 0 0
+		.conversation-content
+			display: inline-block
+			width: 600px
+			vertical-align: top
+			p
+				vertical-align: top
+				margin: 0
+				span.when
+					font-style: italic
