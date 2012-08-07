@@ -1,10 +1,7 @@
 <section class="conversations-conversation">
 	<header>
 		<h2>Inbox</h2>
-		<menu>
-			<li><a href="#" class="button mark-read" title="Mark all conversations as read">Mark all as Read</a></li>
-			<li><a href="#" class="button archive" title="Start a new conversation with someone">New Conversation</a></li>
-		</menu>
+		<a href="#" class="button archive" title="Start a new conversation with someone">New Conversation</a>
 	</header>
 	<article>
 		<ol>
@@ -16,11 +13,13 @@
 					<img src="{{photo}}" alt="{{name}}" />
 				</a>
 				{{/from}}
-				<p>
-					{{#from}}<a href="/profile/{{id}}" class="name" title="Profile of {{name}}">{{name}}</a>{{/from}}
-					<span class="when">{{when}}</span>
-					<span class="body">{{body}}</span>
-				</p>
+				<div class="conversation-content">
+					<p>
+						{{#from}}<a href="/profile/{{id}}" class="name" title="Profile of {{name}}">{{name}}</a>{{/from}}
+						<span class="when">{{when}}</span>
+					</p>
+					<p>{{body}}</p>
+				</div>
 				{{/lastMessage}}
 			</li>
 			{{/conversations}}
