@@ -444,7 +444,7 @@ var message1 = {
 		to: user21,
 		body: 'Well, they call me the Doctor. I don\'t know why.',
 		status: ConversationStatus.UNREAD,
-		when: 'todat'
+		when: 'today'
 	},
 	message4 = {
 		from: user22,
@@ -639,6 +639,23 @@ Answer: { #fixed format
 
 		getMessages: function () {
 			return [conversationSummary1, conversationSummary2];
+		},
+
+		getConversation: function () {
+			return {
+				id: '123',
+				status: ConversationStatus.UNREAD,
+				participants: [
+					message4.to,
+					message4.from
+				],
+				messages: [
+					message3,
+					message4,
+					message5,
+					message6
+				]
+			};
 		},
 
 		getUnreadMessages: function () {

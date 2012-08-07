@@ -1,14 +1,9 @@
 <section class="conversations-conversation">
 	<header>
-		<h2>Conversation with {{#to}}{{name}}{{/to}}</h2>
-		<menu>
-			<li><a href="#" class="button mark-read" title="Mark conversation read">Mark as Read</a></li>
-			<li><a href="#" class="button archive" title="Archive conversation">Archive</a></li>
-			<li><a href="#" class="button delete" title="Delete conversation">Delete</a></li>
-		</menu>
+		<h2>Conversation with {{#participants}}{{name}}{{/participants}}</h2>
 	</header>
 	<article>
-		<ul>
+		<ol>
 			{{#messages}}
 			<li class="{{#UNREAD}}un{{/UNREAD}}read">
 				{{#from}}
@@ -26,10 +21,10 @@
 				<p>Enter a message and press <em>Send</em> to start the conversation.</p>
 			</li>
 			{{/messages}}
-		</ul>
+		</ol>
 		<form>
 			<textarea placeholder="Enter a message..."></textarea>
-			<input type="submit" name="Send" />
+			<input type="submit" name="Send" value="Send"/>
 		</form>
 	</article>
 </section>

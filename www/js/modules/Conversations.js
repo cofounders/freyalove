@@ -24,6 +24,20 @@ function($, _, Backbone, app,
 		};
 
 	Models.Conversation = Backbone.Model.extend({
+		initialize: function (options) {
+			this.options = _.extend({
+				to: new Friends.Models.UserSummary()
+			}, options);
+		},
+		url: function () {
+			return app.api + 'conversations/with/' + this.options.to.id + '/';
+		},
+		parse: checkType,
+		dummy: function () {
+			var dummy = Dummy.getConversation();
+			dummy.participants[0].id = app.session.id;
+			this.set(dummy);
+		}
 	});
 
 	Models.ConversationSummary = Backbone.Model.extend({
@@ -38,23 +52,7 @@ function($, _, Backbone, app,
 			return app.api + 'conversations/';
 		},
 		parse: checkType,
-		fetch: function () {
-			this.reset(Dummy.getMessages());
-		}
-	});
-
-	Collections.Conversation = Backbone.Collection.extend({
-		model: Models.Message,
-		initialize: function (models, options) {
-			this.options = _.extend({
-				to: new Friends.Models.UserSummary(),
-			}, options);
-		},
-		url: function () {
-			return app.api + 'conversations/' + this.options.to.id + '/messages/';
-		},
-		parse: checkType,
-		fetch: function () {
+		dummy: function () {
 			this.reset(Dummy.getMessages());
 		}
 	});
@@ -62,13 +60,18 @@ function($, _, Backbone, app,
 	Views.Conversation = Backbone.View.extend({
 		template: 'conversations/conversation',
 		initialize: function () {
-			this.collection.on('reset', this.render, this);
+			this.model.on('change', this.render, this);
 		},
 		cleanup: function () {
-			this.collection.off(null, null, this);
+			this.model.off(null, null, this);
 		},
 		serialize: function () {
-			return {messages: this.collection.toJSON()};
+			var context = this.model.toJSON(),
+				someoneElse = function (participant) {
+					return participant.id !== app.session.id;
+				};
+			context.participants = _.filter(context.participants, someoneElse);
+			return context;
 		}
 	});
 

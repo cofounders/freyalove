@@ -55,13 +55,13 @@ define([
 		},
 
 		conversation: function (id) {
-			var conversation = new Conversations.Collections.Conversation(null, {
+			var conversation = new Conversations.Models.Conversation({
 					to: new Friends.Models.UserSummary({id: id})
 				});
 			app.useLayout('conversation')
 				.setViews({
 					'.bblm-conversations-conversation': new Conversations.Views.Conversation({
-						collection: conversation
+						model: conversation
 					}),
 					'.bblm-sidebar-panels': new Sidebar.Views.Panels(),
 					'.bblm-header-menu': new Header.Views.Menu(),
