@@ -7,13 +7,19 @@
 			{{#messages}}
 			<li class="{{#UNREAD}}un{{/UNREAD}}read">
 				{{#from}}
-				<a href="/profile/{{id}}" title="Profile of {{name}}">
-					<img src="{{photo}}" alt="{{name}}" />
-				</a> says:
-				<a href="/profile/{{id}}" title="Profile of {{name}}">{{name}}</a> says:
+					<a href="/profile/{{id}}" title="Profile of {{name}}">
+						<img src="{{photo}}" alt="{{name}}" />
+					</a>
 				{{/from}}
-				<span class="when">{{when}}</span>
-				<p class="body">{{body}}</p>
+				<div class="conversation-content">
+					<p>
+						{{#from}}
+							<a href="/profile/{{id}}" title="Profile of {{name}}">{{name}}</a>
+						{{/from}}
+						<span class="when">{{when}}</span>
+					</p>
+					<p class="body">{{body}}</p>
+				</div>
 			</li>
 			{{/messages}}
 			{{^messages}}

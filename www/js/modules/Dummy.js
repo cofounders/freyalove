@@ -436,7 +436,7 @@ var message1 = {
 		from: user21,
 		to: user20,
 		body: 'I won\'t stand for it. Not now, not ever, do you understand me?!',
-		status: ConversationStatus.READ,
+		status: ConversationStatus.UNREAD,
 		when: 'yesterday'
 	},
 	message3 = {
@@ -450,7 +450,7 @@ var message1 = {
 		from: user22,
 		to: user21,
 		body: 'All I\'ve got to do is pass as an ordinary human being. Simple. What could possibly go wrong?',
-		status: ConversationStatus.UNREAD,
+		status: ConversationStatus.READ,
 		when: 'yesterday'
 	},
 	message5 = {
@@ -464,7 +464,7 @@ var message1 = {
 		from: user22,
 		to: user21,
 		body: 'What could possibly go wrong?',
-		status: ConversationStatus.UNREAD,
+		status: ConversationStatus.READ,
 		when: '2 days ago'
 	};
 

@@ -15,8 +15,8 @@ function($, _, Backbone, app,
 			result[value] = key;
 			return result;
 		}, {}),
-		checkType = function (response) {
-			return _.map(response.conversations || [], function (conversation) {
+		checkType = function (conversations) {
+			return _.map(conversations || [], function (conversation) {
 				var label = typeById[conversation.status];
 				conversation[label] = true;
 				return conversation;
@@ -32,11 +32,14 @@ function($, _, Backbone, app,
 		url: function () {
 			return app.api + 'conversations/with/' + this.options.to.id + '/';
 		},
-		parse: checkType,
+		parse: function (response) {
+			response.messages = checkType(response.messages);
+			return response;
+		},
 		dummy: function () {
-			var dummy = Dummy.getConversation();
-			dummy.participants[0].id = app.session.id;
-			this.set(dummy);
+			var conversation = Dummy.getConversation();
+			conversation.participants[0].id = app.session.id;
+			this.set(this.parse(conversation));
 		}
 	});
 
@@ -53,23 +56,7 @@ function($, _, Backbone, app,
 		},
 		parse: checkType,
 		dummy: function () {
-			this.reset(Dummy.getMessages());
-		}
-	});
-
-	Collections.Conversation = Backbone.Collection.extend({
-		model: Models.Message,
-		initialize: function (models, options) {
-			this.options = _.extend({
-				to: new Friends.Models.UserSummary()
-			}, options);
-		},
-		url: function () {
-			return app.api + 'conversations/' + this.options.to.id + '/messages/';
-		},
-		parse: checkType,
-		dummy: function () {
-			this.reset(Dummy.getMessages());
+			this.reset(this.parse(Dummy.getMessages()));
 		}
 	});
 
