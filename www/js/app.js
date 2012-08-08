@@ -1,12 +1,12 @@
 define([
 	'jQuery',
 	'Underscore',
-	'Mustache',
+	'Handlebars',
 	'Backbone',
 	'plugins/backbone.layoutmanager',
 	'constants',
 	'modules/Dummy'
-], function ($, _, Mustache, Backbone, LayoutManager, constants, Dummy) {
+], function ($, _, Handlebars, Backbone, LayoutManager, constants, Dummy) {
 
 	var app = _.extend({
 		el: $('#app'),
@@ -33,13 +33,15 @@ define([
 		dummy: Dummy
 	}, Backbone.Events);
 
+	var templateCache = _.memoize(Handlebars.compile);
+
 	Backbone.LayoutManager.configure({
 		paths: {
 			layout: '/templates/layouts/',
 			template: '/templates/views/'
 		},
 		fetch: function (path) { $.get(path + '.html', this.async()); },
-		render: function (template, context) { return Mustache.to_html(template, context); }
+		render: function (template, context) { return templateCache(template)(context); }
 	});
 
 	return app;
