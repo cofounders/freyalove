@@ -27,6 +27,19 @@ class Profile(models.Model):
     def __unicode__(self):
         return self.first_name
 
+"""
+class ProfileDetail(models.Model):
+    # holds the details of a user
+    # ref: https://github.com/cofounders/freyalove/wiki/API-Objects#wiki-userprivacydetail
+    date_of_birth = models.CharField(max_length=10, blank=True)
+    about = models.TextField(blank=True)
+    points = models.IntegerField(max_length=3, null=True)
+    location = models.CharField(max_length=50, blank=True)
+    origin = models.CharField(max_length=50, blank=True)
+    languages = models.CharField(max_length=200, blank=True)
+    likes = models.CharField(max_length=50, blank=True)
+"""
+
 class Blocked(models.Model):
     belongs_to = models.ForeignKey(Profile)
     block_profile_id = models.IntegerField()

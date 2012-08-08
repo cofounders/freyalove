@@ -6,6 +6,7 @@
 from django.http import HttpResponse
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
 
 try:
     import json
@@ -403,6 +404,26 @@ def fetch_messages(request, conversation_id):
             "body": m.message,
             "status": "N/A",
         })
+
+    resp_json = json.JSONEncoder().encode(resp_data)
+    resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
+    return resp 
+
+def search(request):
+    query = request.GET.get('q', None)
+    resp_data = []
+
+    if not query:
+        pass
+    else:
+        profiles = Profile.objects.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
+        for profile in profiles:
+            resp_dict = {}
+            resp_dict["id"] = profile.id
+            resp_dict["name"] = profile.first_name + " " + profile.last_name # TODO: privacy guides the concat?
+            resp_dict["photo"] = "http://graph.facebook.com/%s/picture" % profile.fb_username
+            resp_dict["points"] = "N/A" # not yet implemented
+            resp_data.append(resp_dict)
 
     resp_json = json.JSONEncoder().encode(resp_data)
     resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
