@@ -466,6 +466,27 @@ var message1 = {
 		body: 'What could possibly go wrong?',
 		status: ConversationStatus.READ,
 		when: '2 months ago'
+	},
+	message7 = {
+		from: user22,
+		to: user21,
+		body: 'All I\'ve got to do is pass as an ordinary human being. Simple. What could possibly go wrong?',
+		status: ConversationStatus.READ,
+		when: '3 months ago'
+	},
+	message8 = {
+		from: user22,
+		to: user21,
+		body: 'Simple.',
+		status: ConversationStatus.UNREAD,
+		when: '5 months ago'
+	},
+	message9 = {
+		from: user22,
+		to: user21,
+		body: 'What could possibly go wrong?',
+		status: ConversationStatus.READ,
+		when: '7 months ago'
 	};
 
 var conversationSummary1 = {
@@ -653,7 +674,10 @@ Answer: { #fixed format
 					message3,
 					message4,
 					message5,
-					message6
+					message6,
+					message7,
+					message8,
+					message9
 				]
 			};
 		},

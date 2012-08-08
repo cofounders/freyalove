@@ -3,9 +3,9 @@
 		<h2>Conversation with {{#participants}}{{name}}{{/participants}}</h2>
 	</header>
 	<article>
-		<ol>
+		<ol id="conversation-history">
 			{{#messages}}
-			<li class="{{#UNREAD}}un{{/UNREAD}}read">
+			<li>
 				{{#from}}
 					<a href="/profile/{{id}}" title="Profile of {{name}}">
 						<img src="{{photo}}" alt="{{name}}" />

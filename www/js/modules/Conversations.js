@@ -74,7 +74,7 @@ function($, _, Backbone, app,
 					return participant.id !== app.session.id;
 				};
 			context.participants = _.filter(context.participants, someoneElse);
-			context.messages = context.messages.concat().reverse();
+			context.messages = (context.messages || []).concat().reverse();
 			return context;
 		}
 	});
