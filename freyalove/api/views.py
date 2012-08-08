@@ -417,7 +417,7 @@ def search(request):
         pass
     else:
         profiles = Profile.objects.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
-        for p in profiles:
+        for profile in profiles:
             resp_dict = {}
             resp_dict["id"] = profile.id
             resp_dict["name"] = profile.first_name + " " + profile.last_name # TODO: privacy guides the concat?
