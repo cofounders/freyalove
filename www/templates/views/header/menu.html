@@ -7,21 +7,21 @@
 			<menu>
 				<li>
 					<a href="#" class="notifications" title="Notifications"
-						{{#if unreadNotifications}}data-unread="{{unreadNotifications}}"{{/if}}>
+						{{#unreadNotifications}}data-unread="{{unreadNotifications}}"{{/unreadNotifications}}>
 						Notifications
 					</a>
 					<section class="bblm-notifications-menu"></section>
 				</li>
 				<li>
 					<a href="#" class="conversations" title="Conversations"
-						{{#if unreadConversations}}data-unread="{{unreadConversations}}"{{/if}}>
+						{{#unreadConversations}}data-unread="{{unreadConversations}}"{{/unreadConversations}}>
 						Conversations
 					</a>
 					<section class="bblm-conversations-menu"></section>
 				</li>
 				<li>
 					<a href="#" class="sexytimes" title="Dates"
-						{{#if unreadSexyTimes}}data-unread="{{unreadSexyTimes}}"{{/if}}>
+						{{#unreadSexyTimes}}data-unread="{{unreadSexyTimes}}"{{/unreadSexyTimes}}>
 						Dates
 					</a>
 					<section class="bblm-sexytimes-menu"></section>
