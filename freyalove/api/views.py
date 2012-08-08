@@ -57,7 +57,12 @@ def profile_summary(request, profile_id):
 
     resp_data = {}
     resp_data["id"] = profile.id
-    resp_data["name"] = profile.first_name + " " + profile.last_name 
+    resp_data["firstName"] = profile.first_name 
+    resp_data["lastName"] = profile.last_name 
+    resp_data["email"] = profile.email
+    resp_data["fb_id"] = profile.fb_id
+    resp_data["fb_link"] = profile.fb_link
+    resp_data["fb_username"] = profile.fb_username
     #resp_data["photo"] = fetch_profile_picture(token)
     resp_data["photo"] = "http://graph.facebook.com/%s/picture" % profile.fb_username
     resp_json = json.JSONEncoder().encode(resp_data)
