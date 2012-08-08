@@ -30,8 +30,12 @@
 				p
 					vertical-align top
 					margin 0
-					span.when
-						font-style italic
+					span
+						&.name
+							color $hyperlink
+							font-weight bold
+						&.when
+							font-style italic
 		img
 			profile-image()
 			display inline-block

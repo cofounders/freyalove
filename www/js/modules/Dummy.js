@@ -430,51 +430,51 @@ var message1 = {
 		to: user21,
 		body: 'Stop talking, brain thinking. Hush.',
 		status: ConversationStatus.UNREAD,
-		when: '100 days ago'
+		when: 'just now'
 	},
 	message2 = {
 		from: user21,
 		to: user20,
 		body: 'I won\'t stand for it. Not now, not ever, do you understand me?!',
 		status: ConversationStatus.UNREAD,
-		when: 'yesterday'
+		when: '3 minutes ago'
 	},
 	message3 = {
 		from: user22,
 		to: user21,
 		body: 'Well, they call me the Doctor. I don\'t know why.',
 		status: ConversationStatus.UNREAD,
-		when: 'today'
+		when: 'yesterday'
 	},
 	message4 = {
 		from: user22,
 		to: user21,
 		body: 'All I\'ve got to do is pass as an ordinary human being. Simple. What could possibly go wrong?',
 		status: ConversationStatus.READ,
-		when: 'yesterday'
+		when: '3 days ago'
 	},
 	message5 = {
 		from: user22,
 		to: user21,
 		body: 'Simple.',
 		status: ConversationStatus.UNREAD,
-		when: '10 days ago'
+		when: '1 week ago'
 	},
 	message6 = {
 		from: user22,
 		to: user21,
 		body: 'What could possibly go wrong?',
 		status: ConversationStatus.READ,
-		when: '2 days ago'
+		when: '2 months ago'
 	};
 
 var conversationSummary1 = {
 		status: ConversationStatus.UNREAD,
-		lastMessage: message6
+		lastMessage: message2
 	},
 	conversationSummary2 = {
 		status: ConversationStatus.READ,
-		lastMessage: message2
+		lastMessage: message6
 	};
 
 
