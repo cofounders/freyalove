@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     url(r'^users/(\d+)/facebookfriends/$', 'freyalove.api.views.fb_friends'),
     url(r'^users/(\d+)/profile/summary/$', 'freyalove.api.views.profile_summary'),
     url(r'^users/(\d+)/profile/$', 'freyalove.api.views.profile'), # POST/GET 2-in-1
+    url(r'^users/search/$', 'freyalove.api.views.search'), 
     url(r'^activities/sexytimes/$', 'freyalove.api.views.fetch_sexytimes'), 
     url(r'^activities/winks/$', 'freyalove.api.views.fetch_winks'),
     url(r'^activities/$', 'freyalove.api.views.fetch_activities'), # winks and sexytimes combined
