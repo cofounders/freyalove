@@ -3,31 +3,33 @@
 		<h2>Conversation with {{#participants}}{{name}}{{/participants}}</h2>
 	</header>
 	<article>
-		<ol id="conversation-history">
-			{{#messages}}
-			<li>
-				{{#from}}
-					<a href="/profile/{{id}}" title="Profile of {{name}}">
-						<img src="{{photo}}" alt="{{name}}" />
-					</a>
-				{{/from}}
-				<div class="conversation-content">
-					<p>
-						{{#from}}
-							<a href="/profile/{{id}}" title="Profile of {{name}}">{{name}}</a>
-						{{/from}}
-						<span class="when">{{when}}</span>
-					</p>
-					<p class="body">{{body}}</p>
-				</div>
-			</li>
-			{{/messages}}
-			{{^messages}}
-			<li class="empty">
-				<p>Enter a message and press <em>Send</em> to start the conversation.</p>
-			</li>
-			{{/messages}}
-		</ol>
+		<div class="conversation-viewport">
+			<ol id="conversation-history">
+				{{#messages}}
+				<li>
+					{{#from}}
+						<a href="/profile/{{id}}" title="Profile of {{name}}">
+							<img src="{{photo}}" alt="{{name}}" />
+						</a>
+					{{/from}}
+					<div class="conversation-content">
+						<p>
+							{{#from}}
+								<a href="/profile/{{id}}" title="Profile of {{name}}">{{name}}</a>
+							{{/from}}
+							<span class="when">{{when}}</span>
+						</p>
+						<p class="body">{{body}}</p>
+					</div>
+				</li>
+				{{/messages}}
+				{{^messages}}
+				<li class="empty">
+					<p>Enter a message and press <em>Send</em> to start the conversation.</p>
+				</li>
+				{{/messages}}
+			</ol>
+		</div>
 		<form>
 			<textarea placeholder="Enter a message..."></textarea>
 			<input type="submit" name="Send" value="Send" class="button"/>
