@@ -60,12 +60,12 @@ class Migration(SchemaMigration):
 
         # Adding field 'Profile.details'
         db.add_column('users_profile', 'details',
-                      self.gf('django.db.models.fields.related.ForeignKey')(default=None, to=orm['users.ProfileDetail']),
+                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['users.ProfileDetail'], null=True),
                       keep_default=False)
 
         # Adding field 'Profile.permissions'
         db.add_column('users_profile', 'permissions',
-                      self.gf('django.db.models.fields.related.ForeignKey')(default=None, to=orm['users.ProfilePrivacyDetail']),
+                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['users.ProfilePrivacyDetail'], null=True),
                       keep_default=False)
 
 
@@ -101,7 +101,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Profile'},
             'age': ('django.db.models.fields.CharField', [], {'max_length': '3', 'blank': 'True'}),
             'banned': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'details': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['users.ProfileDetail']"}),
+            'details': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['users.ProfileDetail']", 'null': 'True'}),
             'email': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'}),
             'fb_id': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'}),
             'fb_link': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
@@ -110,7 +110,7 @@ class Migration(SchemaMigration):
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'permissions': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['users.ProfilePrivacyDetail']"}),
+            'permissions': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['users.ProfilePrivacyDetail']", 'null': 'True'}),
             'profile': ('django.db.models.fields.TextField', [], {'blank': 'True'})
         },
         'users.profiledetail': {

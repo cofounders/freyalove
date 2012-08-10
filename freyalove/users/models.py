@@ -70,8 +70,8 @@ class Profile(models.Model):
     profile = models.TextField(blank=True)
 
     # extra
-    details = models.ForeignKey(ProfileDetail)
-    permissions = models.ForeignKey(ProfilePrivacyDetail)
+    details = models.ForeignKey(ProfileDetail, null=True)
+    permissions = models.ForeignKey(ProfilePrivacyDetail, null=True)
 
     def __unicode__(self):
         return self.first_name + " " + self.last_name
