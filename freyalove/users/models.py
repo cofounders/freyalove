@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_delete, pre_save, post_save
 
 from freyalove.users.managers import FriendshipManager
 
@@ -70,6 +71,31 @@ class Wink(models.Model):
     to_profile = models.ForeignKey(Profile, related_name="wink_to")
     from_profile = models.ForeignKey(Profile, related_name="wink_from")
     received = models.BooleanField(default=False) # denotes read/received
+    accepted = models.BooleanField(default=False)
 
     def __unicode__(self):
         return "wink from %s to %s" % (from_profile.first_name, to_profile.first_name)
+
+def register_wink(sender, instance, **kwargs):
+    from freyalove.notifications.models import Notification
+    try:
+        n = Notification.objects.get(wink=instance)
+        if instance.accepted and instance.received:
+            n.status = "1"
+            n.marked_for_removal = True
+        elif instance.received and not instance.accepted:
+            n.status = "2"
+            n.marked_for_removal = True
+        else:
+            pass
+        n.save()
+    except Notification.DoesNotExist:
+        n = Notification()
+        n.profile = instance.to_profile
+        n.ntype = "1"
+        n.status = "2"
+        n.wink = instance
+        n.save()
+
+# Register with freyalove.notifications
+post_save.connect(register_wink, sender=Wink, dispatch_uid="wink_save")

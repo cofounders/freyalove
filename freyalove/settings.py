@@ -141,6 +141,7 @@ INSTALLED_APPS = (
     'freyalove.users',
     'freyalove.matchmaker',
     'freyalove.conversations',
+    'freyalove.notifications',
 )
 
 # A sample logging configuration. The only tangible logging
