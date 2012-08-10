@@ -30,31 +30,17 @@ def hello(request):
     resp = inject_cors(HttpResponse(resp_json, content_type="application/json"))
     return resp
 
-def profile_summary(request, profile_id):
+def profile_summary(request):
     """
     Return summarized information on a user profile given an id/fb_id
     """
-    try:
-        profile_id = int(profile_id)
-    except ValueError:
-        resp = HttpResponse("Bad request", status=400)
+    # parse for token in cookie
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    if not cookie:
+        resp = HttpResponse("Missing authentication cookie", status=403)
         return resp
-    try:
-        profile = Profile.objects.get(id=profile_id)
-    except Profile.DoesNotExist:
-        try:
-            profile = Profile.objects.get(fb_id=str(profile_id))
-        except Profile.DoesNotExist:
-            resp = HttpResponse("Not found", status=404)
-            return resp
 
-    # Determine if we need to fetch the actual image object
-    #cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
-    #if not cookie:
-    #   resp = HttpResponse("Missing authentication cookie", status=403)
-    #   return resp
-
-    #token = cookie["access_token"]
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
     resp_data = {}
     resp_data["id"] = profile.id
@@ -71,23 +57,17 @@ def profile_summary(request, profile_id):
     resp = inject_cors(HttpResponse(resp_json, content_type="application/json"))
     return resp
 
-def profile(request, profile_id):
+def profile(request):
     """
     Return information on a user profile given an id/fb_id
     """
-    try:
-        profile_id = int(profile_id)
-    except ValueError:
-        resp = HttpResponse("Bad request", status=400)
+    # parse for token in cookie
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    if not cookie:
+        resp = HttpResponse("Missing authentication cookie", status=403)
         return resp
-    try:
-        profile = Profile.objects.get(id=profile_id)
-    except Profile.DoesNotExist:
-        try:
-            profile = Profile.objects.get(fb_id=str(profile_id))
-        except Profile.DoesNotExist:
-            resp = HttpResponse("Not found", status=404)
-            return resp
+
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
     if request.method == "POST":
         return update_profile(request, profile_id)
@@ -431,20 +411,14 @@ def search(request):
 
 # POST
 @csrf_exempt
-def update_profile(request, profile_id):
-    try:
-        profile_id = int(profile_id)
-    except ValueError:
-        resp = HttpResponse("Bad request", status=400)
+def update_profile(request):
+    # parse for token in cookie
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    if not cookie:
+        resp = HttpResponse("Missing authentication cookie", status=403)
         return resp
-    try:
-        profile = Profile.objects.get(id=profile_id)
-    except Profile.DoesNotExist:
-        try:
-            profile = Profile.objects.get(fb_id=str(profile_id))
-        except Profile.DoesNotExist:
-            resp = HttpResponse("Not found", status=404)
-            return resp
+
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
     if request.method == "POST":
         resp_data = {}
