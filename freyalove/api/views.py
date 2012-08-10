@@ -621,7 +621,7 @@ def update_sexytime_note(request, sexytime_id):
         return resp
 
 @csrf_exempt
-def create_wink(request, from_profile_id, to_profile_id):
+def create_wink(request, to_profile_id):
     if request.method == "POST":
         resp_data = {}
 
@@ -632,10 +632,6 @@ def create_wink(request, from_profile_id, to_profile_id):
             resp = HttpResponse("Missing authentication cookie", status=403)
             return resp
         profile = is_registered_user(fetch_profile(cookie["access_token"]))
-
-        if profile.id != int(from_profile_id):
-            resp = HttpResponse("Bad request - from user must match current profile (current %d, from %d)" % (profile.id, int(from_profile_id)), status=400)
-            return resp
 
         try:
             to_profile = Profile.objects.get(id=int(to_profile_id))
