@@ -16,7 +16,7 @@ except ImportError:
 import facebook
 
 #from freyalove.matchmaker.models import MatchMaker
-from freyalove.users.models import Profile, Blocked, Friendship, Wink
+from freyalove.users.models import Profile, Blocked, Friendship, Wink, ProfileDetail, ProfilePrivacyDetail
 from freyalove.matchmaker.models import Match, SexyTime
 from freyalove.conversations.models import Conversation, Msg
 
@@ -52,6 +52,31 @@ def profile_summary(request):
     resp_data["fb_username"] = profile.fb_username
     #resp_data["photo"] = fetch_profile_picture(token)
     resp_data["photo"] = "http://graph.facebook.com/%s/picture" % profile.fb_username
+    resp_json = json.JSONEncoder().encode(resp_data)
+
+    resp = inject_cors(HttpResponse(resp_json, content_type="application/json"))
+    return resp
+
+def profile_details(request):
+    """
+    Return summarized information on a user profile given an id/fb_id
+    """
+    # parse for token in cookie
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    if not cookie:
+        resp = HttpResponse("Missing authentication cookie", status=403)
+        return resp
+
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
+
+    resp_data = {}
+    
+    details_fields = ProfileDetail._meta.get_all_field_names()
+    privacy_fields = ProfilePrivacyDetail._meta.get_all_field_names()
+    for field in details_fields:
+        resp_data[field] = getattr(profile.details, field)
+    for field in privacy_fields:
+        resp_data[field + "Public"] = getattr(profile.permissions, field)
     resp_json = json.JSONEncoder().encode(resp_data)
 
     resp = inject_cors(HttpResponse(resp_json, content_type="application/json"))
