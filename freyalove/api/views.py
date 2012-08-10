@@ -222,10 +222,12 @@ def fetch_winks(request):
 
     profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
-    winks = Wink.objects.filter(to_profile=profile)
+    winks = Wink.objects.filter(to_profile=profile, received=False)
 
     resp_data = {}
     resp_data["winks"] = []
+
+    # TODO: Need "Wink" defined, pending Wolf's response
     for w in winks:
         resp_data["winks"].append({"from": w.from_profile.first_name})
         # we write a generator for throwing up a UserSummary next

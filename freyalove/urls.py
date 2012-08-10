@@ -21,7 +21,7 @@ urlpatterns = patterns('',
     url(r'^profile/$', 'freyalove.api.views.profile'), # POST/GET 2-in-1
     url(r'^users/search/$', 'freyalove.api.views.search'), 
     url(r'^activities/sexytimes/upcoming/$', 'freyalove.api.views.fetch_sexytimes'), 
-    url(r'^activities/winks/$', 'freyalove.api.views.fetch_winks'),
+    url(r'^activities/winks/unreturned/$', 'freyalove.api.views.fetch_winks'),
     url(r'^activities/$', 'freyalove.api.views.fetch_activities'), # winks and sexytimes combined
     url(r'^conversations/unread/$', 'freyalove.api.views.fetch_unread_conversations'),
     url(r'^conversations/$', 'freyalove.api.views.fetch_conversations'), # fetch all conversations
