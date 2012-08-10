@@ -464,6 +464,43 @@ def update_profile(request):
         resp = HttpResponse("Bad request", status=400)
         return resp
 
+def profile_unregister(request):
+    """
+    Allows the user to delete the Freya Love account. 
+    A successful request to this URL deletes the account and all data stored with it. 
+    The fb_id is sent only for confirmation purposes.
+    """
+    # parse for token in cookie
+    if request.method == "POST":
+        cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+        if not cookie:
+            resp = HttpResponse("Missing authentication cookie", status=403)
+            return resp
+
+        profile = existing_user(fetch_profile(cookie["access_token"]))
+        if not profile:
+            resp = HttpResponse("Fail to unregister user; not registered!", status=403)
+            return resp
+
+        resp_data = {}
+        fb_id = request.POST.get("fb_id", None)
+        if not fb_id:
+            resp_data["status"] = "Fail"
+        else:
+            if fb_id != profile.fb_id:
+                resp_data["status"] = "Fail"
+            else:
+                profile.delete()
+                resp_data["status"] = Success
+
+        resp_json = json.JSONEncoder().encode(resp_data)
+
+        resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
+        return resp 
+    else:
+        resp = HttpResponse("Bad request", status=400)
+        return resp
+
 @csrf_exempt
 def create_sexytime(request):
     if request.method == "POST":
