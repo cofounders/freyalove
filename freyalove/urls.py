@@ -15,10 +15,10 @@ urlpatterns = patterns('',
     url(r'^users/(\d+)/friends/(\d+)/mutual/$', 'freyalove.api.views.mutual_friends_in_freya'),
     url(r'^users/(\d+)/friends/$', 'freyalove.api.views.friends_in_freya'),
     url(r'^users/(\d+)/facebookfriends/$', 'freyalove.api.views.fb_friends'),
-    url(r'^/profile/summary/$', 'freyalove.api.views.profile_summary'),
-    url(r'^/profile/$', 'freyalove.api.views.profile'), # POST/GET 2-in-1
+    url(r'^profile/summary/$', 'freyalove.api.views.profile_summary'),
+    url(r'^profile/$', 'freyalove.api.views.profile'), # POST/GET 2-in-1
     url(r'^users/search/$', 'freyalove.api.views.search'), 
-    url(r'^activities/sexytimes/$', 'freyalove.api.views.fetch_sexytimes'), 
+    url(r'^activities/sexytimes/upcoming/$', 'freyalove.api.views.fetch_sexytimes'), 
     url(r'^activities/winks/$', 'freyalove.api.views.fetch_winks'),
     url(r'^activities/$', 'freyalove.api.views.fetch_activities'), # winks and sexytimes combined
     url(r'^conversations/unread/$', 'freyalove.api.views.fetch_unread_conversations'),
