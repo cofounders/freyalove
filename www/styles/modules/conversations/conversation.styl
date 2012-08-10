@@ -1,6 +1,18 @@
-#conversation-history
-	overflow auto
+.conversation-viewport
+	height -webkit-calc(100vh - 300px)
 	height 400px
-	position relative
-	bottom 0
-	left 0
+	height calc(100vh - 300px)
+	margin 0 0 20px 0
+	overflow-y auto
+	#conversation-history
+		margin 0
+		position relative
+		bottom 0
+		left 0
+			li
+				.conversation-content
+					display inline-block
+					vertical-align top
+					width 500px
+					p 
+						margin 0

@@ -30,7 +30,7 @@ function($, _, Backbone, app, User) {
 	});
 
 	Collections.Friends = Backbone.Collection.extend({
-		
+
 		// checks if e is in this collection
 		indexOf: function (e) {
 			var i = 0;
@@ -40,7 +40,7 @@ function($, _, Backbone, app, User) {
 			}
 			return -1;
 		}
-	
+
 	});
 
 
@@ -56,15 +56,15 @@ function($, _, Backbone, app, User) {
 	Views.LeaderboardFull = Backbone.View.extend({
 		template: 'friends/leaderboard-full'
 	});
-	
-	
+
+
 	// Friend list on the right hand friend panel
 	Views.ListRight = Backbone.View.extend({
 		template: 'friends/list-right',
 
 		initialize: function () {
 			this.collection.on('reset', this.render, this);
-			
+
 			// this.collection.on('fetch', function () {
 			// 	this.$el.html('<img src="'"/assets/img/spinner.gif">'');
 			// }, this);

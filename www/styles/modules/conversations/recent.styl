@@ -25,26 +25,36 @@
 				&:hover
 					tray()
 					padding 0
+					border none
 		li
 			margin 0
 			font-size 1rem
 			list-style-type none
 			padding 5px
-			&.unread
-				background-color lighten(red, 95%) //temp style for unread messages
-			.conversation-content
-				display inline-block
-				width 575px
-				vertical-align top
-				p
+			&.unread, &.read
+				.conversation-content
+					display inline-block
+					width 550px
 					vertical-align top
-					margin 0
-					span
-						&.name
-							color $hyperlink
-							font-weight bold
-						&.when
-							font-style italic
+					p
+						vertical-align top
+						margin 0
+						span
+							&.name
+								color $hyperlink
+								font-weight bold
+							&.when
+								font-style italic
+			&.unread .conversation-content:after
+				content url("../img/unread.png")
+				position absolute
+				right 20px
+				top 25px
+			&.read .conversation-content:after
+				content url("../img/read.png")
+				position absolute
+				right 20px
+				top 25px
 		img
 			profile-image()
 			display inline-block
