@@ -45,16 +45,20 @@
 								font-weight bold
 							&.when
 								font-style italic
-			&.unread .conversation-content:after
-				content url("../img/unread.png")
-				position absolute
-				right 20px
-				top 25px
-			&.read .conversation-content:after
-				content url("../img/read.png")
-				position absolute
-				right 20px
-				top 25px
+				span
+					&.read, &.unread
+						height 10px
+						width 10px
+						border-radius 50%
+						display inline-block
+						vertical-align top
+						position relative
+						top 20px
+			&.unread span.unread
+				background linear-gradient(top, lighten($hyperlink, 10%), darken($hyperlink, 10%))
+				box-shadow 0 0 1px #444
+			&.read span.read
+				border solid 1px $hyperlink
 		img
 			profile-image()
 			display inline-block
