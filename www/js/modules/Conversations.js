@@ -76,6 +76,32 @@ function($, _, Backbone, app,
 			context.participants = _.filter(context.participants, someoneElse);
 			context.messages = (context.messages || []).concat().reverse();
 			return context;
+		},
+		events: {
+			"submit form": "sendMessage"
+		},
+		sendMessage: function (event) {
+			event.stopPropagation();
+			event.preventDefault();
+
+			var body = this.$('textarea').val(),
+				url = app.api + '/conversations/message/',
+				participants = _.pluck(this.model.get('participants'), 'id');
+
+			this.$('textarea').val('');
+
+			$.post(url, {
+				to: participants,
+				body: body
+			}, function (data, textStatus, jqXHR) {
+			});
+		},
+		render: function (manage) {
+			setTimeout( function () {
+				var height = $(".conversation-viewport > ol").height();
+				$(".conversation-viewport").scrollTop(height);
+			}, 500);
+			return manage(this).render();
 		}
 	});
 

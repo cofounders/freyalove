@@ -1,4 +1,4 @@
-from freyalove.users.models import Profile, Blocked, Friendship
+from freyalove.users.models import Profile, Blocked, Friendship, ProfileDetail, ProfilePrivacyDetail
 from freyalove.matchmaker.models import Match
 from freyalove.conversations.models import Conversation
 
@@ -23,6 +23,20 @@ def is_registered_user(profile_dict):
 		fb_id = profile_dict["id"]
 		try:
 			profile = Profile.objects.get(fb_id=fb_id)
+			if profile.details:
+		        pass
+		    else:
+		        details = ProfileDetail()
+		        details.save()
+		        profile.details = details
+		        profile.save()
+		    if profile.permissions:
+		    	pass
+		    else:
+		    	permissions = ProfilePrivacyDetail()
+		    	permissions.save()
+		    	profile.permissions = permissions
+		    	profile.save()
 			return profile
 		except Profile.DoesNotExist:
 			profile = create_freya_profile(profile_dict)
