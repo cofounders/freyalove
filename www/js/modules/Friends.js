@@ -57,7 +57,8 @@ function($, _, Backbone, app, Facebook, Dummy) {
 			this.options = options || {query: ''};
 		},
 		url: function () {
-			return app.api + 'users/search/' + this.options.query;
+			var query = encodeURIComponent(this.options.query);
+			return app.api + 'users/search/query/?q=' + query;
 		},
 		parse: function (response) {
 			return response.friends;
