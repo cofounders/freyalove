@@ -13,12 +13,12 @@ urlpatterns = patterns('',
     url(r'^profile/details/$', 'freyalove.api.views.currentuser.profile_details'),
     url(r'^profile/unregister/$', 'freyalove.api.currentuser.views.profile_unregister'),
     url(r'^profile/$', 'freyalove.api.views.currentuser.profile'),
+    url(r'^users/facebookfriends/$', 'freyalove.api.views.currentuser.facebookfriends'),
 
     # OTHER USERS
     url(r'^users/(?P<fb_username>[-\w]+)/profile/summary/$', 'freyalove.api.views.otherusers.profile_summary'),
     url(r'^users/friends/(?P<fb_username>[-\w]+)/mutual/$', 'freyalove.api.views.otherusers.mutual_friends_in_freya'),
     url(r'^users/(?P<fb_username>[-\w]+)/friends/$', 'freyalove.api.views.otherusers.friends_in_freya'),
-    url(r'^users/(?P<fb_username>[-\w]+)/facebookfriends/$', 'freyalove.api.views.otherusers.fb_friends'),
     url(r'^users/search/$', 'freyalove.api.views.search'), 
 
     # ACTIVITIES

@@ -13,7 +13,7 @@ import facebook
 from freyalove.users.models import Profile, Wink, ProfileDetail, ProfilePrivacyDetail
 from freyalove.api.decorators import user_is_authenticated_with_facebook
 from freyalove.api.utils import *
-from freyalove.api.objectification import obj_user_summary, obj_user
+from freyalove.api.objectification import obj_user_summary, obj_user, obj_fb_user_summary
 
 # GET /PROFILE/DETAILS/
 @user_is_authenticated_with_facebook
@@ -101,4 +101,14 @@ def profile_unregister(request):
             profile.delete()
             resp_data["status"] = Success
 
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
+
+# GET /USERS/FACEBOOKFRIENDS/
+@user_is_authenticated_with_facebook
+@require_http_methods(["GET"])
+def facebookfriends(request):
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    profile = existing_user(fetch_profile(cookie["access_token"]))
+
+    resp_data = obj_fb_user_summary(cookie["access_token"])
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))

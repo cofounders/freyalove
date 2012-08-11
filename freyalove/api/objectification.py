@@ -1,3 +1,5 @@
+import facebook
+
 # User
 def obj_user(list_of_profiles):
     """
@@ -52,3 +54,17 @@ def obj_user_summary(list_of_profiles):
         resp.append(profile_as_user_summary)
 
     return resp
+
+# FbUserSummary
+def obj_fb_user_summary(token):
+    """
+    Given an oauth access token, return a list of dictionaries with the following:
+        fb_id: String
+        fb_link: String
+        fb_username: String
+        fb_photo: String
+    """
+    graph = facebook.GraphAPI(token)
+    friends = graph.get_connections("me", "friends")
+
+    return friends

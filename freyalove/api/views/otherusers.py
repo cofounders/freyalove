@@ -32,25 +32,6 @@ def profile_summary(request):
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json"))
 
-
-def fb_friends(request, profile_id):
-    # parse for token in cookie
-    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
-    if not cookie:
-        resp = HttpResponse("Missing authentication cookie", status=403)
-        return resp
-
-    token = cookie["access_token"]
-    friends = fetch_friends(token)
-
-    resp_data = {}
-    resp_data["friends"] = friends["data"] # we will handle the "paging" link later on when we do pagination
-
-    resp_json = json.JSONEncoder().encode(resp_data)
-
-    resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
-    return resp
-
 def friends_in_freya(request, profile_id):
     # parse for token in cookie
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
