@@ -71,7 +71,7 @@ def obj_fb_user_summary(token):
     resp = []
     for f in friends:
         #profile = graph.get_object(f["id"])
-        #facebook_profile_as_summary = {}
+        facebook_profile_as_summary = {}
         facebook_profile_as_summary["fb_id"] = f["id"]
         facebook_profile_as_summary["name"] = f["name"]
         #facebook_profile_as_summary["fb_username"] = profile["username"]
