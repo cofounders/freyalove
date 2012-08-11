@@ -11,7 +11,7 @@ function($, _, Backbone, app, Facebook, Dummy) {
 		},
 		dummy: function () {
 			this.clear({silent: true});
-			this.set(+this.id === +app.session.id
+			this.set(this.id === app.session.id
 				? Dummy.getMyProfile()
 				: Dummy.getRandomProfile()
 			);
