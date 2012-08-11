@@ -3,23 +3,23 @@ from django.db import models
 class ProfileManager(models.Manager):
 
     def has_freya_profile_given_fb_details(self, fb_val):
-    try:
-        fb_id = int(fb_val)
-    except ValueError:
-        fb_id = None
-
-    if not fb_id:
         try:
-            profile = self.get(fb_username=fb_val)
-        except self.model.DoesNotExist:
-            pass
-    else:
-        try:
-            profile = Profile.objects.get(fb_id=val)
-        except self.model.DoesNotExist:
-            pass
+            fb_id = int(fb_val)
+        except ValueError:
+            fb_id = None
 
-    return profile
+        if not fb_id:
+            try:
+                profile = self.get(fb_username=fb_val)
+            except self.model.DoesNotExist:
+                pass
+        else:
+            try:
+                profile = Profile.objects.get(fb_id=val)
+            except self.model.DoesNotExist:
+                pass
+
+        return profile
 
 class FriendshipManager(models.Manager):
 
