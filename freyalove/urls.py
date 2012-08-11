@@ -12,9 +12,10 @@ urlpatterns = patterns('',
     # API urls
     # get routes
     url(r'^users/init/$', 'freyalove.api.views.init'),
-    url(r'^users/(\d+)/friends/(\d+)/mutual/$', 'freyalove.api.views.mutual_friends_in_freya'),
+    url(r'^users/friends/(?P<fb_username>[-\w]+)/mutual/$', 'freyalove.api.views.mutual_friends_in_freya'),
     url(r'^users/(\d+)/friends/$', 'freyalove.api.views.friends_in_freya'),
     url(r'^users/(\d+)/facebookfriends/$', 'freyalove.api.views.fb_friends'),
+    url(r'^users/(?P<fb_username>[-\w]+)/profile/summary/$', 'freyalove.api.get_user_summary'),
     url(r'^profile/summary/$', 'freyalove.api.views.profile_summary'),
     url(r'^profile/details/$', 'freyalove.api.views.profile_details'),
     url(r'^profile/unregister/$', 'freyalove.api.views.profile_unregister'),

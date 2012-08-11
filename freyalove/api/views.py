@@ -21,11 +21,36 @@ from freyalove.matchmaker.models import Match, SexyTime
 from freyalove.conversations.models import Conversation, Msg
 
 from freyalove.api.utils import *
+from freyalove.api.objectification import user_summary
 
 
 # GET
 def hello(request):
     resp_data = {"hello": "api"}
+    resp_json = json.JSONEncoder().encode(resp_data)
+    resp = inject_cors(HttpResponse(resp_json, content_type="application/json"))
+    return resp
+
+def get_user_summary(request, fb_username):
+    """
+    Return summarized information on a user profile given an fb_username
+    """
+    # parse for token in cookie
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    if not cookie:
+        resp = HttpResponse("Missing authentication cookie", status=403)
+        return resp
+
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
+
+    given_user_profile = get_user(fb_username)
+    resp_data = {}
+
+    if given_user_profile:
+        resp_data_ = user_summary([given_user_profile])
+        if len(resp_data_) > 0:
+            resp_data = resp_data_[0]
+
     resp_json = json.JSONEncoder().encode(resp_data)
     resp = inject_cors(HttpResponse(resp_json, content_type="application/json"))
     return resp
@@ -175,12 +200,26 @@ def friends_in_freya(request, profile_id):
     resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
     return resp
 
-def mutual_friends_in_freya(request, profile_id, target_id):
+def mutual_friends_in_freya(request, fb_username):
     """
-    Given 2 ids, check that they are friends, then return a set of mutual friends in the system
+    Given a username, check that they are friends, then return a set of mutual friends in the system
     """
     
-    return HttpResponse("wip.")
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    if not cookie:
+        resp = HttpResponse("Missing authentication cookie", status=403)
+        return resp
+
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
+    given_user_profile = get_user(fb_username)
+    resp_data = []
+
+    if given_user_profile:
+        pass
+
+    resp_json = json.JSONEncoder().encode(resp_data)
+    resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
+    return resp
 
 def fetch_sexytimes(request):
     """
@@ -424,13 +463,7 @@ def search(request):
         pass
     else:
         profiles = Profile.objects.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
-        for profile in profiles:
-            resp_dict = {}
-            resp_dict["id"] = profile.id
-            resp_dict["name"] = profile.first_name + " " + profile.last_name # TODO: privacy guides the concat?
-            resp_dict["photo"] = "http://graph.facebook.com/%s/picture" % profile.fb_username
-            resp_dict["points"] = "N/A" # not yet implemented
-            resp_data.append(resp_dict)
+        resp_data = user_summary(profiles)
 
     resp_json = json.JSONEncoder().encode(resp_data)
     resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))

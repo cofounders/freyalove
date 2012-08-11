@@ -68,6 +68,27 @@ def existing_user(profile_dict):
         except Profile.DoesNotExist:
             return None
 
+def get_user(fb_username_or_id):
+    profile = None
+    # filler function until transition to verbose username complete
+    try:
+        fb_id = int(fb_username_or_id)
+    except ValueError:
+        fb_id = None
+
+    if not fb_id:
+        try:
+            profile = Profile.objects.get(fb_username=fb_username_or_id)
+        except Profile.DoesNotExist:
+            pass
+    else:
+        try:
+            profile = Profile.objects.get(fb_id=fb_id)
+        except Profile.DoesNotExist:
+            pass
+
+    return profile
+
 def create_freya_profile(profile_dict):
     profile = Profile()
     profile.first_name = profile_dict["first_name"]
