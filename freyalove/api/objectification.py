@@ -66,5 +66,16 @@ def obj_fb_user_summary(token):
     """
     graph = facebook.GraphAPI(token)
     friends = graph.get_connections("me", "friends")
+    friends = friends["data"]
 
+    resp = []
+    for f in friends:
+        profile = graph.get_object(f["id"])
+        facebook_profile_as_summary = {}
+        facebook_profile_as_summary["fb_id"] = profile["id"]
+        facebook_profile_as_summary["fb_username"] = profile["username"]
+        facebook_profile_as_summary["fb_link"] = "http://www.facebook.com/%s"
+        facebook_profile_as_summary["photo"] = "http://graph.facebook.com/%s/picture" % profile["username"]
+        resp.append(facebook_profile_as_summary)
+        
     return friends

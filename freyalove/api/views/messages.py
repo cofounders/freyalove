@@ -15,6 +15,7 @@ from freyalove.users.models import Profile, Blocked, Friendship, Wink, ProfileDe
 from freyalove.matchmaker.models import Match, SexyTime
 from freyalove.conversations.models import Conversation, Msg
 
+from freyalove.api.decorators import user_is_authenticated_with_facebook
 from freyalove.api.utils import *
 from freyalove.api.objectification import user_summary
 
