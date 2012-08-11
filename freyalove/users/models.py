@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_delete, pre_save, post_save
 
-from freyalove.users.managers import FriendshipManager
+from freyalove.users.managers import FriendshipManager, WinkManager
 
 import datetime
 
@@ -119,6 +119,8 @@ class Wink(models.Model):
     from_profile = models.ForeignKey(Profile, related_name="wink_from")
     received = models.BooleanField(default=False) # denotes read/received
     accepted = models.BooleanField(default=False)
+
+    objects = WinkManager()
 
     def __unicode__(self):
         return "wink from %s to %s" % (from_profile.first_name, to_profile.first_name)
