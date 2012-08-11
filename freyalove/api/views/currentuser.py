@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
+from django.db.models import Q
 
 try:
     import json
@@ -131,3 +132,10 @@ def search(request, query):
     resp_data = user_summary(profiles)
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200)) 
+
+# GET /USERS/FRIENDS/LEADERBOARD/SUMMARY/
+@user_is_authenticated_with_facebook
+@require_http_methods(["GET"])
+def leaderboard(request):
+
+    return HttpResponse("wip.")
