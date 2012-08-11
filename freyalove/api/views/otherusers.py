@@ -72,23 +72,22 @@ def friends(request, fb_username):
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
 
-def mutual_friends_in_freya(request, fb_username):
-    """
-    Given a username, check that they are friends, then return a set of mutual friends in the system
-    """
-    
+# GET /USERS/:ID/MUTUAL/
+def mutual_friends(request, fb_username):
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
-    if not cookie:
-        resp = HttpResponse("Missing authentication cookie", status=403)
-        return resp
-
     profile = is_registered_user(fetch_profile(cookie["access_token"]))
-    given_user_profile = get_user(fb_username)
+
+    given_user_profile = Profile.objects.has_freya_profile_given_fb_details(fb_username)
+
+    # TODO: Permissions check - Self, friends and friends-of-friends
+
+    user_friends = list(Friendship.objects.friends_for_profile(profile))
+    her_friends = list(Friendship.objects.friends_for_profile(given_user_profile))
+
     resp_data = []
 
-    if given_user_profile:
-        pass
+    friends = set(user_friends + her_friends)
+    if len(friends) > 0:
+        resp_data_ = obj_user_summary([friends])
 
-    resp_json = json.JSONEncoder().encode(resp_data)
-    resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
-    return resp
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
