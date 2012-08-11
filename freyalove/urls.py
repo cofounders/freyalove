@@ -44,5 +44,5 @@ urlpatterns = patterns('',
     # QUESTIONAIRE
 
     # Index
-    url(r'^$', 'freyalove.api.views.hello'),
+    url(r'^$', 'freyalove.views.hello'),
 )

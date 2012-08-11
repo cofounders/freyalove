@@ -1,6 +1,9 @@
+# User
+def obj_user(list_of_profiles):
+	pass
 
 # UserSummary
-def user_summary(list_of_profiles):
+def obj_user_summary(list_of_profiles):
 	"""
 	Given a list of profiles, return a list of dictionaries with the following:
 		id: String // by default use verbose userIDs (use FB username)

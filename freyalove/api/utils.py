@@ -1,10 +1,19 @@
+try:
+    import json
+except ImportError:
+    import simplejson as json
+
+import datetime
+from functools import wraps
+import facebook
+
+from django.utils.decorators import available_attrs
+from django.conf import settings
+from django.http import HttpResponse
+
 from freyalove.users.models import Profile, Blocked, Friendship, ProfileDetail, ProfilePrivacyDetail
 from freyalove.matchmaker.models import Match
 from freyalove.conversations.models import Conversation
-
-import datetime
-
-import facebook
 
 # Utils
 def inject_cors(resp_obj):
