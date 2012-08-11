@@ -4,6 +4,8 @@ from freyalove.conversations.models import Conversation
 
 import datetime
 
+import facebook
+
 # Utils
 def inject_cors(resp_obj):
     resp_obj['Access-Control-Allow-Origin'] = '*'
@@ -113,3 +115,25 @@ def has_conversation(from_profile, to_profile):
         conversation.save()
 
     return conversation
+
+# Direct calls to Open Graph API
+
+def fetch_profile(token):
+    graph = facebook.GraphAPI(token)
+    profile = graph.get_object("me")
+    return profile
+
+def fetch_profile_picture(token):
+    graph = facebook.GraphAPI(token)
+    picture = graph.get_connections("me", "picture")
+    return picture
+
+def fetch_friends(token):
+    graph = facebook.GraphAPI(token)
+    friends = graph.get_connections("me", "friends")
+    return friends
+
+def fetch_all_friends(token):
+    graph = facebook.GraphAPI(token)
+    friends = graph.get_connections("me", "friends")
+    return friends
