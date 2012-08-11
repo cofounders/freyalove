@@ -79,17 +79,3 @@ def mutual_friends_in_freya(request, fb_username):
     resp_json = json.JSONEncoder().encode(resp_data)
     resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
     return resp
-
-def search(request):
-    query = request.GET.get('q', None)
-    resp_data = []
-
-    if not query:
-        pass
-    else:
-        profiles = Profile.objects.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
-        resp_data = user_summary(profiles)
-
-    resp_json = json.JSONEncoder().encode(resp_data)
-    resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
-    return resp 
