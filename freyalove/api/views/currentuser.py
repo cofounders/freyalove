@@ -30,9 +30,17 @@ def profile_details(request):
     details_fields = ProfileDetail._meta.get_all_field_names()
     privacy_fields = ProfilePrivacyDetail._meta.get_all_field_names()
     for field in details_fields:
-        resp_data[field] = getattr(profile.details, field)
+        try:
+            resp_data[field] = getattr(profile.details, field)
+        except AttributeError:
+            pass
     for field in privacy_fields:
-        resp_data[field + "Public"] = getattr(profile.permissions, field)
+        try:
+            resp_data[field + "Public"] = getattr(profile.permissions, field)
+        except AttributeError:
+            pass
+
+    # TODO: We should match the introspection against a whitelist
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json"))
 
