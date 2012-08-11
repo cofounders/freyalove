@@ -16,31 +16,21 @@ from freyalove.matchmaker.models import Match, SexyTime
 from freyalove.conversations.models import Conversation, Msg
 
 from freyalove.api.utils import *
-from freyalove.api.objectification import user_summary
+from freyalove.api.objectification import obj_user_summary, obj_user
 
-def get_user_summary(request, fb_username):
+@user_is_authenticated_with_facebook
+@require_http_methods(["GET"])
+def profile_summary(request):
     """
-    Return summarized information on a user profile given an fb_username
+    Return summarized information on a user profile given an id/fb_id
     """
-    # parse for token in cookie
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
-    if not cookie:
-        resp = HttpResponse("Missing authentication cookie", status=403)
-        return resp
-
     profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
-    given_user_profile = get_user(fb_username)
-    resp_data = {}
+    resp_data_ = obj_user([profile])
+    resp_data = resp_data[0]
 
-    if given_user_profile:
-        resp_data_ = user_summary([given_user_profile])
-        if len(resp_data_) > 0:
-            resp_data = resp_data_[0]
-
-    resp_json = json.JSONEncoder().encode(resp_data)
-    resp = inject_cors(HttpResponse(resp_json, content_type="application/json"))
-    return resp
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json"))
 
 
 def fb_friends(request, profile_id):
