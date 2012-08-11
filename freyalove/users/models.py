@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_delete, pre_save, post_save
 
-from freyalove.users.managers import FriendshipManager, WinkManager
+from freyalove.users.managers import FriendshipManager, WinkManager, ProfileManager
 
 import datetime
 
@@ -72,6 +72,8 @@ class Profile(models.Model):
     # extra
     details = models.ForeignKey(ProfileDetail, null=True)
     permissions = models.ForeignKey(ProfilePrivacyDetail, null=True)
+
+    objects = ProfileManager()
 
     def __unicode__(self):
         return self.first_name + " " + self.last_name

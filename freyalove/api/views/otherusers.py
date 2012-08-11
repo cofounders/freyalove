@@ -20,6 +20,23 @@ from freyalove.api.objectification import obj_user_summary, obj_user
 
 @user_is_authenticated_with_facebook
 @require_http_methods(["GET"])
+def profile(request, fb_username):
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
+
+    given_user_profile = Profile.objects.has_freya_profile_given_fb_details(fb_username)
+
+    # TODO: Permissions check - Self, friends and friends-of-friends
+
+    resp_data = []
+    resp_data_ = obj_user([given_user_profile])
+    resp_data["user"] = resp_data_[0]
+    resp_data["pending_match"] = False # TODO 
+
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json"))
+
+@user_is_authenticated_with_facebook
+@require_http_methods(["GET"])
 def profile_summary(request):
     """
     Return summarized information on a user profile given an id/fb_id
@@ -27,8 +44,8 @@ def profile_summary(request):
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
     profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
-    resp_data_ = obj_user([profile])
-    resp_data = resp_data[0]
+    resp_data_ = obj_user_summary([profile])
+    resp_data = resp_data_[0]
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json"))
 

@@ -129,7 +129,7 @@ def search(request, query):
     resp_data = []
 
     profiles = Profile.objects.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
-    resp_data = user_summary(profiles)
+    resp_data = obj_user_summary(profiles)
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200)) 
 
