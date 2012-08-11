@@ -39,10 +39,18 @@ urlpatterns = patterns('',
     url(r'^conversations/messages/$', 'freyalove.api.views.messages.send_message'), # send Message, a conversation will be created if it doesn't exist
 
     # STREAM
+    url(r'^stream/unread/$', 'freyalove.api.views.stream.unread'),
 
     # MATCHMAKING
+    url(r'^matchmaker/recommendations/$', 'freyalove.api.views.matchmaking.recommendations'),
+    url(r'^matchmaker/match/$', 'freyalove.api.views.matchmaking.match'),
+    url(r'^matchmaker/(?P<userid_list>[-\w+]+)/questions/answered/$', 'freyalove.api.views.matchmaking.answered'),
 
-    # QUESTIONAIRE
+    # QUESTIONNAIRE
+    url(r'^users/(?P<fb_username>[-\w]+)/questionnaire/categories/$', 'freyalove.api.views.questionnaire.categories'),
+    url(r'^users/(?P<fb_username>[-\w]+)/questionnaire/questions/random/(?P<status>[-\w]+)/$','freyalove.api.views.questionnaire.random_questions'),
+    url(r'^users/(?P<fb_username>[-\w]+)/questionnaire/(?P<category>[-\w]+)/(?P<status>[-\w]+)/$','freyalove.api.views.questionnaire.filter_questions'),
+    url(r'^questionnaire/questions/add/$', 'freyalove.api.views.questionnaire.answer'),
 
     # Index
     url(r'^$', 'freyalove.views.hello'),

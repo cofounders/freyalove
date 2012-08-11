@@ -47,7 +47,7 @@ def profile_summary(request, fb_username):
     given_user_profile = Profile.objects.has_freya_profile_given_fb_details(fb_username)
 
     # TODO: Permissions check - Self, friends and friends-of-friends
-    
+
     resp_data_ = obj_user_summary([given_user_profile])
     resp_data = resp_data_[0]
 
@@ -67,7 +67,8 @@ def friends(request, fb_username):
     friends = Friendship.objects.friends_for_profile(given_user_profile)
 
     resp_data = []
-    resp_data_ = obj_user_summary([friends])
+    if len(friends) > 0:
+        resp_data_ = obj_user_summary([friends])
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
 

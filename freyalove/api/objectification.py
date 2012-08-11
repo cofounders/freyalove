@@ -51,6 +51,7 @@ def obj_user_summary(list_of_profiles):
         profile_as_user_summary["lastName"] = profile.last_name
         profile_as_user_summary["photo"] = "http://graph.facebook.com/%s/picture" % profile.fb_username
         profile_as_user_summary["points"] = 0 # TODO
+        profile_as_user_summary["username"] = profile.fb_username
         resp.append(profile_as_user_summary)
 
     return resp
