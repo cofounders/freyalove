@@ -26,9 +26,11 @@ class FriendshipManager(models.Manager):
     def friends_for_profile(self, profile):
         friends = []
         for friendship in self.filter(from_profile=profile).select_related(depth=1):
-            friends.append({"friend": friendship.to_profile, "friendship": friendship})
+            #friends.append({"friend": friendship.to_profile, "friendship": friendship})
+            friends.append(friendship.to_profile)
         for friendship in self.filter(to_profile=profile).select_related(depth=1):
-            friends.append({"friend": friendship.to_profile, "friendship": friendship})
+            #friends.append({"friend": friendship.from_profile, "friendship": friendship})
+            friends.append(friendship.from_profile)
         return friends
 
     def are_friends(self, profile1, profile2):

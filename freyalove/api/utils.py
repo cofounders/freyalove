@@ -104,6 +104,9 @@ def has_conversation(from_profile, to_profile):
 
     return conversation
 
+def parse_term(term):
+    return " ".join(term.split("+"))
+
 # Direct calls to Open Graph API
 
 def fetch_profile(token):

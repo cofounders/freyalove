@@ -20,8 +20,8 @@ urlpatterns = patterns('',
     # OTHER USERS
     url(r'^users/(?P<fb_username>[-\w]+)/profile/$', 'freyalove.api.views.otherusers.profile'),
     url(r'^users/(?P<fb_username>[-\w]+)/profile/summary/$', 'freyalove.api.views.otherusers.profile_summary'),
+    url(r'^users/(?P<fb_username>[-\w]+)/friends/$', 'freyalove.api.views.otherusers.friends'),
     url(r'^users/friends/(?P<fb_username>[-\w]+)/mutual/$', 'freyalove.api.views.otherusers.mutual_friends_in_freya'),
-    url(r'^users/(?P<fb_username>[-\w]+)/friends/$', 'freyalove.api.views.otherusers.friends_in_freya'),
 
     # ACTIVITIES
     url(r'^activities/sexytimes/upcoming/$', 'freyalove.api.views.activities.fetch_sexytimes'), 

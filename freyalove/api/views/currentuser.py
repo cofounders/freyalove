@@ -128,6 +128,7 @@ def facebookfriends(request):
 def search(request, query):
     resp_data = []
 
+    query = parse_term(query)
     profiles = Profile.objects.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
     resp_data = obj_user_summary(profiles)
 
