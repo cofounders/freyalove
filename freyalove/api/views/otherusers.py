@@ -30,7 +30,7 @@ def profile(request, fb_username):
 
     # TODO: Permissions check - Self, friends and friends-of-friends
 
-    resp_data = []
+    resp_data = {}
     resp_data_ = obj_user([given_user_profile])
     resp_data["user"] = resp_data_[0]
     resp_data["pending_match"] = False # TODO 
@@ -47,7 +47,7 @@ def profile_summary(request, fb_username):
     given_user_profile = Profile.objects.has_freya_profile_given_fb_details(fb_username)
 
     # TODO: Permissions check - Self, friends and friends-of-friends
-
+    
     resp_data_ = obj_user_summary([given_user_profile])
     resp_data = resp_data_[0]
 
