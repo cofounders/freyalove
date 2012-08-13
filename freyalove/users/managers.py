@@ -89,7 +89,7 @@ class FriendsCacheManager(models.Manager):
 
             # update friendships in the system
             from freyalove.users.models import Profile, Friendship
-            other_profiles = Profile.objects.get(fb_id__in=friends_ids)
+            other_profiles = Profile.objects.filter(fb_id__in=friends_ids)
             for p in other_profiles:
                 if Friendship.are_friends(profile, p):
                     pass
