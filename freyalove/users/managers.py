@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import timezone
+
 import datetime
 import facebook
 
@@ -72,7 +74,7 @@ class FriendsCacheManager(models.Manager):
     def update_cache(self, profile, token):
         cache = super(FriendsCacheManager, self).get_query_set().get(profile=profile)
         # check to see if to be updated
-        if (cache.updated + datetime.timedelta(hours=2)) < datetime.datetime.now(): 
+        if timezone.make_aware((cache.updated + datetime.timedelta(hours=2)), timezone.get_default_timezone()) < timezone.make_aware(datetime.datetime.now(), timezone.get_default_timezone()): 
             graph = facebook.GraphAPI(token)
             friends = graph.get_connections("me", "friends")
             friends = friends["data"]
