@@ -80,18 +80,78 @@ def obj_fb_user_summary(token):
         #facebook_profile_as_summary["photo"] = "http://graph.facebook.com/%s/picture" % profile["username"]
         resp.append(facebook_profile_as_summary)
 
-    return friends
+    return resp
 
 
 ## MESSAGES
 
 # ConversationSummary
-def obj_conversation_summary():
+def obj_message(messages):
+    """
+    Given a list of messages, return a list of dictionaries with the following:
+        id: String
+        from: [UserSummary](API-Objects-Messaging#wiki-usersummary)
+        to: [UserID]
+        date: Timestamp
+        body: String
+        status: [StatusType](#wiki-statustype)
+        timestamp: [DateTime](API-Objects#wiki-datetime)
+    """
+    resp = []
+
+    for m in messages:
+        m_summary = {}
+        m_summary["id"] = m.id
+        m_summary["from"] = obj_user_summary([m.sender])[0]
+        m_summary["to"] = obj_user_summary([m.receiver])[0] # TODO current code implies 1 <-> 1, updated spec is 1 <-> n
+        m_summary["date"] = str(m.created_at)
+        m_summary["timestamp"] = str(m.created_at) # TODO
+        if m.unread:
+            m_summary["status"] = "unread"
+        elif m.deleted:
+            m_summary["status"] = "deleted"
+        else:
+            m_summary["status"] = "read"
+
+        resp.append(m_summary)
+
+    return resp
+
+def obj_conversation():
     """
     Given, return a list of dictionaries with the following:
+        id: String
+        participants: [[UserID](Object-API-User#wikiusersummary)]
+        status:  [StatusType](#wiki-statustype) // aggregate of the contained messages
+        messages: [Message]
+    """
+    pass
+
+def obj_conversation_summary(conversations):
+    """
+    Given a list of conversations, return a list of dictionaries with the following:
         id: ConversationID
         participants: [[UserID](Object-API-User#wikiusersummary)]
         status:  [StatusType](#wiki-statustype) // aggregate of the contained messages
         lastMessage: Message
     """
-    
+    resp = []
+    for c in conversations:
+        c_summary = {}
+        c_summary["id"] = c.id
+        c_summary["participants"] = obj_user_summary([c_summary.owner, c_summary.participant])
+        if c.unread:
+            c_summary["status"] = "unread"
+        elif c.deleted:
+            c_summary["status"] = "deleted"
+        else:
+            c_summary["status"] = "read"
+        msgs = c.msg_set.all().order_by('-created_at')
+        if msgs.count() > 0:
+            c_summary["lastMessage"] = obj_message([msgs[0]])[0]
+        else:
+            c_summary["lastMessage"] = {}
+
+        resp.append(c_summary)
+
+    return resp

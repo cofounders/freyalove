@@ -33,8 +33,8 @@ urlpatterns = patterns('',
     url(r'^activities/winks/to/(\d+)/$', 'freyalove.api.views.activities.create_wink'), # send Wink
 
     # MESSAGES
+    url(r'^conversations/$', 'freyalove.api.views.messages.conversations'),
     url(r'^conversations/unread/$', 'freyalove.api.views.messages.fetch_unread_conversations'),
-    url(r'^conversations/$', 'freyalove.api.views.messages.fetch_conversations'), # fetch all conversations
     url(r'^conversations/(\d+)/messages/$', 'freyalove.api.views.messages.fetch_messages'),
     url(r'^conversations/messages/$', 'freyalove.api.views.messages.send_message'), # send Message, a conversation will be created if it doesn't exist
 
