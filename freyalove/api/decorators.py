@@ -18,6 +18,14 @@ def user_is_authenticated_with_facebook(view):
         else:
             # Signal handlers that require the token to run (e.g. update FriendsCache)
             profile = is_registered_user(fetch_profile(cookie["access_token"]))
+
+            # Update cache. Create and assign if user doesn't have one yet.
+            try:
+                f = FriendsCache.objects.get(profile=profile)
+            except FriendsCache.DoesNotExist:
+                f = FriendsCache()
+                f.profile = profile
+                f.save()
             FriendsCache.objects.update_cache(profile, cookie["access_token"])
             # Return view
             return view(request, *args, **kwargs)
