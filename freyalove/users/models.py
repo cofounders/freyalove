@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_delete, pre_save, post_save
 
-from freyalove.users.managers import FriendshipManager, WinkManager, ProfileManager
+from freyalove.users.managers import FriendshipManager, WinkManager, ProfileManager, FriendsCacheManager
 
 import datetime
 
@@ -113,8 +113,13 @@ class Friendship(models.Model):
     class Meta:
         unique_together = (('to_profile', 'from_profile'),)
 
-# Activities
-# Placeholders
+class FriendsCache(models.Model):
+    fb_ids = models.TextField(blank=True)
+    profile = models.ForeignKey(Profile)
+    updated = models.DateTimeField(auto_now=True, null=True)
+
+    objects = FriendsCacheManager()
+
 
 class Wink(models.Model):
     to_profile = models.ForeignKey(Profile, related_name="wink_to")

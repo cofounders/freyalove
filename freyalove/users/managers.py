@@ -1,4 +1,6 @@
 from django.db import models
+import datetime
+import facebook
 
 class ProfileManager(models.Manager):
 
@@ -64,3 +66,33 @@ class WinkManager(models.Manager):
                     if w.received and w.accepted:
                         has_wink = True
         return has_wink
+
+class FriendsCacheManager(models.Manager):
+
+    def update_cache(self, profile, token):
+        cache = super(FriendsCacheManager, self).get_query_set().get(profile=profile)
+        # check to see if to be updated
+        if (cache.updated + datetime.timedelta(hours=2)) < datetime.datetime.now(): 
+            graph = facebook.GraphAPI(token)
+            friends = graph.get_connections("me", "friends")
+            friends = friends["data"]
+            friends_ids = []
+            for entry in friends:
+                friends_ids.append(entry["id"])
+
+            friends_as_str = ",".join(friends_ids)
+            cache.fb_ids = friends_as_str
+            cache.updated = datetime.datetime.now()
+            cache.save()
+
+            # update friendships in the system
+            from freyalove.users.models import Profile, Friendship
+            other_profiles = Profile.objects.get(fb_id__in=friends_ids)
+            for p in other_profiles:
+                if Friendship.are_friends(profile, p):
+                    pass
+                else:
+                    f = Friendship()
+                    f.to_profile = p
+                    f.from_profile = profile
+                    f.save()
