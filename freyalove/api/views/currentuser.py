@@ -126,11 +126,14 @@ def facebookfriends(request):
 @user_is_authenticated_with_facebook
 @require_http_methods(["GET"])
 def search(request, query):
+    query = request.GET.get("q", None)
     resp_data = []
 
-    query = parse_term(query)
-    profiles = Profile.objects.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
-    resp_data = obj_user_summary(profiles)
+    #query = parse_term(query)
+    if query:
+        profiles = Profile.objects.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
+        if profiles.count() > 0:
+            resp_data = obj_user_summary(profiles)
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200)) 
 
