@@ -16,9 +16,9 @@ def user_is_authenticated_with_facebook(view):
             resp = HttpResponse("Missing authentication cookie", status=403)
             return resp
         else:
-        	# Signal handlers that require the token to run (e.g. update FriendsCache)
-        	profile = is_registered_user(fetch_profile(cookie["access_token"]))
-        	FriendsCache.objects.update_cache(profile, cookie["access_token"])
-        	# Return view
+            # Signal handlers that require the token to run (e.g. update FriendsCache)
+            profile = is_registered_user(fetch_profile(cookie["access_token"]))
+            FriendsCache.objects.update_cache(profile, cookie["access_token"])
+            # Return view
             return view(request, *args, **kwargs)
     return _wrapped_view
