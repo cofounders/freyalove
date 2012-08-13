@@ -8,6 +8,7 @@ class Conversation(models.Model):
     participant = models.ForeignKey(Profile, related_name='participant_set')
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     unread = models.BooleanField(default=False) 
+    deleted = models.BooleanField(default=False)
     
     objects = ConversationManager()
 
@@ -20,6 +21,7 @@ class Msg(models.Model):
     sender = models.ForeignKey(Profile,related_name='sender_set')
     receiver = models.ForeignKey(Profile, related_name='receiver_set')
     read = models.BooleanField(default=False)
+    deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
 

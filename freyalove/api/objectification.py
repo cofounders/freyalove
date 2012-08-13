@@ -81,3 +81,17 @@ def obj_fb_user_summary(token):
         resp.append(facebook_profile_as_summary)
 
     return friends
+
+
+## MESSAGES
+
+# ConversationSummary
+def obj_conversation_summary():
+    """
+    Given, return a list of dictionaries with the following:
+        id: ConversationID
+        participants: [[UserID](Object-API-User#wikiusersummary)]
+        status:  [StatusType](#wiki-statustype) // aggregate of the contained messages
+        lastMessage: Message
+    """
+    
