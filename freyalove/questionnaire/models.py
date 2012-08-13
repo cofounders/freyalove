@@ -1,15 +1,18 @@
 from django.db import models
 
 from freyalove.users.models import Profile
+from freyalove.questionnaire.managers import QuestionnaireManager
 
 class QuestionTopic(models.Model):
     name = models.CharField(max_length=100)
+    active = models.BooleanField(default=True)
 
     def __unicode__(self):
         return self.name
 
 class QuestionType(models.Model):
     name = models.CharField(max_length=100)
+    active = models.BooleanField(default=True)
 
     def __unicode__(self):
         return self.name
@@ -22,6 +25,9 @@ class Question(models.Model):
     choice_3 = models.CharField(max_length=300, blank=True)
     choice_4 = models.CharField(max_length=300, blank=True)
     help_text = models.TextField(blank=True)
+    publish = models.BooleanField(default=True)
+
+    objects = QuestionnaireManager()
 
     def __unicode__(self):
         return "%s / %s / %d" % (self.question_topic, self.question_type, self.id)
