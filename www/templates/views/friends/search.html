@@ -1,6 +1,6 @@
-<section class="panel friends-search">
+<section class="friends-search">
 	<header>
-		<h2>Found {{count}} Search Results for "<span class="query">{{query}}</span>"</h2>
+		<h2>Found {{count}} Search Results for {{query}}</h2>
 	</header>
 	<article>
 		<ol>
@@ -9,9 +9,14 @@
 				<a href="/profile/{{id}}" title="Profile of {{name}}">
 					<img src="{{photo}}" alt="{{name}}" />
 				</a>
-				<p>
-					<a href="/profile/{{id}}" class="name" title="Profile of {{name}}">{{name}}</a>
-				</p>
+				<div class="search-profile-details">
+					<p>
+						<a href="/profile/{{id}}" class="name" title="Profile of {{name}}">{{name}}</a>
+					</p>
+					<p>{{dateOfBirth}}, {{location}}</p>
+					<p>{{likes}}</p>
+				</div>
+
 			</li>
 			{{/friends}}
 		</ol>

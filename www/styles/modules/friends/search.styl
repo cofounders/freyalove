@@ -1,0 +1,31 @@
+.friends-search
+	header
+		h2
+			sidebar-spacing-bottom()
+			text-transform none
+			text-align left
+		&:after
+			sidebar-heading-underline()
+	article
+		ol
+			li
+				display inline-block
+				vertical-align top
+				width 210px
+				margin 10px 21px 20px 0
+				&:nth-child(3n)
+					margin-right 0
+				img
+					profile-image()
+				.search-profile-details
+					display inline-block
+					vertical-align top
+					width 135px
+					margin: 0 0 0 15px
+				p
+					margin 0
+					font-size 0.875rem
+				a
+					color #444
+					&:hover, &:active
+						text-decoration underline
