@@ -9,16 +9,19 @@
 		<ol>
 			{{#conversations}}
 			<li class="{{#UNREAD}}un{{/UNREAD}}read">
-				<a href="#">
+				{{#lastMessage}}{{#from}}
+				<a href="/conversations/{{id}}">
+				{{/from}}{{/lastMessage}}
 				{{#lastMessage}}
-				{{#from}}
-				<img src="{{photo}}" alt="{{name}}" />
-				{{/from}}
-				<p>
-					{{#from}}{{name}}{{/from}}
-					<span class="body">{{body}}</span>
-					<span class="when">{{when}}</span>
-				</p>
+					{{#from}}
+					<img src="{{photo}}" alt="{{name}}" />
+					{{/from}}
+					<div class="popup-conversation-profile-details">
+						<p>{{#from}}{{name}}{{/from}}</p>
+						<p>{{body}}</p>
+						<p>{{when}}</p>
+					</div>
+
 				{{/lastMessage}}
 				</a>
 			</li>

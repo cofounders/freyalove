@@ -435,7 +435,7 @@ var message1 = {
 	message2 = {
 		from: user21,
 		to: user20,
-		body: 'I won\'t stand for it. Not now, not ever, do you understand me?!',
+		body: 'I won\'t stand for it. Not now, not ever, do you understand me?!I won\'t stand for it. Not now, not ever, do you understand me?!I won\'t stand for it. Not now, not ever, do you understand me?!',
 		status: ConversationStatus.UNREAD,
 		when: '3 minutes ago'
 	},
