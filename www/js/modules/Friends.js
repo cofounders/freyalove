@@ -123,9 +123,17 @@ function($, _, Backbone, app, Facebook, Dummy) {
 			this.collection.off(null, null, this);
 		},
 		serialize: function () {
+			var friends = _.map(this.collection.toJSON(), function (friend) {
+					var dob = new Date(friend.dateOfBirth),
+						months = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ');
+					friend.prettyDateOfBirth = (/^\d{4}/.test(friend.dateOfBirth))
+						? months[dob.getMonth()] + ' ' + dob.getDate() + ', ' + dob.getFullYear()
+						: dob.getDate() + ', ' + dob.getFullYear();
+					return friend;
+				});
 			return {
 				count: this.collection.length,
-				friends: this.collection.toJSON(),
+				friends: friends,
 				query: this.collection.options.query
 			};
 		}

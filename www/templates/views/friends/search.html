@@ -13,7 +13,14 @@
 					<p>
 						<a href="/profile/{{id}}" class="name" title="Profile of {{name}}">{{name}}</a>
 					</p>
-					<p>{{dateOfBirth}}, {{location}}</p>
+
+					{{#dateOfBirth}}
+					<p>{{prettyDateOfBirth}}</p>
+					{{/dateOfBirth}}
+
+					{{#location}}
+					<p>{{location}}</p>
+					{{/location}}
 				</div>
 
 			</li>

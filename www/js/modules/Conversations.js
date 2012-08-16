@@ -107,7 +107,7 @@ function($, _, Backbone, app,
 			this.collection.off(null, null, this);
 		},
 		serialize: function () {
-			return {conversations: this.collection.toJSON()};
+			return {conversations: this.collection.toJSON().slice(0, 4)};
 		}
 	});
 
