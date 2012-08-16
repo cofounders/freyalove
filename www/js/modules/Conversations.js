@@ -96,13 +96,6 @@ function($, _, Backbone, app,
 			}, function (data, textStatus, jqXHR) {
 			});
 		}
-		// render: function (manage) {
-		// 	setTimeout( function () {
-		// 		var height = $(".conversation-viewport > ol").height();
-		// 		$(".conversation-viewport").scrollTop(height);
-		// 	}, 500);
-		// 	return manage(this).render();
-		// }
 	});
 
 	Views.Menu = Backbone.View.extend({

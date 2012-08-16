@@ -49,9 +49,10 @@ function($, _, Backbone) {
 				begin = Math.max(0, Math.min(this.begin, lastAllowed));
 			items.slice(begin, begin + this.span).forEach(selectItem);
 			return {
-				showPrevious: begin > 0,
+				hasItems: this.collection.length > 0,
+				items: items,
 				showNext: begin < items.length - 2,
-				items: items
+				showPrevious: begin > 0
 			};
 		}
 	});
