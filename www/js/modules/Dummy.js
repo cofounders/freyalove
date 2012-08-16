@@ -51,7 +51,7 @@ define(['Underscore'], function (_) {
 	var user3 = {
 		"id": "3",
 		"name": "Alice Pieszecki",
-		"dateOfBirth": "11/25/1976",
+		"dateOfBirth": "1976-11-25",
 		"photo": "/dummy/user3.png",
 		"about": "Alice Pieszecki is a fictional character on the Showtime television network series The L Word, shown nationally in the United States. She is played by American actress Leisha Hailey. Alice lives in Los Angeles, California, and mostly hangs out in West Hollywood. During the first seasons, she is often seen with her best friends, Shane McCutcheon (Katherine Moennig) and Dana Fairbanks (Erin Daniels).",
 		"points": "201",
@@ -73,7 +73,7 @@ define(['Underscore'], function (_) {
 	var user4 = {
 		"id": "4",
 		"name": "Anabelle Hernandez-Herrara",
-		"dateOfBirth": "2/29/1984",
+		"dateOfBirth": "1984-2-29",
 		"photo": "/dummy/user4.png",
 		"about": "About Anabelle... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porta sem malesuada magna mollis euismod. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.",
 		"points": "612",
@@ -98,7 +98,7 @@ define(['Underscore'], function (_) {
 	var user10 = {
 		"id": "10",
 		"name": "Kenny Shen",
-		"dateOfBirth": "9/11/1982",
+		"dateOfBirth": "1982-11-9",
 		"photo": "/dummy/user10.png",
 		"about": "Kenny is a Python Wrangler... Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.",
 		"points": "502",
@@ -142,7 +142,7 @@ define(['Underscore'], function (_) {
 	var user12 = {
 		"id": "12",
 		"name": "Sebastiaan Deckers",
-		"dateOfBirth": "1/19/1983",
+		"dateOfBirth": "1983-1-19",
 		"photo": "/dummy/user12.png",
 		"about": "Seb is the Javascript Jockey... Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.",
 		"points": "371",
@@ -164,7 +164,7 @@ define(['Underscore'], function (_) {
 	var user13 = {
 		"id": "13",
 		"name": "Veronica Ng",
-		"dateOfBirth": "8/1/1983",
+		"dateOfBirth": "1983-1-8",
 		"photo": "/dummy/user13.png",
 		"about": "Veronica is the UI Undertaker... Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.",
 		"points": "290",
@@ -186,7 +186,7 @@ define(['Underscore'], function (_) {
 	var user14 = {
 		"id": "14",
 		"name": "Wolfgang Maehr",
-		"dateOfBirth": "7/25/1982",
+		"dateOfBirth": "1982-7-25",
 		"photo": "/dummy/user14.png",
 		"about": "Wolf is the IXD Imp... Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.",
 		"points": "103",

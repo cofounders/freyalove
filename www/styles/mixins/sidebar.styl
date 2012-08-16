@@ -112,13 +112,15 @@ popup()
 		overflow auto
 		> ol, > ul
 			margin 0
+			> a
+					&:hover, &:active
+						background-color lighten($purple, 90%)
 			> li
 				padding 0 0 0 10px
 				sidebar-content()
 				single-line-list-spacing()
-				a
-					img
-						profile-image()
+				img
+					profile-image()
 				p
 					sidebar-content()
 					content-beside-list(190px, 10px, 10px)
