@@ -1,5 +1,6 @@
 define([
 	'jQuery', 'Underscore', 'Backbone', 'app',
+	'modules/Alerts',
 	'modules/Conversations',
 	'modules/Footer',
 	'modules/Friends',
@@ -9,6 +10,7 @@ define([
 	'modules/Winks'
 ], function (
 	$, _, Backbone, app,
+	Alerts,
 	Conversations,
 	Footer,
 	Friends,
@@ -90,6 +92,7 @@ define([
 				matchesCouples = new Matches.Collections.Couples();
 			app.useLayout('dashboard')
 				.setViews({
+					'.bblm-alerts-welcome': new Alerts.Views.Welcome(),
 					'.bblm-winks-received': new Winks.Views.Received({
 						collection: winksReceived
 					}),
