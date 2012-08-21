@@ -20,6 +20,7 @@ class QuestionType(models.Model):
 class Question(models.Model):
     question_topic = models.ForeignKey(QuestionTopic)
     question_type = models.ForeignKey(QuestionType)
+    question_given = models.CharField(max_length=300)
     choice_1 = models.CharField(max_length=300, blank=True)
     choice_2 = models.CharField(max_length=300, blank=True)
     choice_3 = models.CharField(max_length=300, blank=True)

@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
@@ -10,12 +10,64 @@ except ImportError:
     import simplejson as json
 
 import facebook
+import random
 
-from freyalove.users.models import Profile, Wink, ProfileDetail, ProfilePrivacyDetail
+from freyalove.users.models import Profile, Wink, ProfileDetail, ProfilePrivacyDetail, Friendship
 from freyalove.questionnaire.models import QuestionTopic, QuestionType, Question, Answer
 from freyalove.api.decorators import user_is_authenticated_with_facebook
 from freyalove.api.utils import *
-from freyalove.api.objectification import obj_user_summary, obj_user, obj_fb_user_summary
+from freyalove.api.objectification import obj_user_summary, obj_user, obj_fb_user_summary, obj_question
+
+# GET /USERS/:USERNAME/QUESTIONNAIRE/QUESTIONS/RANDOM/{ANSWERED|UNANSWERED}/
+@user_is_authenticated_with_facebook
+@require_http_methods(["GET"])
+def random_quesitons(request, fb_username, status):
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
+
+    other_profile = Profile.objects.get(fb_username=fb_username)
+    are_friends = Friendship.objects.are_friends(profile, other_profile)
+    resp_data = []
+
+    topics = QuestionTopic.objects.all()
+
+    if not are_friends:
+        return HttpResponse("Not friends", status=403)
+
+    if status == "answered":
+        for topic in topics:
+            questions = Question.objects.filter(question_topic=topic)
+            answers = []
+            for q in questions:
+                try:
+                    answered = Answer.objects.get(question=q, profile=other_profile)
+                except Answer.DoesNotExist:
+                    answered = None
+                if answered:
+                    answers.append(answered)
+
+            random.shuffle(answers)
+            resp_data.append(obj_question([answers[0].question])[0])
+
+    elif status == "unanswered":
+        for topic in topics:
+            questions = Question.objects.filter(question_topic=topic)
+            answers = []
+            for q in questions:
+                try:
+                    answered = Answer.objects.get(question=q, profile=other_profile)
+                except Answer.DoesNotExist:
+                    answered = None
+                if not answered:
+                    answers.append(q)
+
+            random.shuffle(answers)
+            resp_data.append(obj_question([answers[0]])[0])
+    else:
+        # throw error
+        raise Http404
+
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json"))
 
 # POST /QUESTIONNAIRE/QUESTIONS/ADD/
 @user_is_authenticated_with_facebook

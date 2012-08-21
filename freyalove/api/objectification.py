@@ -155,3 +155,35 @@ def obj_conversation_summary(conversations):
         resp.append(c_summary)
 
     return resp
+
+## QUESTIONNAIRE
+def obj_questiontopics(qtopics):
+    pass
+
+def obj_questiontype(qtypes):
+    pass
+
+def obj_questions(questions):
+    """
+    Given a list of questions, return a list of dictionaries with the following:
+    id: String,
+    topic: QuestionTopic,
+    type: QuestionType,
+    question: String,
+    helpText: String,
+    lang: en
+    """
+    
+    resp = []
+    for q in questions:
+        q_as_object = {}
+        q_as_object["id"] = q.id
+        q_as_object["topic"] = q.question_topic.name
+        q_as_object["type"] = q.question_type.name
+        q_as_object["question"] = q.question_given
+        q_as_object["helpText"] = q.help_text
+        q_as_object["lang"] = "en"
+
+        resp.append(q_as_object)
+
+    return resp
