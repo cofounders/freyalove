@@ -79,59 +79,45 @@ def fetch_messages(request, username_list):
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
 
+@user_is_authenticated_with_facebook
+@require_http_methods(["POST"])
 def send_message(request):
-    if request.method == "POST":
-        recipients = request.POST.getlist('to', [])
-        message = request.POST.get('body', None)
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
-        if not message or not recipients:
-            resp = HttpResponse("Bad request - submission criteria missing.", status=400)
-            return resp
-        # parse for token in cookie
-        cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    resp_data = {}
 
-        if not cookie:
-            resp = HttpResponse("Missing authentication cookie", status=403)
-            return resp
-        profile = is_registered_user(fetch_profile(cookie["access_token"]))
+    usernames = request.POST.get("to", None)
+    msg_body = request.POST.get("body", None)
 
-        recipients = [int(x) for x in recipients]
-
-        to_profiles = Profile.objects.filter(id__in=recipients)
-        if to_profiles.count() < 1:
-            resp = HttpResponse("Bad request - user(s) requested to send message to doesn't exist.", status=400)
-            return resp
-
-        resp_data = []
-
-        for to_profile in to_profiles:
-            conversation = has_conversation(profile, to_profile)
-
-            msg = Msg()
-            msg.message = message
-            msg.sender = profile
-            msg.receiver = to_profile
-            msg.conversation = conversation
-            msg.save()
-
-            resp_dict = {}
-            resp_dict["id"] = msg.id
-            from_summary = {}
-            from_summary["id"] = profile.id
-            from_summary["firstName"] = profile.first_name
-            from_summary["lastName"] = profile.last_name
-            from_summary["photo"] = "http://graph.facebook.com/%s/picture" % profile.fb_username
-            from_summary["points"] = "N/A"
-            resp_dict["from"] = from_summary
-            resp_dict["to"] = to_profile.id
-            resp_dict["body"] = msg.message
-            # TODO: timestamp, status
-            resp_data.append(resp_dict)
-
-        resp_json = json.JSONEncoder().encode(resp_data)
-        resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
-        return resp
-
+    if not usernames or len(usernames.split("+")) < 1 or not msg_body:
+        resp_data["status"] = "Failure"
     else:
-        resp = HttpResponse("Bad request", status=400)
-        return resp
+        usernames = usernames.split("+")
+        profiles = []
+        profiles.append(profile)
+        for username in usernames:
+            profile = Profile.objects.get(fb_username=username)
+            profiles.append(profile)
+        has_conversation = Conversation.objects.has_conversation(profiles)
+        if has_conversation:
+            conversation = Conversation.objects.get_conversation(profiles)
+        else:
+            conversation = Conversation()
+            conversation.save()
+        for p in profiles:
+            conversation.participants.add(p)
+        conversation.owner = profile
+        conversation.save()
+
+        # create message
+        msg = Msg()
+        msg.conversation = conversation
+        msg.message = msg_body
+        msg.sender = profile
+        msg.save()
+
+        resp_data["status"] = "Success"
+        resp_data["message"] = obj_message([msg])[0]
+
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
