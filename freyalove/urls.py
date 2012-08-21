@@ -34,9 +34,9 @@ urlpatterns = patterns('',
 
     # MESSAGES
     url(r'^conversations/$', 'freyalove.api.views.messages.conversations'),
-    url(r'^conversations/unread/$', 'freyalove.api.views.messages.fetch_unread_conversations'),
-    url(r'^conversations/(\d+)/messages/$', 'freyalove.api.views.messages.fetch_messages'),
-    url(r'^conversations/messages/$', 'freyalove.api.views.messages.send_message'), # send Message, a conversation will be created if it doesn't exist
+    url(r'^conversations/(?P<username_list>[-\w]+)/delete/$', 'freyalove.api.views.messages.delete_messages'),
+    url(r'^conversations/(?P<username_list>[-\w]+)//messages/$', 'freyalove.api.views.messages.fetch_messages'),
+    url(r'^conversations/message/$', 'freyalove.api.views.messages.send_message'),
 
     # STREAM
     url(r'^stream/unread/$', 'freyalove.api.views.stream.unread'),

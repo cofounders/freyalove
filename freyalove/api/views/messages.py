@@ -31,48 +31,6 @@ def conversations(request):
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
 
-def fetch_unread_conversations(request):
-    # parse for token in cookie
-    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
-    if not cookie:
-        resp = HttpResponse("Missing authentication cookie", status=403)
-        return resp
-
-    profile = is_registered_user(fetch_profile(cookie["access_token"]))
-
-    conversations = Conversation.objects.fetch_unread_conversations(profile)
-
-    resp_data = {}
-    resp_data["conversations"] = []
-
-    for c in conversations:
-        last_message = Msg.objects.filter(conversation=c).order_by('-created_at')
-        from_profile = {}
-        to_profile = {}
-
-        from_profile["name"] = last_message.sender.first_name + " " + last_message.sender.last_name
-        from_profile["id"] = last_message.sender.id
-        from_profile["photo"] = "http://graph.facebook.com/%s/picture" % last_message.sender.fb_username
-
-        to_profile["name"] = last_message.receiver.first_name + " " + last_message.receiver.last_name
-        to_profile["id"] = last_message.receiver.id
-        to_profile["photo"] = "http://graph.facebook.com/%s/picture" % last_message.receiver.fb_username
-
-        resp_data["conversations"].append({
-            "status":"N/A", 
-            "lastMessage": 
-            {
-                "from": from_profile,
-                "to": to_profile,
-                "body": last_message.message,
-                "status": "N/A",
-            }
-        })
-
-    resp_json = json.JSONEncoder().encode(resp_data)
-    resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
-    return resp
-
 def fetch_messages(request, conversation_id):
     # parse for token in cookie
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
