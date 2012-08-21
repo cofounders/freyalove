@@ -31,6 +31,11 @@ def conversations(request):
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
 
+@user_is_authenticated_with_facebook
+@require_http_methods(["POST"])
+def delete_messages(request):
+    pass
+
 def fetch_messages(request, conversation_id):
     # parse for token in cookie
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
