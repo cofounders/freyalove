@@ -5,3 +5,7 @@ from django.db import models
 class QuestionnaireManager(models.Manager):
 	# stub
 	pass
+
+class AnswerManager(models.Manager):
+	pass
+	

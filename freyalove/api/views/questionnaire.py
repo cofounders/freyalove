@@ -18,6 +18,28 @@ from freyalove.api.decorators import user_is_authenticated_with_facebook
 from freyalove.api.utils import *
 from freyalove.api.objectification import obj_user_summary, obj_user, obj_fb_user_summary, obj_question
 
+# GET /USERS/:USERNAME/QUESTIONNAIRE/CATEGORIES/
+@user_is_authenticated_with_facebook
+@require_http_methods(["GET"])
+def categories(request, fb_username):
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
+
+    other_profile = Profile.objects.get(fb_username=fb_username)
+    are_friends = Friendship.objects.are_friends(profile, other_profile)
+    resp_data = []
+
+    if not are_friends:
+        return HttpResponse("Not friends", status=403)
+
+    answers = Answer.objects.filter(profile=other_profile)
+    for ans in answers:
+        resp_data.append(ans.question.question_topic.name)
+
+    resp_data = list(set(resp_data))
+    
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json"))
+
 # GET /USERS/:USERNAME/QUESTIONNAIRE/{CATEGORY}/{ANSWERED|UNANSWERED}/
 @user_is_authenticated_with_facebook
 @require_http_methods(["GET"])
