@@ -132,6 +132,7 @@ INSTALLED_APPS = (
     # 3rd party
     'south',
     'djangorestframework',
+    'notifications',
 
     # Testing/dbugging, turn off before deployment
     'debug_toolbar',
@@ -141,7 +142,6 @@ INSTALLED_APPS = (
     'freyalove.users',
     'freyalove.matchmaker',
     'freyalove.conversations',
-    'freyalove.notifications',
     'freyalove.questionnaire',
 )
 

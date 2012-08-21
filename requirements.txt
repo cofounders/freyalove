@@ -7,3 +7,4 @@ django-extensions==0.9
 djangorestframework==0.3.3
 facebook-sdk>=0.3.1 #https://github.com/pythonforfacebook/facebook-sdk
 requests>=0.13.3
+django-notifications-hq>=0.5.2
