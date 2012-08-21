@@ -34,8 +34,8 @@ urlpatterns = patterns('',
 
     # MESSAGES
     url(r'^conversations/$', 'freyalove.api.views.messages.conversations'),
-    url(r'^conversations/(?P<username_list>[-\w]+)/delete/$', 'freyalove.api.views.messages.delete_messages'),
-    url(r'^conversations/(?P<username_list>[-\w]+)/messages/$', 'freyalove.api.views.messages.fetch_messages'),
+    url(r'^conversations/(?P<username_list>[-\w+]+)/delete/$', 'freyalove.api.views.messages.delete_messages'),
+    url(r'^conversations/(?P<username_list>[-\w+]+)/messages/$', 'freyalove.api.views.messages.fetch_messages'),
     url(r'^conversations/message/$', 'freyalove.api.views.messages.send_message'),
 
     # STREAM

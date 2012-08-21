@@ -55,54 +55,29 @@ def delete_messages(request, username_list):
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
 
-def fetch_messages(request, conversation_id):
-    # parse for token in cookie
+@user_is_authenticated_with_facebook
+@require_http_methods(["GET"])
+def fetch_messages(request, username_list):
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
-    if not cookie:
-        resp = HttpResponse("Missing authentication cookie", status=403)
-        return resp
-
     profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
-    try:
-        conversation = Conversation.objects.get(id=int(conversation_id))
-    except Conversation.DoesNotExist:
-        resp = HttpResponse("Conversation does not exist!", status=404)
-        return resp
-
-    if conversation.owner == profile or conversation.participant == profile:
+    resp_data = []
+    usernames = set(username_list.split("+"))
+    if len(usernames) < 1:
         pass
     else:
-        resp = HttpResponse("Invalid profile.", status=400)
-        return resp
+        msgs = []
+        current_user_conversations = Conversation.objects.filter(owner=profile)
+        for c in current_user_conversations:
+            match_usernames = set([p.fb_username for p in c.participants.all()])
+            match_usernames.add(c.owner.fb_username)
+            if match_usernames == usernames:
+                for msg in c.msg_set.all():
+                    msgs.append(msg)
 
-    resp_data = {}
-    resp_data["messages"] = []
+        resp_data = obj_message(msgs)
 
-    messages = Msg.objects.get(conversation=conversation).order_by('-created_at')
-
-    for m in messages:
-        from_profile = {}
-        to_profile = {}
-
-        from_profile["name"] = m.sender.first_name + " " + m.sender.last_name
-        from_profile["id"] = m.sender.id
-        from_profile["photo"] = "http://graph.facebook.com/%s/picture" % m.sender.fb_username
-
-        to_profile["name"] = m.receiver.first_name + " " + m.receiver.last_name
-        to_profile["id"] = m.receiver.id
-        to_profile["photo"] = "http://graph.facebook.com/%s/picture" % m.receiver.fb_username
-
-        resp_data["messages"].append({
-            "from": from_profile,
-            "to": to_profile,
-            "body": m.message,
-            "status": "N/A",
-        })
-
-    resp_json = json.JSONEncoder().encode(resp_data)
-    resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
-    return resp 
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
 
 def send_message(request):
     if request.method == "POST":
