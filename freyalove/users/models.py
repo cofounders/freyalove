@@ -4,6 +4,7 @@ from django.db.models.signals import post_delete, pre_save, post_save
 
 from freyalove.users.managers import FriendshipManager, WinkManager, ProfileManager, FriendsCacheManager
 
+from notifications import notify
 import datetime
 
 class ProfilePrivacyDetail(models.Model):
@@ -72,6 +73,7 @@ class Profile(models.Model):
     # extra
     details = models.ForeignKey(ProfileDetail, null=True)
     permissions = models.ForeignKey(ProfilePrivacyDetail, null=True)
+    user_object = models.ForeignKey(User, null=True)
 
     objects = ProfileManager()
 
@@ -132,26 +134,18 @@ class Wink(models.Model):
     def __unicode__(self):
         return "wink from %s to %s" % (from_profile.first_name, to_profile.first_name)
 
-def register_wink(sender, instance, **kwargs):
-    from freyalove.notifications.models import Notification
+def wink_notify(sender, instance, **kwargs):
+    # check if we need to generate a notification
     try:
-        n = Notification.objects.get(wink=instance)
-        if instance.accepted and instance.received:
-            n.status = "1"
-            n.marked_for_removal = True
-        elif instance.received and not instance.accepted:
-            n.status = "2"
-            n.marked_for_removal = True
-        else:
-            pass
-        n.save()
-    except Notification.DoesNotExist:
-        n = Notification()
-        n.profile = instance.to_profile
-        n.ntype = "1"
-        n.status = "2"
-        n.wink = instance
-        n.save()
+        wink_in_db = Wink.objects.get(id=instance.id)
+    except Wink.DoesNotExist:
+        # wink creation
+        if not instance.received and not instance.accepted:
+            notify.send(instance.from_profile.user_object, recipient=instance.from_profile, verb="winked at", action_object=instance, target=instance.to_profile)
+    if instance.received == wink_in_db.received:
+        pass
+    if not wink_in_db.accepted and instance.accepted: # wink response
+        notify.send(instance.to_profile.user_object, ecipient=instance.to_profile, verb="winked at", action_object=instance, target=instance.from_profile)
 
 # Register with freyalove.notifications
-post_save.connect(register_wink, sender=Wink, dispatch_uid="wink_save")
+pre_save.connect(wink_notify, sender=Wink, dispatch_uid="wink_presave")
