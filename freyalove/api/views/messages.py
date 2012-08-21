@@ -33,8 +33,27 @@ def conversations(request):
 
 @user_is_authenticated_with_facebook
 @require_http_methods(["POST"])
-def delete_messages(request):
-    pass
+def delete_messages(request, username_list):
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
+
+    resp_data = {}
+    usernames = set(username_list.split("+"))
+    if len(usernames) < 1:
+        resp_data["status"] = "Failure"
+    else:
+        current_user_conversations = Conversation.objects.filter(owner=profile)
+        for c in current_user_conversations:
+            match_usernames = set([p.fb_username for p in c.participants.all()])
+            match_usernames.add(c.owner.fb_username)
+            if match_usernames == usernames:
+                for msg in c.msg_set.all():
+                    msg.deleted = True
+                    msg.save()
+
+        resp_data["status"] = "Success"
+
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
 
 def fetch_messages(request, conversation_id):
     # parse for token in cookie

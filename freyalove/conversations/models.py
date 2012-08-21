@@ -13,7 +13,7 @@ class Conversation(models.Model):
     objects = ConversationManager()
 
     def __unicode__(self):
-        return "%s <-> %s" % (self.owner, self.participant)
+        return "%s <-> %s" % (self.owner, self.participants)
 
 class Msg(models.Model):
     conversation = models.ForeignKey(Conversation)
@@ -26,5 +26,5 @@ class Msg(models.Model):
     updated_at = models.DateTimeField(auto_now=True, null=True)
 
     def __unicode__(self):
-        return "%s -> %s on %s" % (self.sender, self.receiver, self.created_at)
+        return "%s -> %s on %s" % (self.sender, self.conversation, self.created_at)
 
