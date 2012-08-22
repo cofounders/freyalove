@@ -7,6 +7,8 @@ import facebook
 class ProfileManager(models.Manager):
 
     def has_freya_profile_given_fb_details(self, fb_val):
+        profile = None
+        
         try:
             fb_id = int(fb_val)
         except ValueError:
