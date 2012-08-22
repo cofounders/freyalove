@@ -129,7 +129,7 @@ function($, _, Backbone, app,
 		events: {
 			'click .button.create-conversation': 'createConversation'
 		},
-		createConversation: function () {
+		createConversation: function (event) {
 			event.stopPropagation();
 			event.preventDefault();
 
@@ -142,7 +142,14 @@ function($, _, Backbone, app,
 	});
 
 	Views.Create = Popup.extend({
-		template: 'conversations/create'
+		template: 'conversations/create',
+		events: {
+			'click .close': function (event) {
+				event.stopPropagation();
+				event.preventDefault();
+				this.remove();
+			}
+		}
 	});
 
 	return {
