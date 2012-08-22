@@ -1,5 +1,11 @@
-define(['jQuery', 'Underscore', 'Backbone', 'app', 'modules/Dummy'],
-function($, _, Backbone, app, Dummy) {
+define(['jQuery', 'Underscore', 'Backbone', 'app',
+	'modules/Dummy',
+	'modules/Popup'
+],
+function($, _, Backbone, app,
+	Dummy,
+	Popup
+) {
 
 	var Collections = {},
 		Views = {};
@@ -30,6 +36,19 @@ function($, _, Backbone, app, Dummy) {
 		},
 		serialize: function () {
 			return {sexyTimes: this.collection.toJSON()};
+		},
+		events: {
+			'click .create-sexytime': 'createSexytime'
+		},
+		createSexytime: function () {
+			event.stopPropagation();
+			event.preventDefault();
+
+			var popup = new Views.Create();
+			app.layout.insertViews({
+				'.bblm-popup': popup
+			});
+			popup.render();
 		}
 	});
 
@@ -44,6 +63,10 @@ function($, _, Backbone, app, Dummy) {
 		serialize: function () {
 			return {sexyTimes: this.collection.toJSON()};
 		}
+	});
+
+	Views.Create = Popup.extend({
+		template: 'sexytimes/create'
 	});
 
 	return {

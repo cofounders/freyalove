@@ -1,10 +1,12 @@
 define(['jQuery', 'Underscore', 'Backbone', 'app',
+	'modules/Dummy',
 	'modules/Friends',
-	'modules/Dummy'
+	'modules/Popup'
 ],
 function($, _, Backbone, app,
+	Dummy,
 	Friends,
-	Dummy
+	Popup
 ) {
 	var Models = {},
 		Collections = {},
@@ -123,6 +125,30 @@ function($, _, Backbone, app,
 			return {
 				conversations: this.collection.toJSON()
 			};
+		},
+		events: {
+			'click .button.create-conversation': 'createConversation'
+		},
+		createConversation: function (event) {
+			event.stopPropagation();
+			event.preventDefault();
+
+			var popup = new Views.Create();
+			app.layout.insertViews({
+				'.bblm-popup': popup
+			});
+			popup.render();
+		}
+	});
+
+	Views.Create = Popup.extend({
+		template: 'conversations/create',
+		events: {
+			'click .close': function (event) {
+				event.stopPropagation();
+				event.preventDefault();
+				this.remove();
+			}
 		}
 	});
 
