@@ -7,6 +7,8 @@ import facebook
 class ProfileManager(models.Manager):
 
     def has_freya_profile_given_fb_details(self, fb_val):
+        profile = None
+
         try:
             fb_id = int(fb_val)
         except ValueError:
@@ -19,7 +21,7 @@ class ProfileManager(models.Manager):
                 pass
         else:
             try:
-                profile = Profile.objects.get(fb_id=val)
+                profile = self.model.objects.get(fb_id=fb_val)
             except self.model.DoesNotExist:
                 pass
 
@@ -91,7 +93,7 @@ class FriendsCacheManager(models.Manager):
             from freyalove.users.models import Profile, Friendship
             other_profiles = Profile.objects.filter(fb_id__in=friends_ids)
             for p in other_profiles:
-                if Friendship.are_friends(profile, p):
+                if Friendship.objects.are_friends(profile, p):
                     pass
                 else:
                     f = Friendship()
