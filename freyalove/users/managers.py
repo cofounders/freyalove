@@ -19,7 +19,7 @@ class ProfileManager(models.Manager):
                 pass
         else:
             try:
-                profile = self.model.objects.get(fb_id=val)
+                profile = self.model.objects.get(fb_id=fb_val)
             except self.model.DoesNotExist:
                 pass
 
