@@ -21,7 +21,7 @@ function ($, app, Router, Facebook, Session, Stream, DummySync) {
 	app.session
 		.on('signIn', function () {
 			app.stream.go();
-			var url = app.api + 'users/' + app.session.get('userID') + '/profile/summary/';
+			var url = app.api + 'profile/';
 			$.get(url).success(function (response) {
 				app.session.save(response);
 				Backbone.history.navigate('/dashboard', true);
