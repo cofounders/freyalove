@@ -12,11 +12,11 @@
 				<li class="{{#UNREAD}}un{{/UNREAD}}read">
 					{{#lastMessage}}
 					{{#from}}
-					<img src="{{photo}}" alt="{{name}}" />
+					<img src="{{photo}}" alt="{{firstName}} {{lastName}}" />
 					{{/from}}
 					<div class="conversation-content">
 						<p>
-							<span class="name">{{#from}}{{name}}{{/from}}</span>
+							<span class="name">{{#from}}{{firstName}} {{lastName}}{{/from}}</span>
 							<span class="when">{{when}}</span>
 						</p>
 						<p>{{body}}</p>

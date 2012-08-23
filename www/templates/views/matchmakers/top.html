@@ -6,9 +6,9 @@
 		<ol>
 			{{#matchmakers}}
 			<li>
-				<img src="{{photo}}" alt="Picture of {{name}}" />
+				<img src="{{photo}}" alt="Picture of {{firstName}} {{lastName}}" />
 				<div class="matchmaker-points">
-					<p><a href="/profile/{{id}}" title="Profile of {{name}}">{{name}}</a></p>
+					<p><a href="/profile/{{id}}" title="Profile of {{firstName}} {{lastName}}">{{firstName}} {{lastName}}</a></p>
 					<p>{{points}} points</p>
 				</div>
 			</li>

@@ -6,12 +6,12 @@
 		<ol>
 			{{#friends}}
 			<li>
-				<a href="/profile/{{id}}" title="Profile of {{name}}">
-					<img src="{{photo}}" alt="{{name}}" />
+				<a href="/profile/{{id}}" title="Profile of {{firstName}} {{lastName}}">
+					<img src="{{photo}}" alt="{{firstName}} {{lastName}}" />
 				</a>
 				<div class="search-profile-details">
 					<p>
-						<a href="/profile/{{id}}" class="name" title="Profile of {{name}}">{{name}}</a>
+						<a href="/profile/{{id}}" class="name" title="Profile of {{firstName}} {{lastName}}">{{firstName}} {{lastName}}</a>
 					</p>
 
 					{{#dateOfBirth}}

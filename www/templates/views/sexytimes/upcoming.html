@@ -7,13 +7,13 @@
 			{{#sexyTimes}}
 			<li>
 				{{#from}}
-				<a href="/profile/{{id}}" title="Profile of {{name}}">
-					<img src="{{photo}}" alt="{{name}}" />
+				<a href="/profile/{{id}}" title="Profile of {{firstName}} {{lastName}}">
+					<img src="{{photo}}" alt="{{firstName}} {{lastName}}" />
 				</a>
 				{{/from}}
 				<p>
 					You're meeting
-					{{#from}}<a href="/profile/{{id}}" title="Profile of {{name}}">{{name}}</a>{{/from}}
+					{{#from}}<a href="/profile/{{id}}" title="Profile of {{firstName}} {{lastName}}">{{firstName}} {{lastName}}</a>{{/from}}
 					<span class="when">{{when}}</span>
 					at <span class="where">{{where}}</span>.
 				</p>
