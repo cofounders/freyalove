@@ -40,17 +40,16 @@ function($, _, Backbone, app,
 			return {sexyTimes: this.collection.toJSON()};
 		},
 		events: {
-			'click .create-sexytime': 'createSexytime'
-		},
-		createSexytime: function () {
-			event.stopPropagation();
-			event.preventDefault();
+			'click .create-sexytime': function (event) {
+				event.stopPropagation();
+				event.preventDefault();
 
-			var popup = new Views.Create();
-			app.layout.insertViews({
-				'.bblm-popup': popup
-			});
-			popup.render();
+				var popup = new Views.Create();
+				app.layout.insertViews({
+					'.bblm-popup': popup
+				});
+				popup.render();
+			}
 		}
 	});
 
