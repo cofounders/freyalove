@@ -9,17 +9,17 @@
 				{{#items}}
 				<li{{#selected}} class="selected"{{/selected}}>
 					<a href="/matchmaker/{{#first}}{{id}}{{/first}}/with/{{#second}}{{id}}{{/second}}"
-						title="Compare the profiles of {{#first}}{{name}}{{/first}} and {{#second}}{{name}}{{/second}}">
+						title="Compare the profiles of {{#first}}{{firstName}} {{lastName}}{{/first}} and {{#second}}{{firstName}} {{lastName}}{{/second}}">
 						{{#first}}
 						<div class="first">
-							<img src="{{photo}}" alt="{{name}}" />
-							<h5>{{name}}</h5>
+							<img src="{{photo}}" alt="{{firstName}} {{lastName}}" />
+							<h5>{{firstName}} {{lastName}}</h5>
 						</div>
 						{{/first}}
 						{{#second}}
 						<div class="second">
-							<img src="{{photo}}" alt="{{name}}" />
-							<h5>{{name}}</h5>
+							<img src="{{photo}}" alt="{{firstName}} {{lastName}}" />
+							<h5>{{firstName}} {{lastName}}</h5>
 						</div>
 						{{/second}}
 					</a>

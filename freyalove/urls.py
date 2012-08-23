@@ -18,10 +18,10 @@ urlpatterns = patterns('',
     url(r'^users/friends/leaderboard/summary/$', 'freyalove.api.views.currentuser.leaderboard'),
 
     # OTHER USERS
-    url(r'^users/(?P<fb_username>[-\w]+)/profile/$', 'freyalove.api.views.otherusers.profile'),
-    url(r'^users/(?P<fb_username>[-\w]+)/profile/summary/$', 'freyalove.api.views.otherusers.profile_summary'),
-    url(r'^users/(?P<fb_username>[-\w]+)/friends/$', 'freyalove.api.views.otherusers.friends'),
-    url(r'^users/friends/(?P<fb_username>[-\w]+)/mutual/$', 'freyalove.api.views.otherusers.mutual_friends'),
+    url(r'^users/(?P<fb_username>[-\w.]+)/profile/$', 'freyalove.api.views.otherusers.profile'),
+    url(r'^users/(?P<fb_username>[-\w.]+)/profile/summary/$', 'freyalove.api.views.otherusers.profile_summary'),
+    url(r'^users/(?P<fb_username>[-\w.]+)/friends/$', 'freyalove.api.views.otherusers.friends'),
+    url(r'^users/friends/(?P<fb_username>[-\w.]+)/mutual/$', 'freyalove.api.views.otherusers.mutual_friends'),
 
     # ACTIVITIES
     url(r'^activities/sexytimes/upcoming/$', 'freyalove.api.views.activities.fetch_sexytimes'), 
@@ -47,9 +47,9 @@ urlpatterns = patterns('',
     url(r'^matchmaker/(?P<userid_list>[-\w+]+)/questions/answered/$', 'freyalove.api.views.matchmaking.answered'),
 
     # QUESTIONNAIRE
-    url(r'^users/(?P<fb_username>[-\w]+)/questionnaire/categories/$', 'freyalove.api.views.questionnaire.categories'),
-    url(r'^users/(?P<fb_username>[-\w]+)/questionnaire/questions/random/(?P<status>[-\w]+)/$','freyalove.api.views.questionnaire.random_questions'),
-    url(r'^users/(?P<fb_username>[-\w]+)/questionnaire/(?P<category>[-\w]+)/(?P<status>[-\w]+)/$','freyalove.api.views.questionnaire.filter_questions'),
+    url(r'^users/(?P<fb_username>[-\w.]+)/questionnaire/categories/$', 'freyalove.api.views.questionnaire.categories'),
+    url(r'^users/(?P<fb_username>[-\w.]+)/questionnaire/questions/random/(?P<status>[-\w]+)/$','freyalove.api.views.questionnaire.random_questions'),
+    url(r'^users/(?P<fb_username>[-\w.]+)/questionnaire/(?P<category>[-\w]+)/(?P<status>[-\w]+)/$','freyalove.api.views.questionnaire.filter_questions'),
     url(r'^questionnaire/questions/add/$', 'freyalove.api.views.questionnaire.answer'),
 
     # Index

@@ -7,13 +7,13 @@
 			{{#notifications}}
 			<li>
 				{{#WINK_RECEIVED}}
-				{{#from}}<a href="/profile/{{id}}" title="Profile of {{name}}">{{name}}</a> smiled at you. <a href="#" class="smile_back">Smile back.</a>{{/from}}
+				{{#from}}<a href="/profile/{{id}}" title="Profile of {{firstName}} {{lastName}}">{{firstName}} {{lastName}}</a> smiled at you. <a href="#" class="smile_back">Smile back.</a>{{/from}}
 				{{/WINK_RECEIVED}}
 
 				{{#MATCH_INTRODUCTION}}
-				{{#matchmaker}}<a href="/profile/{{id}}" title="Profile of {{name}}">{{name}}</a>{{/matchmaker}}
+				{{#matchmaker}}<a href="/profile/{{id}}" title="Profile of {{firstName}} {{lastName}}">{{firstName}} {{lastName}}</a>{{/matchmaker}}
 				introduced you to
-				{{#to}}<a href="/profile/{{id}}" title="Profile of {{name}}">{{name}}</a>{{/to}}
+				{{#to}}<a href="/profile/{{id}}" title="Profile of {{firstName}} {{lastName}}">{{firstName}} {{lastName}}</a>{{/to}}
 				{{/MATCH_INTRODUCTION}}
 			</li>
 			{{/notifications}}

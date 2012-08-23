@@ -14,10 +14,10 @@
 				{{/from}}{{/lastMessage}}
 				{{#lastMessage}}
 					{{#from}}
-					<img src="{{photo}}" alt="{{name}}" />
+					<img src="{{photo}}" alt="{{firstName}} {{lastName}}" />
 					{{/from}}
 					<div class="popup-conversation-profile-details">
-						<p>{{#from}}{{name}}{{/from}}</p>
+						<p>{{#from}}{{firstName}} {{lastName}}{{/from}}</p>
 						<p>{{body}}</p>
 						<p>{{when}}</p>
 					</div>

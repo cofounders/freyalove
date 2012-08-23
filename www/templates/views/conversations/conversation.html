@@ -1,6 +1,6 @@
 <section class="conversations-conversation">
 	<header>
-		<h2>Conversation with {{#participants}}{{name}}{{/participants}}</h2>
+		<h2>Conversation with {{#participants}}{{firstName}} {{lastName}}{{/participants}}</h2>
 		<p><a href="/conversations">View All Conversations</a></p>
 	</header>
 	<article>
@@ -9,14 +9,14 @@
 				{{#messages}}
 				<li>
 					{{#from}}
-						<a href="/profile/{{id}}" title="Profile of {{name}}">
-							<img src="{{photo}}" alt="{{name}}" />
+						<a href="/profile/{{id}}" title="Profile of {{firstName}} {{lastName}}">
+							<img src="{{photo}}" alt="{{firstName}} {{lastName}}" />
 						</a>
 					{{/from}}
 					<div class="conversation-content">
 						<p>
 							{{#from}}
-								<a href="/profile/{{id}}" title="Profile of {{name}}">{{name}}</a>
+								<a href="/profile/{{id}}" title="Profile of {{firstName}} {{lastName}}">{{firstName}} {{lastName}}</a>
 							{{/from}}
 							<span class="when">{{when}}</span>
 						</p>

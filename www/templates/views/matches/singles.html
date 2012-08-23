@@ -7,9 +7,9 @@
 			<ol>
 				{{#items}}
 				<li{{#selected}} class="selected"{{/selected}}>
-					<img src="{{photo}}" alt="{{name}}" style="background-image: url({{photo}})" />
+					<img src="{{photo}}" alt="{{firstName}} {{lastName}}" style="background-image: url({{photo}})" />
 
-					<h3><a href="/profile/{{id}}" id="name" title="Profile of {{name}}">{{name}}</a></h3>
+					<h3><a href="/profile/{{id}}" id="name" title="Profile of {{firstName}} {{lastName}}">{{firstName}} {{lastName}}</a></h3>
 
 					{{#age}}
 					<p class="age">Age {{age}}</p>
@@ -33,7 +33,7 @@
 					</div>
 					{{/about}}
 
-					<a href="/profile/{{id}}" class="button cta" title="Profile of {{name}}">Check her out!</a>
+					<a href="/profile/{{id}}" class="button cta" title="Profile of {{firstName}} {{lastName}}">Check her out!</a>
 				</li>
 				{{/items}}
 			</ol>

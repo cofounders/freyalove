@@ -8,15 +8,15 @@
 			<li>
 				{{#FRIEND_JOIN}}
 				Your friend
-				{{#friend}}<a href="/profile/{{id}}" title="Profile of {{name}}">{{name}}</a>{{/friend}}
+				{{#friend}}<a href="/profile/{{id}}" title="Profile of {{firstName}} {{lastName}}">{{firstName}} {{lastName}}</a>{{/friend}}
 				joined FreyaLove.
 				{{/FRIEND_JOIN}}
 
 				{{#ARRANGED_SEXYTIME}}
 				Your friends
-				{{#from}}<a href="/profile/{{id}}" title="Profile of {{name}}">{{name}}</a>{{/from}}
+				{{#from}}<a href="/profile/{{id}}" title="Profile of {{firstName}} {{lastName}}">{{firstName}} {{lastName}}</a>{{/from}}
 				and
-				{{#to}}<a href="/profile/{{id}}" title="Profile of {{name}}">{{name}}</a>{{/to}}
+				{{#to}}<a href="/profile/{{id}}" title="Profile of {{firstName}} {{lastName}}">{{firstName}} {{lastName}}</a>{{/to}}
 				are going to <span class="where">{{where}}</span>
 				on <span class="when">{{when}}</span>.
 				{{#notes}}

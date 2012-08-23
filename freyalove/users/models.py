@@ -141,11 +141,11 @@ def wink_notify(sender, instance, **kwargs):
     except Wink.DoesNotExist:
         # wink creation
         if not instance.received and not instance.accepted:
-            notify.send(instance.from_profile.user_object, recipient=instance.from_profile, verb="winked at", action_object=instance, target=instance.to_profile)
+            notify.send(instance, recipient=instance.to_profile.user_object, verb="winked at")
     if instance.received == wink_in_db.received:
         pass
     if not wink_in_db.accepted and instance.accepted: # wink response
-        notify.send(instance.to_profile.user_object, ecipient=instance.to_profile, verb="winked at", action_object=instance, target=instance.from_profile)
+        notify.send(instance, recipient=instance.to_profile.user_object, verb="winked back")
 
 # Register with freyalove.notifications
-pre_save.connect(wink_notify, sender=Wink, dispatch_uid="wink_presave")
+#pre_save.connect(wink_notify, sender=Wink, dispatch_uid="wink_presave")
