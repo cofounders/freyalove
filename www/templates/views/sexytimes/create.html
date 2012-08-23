@@ -6,15 +6,10 @@
 		<article>
 			<div class="form-item">
 				<label for="">Who</label>
-				<select data-placeholder="Choose conversation receipents..." class="chzn-select" multiple style="width:350px;">
-          <option value=""></option>
-          <option value="United States">United States</option>
-          <option value="United Kingdom">United Kingdom</option>
-          <option value="Afghanistan">Afghanistan</option>
-          <option value="Albania">Albania</option>
-          <option value="Algeria">Algeria</option>
-          <option value="American Samoa">American Samoa</option>
-          <option value="Andorra">Andorra</option>
+				<select data-placeholder="Choose conversation receipents..." class="chzn-select" multiple>
+          {{#friends}}
+          <option value="{{name}}">{{name}}</option>
+          {{/friends}}
         </select>
 			</div>
 			<div class="form-item">
@@ -23,7 +18,7 @@
 			</div>
 			<div class="form-item">
 				<label for="">Time</label>
-				<input type="text"><span>:</span><input type="text">
+				<input type="time" placeholder="HH:MM">
 			</div>
 			<div class="form-item">
 				<label for="">Where</label>

@@ -129,20 +129,19 @@ function($, _, Backbone, app,
 			};
 		},
 		events: {
-			'click .button.create-conversation': 'createConversation'
-		},
-		createConversation: function (event) {
-			event.stopPropagation();
-			event.preventDefault();
+			'click .button.create-conversation': function (event) {
+				event.stopPropagation();
+				event.preventDefault();
 
-			var popup = new Views.Create({
-				collection: new Friends.Collections.All()
-			});
-			app.layout.insertViews({
-				'.bblm-popup': popup
-			});
-			// popup.render();
-			popup.collection.fetch();
+				var popup = new Views.Create({
+					collection: new Friends.Collections.All()
+				});
+				app.layout.insertViews({
+					'.bblm-popup': popup
+				});
+				// popup.render();
+				popup.collection.fetch();
+			}
 		}
 	});
 
