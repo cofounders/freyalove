@@ -1,11 +1,13 @@
 define(['jQuery', 'Underscore', 'Backbone', 'app',
 	'Chosen',
 	'modules/Dummy',
+	'modules/Friends',
 	'modules/Popup'
 ],
 function($, _, Backbone, app,
 	Chosen,
 	Dummy,
+	Friends,
 	Popup
 ) {
 
@@ -44,11 +46,15 @@ function($, _, Backbone, app,
 				event.stopPropagation();
 				event.preventDefault();
 
-				var popup = new Views.Create();
+				var popup = new Views.Create({
+					collection: new Friends.Collections.All()
+				});
 				app.layout.insertViews({
 					'.bblm-popup': popup
 				});
-				popup.render();
+				// popup.render();
+				popup.collection.fetch();
+
 			}
 		}
 	});
@@ -68,6 +74,12 @@ function($, _, Backbone, app,
 
 	Views.Create = Popup.extend({
 		template: 'sexytimes/create',
+		serialize: function () {
+			return {
+				count: this.collection.length,
+				friends: this.collection.toJSON()
+			};
+		},
 		events: {
 			'click .close': function (event) {
 				event.stopPropagation();

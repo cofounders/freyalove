@@ -133,17 +133,26 @@ function($, _, Backbone, app,
 				event.stopPropagation();
 				event.preventDefault();
 
-				var popup = new Views.Create();
+				var popup = new Views.Create({
+					collection: new Friends.Collections.All()
+				});
 				app.layout.insertViews({
 					'.bblm-popup': popup
 				});
-				popup.render();
+				// popup.render();
+				popup.collection.fetch();
 			}
 		}
 	});
 
 	Views.Create = Popup.extend({
 		template: 'conversations/create',
+		serialize: function () {
+			return {
+				count: this.collection.length,
+				friends: this.collection.toJSON()
+			};
+		},
 		events: {
 			'click .close': function (event) {
 				event.stopPropagation();
