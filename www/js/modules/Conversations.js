@@ -1,9 +1,11 @@
 define(['jQuery', 'Underscore', 'Backbone', 'app',
+	'Chosen',
 	'modules/Dummy',
 	'modules/Friends',
 	'modules/Popup'
 ],
 function($, _, Backbone, app,
+	Chosen,
 	Dummy,
 	Friends,
 	Popup
@@ -149,6 +151,13 @@ function($, _, Backbone, app,
 				event.preventDefault();
 				this.remove();
 			}
+		},
+		render: function (manage) {
+			var deferred = manage(this).render();
+			deferred.then(_.bind(function () {
+				this.$('select').chosen();
+			}, this));
+			return deferred;
 		}
 	});
 

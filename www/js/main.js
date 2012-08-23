@@ -1,5 +1,13 @@
 define(
-['jQuery', 'app', 'router', 'Facebook', 'modules/Session/Facebook', 'modules/Stream', 'plugins/backbone.dummysync'],
+[
+	'jQuery',
+	'app',
+	'router',
+	'Facebook',
+	'modules/Session/Facebook',
+	'modules/Stream',
+	'plugins/backbone.dummysync'
+],
 function ($, app, Router, Facebook, Session, Stream, DummySync) {
 
 	var targetUrl = location.href.substr(location.href.indexOf('/', 8));

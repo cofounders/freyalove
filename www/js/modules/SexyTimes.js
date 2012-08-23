@@ -1,8 +1,10 @@
 define(['jQuery', 'Underscore', 'Backbone', 'app',
+	'Chosen',
 	'modules/Dummy',
 	'modules/Popup'
 ],
 function($, _, Backbone, app,
+	Chosen,
 	Dummy,
 	Popup
 ) {
@@ -66,7 +68,21 @@ function($, _, Backbone, app,
 	});
 
 	Views.Create = Popup.extend({
-		template: 'sexytimes/create'
+		template: 'sexytimes/create',
+		events: {
+			'click .close': function (event) {
+				event.stopPropagation();
+				event.preventDefault();
+				this.remove();
+			}
+		},
+		render: function (manage) {
+			var deferred = manage(this).render();
+			deferred.then(_.bind(function () {
+				this.$('select').chosen();
+			}, this));
+			return deferred;
+		}
 	});
 
 	return {
