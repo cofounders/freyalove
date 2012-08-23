@@ -10,7 +10,7 @@ function($, _, Backbone, app, Carousel, Dummy) {
 	Collections.Received = Backbone.Collection.extend({
 		model: Model,
 		url: function () {
-			return app.api + 'activities/winks/';
+			return app.api + 'activities/winks/unreturned/';
 		},
 		parse: function (response) {
 			return response.winks;
