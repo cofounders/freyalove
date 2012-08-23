@@ -6,7 +6,8 @@ define(['Underscore'], function (_) {
 
 	var user1 = {
 		"id": "1",
-		"name": "Bette Porter",
+		"firstName": "Bette",
+		"lastName": "Porter",
 		"dateOfBirth": "1975-04-12",
 		"photo": "/dummy/user1.png",
 		"about": "Bette Porter is a fictional character on the Showtime television network series The L Word, played by Jennifer Beals. While she is portrayed as the one true love of Tina Kennard, she is shown to be rather promiscuous and has had countless affairs with other women, whether or not she is with Tina. She was ranked No. 10 in AfterEllen.com's Top 50 Favorite Female TV Characters.",
@@ -28,7 +29,8 @@ define(['Underscore'], function (_) {
 		"likeQuotes": "Carpe Diem"};
 	var user2 = {
 		"id": "2",
-		"name": "Tina Kennard",
+		"firstName": "Tina",
+		"lastName": "Kennard",
 		"dateOfBirth": "1972-12-08",
 		"photo": "/dummy/user2.png",
 		"about": "Tina Kennard is a fictional character on the Showtime television network series The L Word, shown nationally in the United States. She is played by American actress Laurel Holloman. Tina lives in Los Angeles, California, and mostly hangs out in West Hollywood. She is the mother of Angelica Porter-Kennard and the on-off lover of Bette Porter.",
@@ -50,7 +52,8 @@ define(['Underscore'], function (_) {
 		"likeQuotes": "Carpe Diem"};
 	var user3 = {
 		"id": "3",
-		"name": "Alice Pieszecki",
+		"firstName": "Alice",
+		"lastName": "Pieszecki",
 		"dateOfBirth": "1976-11-25",
 		"photo": "/dummy/user3.png",
 		"about": "Alice Pieszecki is a fictional character on the Showtime television network series The L Word, shown nationally in the United States. She is played by American actress Leisha Hailey. Alice lives in Los Angeles, California, and mostly hangs out in West Hollywood. During the first seasons, she is often seen with her best friends, Shane McCutcheon (Katherine Moennig) and Dana Fairbanks (Erin Daniels).",
@@ -72,7 +75,8 @@ define(['Underscore'], function (_) {
 		"likeQuotes": ""};
 	var user4 = {
 		"id": "4",
-		"name": "Anabelle Hernandez-Herrara",
+		"firstName": "Anabelle",
+		"lastName": "Hernandez-Herrara",
 		"dateOfBirth": "1984-2-29",
 		"photo": "/dummy/user4.png",
 		"about": "About Anabelle... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porta sem malesuada magna mollis euismod. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.",
@@ -97,7 +101,8 @@ define(['Underscore'], function (_) {
 
 	var user10 = {
 		"id": "10",
-		"name": "Kenny Shen",
+		"firstName": "Kenny",
+		"lastName": "Shen",
 		"dateOfBirth": "1982-11-9",
 		"photo": "/dummy/user10.png",
 		"about": "Kenny is a Python Wrangler... Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.",
@@ -119,7 +124,8 @@ define(['Underscore'], function (_) {
 		"likeQuotes": "Do or do not, there is no try.\n\nLike is a circle to cycle around on."}
 	var user11 = {
 		"id": "11",
-		"name": "Sayanee Basu",
+		"firstName": "Sayanee",
+		"lastName": "Basu",
 		"dateOfBirth": "1985-03-22",
 		"photo": "/dummy/user11.png",
 		"about": "Sayanee is the Style Slinger... Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.",
@@ -141,7 +147,8 @@ define(['Underscore'], function (_) {
 		"likeQuotes": "Carpe Diem.\n\nThe early bird catches the early worm."};
 	var user12 = {
 		"id": "12",
-		"name": "Sebastiaan Deckers",
+		"firstName": "Sebastiaan",
+		"lastName": "Deckers",
 		"dateOfBirth": "1983-1-19",
 		"photo": "/dummy/user12.png",
 		"about": "Seb is the Javascript Jockey... Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.",
@@ -163,7 +170,8 @@ define(['Underscore'], function (_) {
 		"likeQuotes": "Ceterum censeo Carthaginem deletam esse."};
 	var user13 = {
 		"id": "13",
-		"name": "Veronica Ng",
+		"firstName": "Veronica",
+		"lastName": "Ng",
 		"dateOfBirth": "1983-1-8",
 		"photo": "/dummy/user13.png",
 		"about": "Veronica is the UI Undertaker... Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.",
@@ -185,7 +193,8 @@ define(['Underscore'], function (_) {
 		"likeQuotes": "All for one, one for all."};
 	var user14 = {
 		"id": "14",
-		"name": "Wolfgang Maehr",
+		"firstName": "Wolfgang",
+		"lastName": "Maehr",
 		"dateOfBirth": "1982-7-25",
 		"photo": "/dummy/user14.png",
 		"about": "Wolf is the IXD Imp... Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.",
@@ -209,21 +218,25 @@ define(['Underscore'], function (_) {
 	// OTHER USERS - Profile Summary
 	var user20 = {
 		"id": "20",
-		"name": "Amy Hunting",
+		"firstName": "Amy",
+		"lastName": "Hunting",
 		"photo": "/dummy/user20.png"};
 	var user21 = {
 		"id": "21",
-		"name": "Adrianna Svitak",
+		"firstName": "Adrianna",
+		"lastName": "Svitak",
 		"photo": "/dummy/user21.png"};
 	var user22 = {
 		"id": "22",
-		"name": "Greta Howell",
+		"firstName": "Greta",
+		"lastName": "Howell",
 		"photo": "/dummy/user22.png"};
 
 	// MYSELF
 		var user0 = {
 		"id": "0",
-		"name": "Jenny Schecter",
+		"firstName": "Jenny",
+		"lastName": "Schecter",
 		"dateOfBirth": "1979-05-26",
 		"photo": "/dummy/user0.png",
 		"about": "Jennifer Schecter is a fictional character origin the American Showtime television drama series The L Word, played by Mia Kirshner. Jenny debuted on-screen during the pilot episode and remained until the series' final episode. Jenny became well documented in the media for her outlandish plots. Jenny was created by series creator Ilene Chaiken, based on herself as a younger woman living in the lesbian community.",
@@ -253,7 +266,8 @@ define(['Underscore'], function (_) {
 	var userToUserSummary = function (user) {
 			return {
 				id: user.id,
-				name: user.name,
+				firstName: user.firstName,
+				lastName: user.lastName,
 				photo: user.photo
 			};
 		}
