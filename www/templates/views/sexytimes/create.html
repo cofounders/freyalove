@@ -8,7 +8,7 @@
 				<label for="">Who</label>
 				<select data-placeholder="Choose conversation receipents..." class="chzn-select" multiple>
           {{#friends}}
-          <option value="{{name}}">{{name}}</option>
+          <option value="{{firstName}} {{lastName}}">{{firstName}} {{lastName}}</option>
           {{/friends}}
         </select>
 			</div>
