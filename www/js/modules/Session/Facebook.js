@@ -23,7 +23,7 @@ function(_, Facebook, Session) {
 					} else {
 						if (_.isFunction(options.error)) options.error();
 					}
-				});
+				}, {scope: options.scope || ''});
 			}
 		},
 		getAuthStatus: function (options) {

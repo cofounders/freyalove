@@ -127,7 +127,7 @@ function($, _, Backbone, app,
 			'click .button.facebook': function (event) {
 				event.stopPropagation();
 				event.preventDefault();
-				app.session.signIn();
+				app.session.signIn({scope: 'email,user_likes'});
 			}
 		}
 	});
