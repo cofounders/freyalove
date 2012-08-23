@@ -337,6 +337,7 @@ Copyright (c) 2011 by Harvest
         "width": dd_width + "px",
         "top": dd_top + "px"
       });
+      console.log(dd_top);
       this.search_field = this.container.find('input').first();
       this.search_results = this.container.find('ul.chzn-results').first();
       this.search_field_scale();

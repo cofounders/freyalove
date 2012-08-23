@@ -1,6 +1,4 @@
-textarea()
-	height 100px
-	resize vertical
+form-input()
 	border 1px solid #ccc
 	outline none
 	padding 10px
@@ -9,18 +7,19 @@ textarea()
 	color #444
 	margin 0
 
+textarea()
+	height 100px
+	resize vertical
+	form-input()
+
 input()
-	border 1px solid #ccc
-	outline none
-	padding 10px
-	border-radius 3px
-	font 1rem Bariol, Helvetica, Arial, sans-serif
-	color #444
-	margin 0
+	form-input()
 
 label()
 	width 65px
 	display inline-block
+	vertical-align top
+	margin 10px 0 0 0
 
 focus()
 	box-shadow lighten(#ccc,5%) 0 0 4px
