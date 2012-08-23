@@ -10,7 +10,7 @@ function($, _, Backbone, app, Dummy) {
 	Collections.Top = Backbone.Collection.extend({
 		model: Model,
 		url: function () {
-			return app.api + 'matchmakers/';
+			return app.api + 'users/friends/leaderboard/summary/';
 		},
 		parse: function (response) {
 			return response.matchmakers;
