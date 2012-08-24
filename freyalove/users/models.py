@@ -72,7 +72,6 @@ class Profile(models.Model):
     # extra
     details = models.ForeignKey(ProfileDetail, null=True)
     permissions = models.ForeignKey(ProfilePrivacyDetail, null=True)
-    user_object = models.ForeignKey(User, null=True)
 
     objects = ProfileManager()
 
