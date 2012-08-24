@@ -132,7 +132,7 @@ INSTALLED_APPS = (
     # 3rd party
     'south',
     'djangorestframework',
-    'notifications',
+    #'notifications',
 
     # Testing/dbugging, turn off before deployment
     'debug_toolbar',
