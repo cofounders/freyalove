@@ -4,7 +4,6 @@ from django.db.models.signals import post_delete, pre_save, post_save
 
 from freyalove.users.managers import FriendshipManager, WinkManager, ProfileManager, FriendsCacheManager
 
-from notifications import notify
 import datetime
 
 class ProfilePrivacyDetail(models.Model):
@@ -141,11 +140,13 @@ def wink_notify(sender, instance, **kwargs):
     except Wink.DoesNotExist:
         # wink creation
         if not instance.received and not instance.accepted:
-            notify.send(instance, recipient=instance.to_profile.user_object, verb="winked at")
+            pass
+            #notify.send(instance, recipient=instance.to_profile.user_object, verb="winked at")
     if instance.received == wink_in_db.received:
         pass
     if not wink_in_db.accepted and instance.accepted: # wink response
-        notify.send(instance, recipient=instance.to_profile.user_object, verb="winked back")
+        #notify.send(instance, recipient=instance.to_profile.user_object, verb="winked back")
+        pass
 
 # Register with freyalove.notifications
 #pre_save.connect(wink_notify, sender=Wink, dispatch_uid="wink_presave")
