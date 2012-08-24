@@ -74,6 +74,7 @@ class WinkManager(models.Manager):
 class FriendsCacheManager(models.Manager):
 
     def update_cache(self, profile, token):
+        from freyalove.notify.register import notify
         cache = super(FriendsCacheManager, self).get_query_set().get(profile=profile)
         # check to see if to be updated
         if timezone.make_aware((cache.updated + datetime.timedelta(hours=2)), timezone.get_default_timezone()) < timezone.make_aware(datetime.datetime.now(), timezone.get_default_timezone()): 
@@ -100,3 +101,5 @@ class FriendsCacheManager(models.Manager):
                     f.to_profile = p
                     f.from_profile = profile
                     f.save()
+                    # emit Friend_Join event
+                    notify(p, "joinevent", None, profile)
