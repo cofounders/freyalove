@@ -94,15 +94,8 @@ class Profile(models.Model):
         super(Profile, self).save(*args, **kwargs)
 
 class Blocked(models.Model):
-    belongs_to = models.ForeignKey(Profile)
-    block_profile_id = models.IntegerField()
-
-    def save(self, *args, **kwargs):
-        try:
-            profile_to_block = Profile.objects.get(id=self.block_profile_id)
-        except Profile.DoesNotExist:
-            raise ValidationError("Trying to block profile id %d for member %s but profile doesn't exist!" % (self.block_profile_id, belongs_to.first_name)) 
-        super(Blocked, self).save(*args, **kwargs)
+    belongs_to = models.ForeignKey(Profile, related_name="blocker")
+    blocked_profile = models.ForeignKey(Profile, related_name="blocked")
 
 # Basic friendship 
 class Friendship(models.Model):
@@ -155,5 +148,10 @@ def wink_notify(sender, instance, **kwargs):
         if not wink_in_db.accepted and instance.accepted: # wink response
             notify(instance.from_profile, "winked back", instance, instance.to_profile)
 
+def blocked_notify(sender, instance, **kwargs):
+    from freyalove.notify.register import notify
+    notify(instance.blocked_profile, "blockevent", instance, instance.belongs_to)
+
 # Register with freyalove.notifications
 pre_save.connect(wink_notify, sender=Wink, dispatch_uid="wink_presave")
+post_save.connect(blocked_notify, sender=Blocked, dispatch_uid="block_postsave")
