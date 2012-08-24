@@ -5,7 +5,7 @@ define(['Underscore'], function (_) {
 	// DIRECT FRIENDS
 
 	var user1 = {
-		"id": "1",
+		"id": "betteporter",
 		"firstName": "Bette",
 		"lastName": "Porter",
 		"dateOfBirth": "1975-04-12",
@@ -28,7 +28,7 @@ define(['Underscore'], function (_) {
 		"likeTv": "The L Word, Tom and Jerry, The Colbert Report, Knitting with Edna",
 		"likeQuotes": "Carpe Diem"};
 	var user2 = {
-		"id": "2",
+		"id": "tina72",
 		"firstName": "Tina",
 		"lastName": "Kennard",
 		"dateOfBirth": "1972-12-08",
@@ -51,7 +51,7 @@ define(['Underscore'], function (_) {
 		"likeTv": "The L Word, Tom and Jerry, The Colbert Report, Knitting with Edna",
 		"likeQuotes": "Carpe Diem"};
 	var user3 = {
-		"id": "3",
+		"id": "alice.pie",
 		"firstName": "Alice",
 		"lastName": "Pieszecki",
 		"dateOfBirth": "1976-11-25",
@@ -74,7 +74,7 @@ define(['Underscore'], function (_) {
 		"likeTv": "",
 		"likeQuotes": ""};
 	var user4 = {
-		"id": "4",
+		"id": "anna-hernandez",
 		"firstName": "Anabelle",
 		"lastName": "Hernandez-Herrara",
 		"dateOfBirth": "1984-2-29",
@@ -100,7 +100,7 @@ define(['Underscore'], function (_) {
 	// FRIENDS OF FRIENDS
 
 	var user10 = {
-		"id": "10",
+		"id": "kenny_shen",
 		"firstName": "Kenny",
 		"lastName": "Shen",
 		"dateOfBirth": "1982-11-9",
@@ -123,7 +123,7 @@ define(['Underscore'], function (_) {
 		"likeTv": "The L Word, Tom and Jerry, The Colbert Report, Knitting with Edna",
 		"likeQuotes": "Do or do not, there is no try.\n\nLike is a circle to cycle around on."}
 	var user11 = {
-		"id": "11",
+		"id": "sayanee",
 		"firstName": "Sayanee",
 		"lastName": "Basu",
 		"dateOfBirth": "1985-03-22",
@@ -146,7 +146,7 @@ define(['Underscore'], function (_) {
 		"likeTv": "",
 		"likeQuotes": "Carpe Diem.\n\nThe early bird catches the early worm."};
 	var user12 = {
-		"id": "12",
+		"id": "sebdeckers",
 		"firstName": "Sebastiaan",
 		"lastName": "Deckers",
 		"dateOfBirth": "1983-1-19",
@@ -169,7 +169,7 @@ define(['Underscore'], function (_) {
 		"likeTv": "The L Word, Tom and Jerry, The Colbert Report, Knitting with Edna",
 		"likeQuotes": "Ceterum censeo Carthaginem deletam esse."};
 	var user13 = {
-		"id": "13",
+		"id": "veronism",
 		"firstName": "Veronica",
 		"lastName": "Ng",
 		"dateOfBirth": "1983-1-8",
@@ -192,7 +192,7 @@ define(['Underscore'], function (_) {
 		"likeTv": "The L Word, Tom and Jerry, The Colbert Report, Knitting with Edna",
 		"likeQuotes": "All for one, one for all."};
 	var user14 = {
-		"id": "14",
+		"id": "wolfgang.maehr",
 		"firstName": "Wolfgang",
 		"lastName": "Maehr",
 		"dateOfBirth": "1982-7-25",
@@ -217,24 +217,24 @@ define(['Underscore'], function (_) {
 
 	// OTHER USERS - Profile Summary
 	var user20 = {
-		"id": "20",
+		"id": "amy_hunting",
 		"firstName": "Amy",
 		"lastName": "Hunting",
 		"photo": "/dummy/user20.png"};
 	var user21 = {
-		"id": "21",
+		"id": "adrianna.svitak",
 		"firstName": "Adrianna",
 		"lastName": "Svitak",
 		"photo": "/dummy/user21.png"};
 	var user22 = {
-		"id": "22",
+		"id": "greta",
 		"firstName": "Greta",
 		"lastName": "Howell",
 		"photo": "/dummy/user22.png"};
 
 	// MYSELF
 		var user0 = {
-		"id": "0",
+		"id": "jenny.schecter",
 		"firstName": "Jenny",
 		"lastName": "Schecter",
 		"dateOfBirth": "1979-05-26",
