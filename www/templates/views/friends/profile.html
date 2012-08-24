@@ -1,17 +1,8 @@
 {{#friend}}
-<img id="profile-pic" src="{{photo}}../dummy/user1.png" alt="My profile picture" />
+<img id="profile-pic" src="{{photo}}" alt="{{firstName}} {{lastName}}" />
 	<div id="profile-snapshot">
-	<h1>
+	<h1 class="{{#isMe}}me{{/isMe}} {{#isFriend}}friend{{/isFriend}} {{#isFof}}fof{{/isFof}}">
 		{{firstName}} {{lastName}}
-		{{#isMe}}
-			me
-		{{/isMe}}
-		{{#isFriend}}
-			friend
-		{{/isFriend}}
-		{{#isFof}}
-			fof
-		{{/isFof}}
 	</h1>
 	<a href="/profile-edit.html" class="see-more" type="button" title="Button to edit my profile">Edit Profile</a>
 	<ul id="profile-snapshot-list">
