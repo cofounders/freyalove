@@ -52,6 +52,9 @@ urlpatterns = patterns('',
     url(r'^users/(?P<fb_username>[-\w.]+)/questionnaire/(?P<category>[-\w]+)/(?P<status>[-\w]+)/$','freyalove.api.views.questionnaire.filter_questions'),
     url(r'^questionnaire/questions/add/$', 'freyalove.api.views.questionnaire.answer'),
 
+    # NOTIFICATIONS
+    url(r'^/notifications/unread', 'freyalove.api.views.notifications.unread'),
+
     # Index
     url(r'^$', 'freyalove.views.hello'),
 )

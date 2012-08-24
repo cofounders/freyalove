@@ -188,6 +188,8 @@ def obj_questions(questions):
 
     return resp
 
+## ACTIVITIES/NOTIFICATIONS 
+
 def obj_wink(winks):
     resp = []
 
@@ -199,5 +201,20 @@ def obj_wink(winks):
         wink_as_object["type"] = "wink"
 
         resp.append(wink_as_object)
+
+    return resp
+
+def obj_notifications(notes):
+    resp = []
+
+    for note in notes:
+        note_as_object = {}
+        note_as_object["id"] = note.id
+        note_as_object["from"] = note.actor
+        note_as_object["to"] = note.belongs_to
+        note_as_object["type"] = "N/A" # TODO parser
+        note_as_object["seen"] = not (note.unread)
+
+        resp.append(note)
 
     return resp
