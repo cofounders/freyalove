@@ -187,3 +187,17 @@ def obj_questions(questions):
         resp.append(q_as_object)
 
     return resp
+
+def obj_wink(winks):
+    resp = []
+
+    for wink in winks:
+        wink_as_object = {}
+        wink_as_object["wink_id"] = wink.id
+        wink_as_object["from"] = obj_user_summary([wink.from_profile])[0]
+        wink_as_object["to"] = obj_user_summary([wink.to_profile])[0]
+        wink_as_object["type"] = "wink"
+
+        resp.append(wink_as_object)
+
+    return resp

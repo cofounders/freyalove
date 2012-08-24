@@ -15,8 +15,9 @@ from freyalove.users.models import Profile, Blocked, Friendship, Wink, ProfileDe
 from freyalove.matchmaker.models import Match, SexyTime
 from freyalove.conversations.models import Conversation, Msg
 
+from freyalove.api.decorators import user_is_authenticated_with_facebook
 from freyalove.api.utils import *
-from freyalove.api.objectification import user_summary
+from freyalove.api.objectification import obj_user_summary, obj_user, obj_fb_user_summary, obj_wink
 
 def fetch_sexytimes(request):
     """
@@ -49,28 +50,18 @@ def fetch_sexytimes(request):
     resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
     return resp
 
+# GET /ACITIVITIES/WINKS/UNRETURNED/
+@user_is_authenticated_with_facebook
+@require_http_methods(["GET"])
 def fetch_winks(request):
-    # parse for token in cookie
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
-    if not cookie:
-        resp = HttpResponse("Missing authentication cookie", status=403)
-        return resp
-
     profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
-    winks = Wink.objects.filter(to_profile=profile, received=False)
+    winks = Wink.objects.filter(to_profile=profile, accepted=False)
 
-    resp_data = {}
-    resp_data["winks"] = []
+    resp_data = obj_wink(winks)
 
-    # TODO: Need "Wink" defined, pending Wolf's response
-    for w in winks:
-        resp_data["winks"].append({"from": w.from_profile.first_name})
-        # we write a generator for throwing up a UserSummary next
-
-    resp_json = json.JSONEncoder().encode(resp_data)
-    resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
-    return resp
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
 
 def fetch_activities(request):
     # parse for token in cookie
