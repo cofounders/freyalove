@@ -129,26 +129,31 @@ class Wink(models.Model):
     from_profile = models.ForeignKey(Profile, related_name="wink_from")
     received = models.BooleanField(default=False) # denotes read/received
     accepted = models.BooleanField(default=False)
+    hide = models.BooleanField(default=False)
 
     objects = WinkManager()
 
     def __unicode__(self):
-        return "wink from %s to %s" % (from_profile.first_name, to_profile.first_name)
+        try:
+            return "wink from %s to %s" % (from_profile.first_name, to_profile.first_name)
+        except:
+            return "wink id: %d" % self.id
 
 def wink_notify(sender, instance, **kwargs):
+    from freyalove.notify.register import notify
     # check if we need to generate a notification
     try:
         wink_in_db = Wink.objects.get(id=instance.id)
     except Wink.DoesNotExist:
         # wink creation
         if not instance.received and not instance.accepted:
+            notify(instance.to_profile, "winked at", instance, instance.from_profile)
+        wink_in_db = None
+    if wink_in_db:
+        if instance.received == wink_in_db.received:
             pass
-            #notify.send(instance, recipient=instance.to_profile.user_object, verb="winked at")
-    if instance.received == wink_in_db.received:
-        pass
-    if not wink_in_db.accepted and instance.accepted: # wink response
-        #notify.send(instance, recipient=instance.to_profile.user_object, verb="winked back")
-        pass
+        if not wink_in_db.accepted and instance.accepted: # wink response
+            notify(instance.from_profile, "winked back", instance, instance.to_profile)
 
 # Register with freyalove.notifications
-#pre_save.connect(wink_notify, sender=Wink, dispatch_uid="wink_presave")
+pre_save.connect(wink_notify, sender=Wink, dispatch_uid="wink_presave")
