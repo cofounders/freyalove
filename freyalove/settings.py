@@ -179,6 +179,9 @@ LOGGING = {
 ADMIN_MEDIA_PREFIX = STATIC_URL + "grappelli/"
 GRAPPELLI_ADMIN_TITLE = "Freyalove"
 
+# ECHO flag, override in local_settings, not here
+ECHO = False
+
 # Grab the local override
 try:
     from local_settings import *

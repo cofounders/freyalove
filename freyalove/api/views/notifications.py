@@ -26,3 +26,28 @@ def unread(request):
     resp_data = obj_notification(Note.objects.filter(belongs_to=profile, unread=True))
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json"))
+
+# GET /NOTIFICATIONS/:ID/READ/
+@user_is_authenticated_with_facebook
+@require_http_methods(["POST"])
+def read(request, note_id):
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
+
+    resp_data = {}
+
+    try:
+        note = Note.objects.get(id=int(note_id))
+    except Note.DoesNotExist:
+        note = None
+        resp_data['status'] = "Failure"
+
+    if note:
+        note.unread = False
+        note.save()
+        resp_data['status'] = "Success"
+
+    if settings.ECHO:
+        resp_data['note'] = obj_notification([note])[0]
+
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json"))

@@ -53,7 +53,8 @@ urlpatterns = patterns('',
     url(r'^questionnaire/questions/add/$', 'freyalove.api.views.questionnaire.answer'),
 
     # NOTIFICATIONS
-    url(r'^/notifications/unread', 'freyalove.api.views.notifications.unread'),
+    url(r'^notifications/unread/$', 'freyalove.api.views.notifications.unread'),
+    url(r'^notifications/(\d+)/read/$', 'freyalove.api.views.notifications.read'),
 
     # Index
     url(r'^$', 'freyalove.views.hello'),
