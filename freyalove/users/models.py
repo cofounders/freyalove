@@ -76,7 +76,10 @@ class Profile(models.Model):
     objects = ProfileManager()
 
     def __unicode__(self):
-        return self.first_name + " " + self.last_name
+        if self.fb_username:
+            return "%s %s (fb_username: %s)" % (self.first_name, self.last_name, self.fb_username)
+        else:
+            return "%s %s (fb_username: N/A)" % (self.first_name, self.last_name)
 
     def save(self, *args, **kwargs):
         if not self.details:
