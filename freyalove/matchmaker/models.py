@@ -153,6 +153,11 @@ def sexytime_notify(sender, instance, **kwargs):
             pass
 
         if instance.p1_response == "accept" and instance.p2_response == "accept":
-            pass # todo
+            notify(instance.p1, "Invite_SexyTime_Confirm", instance, instance.p2)
+            notify(instance.p2, "Invite_SexyTime_Confirm", instance, instance.p1)
+            if instance.matchmaker:
+                notify(instance.matchmaker, "Invite_SexyTime_Confirm", instance)
+            instance.success = True
+            instance.save()
 
 post_save.connect(match_notify, sender=Match, dispatch_uid="match_save")
