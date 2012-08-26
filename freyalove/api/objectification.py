@@ -214,18 +214,8 @@ def obj_sexytimes(sexytimes):
             sexytime_as_object["matchmaker"] = obj_user_summary([sexytime.matchmaker])[0]
         except:
             pass # if not implemented
-        if sexytime.p1_attending and sexytime.p1_responded:
-            sexytime_as_object["statusFrom"] = "accept"
-        elif sexytime.p1_responded and not sexytime.p1_accepted:
-            sexytime_as_object["statusFrom"] = "reject"
-        else:
-            sexytime_as_object["statusFrom"] = "notset"
-        if sexytime.p2_attending and sexytime.p2_responded:
-            sexytime_as_object["statusTo"] = "accept"
-        elif sexytime.p2_responded and not sexytime.p2_accepted:
-            sexytime_as_object["statusTo"] = "reject"
-        else:
-            sexytime_as_object["statusTo"] = "notset"
+        sexytime_as_object["statusFrom"] = sexytime.p1_response
+        sexytime_as_object["statusTo"] = sexytime.p2_response
         sexytime_as_object["when"] = sexytime.when
         sexytime_as_object["where"] = sexytime.where
         sexytime_as_object["notes"] = sexytime.notes

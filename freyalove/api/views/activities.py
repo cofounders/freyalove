@@ -117,16 +117,22 @@ def rsvp_sexytime(request, sexytime_id):
     sexytime_id = int(sexytime_id)
     resp_data = {}
 
+    rsvp = request.POST.get("rsvp", None)
+
     try:
         sexytime = SexyTime.objects.get(id=sexytime_id)
     except SexyTime.DoesNotExist:
         resp_data["status"] = "Failure"
 
     if sexytime.p1.id == profile.id or sexytime.p2.id == profile.id:
-        if sexytime.p1.id == profile.id:
+        if sexytime.p1.id == profile.id and rsvp:
             sexytime.p1_response = "accept"
         else:
+            sexytime.p1_response = "reject"
+        if sexytime.p2.id == profile.id and rsvp:
             sexytime.p2_response = "accept"
+        else:
+            sexytime.p2_response = "reject"
         sexytime.save()
         resp_data["status"] = "Success"
         
