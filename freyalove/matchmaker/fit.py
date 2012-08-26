@@ -27,7 +27,7 @@ def match_fit(profile_1, profile_2):
         else:
             pass
 
-    score += ((questions_points/n)/2)
+    score += ((questions_points/n)/2))
 
     # A mutual wink adds 20%
     if Wink.objects.has_wink(profile_1, profile_2):

@@ -15,4 +15,3 @@ class AnswerManager(models.Manager):
 		mutual_questions = set([answer.question for answer in answers_1] + [answer.question.id for answer in answers_2])
 
 		return mutual_questions
-	

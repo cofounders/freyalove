@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.db.models.signals import post_delete, pre_save, post_save
 
 from freyalove.users.models import Profile
 from freyalove.matchmaker.managers import MatchManager, SexyTimeManager
@@ -100,9 +101,3 @@ class SexyTime(models.Model):
 
     def __unicode__(self):
         return "%s <-> %s on %s" % (self.p1.first_name, self.p2.first_name, str(self.when))
-
-#class MatchMaker(models.Model):
-#    matchmaker = models.ForeignKey(Profile)
-#
-#    def __unicode__(self):
-#        return self.matchmaker.first_name

@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.signals import post_delete, pre_save, post_save
 
 from freyalove.users.models import Profile
 from freyalove.questionnaire.managers import QuestionnaireManager
@@ -41,3 +42,9 @@ class Answer(Question):
     matches = models.CharField(max_length=300, blank=True)
     comment = models.TextField(blank=True)
     public = models.BooleanField(default=False)
+
+def update_match_proposals(sender, instance, **kwargs):
+    # when a user answers a question, we should update the match proposals
+    pass
+
+post_save.connect(update_match_proposals, sender=Answer, dispatch_uid="answer_postsave")
