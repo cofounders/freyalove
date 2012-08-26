@@ -51,30 +51,25 @@ def fetch_winks(request):
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
 
+# GET /ACTIVITIES/
+@user_is_authenticated_with_facebook
+@require_http_methods(["GET"])
 def fetch_activities(request):
     # parse for token in cookie
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
-    if not cookie:
-        resp = HttpResponse("Missing authentication cookie", status=403)
-        return resp
-
     profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
     winks = Wink.objects.filter(to_profile=profile)
     sexytimes = SexyTime.objects.fetch_sexytimes(profile)
 
-    resp_data = {}
-    resp_data["activities"] = []
+    resp_data = []
 
-    for w in winks:
-        resp_data["activities"].append({"type": "wink", "from": w.from_profile.id, "to": w.to_profile.id})
+    winks_as_objects = obj_wink(winks)
+    sexytimes_as_objects = obj_sexytimes(sexytimes)
 
-    for s in sexytimes:
-        resp_data["activities"].append({"type": "sexytime", "p2": s.p2.id, "p1": s.p1.id, "when": str(s.when), "where": s.where})
+    resp_data = [winks_as_objects + sexytimes_as_objects]
 
-    resp_json = json.JSONEncoder().encode(resp_data)
-    resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
-    return resp
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
 
 @csrf_exempt
 def create_sexytime(request):
