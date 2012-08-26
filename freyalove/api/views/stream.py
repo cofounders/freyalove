@@ -27,6 +27,6 @@ def unread(request):
 
     resp_data["unreadNotifications"] = Note.objects.filter(belongs_to=profile, unread=True).count()
     resp_data["unreadConversations"] = Conversation.objects.filter(participants__in=[profile], unread=True).count()
-    resp_data["unreadSexyTimes"] = SexyTime.objects.fetch_sexytimes(profile).count() # TODO unseen flag for SexyTime
+    resp_data["unreadSexyTimes"] = len(SexyTime.objects.fetch_sexytimes(profile)) # TODO unseen flag for SexyTime
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json"))
