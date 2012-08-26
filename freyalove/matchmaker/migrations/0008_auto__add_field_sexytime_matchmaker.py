@@ -10,7 +10,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding field 'SexyTime.matchmaker'
         db.add_column('matchmaker_sexytime', 'matchmaker',
-                      self.gf('django.db.models.fields.related.ForeignKey')(default=None, related_name='maker', to=orm['users.Profile']),
+                      self.gf('django.db.models.fields.related.ForeignKey')(default=None, related_name='maker', to=orm['users.Profile'], null=True),
                       keep_default=False)
 
 
@@ -38,7 +38,7 @@ class Migration(SchemaMigration):
             'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'match': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['matchmaker.Match']", 'null': 'True'}),
-            'matchmaker': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'maker'", 'to': "orm['users.Profile']"}),
+            'matchmaker': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'maker'", 'to': "orm['users.Profile']", 'null': 'True'}),
             'notes': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'p1': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'date1'", 'to': "orm['users.Profile']"}),
             'p1_attending': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
