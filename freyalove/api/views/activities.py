@@ -18,40 +18,27 @@ from freyalove.conversations.models import Conversation, Msg
 
 from freyalove.api.decorators import user_is_authenticated_with_facebook
 from freyalove.api.utils import *
-from freyalove.api.objectification import obj_user_summary, obj_user, obj_fb_user_summary, obj_wink
+from freyalove.api.objectification import obj_user_summary, obj_user, obj_fb_user_summary, obj_wink, obj_sexytimes
 
+
+# GET /ACTIVITIES/SEXYTIMES/UPCOMING/
+@user_is_authenticated_with_facebook
+@require_http_methods(["GET"])
 def fetch_sexytimes(request):
     """
     Returns all incoming sexytimes for a user.
     """
 
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
-    if not cookie:
-        resp = HttpResponse("Missing authentication cookie", status=403)
-        return resp
-
     profile = is_registered_user(fetch_profile(cookie["access_token"]))
-    has_match = Match.objects.has_match(profile)
-    resp_data = {}
-    resp_data['sexytimes'] = []
 
-    if not has_match:
-        pass
-    else:
-        sexytimes = Match.objects.fetch_sexytimes(profile)
-        for s in sexytimes:
-            s_dict = {}
-            s_dict["when"] = s.when
-            s_dict["where"] = s.where
-            # we'll add notes when i understand the context
-            resp_data['sexytimes'].append(s_dict)
+    sexytimes = SexyTime.objects.fetch_sexytimes(profile)
 
-    resp_json = json.JSONEncoder().encode(resp_data)
+    resp_data = obj_sexytimes(sexytimes)
 
-    resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
-    return resp
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
 
-# GET /ACITIVITIES/WINKS/UNRETURNED/
+# GET /ACTIVITIES/WINKS/UNRETURNED/
 @user_is_authenticated_with_facebook
 @require_http_methods(["GET"])
 def fetch_winks(request):

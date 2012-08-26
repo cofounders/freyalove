@@ -74,6 +74,7 @@ class SexyTime(models.Model):
     match = models.ForeignKey(Match, null=True)
     p1 = models.ForeignKey(Profile, related_name="date1")
     p2 = models.ForeignKey(Profile, related_name="date2")
+    matchmaker = models.ForeignKey(Profile, related_name="maker")
 
     # event fields
     where = models.CharField(max_length=300, blank=True)
