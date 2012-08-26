@@ -216,7 +216,7 @@ def obj_sexytimes(sexytimes):
             pass # if not implemented
         sexytime_as_object["statusFrom"] = sexytime.p1_response
         sexytime_as_object["statusTo"] = sexytime.p2_response
-        sexytime_as_object["when"] = sexytime.when
+        sexytime_as_object["when"] = str(sexytime.when) # temporarily fix so that this is JSON-serializable
         sexytime_as_object["where"] = sexytime.where
         sexytime_as_object["notes"] = sexytime.notes
 
