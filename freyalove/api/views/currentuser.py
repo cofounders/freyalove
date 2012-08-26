@@ -11,7 +11,7 @@ except ImportError:
 
 import facebook
 
-from freyalove.users.models import Profile, Wink, ProfileDetail, ProfilePrivacyDetail
+from freyalove.users.models import Profile, Wink, ProfileDetail, ProfilePrivacyDetail, Friendship
 from freyalove.api.decorators import user_is_authenticated_with_facebook
 from freyalove.api.utils import *
 from freyalove.api.objectification import obj_user_summary, obj_user, obj_fb_user_summary
@@ -141,5 +141,18 @@ def search(request, query):
 @user_is_authenticated_with_facebook
 @require_http_methods(["GET"])
 def leaderboard(request):
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    profile = existing_user(fetch_profile(cookie["access_token"]))
 
-    return HttpResponse("wip.")
+    friends_ids = [f.id for f in Friendship.objects.friends_for_profile(profile)]
+    friend_profiles = Profile.objects.filter(id__in=friends_ids).order_by('-matchmaker_score')
+
+    if friend_profiles.count() <= 5:
+        pass
+    else:
+        friend_profiles = friend_profiles[:5]
+
+    resp_data = obj_user_summary(friend_profiles)
+
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200)) 
+    

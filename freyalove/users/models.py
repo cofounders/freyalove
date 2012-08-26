@@ -73,7 +73,9 @@ class Profile(models.Model):
     details = models.ForeignKey(ProfileDetail, null=True)
     permissions = models.ForeignKey(ProfilePrivacyDetail, null=True)
 
+    # matchmaker information
     is_matchmaker = models.BooleanField(default=False)
+    matchmaker_score = models.PositiveIntegerField(default=0)
 
     objects = ProfileManager()
 
