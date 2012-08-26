@@ -26,6 +26,7 @@ class Match(models.Model):
     # timestamps
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
+    initial_signal = models.BooleanField(default=True)
 
     # manager
     objects = MatchManager()
@@ -102,3 +103,13 @@ class SexyTime(models.Model):
 
     def __unicode__(self):
         return "%s <-> %s on %s" % (self.p1.first_name, self.p2.first_name, str(self.when))
+
+def match_notify(sender, instance, **kwargs):
+    from freyalove.notify.register import notify
+
+    if instance.initial_signal:
+        notify(instance.p1, "Match_Introduction", instance, instance.p2)
+        instance.initial_signal = False
+        instance.save()
+
+post_save.connect(match_notify, sender=Match, dispatch_uid="match_save")
