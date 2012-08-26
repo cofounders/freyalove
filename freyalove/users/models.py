@@ -77,6 +77,9 @@ class Profile(models.Model):
     is_matchmaker = models.BooleanField(default=False)
     matchmaker_score = models.PositiveIntegerField(default=0)
 
+    # engagement
+    engaged_to = models.ForeignKey("Profile", related_name="engaged", null=True)
+
     objects = ProfileManager()
 
     def __unicode__(self):
@@ -156,6 +159,31 @@ def blocked_notify(sender, instance, **kwargs):
     from freyalove.notify.register import notify
     notify(instance.blocked_profile, "blockevent", instance, instance.belongs_to)
 
+def engage_notify(sender, instance, **kwargs):
+    from freyalove.notify.register import notify
+    # check if we need to generate a notification
+    try:
+        profile_in_db = Profile.objects.get(id=instance.id)
+    except Profile.DoesNotExist:
+        # wink creation
+        pass
+
+    if not profile_in_db.engaged_to and instance.engaged_to:
+        notify(instance, "User_FB_Hookup")
+        notify(instance.engaged_to, "User_FB_Hookup", instance, instance)
+        match_proposal = MatchProposal.objects.get_match_proposal(instance, instance.engaged_to)
+        if match_proposal:
+            mp = matchmaker[0]
+            notify(mp.match.matchmaker, "User_FB_Hookup", instance)
+        # notify friends
+        friends = Friendship.objects.friends_for_profile(instance)
+        for f in friends:
+            notify(f, "User_FB_Hookup", instance)
+        friends = Friendship.objects.friends_for_profile(instance.engaged_to)
+        for f in friends:
+            notify(f, "User_FB_Hookup", instance)
+
 # Register with freyalove.notifications
 pre_save.connect(wink_notify, sender=Wink, dispatch_uid="wink_presave")
+pre_save.connect(engage_notify, sender=Profile, dispatch_uid="profile_presave")
 post_save.connect(blocked_notify, sender=Blocked, dispatch_uid="block_postsave")

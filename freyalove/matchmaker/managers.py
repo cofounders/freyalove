@@ -34,6 +34,16 @@ class MatchProposalManager(models.Manager):
 
         return profiles
 
+    def get_match_proposal(self, profile1, profile2):
+        mp = super(MatchProposalManager, self).get_query_set().filter(from_profile=profile1, to_profile=profile2)
+        if mp.count() > 0:
+            pass
+        else:
+            mp = super(MatchProposalManager, self).get_query_set().filter(from_profile=profile2, to_profile=profile1)
+
+        return mp
+        
+
 class SexyTimeManager(models.Manager):
     def fetch_sexytimes(self, profile):
         now = datetime.datetime.now()
