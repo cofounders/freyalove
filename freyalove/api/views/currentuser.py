@@ -84,6 +84,7 @@ def update_profile(request):
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json"))
 
 # POST /PROFILE/UNREGISTER/
+@csrf_exempt
 @user_is_authenticated_with_facebook
 @require_http_methods(["POST"])
 def profile_unregister(request):
@@ -114,6 +115,7 @@ def profile_unregister(request):
 
 # Not activated, for in case manual points assignment is called for
 # POST /PROFILE/POINTS/ADD/
+@csrf_exempt
 @user_is_authenticated_with_facebook
 @require_http_methods(["POST"])
 def add_points(request):

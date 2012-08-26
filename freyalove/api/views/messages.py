@@ -31,6 +31,7 @@ def conversations(request):
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
 
+@csrf_exempt
 @user_is_authenticated_with_facebook
 @require_http_methods(["POST"])
 def delete_messages(request, username_list):
@@ -79,6 +80,7 @@ def fetch_messages(request, username_list):
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
 
+@csrf_exempt
 @user_is_authenticated_with_facebook
 @require_http_methods(["POST"])
 def send_message(request):

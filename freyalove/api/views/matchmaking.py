@@ -17,6 +17,7 @@ from freyalove.api.utils import *
 from freyalove.api.objectification import *
 
 # POST /MATCHMAKER/MATCH/
+@csrf_exempt
 @user_is_authenticated_with_facebook
 @require_http_methods(["POST"])
 def match(request):

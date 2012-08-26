@@ -142,6 +142,7 @@ def random_questions(request, fb_username, status):
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json"))
 
 # POST /QUESTIONNAIRE/QUESTIONS/ADD/
+@csrf_exempt
 @user_is_authenticated_with_facebook
 @require_http_methods(["POST"])
 def answer(request):
