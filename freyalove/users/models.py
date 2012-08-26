@@ -75,7 +75,7 @@ class Profile(models.Model):
 
     # matchmaker information
     is_matchmaker = models.BooleanField(default=False)
-    matchmaker_score = models.PositiveIntegerField(default=0)
+    matchmaker_score = models.PositiveIntegerField(default=1000)
 
     # engagement
     engaged_to = models.ForeignKey("Profile", related_name="engaged", null=True)

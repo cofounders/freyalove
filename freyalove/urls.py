@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^users/facebookfriends/$', 'freyalove.api.views.currentuser.facebookfriends'),
     url(r'^users/search/(?P<query>[-\w+]+)/$', 'freyalove.api.views.currentuser.search'), 
     url(r'^users/friends/leaderboard/summary/$', 'freyalove.api.views.currentuser.leaderboard'),
+    #url(r'^points/add/$', 'freyalove.api.views.currentuser.add_points'), # SEE VIEW FOR ADDITIONAL INFORMATION
 
     # OTHER USERS
     url(r'^users/(?P<fb_username>[-\w.]+)/profile/$', 'freyalove.api.views.otherusers.profile'),

@@ -112,6 +112,24 @@ def profile_unregister(request):
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
 
+# Not activated, for in case manual points assignment is called for
+# POST /PROFILE/POINTS/ADD/
+@user_is_authenticated_with_facebook
+@require_http_methods(["POST"])
+def add_points(request):
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    profile = existing_user(fetch_profile(cookie["access_token"]))
+
+    points = request.POST.get("points", None)
+
+    if points:
+        points = int(points)
+        profile.matchmaker_score += points
+        profile.save()
+
+    resp_data = obj_user_summary([profile])[0]
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
+
 # GET /USERS/FACEBOOKFRIENDS/
 @user_is_authenticated_with_facebook
 @require_http_methods(["GET"])
