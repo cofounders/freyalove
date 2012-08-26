@@ -32,7 +32,7 @@ urlpatterns = patterns('',
     url(r'^activities/sexytimes/create/$', 'freyalove.api.views.activities.create_sexytime'), # create SexyTime
     url(r'^activities/sexytimes/(\d+)/rsvp/$', 'freyalove.api.views.activities.rsvp_sexytime'), # rsvp for a SexyTime
     url(r'^activities/sexytimes/(\d+)/notes/add/$', 'freyalove.api.views.activities.update_sexytime_note'),
-    url(r'^activities/winks/to/(\d+)/$', 'freyalove.api.views.activities.create_wink'), # send Wink
+    url(r'^activities/winks/$', 'freyalove.api.views.activities.create_wink'), # send Wink
 
     # MESSAGES
     url(r'^conversations/$', 'freyalove.api.views.messages.conversations'),

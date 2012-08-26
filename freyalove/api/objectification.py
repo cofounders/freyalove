@@ -195,7 +195,7 @@ def obj_wink(winks):
 
     for wink in winks:
         wink_as_object = {}
-        wink_as_object["wink_id"] = wink.id
+        wink_as_object["id"] = wink.id
         wink_as_object["from"] = obj_user_summary([wink.from_profile])[0]
         wink_as_object["to"] = obj_user_summary([wink.to_profile])[0]
         wink_as_object["type"] = "wink"
@@ -209,6 +209,7 @@ def obj_sexytimes(sexytimes):
 
     for sexytime in sexytimes:
         sexytime_as_object = {}
+        sexytime_as_object["id"] = sexytime.id
         sexytime_as_object["matchmaker"] = obj_user_summary([sexytime.matchmaker])[0]
         if sexytime.p1_attending and sexytime.p1_responded:
             sexytime_as_object["statusFrom"] = "accept"

@@ -45,7 +45,7 @@ def fetch_winks(request):
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
     profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
-    winks = Wink.objects.filter(to_profile=profile, accepted=False)
+    winks = Wink.objects.filter(to_profile=profile, accepted=False, hide=False)
 
     resp_data = obj_wink(winks)
 
@@ -55,7 +55,6 @@ def fetch_winks(request):
 @user_is_authenticated_with_facebook
 @require_http_methods(["GET"])
 def fetch_activities(request):
-    # parse for token in cookie
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
     profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
@@ -71,161 +70,139 @@ def fetch_activities(request):
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
 
+# POST /ACTIVITIES/SEXYTIMES/CREATE/
 @csrf_exempt
+@user_is_authenticated_with_facebook
+@require_http_methods(["POST"])
 def create_sexytime(request):
-    if request.method == "POST":
-        resp_data = {}
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
-        p1 = request.POST.get("from", None)
-        p2 = request.POST.get("to", None)
-        when = request.POST.get("when", None)
-        where = request.POST.get("where", None)
+    p2 = request.POST.get("to", None)
+    when = request.POST.get("when", None)
+    where = request.POST.get("where", None)
+    resp_data = {}
 
-        if p1 and p2 and when and where:
-            # does users exists?
-            try:
-                p1_profile = Profile.objects.get(id=int(p1))
-            except Profile.DoesNotExist:
-                p1_profile = None
-                resp["status"] = "Fail. User of id %s does not exist!" % p1
-            try:
-                p2_profile = Profile.objects.get(id=int(p2))
-            except Profile.DoesNotExist:
-                p2_profile = None
-                resp["status"] = "Fail. User of id %s does not exist!" % p2
+    if p2:
+        p2 = Profile.objects.has_freya_profile_given_fb_details(p2)
 
-            # parse date
-            when_parsed = convert_to_dtobj(when)
+    if p2 and when and where:
+        # parse date
+        when_parsed = convert_to_dtobj(when)
 
-            sexytime = SexyTime()
-            sexytime.p1 = p1_profile
-            sexytime.p2 = p2_profile
-            sexytime.when = when_parsed
-            sexytime.where = where
-            sexytime.save()
+        sexytime = SexyTime()
+        sexytime.p1 = profile
+        sexytime.p1_response = "accept" # by default, creator accepts event
+        sexytime.p2 = p2
+        sexytime.when = when_parsed
+        sexytime.where = where
+        sexytime.save()
 
-            resp_data["sexytime_id"] = sexytime.id
-            resp_data["status"] = "Success. SexyTime between %s and %s created." % (p1_profile.id, p2_profile.id)
-        else:
-            resp_data["status"] = "Fail. You did not provide all fields required."
-
-        resp_json = json.JSONEncoder().encode(resp_data)
-        resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
-        return resp
+        if settings.ECHO:
+            resp_data["sexytime"] = obj_sexytimes([sexytime])[0]
+        resp_data["status"] = "Success"
     else:
-        resp = HttpResponse("Bad request", status=400)
-        return resp
+        resp_data["status"] = "Failure"
 
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
+
+# POST /ACTIVITIES/SEXYTIMES/:ID/RSVP/
 @csrf_exempt
+@user_is_authenticated_with_facebook
+@require_http_methods(["POST"])
 def rsvp_sexytime(request, sexytime_id):
-    if request.method == "POST":
-        sexytime_id = int(sexytime_id)
-        resp_data = {}
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
-        # parse for token in cookie
-        cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
-        if not cookie:
-            resp = HttpResponse("Missing authentication cookie", status=403)
-            return resp
+    sexytime_id = int(sexytime_id)
+    resp_data = {}
 
-        profile = is_registered_user(fetch_profile(cookie["access_token"]))
-        try:
-            sexytime = SexyTime.objects.get(id=sexytime_id)
-        except SexyTime.DoesNotExist:
-            resp = HttpResponse("SexyTime requested does not exist!", status=404)
-            return resp
+    try:
+        sexytime = SexyTime.objects.get(id=sexytime_id)
+    except SexyTime.DoesNotExist:
+        resp_data["status"] = "Failure"
 
-        if sexytime.p1.id == profile.id or sexytime.p2.id == profile.id:
-            if sexytime.p1.id == profile.id:
-                sexytime.p1_attending = True
-                sexytime.p1_responded = True
-            else:
-                sexytime.p2_attending = True
-                sexytime.p2_responded = True
-            sexytime.save()
-            resp_data["status"] = "RSVP for event %d, participant %d successful!" % (sexytime.id, profile.id)
-            resp_json = json.JSONEncoder().encode(resp_data)
-            resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
-            return resp
+    if sexytime.p1.id == profile.id or sexytime.p2.id == profile.id:
+        if sexytime.p1.id == profile.id:
+            sexytime.p1_response = "accept"
         else:
-            resp = HttpResponse("You are trying to RSVP for a sexytime you're not part of!", status=400)
-            return resp
-    else:
-        resp = HttpResponse("Bad request", status=400)
-        return resp
+            sexytime.p2_response = "accept"
+        sexytime.save()
+        resp_data["status"] = "Success"
+        
+    if settings.ECHO:
+        resp_data["sexytime"] = obj_sexytimes([sexytime])[0]
 
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
+
+# POST /ACTIVITIES/SEXYTIMES/:ID/NOTES/ADD/
 @csrf_exempt
+@user_is_authenticated_with_facebook
+@require_http_methods(["POST"])
 def update_sexytime_note(request, sexytime_id):
-    if request.method == "POST":
-        sexytime_id = int(sexytime_id)
-        resp_data = {}
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
-        # parse for token in cookie
-        cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
-        if not cookie:
-            resp = HttpResponse("Missing authentication cookie", status=403)
-            return resp
+    sexytime_id = int(sexytime_id)
+    resp_data = {}
 
-        profile = is_registered_user(fetch_profile(cookie["access_token"]))
+    try:
+        sexytime = SexyTime.objects.get(id=int(sexytime_id))
+    except SexyTime.DoesNotExist:
+        resp_data["status"] = "Failure"
 
-        try:
-            sexytime = SexyTime.objects.get(id=int(sexytime_id))
-        except SexyTime.DoesNotExist:
-            resp = HttpResponse("SexyTime requested does not exist!", status=404)
-            return resp
-
-        note = request.POST.get("notes", None)
-        if not note:
-            resp_data["status"] = "Fail"
-        else:
-            sexytime.notes = note
-            sexytime.save()
-            resp_data["status"] = "Successfully updated note for sexytime %d" % sexytime.id
-            resp_data["note"] = sexytime.notes
-
-        resp_json = json.JSONEncoder().encode(resp_data)
-        resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
-        return resp
+    note = request.POST.get("notes", None)
+    if not note:
+        resp_data["status"] = "Failure"
     else:
-        resp = HttpResponse("Bad request", status=400)
-        return resp
+        sexytime.notes = note
+        sexytime.save()
+        resp_data["status"] = "Success"
+        if settings.ECHO:
+            resp["note"] = {"from": obj_user_summary([profile])[0], "body": note}
 
+
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
+
+# POST /ACTIVITIES/WINKS/
 @csrf_exempt
-def create_wink(request, to_profile_id):
-    if request.method == "POST":
-        resp_data = {}
+@user_is_authenticated_with_facebook
+@require_http_methods(["POST"])
+def create_wink(request):
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
+    resp_data = {}
 
-        # parse for token in cookie
-        cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    wink_id = request.POST.get('winkID', None)
+    action = request.POST.get('action', None)
+    fb_username = request.POST.get('userID', None)
 
-        if not cookie:
-            resp = HttpResponse("Missing authentication cookie", status=403)
-            return resp
-        profile = is_registered_user(fetch_profile(cookie["access_token"]))
-
-        try:
-            to_profile = Profile.objects.get(id=int(to_profile_id))
-        except Profile.DoesNotExist:
-            to_profile = None
-            resp = HttpResponse("Bad request - to user doesn't exist!", status=400)
-            return resp
-
-        try:
-            wink = Wink.objects.get(from_profile=profile, to_profile=to_profile, received=False)
-            resp = HttpResponse("Bad request - a wink already exists!", status=400)
-            return resp
-        except Wink.DoesNotExist:
-            pass
-
+    if not wink_id:
+        to_profile = Profile.objects.has_freya_profile_given_fb_details(fb_username)
+        if to_profile:
         wink = Wink()
         wink.to_profile = to_profile
         wink.from_profile = profile
         wink.save()
         resp_data = {}
-        resp_data["status"] = "Successfully create a wink from %d to %d" % (wink.from_profile.id, wink.to_profile.id)
-        resp_json = json.JSONEncoder().encode(resp_data)
-        resp = inject_cors(HttpResponse(resp_json, content_type="application/json", status=200))
-        return resp
+        resp_data["status"] = "Success" 
+        resp_data["wink"] = obj_wink([wink])[0]
     else:
-        resp = HttpResponse("Bad request", status=400)
-        return resp
+        try:
+            wink = Wink.objects.get(id=int(wink_id))
+        except Wink.DoesNotExist:
+            wink = None
+
+        if wink:
+            if action == "hide":
+                wink.hide = True
+                wink.save()
+            elif action == "return":
+                wink.accepted = True
+                wink.save()
+            resp_data["status"] = "Success" 
+            resp_data["wink"] = obj_wink([wink])[0]
+        else:
+            resp_data["status"] = "Failure"
+
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
