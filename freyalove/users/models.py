@@ -159,9 +159,11 @@ def blocked_notify(sender, instance, **kwargs):
     from freyalove.notify.register import notify
     notify(instance.blocked_profile, "blockevent", instance, instance.belongs_to)
 
-def engage_notify(sender, instance, **kwargs):
+def engage_and_matchmaker_rank_notify(sender, instance, **kwargs):
     from freyalove.notify.register import notify
     # check if we need to generate a notification
+
+    # Engagement
     try:
         profile_in_db = Profile.objects.get(id=instance.id)
     except Profile.DoesNotExist:
@@ -176,14 +178,43 @@ def engage_notify(sender, instance, **kwargs):
             mp = matchmaker[0]
             notify(mp.match.matchmaker, "User_FB_Hookup", instance)
         # notify friends
-        friends = Friendship.objects.friends_for_profile(instance)
-        for f in friends:
+        self_friends = Friendship.objects.friends_for_profile(instance)
+        for f in self_friends:
             notify(f, "User_FB_Hookup", instance)
         friends = Friendship.objects.friends_for_profile(instance.engaged_to)
         for f in friends:
             notify(f, "User_FB_Hookup", instance)
 
+    # Matchmaker
+    if instance.matchmaker_score != profile_in_db.matchmaker_score and instance.matchmaker_score > profile_in_db.matchmaker_score:
+        self_friends = list(self_friends.order_by('-matchmaker_score'))
+        scores = [f.matchmaker_score for f in self_friends]
+        max_score = max(scores)
+        min_score = min(scores)
+        rank = None
+        overtook_profile = None
+        overtook_score = None
+        if not instance.matchmaker_score == max_score or not instance.matchmaker_score == min_score:
+            for i, v in enumerate(scores):
+                if instance.matchmaker_score > score:
+                    scores.insert(i+1, instance.matchmaker_score)
+                    rank = i + 2
+                    overtook_score = v
+
+        elif instance.matchmaker_score == max_score:
+            rank = 1
+            overtook_score = scores[0]
+        elif instance.matchmaker_score == min_score:
+            rank = len(scores) + 1
+            overtook_score = scores[-1]
+
+        for f in self_friends:
+            if overtook_score == f.matchmaker_score:
+                overtook_profile = f
+        notify(instance, "Matchmaker_Rank_Update")
+        notify(overtook_profile, "Matchmaker_Rank_Update")
+
 # Register with freyalove.notifications
 pre_save.connect(wink_notify, sender=Wink, dispatch_uid="wink_presave")
-pre_save.connect(engage_notify, sender=Profile, dispatch_uid="profile_presave")
+pre_save.connect(engage_and_matchmaker_rank_notify, sender=Profile, dispatch_uid="profile_presave")
 post_save.connect(blocked_notify, sender=Blocked, dispatch_uid="block_postsave")
