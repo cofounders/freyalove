@@ -98,6 +98,7 @@ class SexyTime(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
+    initial_signal = models.BooleanField(default=True)
 
     objects = SexyTimeManager()
 
@@ -119,12 +120,19 @@ def match_notify(sender, instance, **kwargs):
             notify(instance.matchmaker, "Match_Introduction_Fail", instance, instance.p1)
             instance.rejected = True
             instance.save()
-        elif instance.p2_response == "reject"
+        elif instance.p2_response == "reject":
             notify(instance.p1, "Match_Introduction_Fail", instance, instance.p2)
             notify(instance.matchmaker, "Match_Introduction_Fail", instance, instance.p2)
             instance.rejected = True
             instance.save()
         else:
             pass
+
+def sexytime_notify(sender, instance, **kwargs):
+    if instance.initial_signal:
+        notify(instance.p1, "Invite_SexyTime", instance, instance.p2)
+        notify(instance.p2, "Invite_SexyTime", instance, instance.p1)
+        instance.initial_signal = False
+        instance.save()
 
 post_save.connect(match_notify, sender=Match, dispatch_uid="match_save")
