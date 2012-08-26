@@ -10,7 +10,7 @@ class ConversationManager(models.Manager):
                 has_conversation = True
         return has_conversation
 
-    def get_conversation(self, profiles):
+    def get_conversations(self, profiles):
         conversations = super(ConversationManager, self).get_query_set().filter(participants__in=profiles)
         for c in conversations:
             c_profiles = set(list(c.participants.all()))
