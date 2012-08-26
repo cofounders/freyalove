@@ -69,6 +69,13 @@ class Match(models.Model):
 
         super(Match, self).save(*args, **kwargs)
 
+class MatchProposal(models.Model):
+    from_profile = models.ForeignKey(Profile, related_name="from")
+    to_profile = models.ForeignKey(Profile, related_name="to")
+    quality = models.PositiveIntegerField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    match = models.ForeignKey(Match, null=True)
 
 class SexyTime(models.Model):
     match = models.ForeignKey(Match, null=True)
