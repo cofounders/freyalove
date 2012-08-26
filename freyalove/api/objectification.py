@@ -230,6 +230,20 @@ def obj_sexytimes(sexytimes):
 
     return resp
 
+def obj_matches(matches):
+    resp = []
+
+    for match in matches:
+        match_as_object = {}
+        match_as_object["quality"] = match.quality
+        match_as_object["timestamp"] = match.created_at
+        match_as_object["statusFrom"] = match.p1_response
+        match_as_object["statusTo"] = match.p2_response
+
+        resp.append(match_as_object)
+
+    return resp
+
 def obj_notifications(notes):
     resp = []
 

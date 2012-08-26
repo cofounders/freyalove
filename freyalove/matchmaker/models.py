@@ -5,10 +5,9 @@ from freyalove.users.models import Profile
 from freyalove.matchmaker.managers import MatchManager, SexyTimeManager
 
 MATCHMAKE_RESPONSES = (
-    ('Pending', 'Pending'),
-    ('Accepted', 'Accepted'),
-    ('Declined', 'Declined'),
-    ('Block', 'Block'),
+    ('Pending', 'notset'),
+    ('Accepted', 'accept'),
+    ('Declined', 'reject'),
 )
 
 class Match(models.Model):
