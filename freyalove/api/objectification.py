@@ -269,6 +269,27 @@ def obj_notifications(notes):
         note_as_object["type"] = "N/A" # TODO parser
         note_as_object["seen"] = not (note.unread)
 
-        resp.append(note)
+        resp.append(note_as_object)
+
+    return resp
+
+def obj_answered_questions(answers):
+    resp = []
+
+    for answer in answers:
+        answered_question_obj = {}
+        answered_question_obj["id"] = answer.question.id
+        answered_question_obj["topic"] = answer.question.question_topic.name
+        answered_question_obj["type"] = answer.question.question_type.name
+        answered_question_obj["question"] = answer.question.question_given
+        answered_question_obj["helpText"] = answer.question.help_text
+        answered_question_obj["lang"] = "en"
+        answered_question_obj["user"] = answer.profile.fb_username
+        answered_question_obj["userAnswer"] = answer.answer
+        answered_question_obj["matchAnswer"] = answer.matches
+        answered_question_obj["comment"] = answer.comment
+        answered_question_obj["answerPublic"] = answer.public
+
+        resp.append(answered_question_obj)
 
     return resp

@@ -45,7 +45,7 @@ urlpatterns = patterns('',
     # MATCHMAKING
     url(r'^matchmaker/recommendations/$', 'freyalove.api.views.matchmaking.recommendations'),
     url(r'^matchmaker/match/$', 'freyalove.api.views.matchmaking.match'),
-    url(r'^matchmaker/(?P<userid_list>[-\w+]+)/questions/answered/$', 'freyalove.api.views.matchmaking.answered'),
+    url(r'^matchmaker/(?P<userid_list>[-\w.+]+)/questions/answered/$', 'freyalove.api.views.matchmaking.answered'),
 
     # QUESTIONNAIRE
     url(r'^users/(?P<fb_username>[-\w.]+)/questionnaire/categories/$', 'freyalove.api.views.questionnaire.categories'),

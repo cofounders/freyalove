@@ -69,3 +69,26 @@ def recommendations(request):
     resp_data = obj_match_proposals(proposals)
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json"))
+
+# GET /MATCHMAKER/:USERNAME_LIST/QUESTIONS/ANSWERED/
+@user_is_authenticated_with_facebook
+@require_http_methods(["GET"])
+def answered(request, username_list):
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
+
+    usernames = username_list.split("+")
+    verified_profiles = []
+    for username in usernames:
+        friend_profile = Profile.objects.has_freya_profile_given_fb_details(username)
+        if friend_profile:
+            if Friendship.objects.are_friends(profile, friend_profile):
+                verified_profiles.append(friend_profile)
+
+    answers = []
+    for p in verified_profiles:
+        answers += list(Answer.objects.filter(profile=p))
+
+    resp_data = obj_answered_questions(answers)
+
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json"))
