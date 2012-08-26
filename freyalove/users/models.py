@@ -73,6 +73,8 @@ class Profile(models.Model):
     details = models.ForeignKey(ProfileDetail, null=True)
     permissions = models.ForeignKey(ProfilePrivacyDetail, null=True)
 
+    is_matchmaker = models.BooleanField(default=False)
+
     objects = ProfileManager()
 
     def __unicode__(self):
