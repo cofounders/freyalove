@@ -180,13 +180,13 @@ def create_wink(request):
     if not wink_id:
         to_profile = Profile.objects.has_freya_profile_given_fb_details(fb_username)
         if to_profile:
-        wink = Wink()
-        wink.to_profile = to_profile
-        wink.from_profile = profile
-        wink.save()
-        resp_data = {}
-        resp_data["status"] = "Success" 
-        resp_data["wink"] = obj_wink([wink])[0]
+            wink = Wink()
+            wink.to_profile = to_profile
+            wink.from_profile = profile
+            wink.save()
+            resp_data = {}
+            resp_data["status"] = "Success" 
+            resp_data["wink"] = obj_wink([wink])[0]
     else:
         try:
             wink = Wink.objects.get(id=int(wink_id))
