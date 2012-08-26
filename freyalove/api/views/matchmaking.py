@@ -54,3 +54,18 @@ def match(request):
     	resp_data["match"] = obj_matches([match])[0]
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json"))
+
+# GET /MATCHMAKER/RECOMMENDATIONS/
+@user_is_authenticated_with_facebook
+@require_http_methods(["GET"])
+def recommendations(request):
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
+
+    friends = Friendship.objects.friends_for_profile(profile)
+    friends_ids = [f.id for f in friends]
+
+    proposals = MatchProposal.objects.filter(to_profile__in=friends_ids, from_profile__in=friends_ids).order_by('-quality')
+    resp_data = obj_match_proposals(proposals)
+
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json"))

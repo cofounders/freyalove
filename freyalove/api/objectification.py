@@ -235,12 +235,26 @@ def obj_matches(matches):
 
     for match in matches:
         match_as_object = {}
-        match_as_object["quality"] = match.quality
+        match_as_object["quality"] = match.matchproposal_set.all()[0]
         match_as_object["timestamp"] = match.created_at
         match_as_object["statusFrom"] = match.p1_response
         match_as_object["statusTo"] = match.p2_response
 
         resp.append(match_as_object)
+
+    return resp
+
+def obj_match_proposals(match_proposals):
+    resp = []
+
+    for mp in match_proposals:
+        mp_as_object = {}
+        mp_as_object["id"] = mp.id
+        mp_as_object["from"] = obj_user_summary([mp.from_profile])[0]
+        mp_as_object["to"] = obj_user_summary([mp.to_profile])[0]
+        mp_as_object["quality"] = mp.quality
+        mp_as_object["timestamp"] = mp.timestamp
+        resp.append(mp_as_object)
 
     return resp
 
