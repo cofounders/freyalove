@@ -210,7 +210,10 @@ def obj_sexytimes(sexytimes):
     for sexytime in sexytimes:
         sexytime_as_object = {}
         sexytime_as_object["id"] = sexytime.id
-        sexytime_as_object["matchmaker"] = obj_user_summary([sexytime.matchmaker])[0]
+        try:
+            sexytime_as_object["matchmaker"] = obj_user_summary([sexytime.matchmaker])[0]
+        except:
+            pass # if not implemented
         if sexytime.p1_attending and sexytime.p1_responded:
             sexytime_as_object["statusFrom"] = "accept"
         elif sexytime.p1_responded and not sexytime.p1_accepted:
