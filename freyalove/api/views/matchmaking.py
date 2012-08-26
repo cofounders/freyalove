@@ -66,6 +66,11 @@ def recommendations(request):
     friends_ids = [f.id for f in friends]
 
     proposals = MatchProposal.objects.filter(to_profile__in=friends_ids, from_profile__in=friends_ids).order_by('-quality')
+    rejected_ids = []
+    for p in proposals:
+        if p.match.rejected:
+            rejected_ids.append(p.id)
+    proposals = proposals.exclude(id__in=rejected_ids)
     resp_data = obj_match_proposals(proposals)
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json"))

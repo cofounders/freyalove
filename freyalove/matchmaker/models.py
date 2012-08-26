@@ -111,5 +111,20 @@ def match_notify(sender, instance, **kwargs):
         notify(instance.p1, "Match_Introduction", instance, instance.p2)
         instance.initial_signal = False
         instance.save()
+    else:
+        # check if introduction was flagged a failure or success
+        # Fail case
+        if instance.p1_response == "reject":
+            notify(instance.p2, "Match_Introduction_Fail", instance, instance.p1)
+            notify(instance.matchmaker, "Match_Introduction_Fail", instance, instance.p1)
+            instance.rejected = True
+            instance.save()
+        elif instance.p2_response == "reject"
+            notify(instance.p1, "Match_Introduction_Fail", instance, instance.p2)
+            notify(instance.matchmaker, "Match_Introduction_Fail", instance, instance.p2)
+            instance.rejected = True
+            instance.save()
+        else:
+            pass
 
 post_save.connect(match_notify, sender=Match, dispatch_uid="match_save")
