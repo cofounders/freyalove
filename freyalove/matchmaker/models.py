@@ -20,8 +20,8 @@ class Match(models.Model):
     # state/switches
     success = models.BooleanField(default=False)
     rejected = models.BooleanField(default=False)
-    p1_response = models.CharField(choices=MATCHMAKE_RESPONSES, default="Pending", max_length=10)
-    p2_response = models.CharField(choices=MATCHMAKE_RESPONSES, default="Pending", max_length=10)
+    p1_response = models.CharField(choices=MATCHMAKE_RESPONSES, default="notset", max_length=10)
+    p2_response = models.CharField(choices=MATCHMAKE_RESPONSES, default="notset", max_length=10)
 
     # timestamps
     created_at = models.DateTimeField(auto_now_add=True, null=True)
@@ -91,10 +91,10 @@ class SexyTime(models.Model):
     notes = models.TextField(blank=True)
 
     # RSVP
-    p1_attending = models.BooleanField(default=False)
-    p2_attending = models.BooleanField(default=False)
-    p1_responded = models.BooleanField(default=False)
-    p2_responded = models.BooleanField(default=False)
+    p1_response = models.CharField(choices=MATCHMAKE_RESPONSES, default="notset", max_length=10)
+    p2_response = models.CharField(choices=MATCHMAKE_RESPONSES, default="notset", max_length=10)
+    success = models.BooleanField(default=False)
+    rejected = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
@@ -134,5 +134,17 @@ def sexytime_notify(sender, instance, **kwargs):
         notify(instance.p2, "Invite_SexyTime", instance, instance.p1)
         instance.initial_signal = False
         instance.save()
+    else:
+        # check for failure or success arrangements
+        if instance.p1_response == "reject":
+            notify(instance.p2, "Invite_SexyTime_Reject", instance, instance.p1)
+            instance.rejected = True
+            instance.save()
+        elif instance.p2_response == "reject":
+            notify(instance.p1, "Invite_SexyTime_Reject", instance, instance.p2)
+            instance.rejected = True
+            instance.save()
+        else:
+            pass
 
 post_save.connect(match_notify, sender=Match, dispatch_uid="match_save")

@@ -37,7 +37,7 @@ class MatchProposalManager(models.Manager):
 class SexyTimeManager(models.Manager):
     def fetch_sexytimes(self, profile):
         now = datetime.datetime.now()
-        sexytimes_1 = super(SexyTimeManager, self).get_query_set().filter(p1=profile)
-        sexytimes_2 = super(SexyTimeManager, self).get_query_set().filter(p2=profile)
+        sexytimes_1 = super(SexyTimeManager, self).get_query_set().filter(p1=profile).filter(rejected=False)
+        sexytimes_2 = super(SexyTimeManager, self).get_query_set().filter(p2=profile).filter(rejected=False)
 
         return list(sexytimes_1) + list(sexytimes_2)
