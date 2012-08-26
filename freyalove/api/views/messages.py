@@ -26,7 +26,7 @@ def conversations(request):
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
     profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
-    conversations = Conversation.objects.fetch_conversations(profile)
+    conversations = Conversation.objects.get_conversations([profile])
     resp_data = obj_conversation_summary(conversations)
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
