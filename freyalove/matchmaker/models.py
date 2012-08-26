@@ -126,7 +126,12 @@ def match_notify(sender, instance, **kwargs):
             instance.rejected = True
             instance.save()
         else:
-            pass
+            if instance.p1_response == "accept" and instance.p2_response == "accept":
+                notify(instance.p1, "Match_Introduction_Success", instance, instance.p2)
+                notify(instance.p2, "Match_Introduction_Success", instance, instance.p1)
+                notify(instance.matchmaker, "Match_Introduction_Success", instance)
+                instance.success = True
+                instance.save()
 
 def sexytime_notify(sender, instance, **kwargs):
     if instance.initial_signal:
@@ -146,5 +151,8 @@ def sexytime_notify(sender, instance, **kwargs):
             instance.save()
         else:
             pass
+
+        if instance.p1_response == "accept" and instance.p2_response == "accept":
+            pass # todo
 
 post_save.connect(match_notify, sender=Match, dispatch_uid="match_save")
