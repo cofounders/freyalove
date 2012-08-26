@@ -23,7 +23,7 @@ def unread(request):
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
     profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
-    resp_data = obj_notification(Note.objects.filter(belongs_to=profile, unread=True))
+    resp_data = obj_notifications(Note.objects.filter(belongs_to=profile, unread=True))
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json"))
 
@@ -48,6 +48,6 @@ def read(request, note_id):
         resp_data['status'] = "Success"
 
     if settings.ECHO:
-        resp_data['note'] = obj_notification([note])[0]
+        resp_data['note'] = obj_notifications([note])[0]
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json"))
