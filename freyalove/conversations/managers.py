@@ -16,7 +16,7 @@ class ConversationManager(models.Manager):
             c_profiles = set(list(c.participants.all()))
             if c_profiles == set(profiles):
                 return c
-        return None
+        return []
 
     # old methods assuming 1-1 conversations
     def fetch_conversations(self, profile):
