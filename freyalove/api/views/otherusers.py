@@ -73,6 +73,8 @@ def friends(request, fb_username):
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
 
 # GET /USERS/:ID/MUTUAL/
+@user_is_authenticated_with_facebook
+@require_http_methods(["GET"])
 def mutual_friends(request, fb_username):
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
     profile = is_registered_user(fetch_profile(cookie["access_token"]))
@@ -89,5 +91,24 @@ def mutual_friends(request, fb_username):
     friends = set(user_friends + her_friends)
     if len(friends) > 0:
         resp_data_ = obj_user_summary([friends])
+
+    return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
+
+# GET /USERS/:ID/MATCHES/RECOMMENDATIONS/
+@user_is_authenticated_with_facebook
+@require_http_methods(["GET"])
+def recommendations(request, fb_username):
+    cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
+    profile = is_registered_user(fetch_profile(cookie["access_token"]))
+
+    given_user_profile = Profile.objects.has_freya_profile_given_fb_details(fb_username)
+
+    resp_data = []
+
+    if not Friendship.objects.are_friends(profile, given_user_profile):
+        pass
+    else:
+        profiles = MatchProposal.objects.fetch_match_proposals(given_user_profile)
+        resp_data = obj_user_summary(profiles)
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
