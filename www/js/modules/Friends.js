@@ -161,6 +161,136 @@ function($, _, Backbone, app, Facebook, Dummy) {
 		}
 	});
 
+	Views.Tabs = Backbone.View.extend({
+		template: 'friends/tabs',
+		initialize: function (options) {
+			this.options = _.extend(options || {}, {
+				tabs: [
+					{
+						name: 'Likes',
+						view: Views.Tab.Likes
+					},
+					{
+						name: 'Favorite Quotes',
+						view: Views.Tab.Quotes
+					},
+					{
+						name: 'Questionnaire',
+						view: Views.Tab.About,
+						tabs: [
+							{
+								name: 'About',
+								view: Views.Tab.About
+							},
+							{
+								name: 'Identity',
+								view: Views.Tab.Identity
+							},
+							{
+								name: 'Looks',
+								view: Views.Tab.Looks
+							},
+							{
+								name: 'Lifestyle',
+								view: Views.Tab.Lifestyle
+							},
+							{
+								name: 'Relationship',
+								view: Views.Tab.Relationship
+							},
+							{
+								name: 'Background',
+								view: Views.Tab.Background
+							},
+							{
+								name: 'Personality',
+								view: Views.Tab.Personality
+							},
+							{
+								name: 'Sexuality',
+								view: Views.Tab.Sexuality
+							}
+						]
+					}
+				]
+			});
+		},
+		render: function (manage) {
+			var deferred = manage(this).render(),
+				view = this,
+				drawTab = _.bind(function (tab, menu) {
+					var button = $('<li></li>')
+						.text(tab.name)
+						.click(function (event) {
+							event.stopPropagation();
+							var panel = view.$('article').html(''),
+								content = new tab.view({el: panel});
+							view.$('menu > li.active').removeClass('active');
+							$(this).addClass('active');
+							view
+								.insertView('article', content)
+								.render();
+						});
+					menu.append(button);
+					if (tab.tabs) {
+						var submenu = $('<menu></menu>');
+						button.append(submenu);
+						_.each(tab.tabs, function (tab) {
+							drawTab(tab, submenu);
+						});
+					}
+				}, this);
+			deferred.then(_.bind(function () {
+				_.each(this.options.tabs, function (tab) {
+					drawTab(tab, this.$('menu'));
+				});
+			}, this));
+			return deferred;
+		}
+	});
+
+	Views.Tab = {};
+
+	Views.Tab.Likes = Backbone.View.extend({
+		template: 'friends/tab/likes'
+	});
+
+	Views.Tab.Quotes = Backbone.View.extend({
+		template: 'friends/tab/quotes'
+	});
+
+	Views.Tab.About = Backbone.View.extend({
+		template: 'friends/tab/about'
+	});
+
+	Views.Tab.Identity = Backbone.View.extend({
+		template: 'friends/tab/identity'
+	});
+
+	Views.Tab.Looks = Backbone.View.extend({
+		template: 'friends/tab/looks'
+	});
+
+	Views.Tab.Lifestyle = Backbone.View.extend({
+		template: 'friends/tab/lifestyle'
+	});
+
+	Views.Tab.Relationship = Backbone.View.extend({
+		template: 'friends/tab/relationship'
+	});
+
+	Views.Tab.Background = Backbone.View.extend({
+		template: 'friends/tab/background'
+	});
+
+	Views.Tab.Personality = Backbone.View.extend({
+		template: 'friends/tab/personality'
+	});
+
+	Views.Tab.Sexuality = Backbone.View.extend({
+		template: 'friends/tab/sexuality'
+	});
+
 	return {
 		Models: Models,
 		Collections: Collections,

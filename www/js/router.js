@@ -157,6 +157,9 @@ define([
 					'.bblm-user-profile': new Friends.Views.Profile({
 						model: profile
 					}),
+					'.bblm-user-tabs': new Friends.Views.Tabs({
+						model: profile
+					}),
 					'.bblm-sidebar-panels': new Sidebar.Views.Panels({
 						friend: profile
 					}),
