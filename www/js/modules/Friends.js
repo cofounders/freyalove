@@ -1,5 +1,13 @@
-define(['jQuery', 'Underscore', 'Backbone', 'app', 'Facebook', 'modules/Dummy'],
-function($, _, Backbone, app, Facebook, Dummy) {
+define(['jQuery', 'Underscore', 'Backbone', 'app',
+	'Facebook',
+	'modules/ProfileTabs',
+	'modules/Dummy'
+],
+function($, _, Backbone, app,
+	Facebook,
+	ProfileTabs,
+	Dummy
+) {
 
 	var Models = {},
 		Collections = {},
@@ -165,54 +173,7 @@ function($, _, Backbone, app, Facebook, Dummy) {
 		template: 'friends/tabs',
 		initialize: function (options) {
 			this.options = _.extend(options || {}, {
-				tabs: [
-					{
-						name: 'Likes',
-						view: Views.Tab.Likes
-					},
-					{
-						name: 'Favorite Quotes',
-						view: Views.Tab.Quotes
-					},
-					{
-						name: 'Questionnaire',
-						view: Views.Tab.About,
-						tabs: [
-							{
-								name: 'About',
-								view: Views.Tab.About
-							},
-							{
-								name: 'Identity',
-								view: Views.Tab.Identity
-							},
-							{
-								name: 'Looks',
-								view: Views.Tab.Looks
-							},
-							{
-								name: 'Lifestyle',
-								view: Views.Tab.Lifestyle
-							},
-							{
-								name: 'Relationship',
-								view: Views.Tab.Relationship
-							},
-							{
-								name: 'Background',
-								view: Views.Tab.Background
-							},
-							{
-								name: 'Personality',
-								view: Views.Tab.Personality
-							},
-							{
-								name: 'Sexuality',
-								view: Views.Tab.Sexuality
-							}
-						]
-					}
-				]
+				tabs: ProfileTabs.Tabs
 			});
 		},
 		render: function (manage) {
@@ -224,7 +185,7 @@ function($, _, Backbone, app, Facebook, Dummy) {
 						.click(function (event) {
 							event.stopPropagation();
 							var panel = view.$('article').html(''),
-								content = new tab.view({el: panel});
+								content = new tab.view();
 							view.$('menu > li.active').removeClass('active');
 							$(this).addClass('active');
 							view
@@ -241,54 +202,14 @@ function($, _, Backbone, app, Facebook, Dummy) {
 					}
 				}, this);
 			deferred.then(_.bind(function () {
+				var menu = this.$('menu');
 				_.each(this.options.tabs, function (tab) {
-					drawTab(tab, this.$('menu'));
+					drawTab(tab, menu);
 				});
+				this.$('menu > li').first().click();
 			}, this));
 			return deferred;
 		}
-	});
-
-	Views.Tab = {};
-
-	Views.Tab.Likes = Backbone.View.extend({
-		template: 'friends/tab/likes'
-	});
-
-	Views.Tab.Quotes = Backbone.View.extend({
-		template: 'friends/tab/quotes'
-	});
-
-	Views.Tab.About = Backbone.View.extend({
-		template: 'friends/tab/about'
-	});
-
-	Views.Tab.Identity = Backbone.View.extend({
-		template: 'friends/tab/identity'
-	});
-
-	Views.Tab.Looks = Backbone.View.extend({
-		template: 'friends/tab/looks'
-	});
-
-	Views.Tab.Lifestyle = Backbone.View.extend({
-		template: 'friends/tab/lifestyle'
-	});
-
-	Views.Tab.Relationship = Backbone.View.extend({
-		template: 'friends/tab/relationship'
-	});
-
-	Views.Tab.Background = Backbone.View.extend({
-		template: 'friends/tab/background'
-	});
-
-	Views.Tab.Personality = Backbone.View.extend({
-		template: 'friends/tab/personality'
-	});
-
-	Views.Tab.Sexuality = Backbone.View.extend({
-		template: 'friends/tab/sexuality'
 	});
 
 	return {
