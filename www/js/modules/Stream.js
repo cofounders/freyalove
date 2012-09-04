@@ -12,7 +12,7 @@ function($, _, Backbone, app, Dummy) {
 			clearInterval(interval);
 		},
 		url: function () {
-			return app.api + 'stream/unread';
+			return app.api + 'stream/unread/';
 		},
 		dummy: function () {
 			this.set(Dummy.getStreamUnread());

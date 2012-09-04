@@ -47,10 +47,7 @@ function($, _, Backbone, app,
 			this.options = options || {friend: new Models.UserSummary()};
 		},
 		url: function () {
-			return Url(app.api + 'users/:me/friends/:friend/mutual/', {
-				me: app.session.id,
-				friend: this.options.friend.id
-			});
+			return Url(app.api + 'users/:id/mutual/', this.options.friend);
 		},
 		dummy: function () {
 			this.reset(Dummy.getMutualFriends());
