@@ -90,7 +90,7 @@ def mutual_friends(request, fb_username):
 
     friends = set(user_friends + her_friends)
     if len(friends) > 0:
-        resp_data_ = obj_user_summary([friends])
+        resp_data_ = obj_user_summary(friends)
 
     return inject_cors(HttpResponse(json.JSONEncoder().encode(resp_data), content_type="application/json", status=200))
 

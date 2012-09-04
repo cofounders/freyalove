@@ -173,7 +173,6 @@ def obj_questions(questions):
     helpText: String,
     lang: en
     """
-    
     resp = []
     for q in questions:
         q_as_object = {}
@@ -188,7 +187,7 @@ def obj_questions(questions):
 
     return resp
 
-## ACTIVITIES/NOTIFICATIONS 
+## ACTIVITIES/NOTIFICATIONS
 
 def obj_wink(winks):
     resp = []
