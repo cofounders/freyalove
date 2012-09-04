@@ -56,17 +56,8 @@ function($, _, Backbone, app,
 		}
 	});
 
-	Views.Menu = Backbone.View.extend({
-		template: 'sexytimes/menu',
-		initialize: function () {
-			this.collection.on('reset', this.render, this);
-		},
-		cleanup: function () {
-			this.collection.off(null, null, this);
-		},
-		serialize: function () {
-			return {sexyTimes: this.collection.toJSON()};
-		}
+	Views.Menu = Views.Upcoming.extend({
+		template: 'sexytimes/menu'
 	});
 
 	Views.Create = Popup.extend({
