@@ -34,18 +34,29 @@
 		display inline-block
 		vertical-align top
 		width 450px
-		padding 15px
+		padding 10px
 		margin 5px 0 5px -5px
 		border-radius 6px
 		background-color white
+		a.button.secondary
+			right -255px
+			top 0
+			position relative
 		p
 			margin 0
 			font-style italic
 		ul
+			margin 15px 0 0 0
+			&#profile-about, &#profile-looks, &#profile-lifestyle
+				li
+					background-color #f4f3f3
+					border-radius 6px
+					padding 5px
 			li
 				display block
 				width 100%
 				margin 0 0 20px 0
+
 				&:last-child
 					margin-bottom 0
 				input[type=checkbox]
@@ -58,13 +69,14 @@
 					margin 3px 10px 0 0
 					cursor pointer
 					position relative
-					top 3px
+					top 0
 					left 0
-				input[type=checkbox]:checked ~ *
+				input[type=checkbox]:checked ~ p
 					color #aaa
 					font-style italic
-				input[type=checkbox]:checked ~ h3:after
-					content " (hidden)"
+				input[type=checkbox]:checked ~ h3
+					color #aaa
+					font-style italic
 				input[type=checkbox] + label
 					background: url('../img/icn_visible.png') no-repeat center center
 				input[type=checkbox]:checked + label
@@ -75,4 +87,12 @@
 				p
 					font-size 0.875rem
 					font-style normal
-					margin 0 0 0 37px
+					margin 5px 0 0 37px
+					.text-answer
+						margin-top 15px
+				a.retake
+					right -415px
+					position relative
+					top 0
+					left 375px
+					position relative

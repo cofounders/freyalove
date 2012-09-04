@@ -16,10 +16,6 @@ function($, _, Backbone, app, Dummy) {
 		template: 'friends/tab/about'
 	});
 
-	Views.Identity = Backbone.View.extend({
-		template: 'friends/tab/identity'
-	});
-
 	Views.Looks = Backbone.View.extend({
 		template: 'friends/tab/looks'
 	});
@@ -60,10 +56,6 @@ function($, _, Backbone, app, Dummy) {
 				{
 					name: 'About',
 					view: Views.About
-				},
-				{
-					name: 'Identity',
-					view: Views.Identity
 				},
 				{
 					name: 'Looks',
