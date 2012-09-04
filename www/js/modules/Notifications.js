@@ -17,7 +17,7 @@ function($, _, Backbone, app, Dummy) {
 					result[value] = key;
 					return result;
 				}, {});
-			return _.map(response.notifications || [], function (notification) {
+			return _.map(response || [], function (notification) {
 				var label = typeById[notification.type];
 				notification[label] = true;
 				return notification;

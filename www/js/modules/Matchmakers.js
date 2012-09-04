@@ -12,9 +12,6 @@ function($, _, Backbone, app, Dummy) {
 		url: function () {
 			return app.api + 'users/friends/leaderboard/summary/';
 		},
-		parse: function (response) {
-			return response.matchmakers;
-		},
 		dummy: function () {
 			this.reset(Dummy.getTopMatchmakers());
 		}

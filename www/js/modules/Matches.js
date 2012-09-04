@@ -12,9 +12,6 @@ function($, _, Backbone, app, Url, Carousel, Dummy) {
 		url: function () {
 			return Url(app.api + 'users/:id/matches/recommendations/', app.session);
 		},
-		parse: function (response) {
-			return response.matches;
-		},
 		dummy: function () {
 			this.reset(Dummy.getMyPossibleMatches());
 		}
@@ -24,9 +21,6 @@ function($, _, Backbone, app, Url, Carousel, Dummy) {
 		model: Model,
 		url: function () {
 			return app.api + 'matchmaker/recommendations/';
-		},
-		parse: function (response) {
-			return response.matches;
 		},
 		dummy: function () {
 			this.reset(Dummy.getMatchingFriends());

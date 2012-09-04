@@ -12,9 +12,6 @@ function($, _, Backbone, app, Carousel, Dummy) {
 		url: function () {
 			return app.api + 'activities/winks/unreturned/';
 		},
-		parse: function (response) {
-			return response.winks;
-		},
 		dummy: function () {
 			this.reset(Dummy.getWinks());
 		}

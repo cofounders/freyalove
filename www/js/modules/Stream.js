@@ -14,9 +14,6 @@ function($, _, Backbone, app, Dummy) {
 		url: function () {
 			return app.api + 'stream/unread';
 		},
-		parse: function (response) {
-			return response.unread;
-		},
 		dummy: function () {
 			this.set(Dummy.getStreamUnread());
 		}
