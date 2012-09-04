@@ -17,7 +17,7 @@ function($, _, Backbone, app, Dummy) {
 					result[value] = key;
 					return result;
 				}, {});
-			return _.map(response.activities || [], function (activity) {
+			return _.map(response || [], function (activity) {
 				var label = typeById[activity.type];
 				activity[label] = true;
 				return activity;

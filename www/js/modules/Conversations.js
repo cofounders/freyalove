@@ -1,11 +1,13 @@
 define(['jQuery', 'Underscore', 'Backbone', 'app',
 	'Chosen',
+	'libs/url',
 	'modules/Dummy',
 	'modules/Friends',
 	'modules/Popup'
 ],
 function($, _, Backbone, app,
 	Chosen,
+	Url,
 	Dummy,
 	Friends,
 	Popup
@@ -34,12 +36,9 @@ function($, _, Backbone, app,
 			}, options);
 		},
 		url: function () {
-			return app.api + 'conversations/with/' + this.options.to.id + '/';
+			Url(app.api + 'conversations/:id/messages/', this.options.to);
 		},
-		parse: function (response) {
-			response.messages = checkType(response.messages);
-			return response;
-		},
+		parse: checkType,
 		dummy: function () {
 			var conversation = Dummy.getConversation();
 			conversation.participants[0].id = app.session.id;

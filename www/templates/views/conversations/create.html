@@ -5,13 +5,13 @@
 		</header>
 		<article>
 			<div class="form-item">
-				<label for="">Who</label>
-			 	<select data-placeholder="Choose conversation receipents..." class="chzn-select" multiple>
-          {{#friends}}
-          <option value="{{firstName}} {{lastName}}">{{firstName}} {{lastName}}</option>
-        	{{/friends}}
-        </select>
-      </div>
+				<label for="chzn">Who</label>
+			 	<select data-placeholder="Choose conversation receipents..." id="chzn" class="chzn-select" multiple>
+					{{#friends}}
+					<option value="{{firstName}} {{lastName}}">{{firstName}} {{lastName}}</option>
+					{{/friends}}
+				</select>
+			</div>
 			<div class="form-item">
 				<textarea placeholder="Write a message..."></textarea>
 			</div>

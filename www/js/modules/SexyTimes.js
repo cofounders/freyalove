@@ -22,9 +22,6 @@ function($, _, Backbone, app,
 		url: function () {
 			return app.api + 'activities/sexytimes/upcoming/';
 		},
-		parse: function (response) {
-			return response.sexytimes;
-		},
 		dummy: function () {
 			this.reset(Dummy.getSexyTimes());
 		}

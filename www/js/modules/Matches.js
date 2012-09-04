@@ -1,5 +1,5 @@
-define(['jQuery', 'Underscore', 'Backbone', 'app', 'modules/Carousel', 'modules/Dummy'],
-function($, _, Backbone, app, Carousel, Dummy) {
+define(['jQuery', 'Underscore', 'Backbone', 'app', 'libs/url', 'modules/Carousel', 'modules/Dummy'],
+function($, _, Backbone, app, Url, Carousel, Dummy) {
 
 	var Collections = {},
 		Views = {};
@@ -10,7 +10,7 @@ function($, _, Backbone, app, Carousel, Dummy) {
 	Collections.Singles = Backbone.Collection.extend({
 		model: Model,
 		url: function () {
-			return app.api + 'users/' + app.session.id + '/matches/recommendations/';
+			return Url(app.api + 'users/:id/matches/recommendations/', app.session);
 		},
 		parse: function (response) {
 			return response.matches;

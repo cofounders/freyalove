@@ -1,10 +1,12 @@
 define(['jQuery', 'Underscore', 'Backbone', 'app',
 	'Facebook',
+	'libs/url',
 	'modules/ProfileTabs',
 	'modules/Dummy'
 ],
 function($, _, Backbone, app,
 	Facebook,
+	Url,
 	ProfileTabs,
 	Dummy
 ) {
@@ -15,7 +17,7 @@ function($, _, Backbone, app,
 
 	Models.User = Backbone.Model.extend({
 		url: function () {
-			return app.api + 'users/' + this.id + '/profile/';
+			return Url(app.api + 'users/:id/profile/', this);
 		},
 		dummy: function () {
 			this.clear({silent: true});
@@ -32,10 +34,7 @@ function($, _, Backbone, app,
 	Collections.All = Backbone.Collection.extend({
 		model: Models.UserSummary,
 		url: function () {
-			return app.api + 'users/' + app.session.id + '/friends/';
-		},
-		parse: function (response) {
-			return response.friends;
+			return Url(app.api + 'users/:id/friends/', app.session);
 		},
 		dummy: function () {
 			this.reset(Dummy.getFriends());
@@ -48,11 +47,10 @@ function($, _, Backbone, app,
 			this.options = options || {friend: new Models.UserSummary()};
 		},
 		url: function () {
-			return app.api + 'users/' + app.session.id + '/friends/'
-				+ this.options.friend.id + '/mutual/';
-		},
-		parse: function (response) {
-			return response.friends;
+			return Url(app.api + 'users/:me/friends/:friend/mutual/', {
+				me: app.session.id,
+				friend: this.options.friend.id
+			});
 		},
 		dummy: function () {
 			this.reset(Dummy.getMutualFriends());
@@ -65,11 +63,7 @@ function($, _, Backbone, app,
 			this.options = options || {query: ''};
 		},
 		url: function () {
-			var query = encodeURIComponent(this.options.query);
-			return app.api + 'users/search/query/?q=' + query;
-		},
-		parse: function (response) {
-			return response.friends;
+			return Url(app.api + 'users/search/query/?q=:query', this.options);
 		},
 		dummy: function () {
 			this.reset(Dummy.getFriends());
