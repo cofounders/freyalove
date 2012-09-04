@@ -1,0 +1,71 @@
+.tab-container
+	tray()
+	padding 0
+	box-shadow 0 1px 5px #ccc inset
+	border-radius 6px
+	margin-bottom 20px
+	menu
+		display inline-block
+		vertical-align top
+		list-style-type none
+		padding 0
+		margin 10px 0 0 0
+		width 215px
+		> li
+			text-transform uppercase
+			border-top 1px solid #ccc
+			padding 10px 15px
+			background-color rgba(200, 200, 200, 0.2)
+			cursor pointer
+			color $brown
+			&.active
+				color #444
+			> menu
+				> li
+					color $redbright
+					border none
+					text-transform none
+					background-color transparent
+					padding 8px 15px
+	article
+		display inline-block
+		vertical-align top
+		width 450px
+		padding 15px
+		margin 5px 0 5px -5px
+		border-radius 6px
+		background-color white
+		p
+			margin 0
+			font-style italic
+		ul
+			li
+				display block
+				width 100%
+				margin 0 0 20px 0
+				&:last-child
+					margin-bottom 0
+				input[type=checkbox]
+					display none
+				label
+					height 20px
+					width 23px
+					display inline-block
+					margin 3px 10px 0 0
+					cursor pointer
+					position relative
+					top 3px
+					left 0
+				input[type=checkbox]:checked ~ *
+					color #aaa
+					font-style italic
+				input[type=checkbox]:checked ~ h3:after
+					content " (hidden)"
+				input[type=checkbox] + label
+					background: url('../img/icn_visible.png') no-repeat center center
+				input[type=checkbox]:checked + label
+					background: url('../img/icn_invisible.png') no-repeat center center
+				p
+					font-size 0.875rem
+					font-style normal
+					margin 0 0 0 37px
