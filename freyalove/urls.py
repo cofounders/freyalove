@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     url(r'^profile/unregister/$', 'freyalove.api.currentuser.views.profile_unregister'),
     url(r'^profile/$', 'freyalove.api.views.currentuser.profile'),
     url(r'^users/facebookfriends/$', 'freyalove.api.views.currentuser.facebookfriends'),
-    url(r'^users/search/(?P<query>[-\w+]+)/$', 'freyalove.api.views.currentuser.search'), 
+    url(r'^users/search/(?P<query>[-\w+]+)/$', 'freyalove.api.views.currentuser.search'),
     url(r'^users/friends/leaderboard/summary/$', 'freyalove.api.views.currentuser.leaderboard'),
     #url(r'^points/add/$', 'freyalove.api.views.currentuser.add_points'), # SEE VIEW FOR ADDITIONAL INFORMATION
 
@@ -22,11 +22,11 @@ urlpatterns = patterns('',
     url(r'^users/(?P<fb_username>[-\w.]+)/profile/$', 'freyalove.api.views.otherusers.profile'),
     url(r'^users/(?P<fb_username>[-\w.]+)/profile/summary/$', 'freyalove.api.views.otherusers.profile_summary'),
     url(r'^users/(?P<fb_username>[-\w.]+)/friends/$', 'freyalove.api.views.otherusers.friends'),
-    url(r'^users/friends/(?P<fb_username>[-\w.]+)/mutual/$', 'freyalove.api.views.otherusers.mutual_friends'),
+    url(r'^users/(?P<fb_username>[-\w.]+)/mutual/$', 'freyalove.api.views.otherusers.mutual_friends'),
     url(r'^users/(?P<fb_username>[-\w.]+)/matches/recommendations/$', 'freyalove.api.views.otherusers.recommendations'),
 
     # ACTIVITIES
-    url(r'^activities/sexytimes/upcoming/$', 'freyalove.api.views.activities.fetch_sexytimes'), 
+    url(r'^activities/sexytimes/upcoming/$', 'freyalove.api.views.activities.fetch_sexytimes'),
     url(r'^activities/winks/unreturned/$', 'freyalove.api.views.activities.fetch_winks'),
     url(r'^activities/$', 'freyalove.api.views.activities.fetch_activities'), # winks and sexytimes combined
     url(r'^activities/sexytimes/create/$', 'freyalove.api.views.activities.create_sexytime'), # create SexyTime
