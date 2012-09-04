@@ -20,6 +20,7 @@
 			color $brown
 			&.active
 				color #444
+				background-color rgba(150, 150, 150, 0.2)
 			> menu
 				> li
 					color $redbright
@@ -51,6 +52,7 @@
 					height 20px
 					width 23px
 					display inline-block
+					vertical-align top
 					margin 3px 10px 0 0
 					cursor pointer
 					position relative
@@ -65,6 +67,9 @@
 					background: url('../img/icn_visible.png') no-repeat center center
 				input[type=checkbox]:checked + label
 					background: url('../img/icn_invisible.png') no-repeat center center
+				h3
+					width 380px
+					vertical-align top
 				p
 					font-size 0.875rem
 					font-style normal
