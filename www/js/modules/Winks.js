@@ -20,7 +20,7 @@ function($, _, Backbone, app, Carousel, Dummy) {
 	Views.Received = Carousel.extend({
 		template: 'winks/received',
 		begin: 0,
-		span: 4,
+		step: 4,
 		width: 654 / 4
 	});
 

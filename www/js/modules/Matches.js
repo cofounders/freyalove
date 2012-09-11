@@ -1,14 +1,38 @@
-define(['jQuery', 'Underscore', 'Backbone', 'app', 'libs/url', 'modules/Carousel', 'modules/Dummy'],
-function($, _, Backbone, app, Url, Carousel, Dummy) {
+define(['jQuery', 'Underscore', 'Backbone', 'app',
+	'libs/url',
+	'modules/Friends',
+	'modules/Carousel',
+	'modules/Dummy'
+],
+function($, _, Backbone, app,
+	Url,
+	Friends,
+	Carousel,
+	Dummy
+) {
 
-	var Collections = {},
+	var Models = {},
+		Collections = {},
 		Views = {};
 
-	var Model = Backbone.Model.extend({
+	Models.Comparison = Backbone.Model.extend({
+		initialize: function (options) {
+			this.options = _.extend({
+				users: []
+			}, options);
+		},
+		url: function () {
+			Url(app.api + '/matchmaker/:users/questions/answered/', {
+				users: _.pluck(this.options.users, 'id')
+			});
+		},
+		dummy: function () {
+			this.set(Dummy.getComparison());
+		}
 	});
 
 	Collections.Singles = Backbone.Collection.extend({
-		model: Model,
+		model: Backbone.Model,
 		url: function () {
 			return Url(app.api + 'users/:id/matches/recommendations/', app.session);
 		},
@@ -18,7 +42,7 @@ function($, _, Backbone, app, Url, Carousel, Dummy) {
 	});
 
 	Collections.Couples = Backbone.Collection.extend({
-		model: Model,
+		model: Backbone.Model,
 		url: function () {
 			return app.api + 'matchmaker/recommendations/';
 		},
@@ -30,7 +54,7 @@ function($, _, Backbone, app, Url, Carousel, Dummy) {
 	Views.Singles = Carousel.extend({
 		template: 'matches/singles',
 		begin: 1,
-		span: 1,
+		step: 1,
 		offset: function (index) {
 			return -1 * (index - 1) * 230;
 		}
@@ -39,36 +63,50 @@ function($, _, Backbone, app, Url, Carousel, Dummy) {
 	Views.Couples = Carousel.extend({
 		template: 'matches/couples',
 		begin: 0,
-		span: 2,
+		step: 2,
 		width: 654 / 2
 	});
 
-	Views.Matchmaker = Backbone.View.extend({
-		template: 'matches/matchmaker',
-		initialize: function () {
-			this.collection.on('reset', this.render, this);
+	Views.Choice = Carousel.extend({
+		template: 'matches/choice',
+		begin: 1,
+		step: 1,
+		offset: function (index) {
+			return -1 * (index - 1) * 230;
+		}
+	});
+
+	Views.Comparison = Backbone.View.extend({
+		template: 'matches/comparison',
+		initialize: function (options) {
+			this.options = _.extend({
+				first: options.first || new Friends.Models.User(),
+				second: options.second || new Friends.Models.User()
+			}, options);
+			this.model = new Models.Comparison(null, {
+				users: [this.options.first, this.options.second]
+			});
+			this.model.on('change', this.render, this);
+			this.options.first.model.on('change:id', this.model.fetch, this);
+			this.options.second.model.on('change:id', this.model.fetch, this);
+			this.options.first.on('slide', function (user) {
+				this.options.first.model.set(user.attributes);
+			});
+			this.options.second.on('slide', function (user) {
+				this.options.second.model.set(user.attributes);
+			});
 		},
 		cleanup: function () {
-			this.collection.off(null, null, this);
-		},
-		render: function (manage) {
-			this.insertView('.bblm-matches-selection', new Carousel.extend({
-				// collection: commonFriends
-			}));
-
-			return manage(this).render();
+			this.options.first.off(null, null, this);
+			this.options.second.off(null, null, this);
 		},
 		serialize: function () {
-			return {
-				candidates: this.collection.toJSON(),
-				first: this.options.first,
-				second: this.options.second
-			};
+			return this.model.toJSON();
 		}
 	});
 
 	return {
-		Model: Model,
+		Models: Models,
 		Collections: Collections,
 		Views: Views
 	};

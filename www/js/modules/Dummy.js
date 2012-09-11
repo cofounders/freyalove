@@ -640,6 +640,9 @@ Answer: { #fixed format
 			return randArray([user20, user21, user22]);
 		},
 
+		getComparison: function () {
+			return [];
+		},
 
 	// ACTIVITIES
 		getNotifications: function () {

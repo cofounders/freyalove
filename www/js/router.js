@@ -128,14 +128,24 @@ define([
 		},
 
 		matchmaker: function (firstId, secondId) {
-			var candidates = new Friends.Collections.All();
+			var candidates = new Friends.Collections.All(),
+				firstChoice = new Matches.Views.Choice({
+					collection: candidates,
+					model: new Friends.Models.User({id: firstId})
+				}),
+				secondChoice = new Matches.Views.Choice({
+					collection: candidates,
+					model: new Friends.Models.User({id: secondId})
+				}),
+				comparison = new Matches.Views.Comparison({
+					first: firstChoice,
+					second: secondChoice
+				});
 			app.useLayout('matchmaker')
 				.setViews({
-					'.bblm-matches-matchmaker': new Matches.Views.Matchmaker({
-						collection: candidates,
-						first: new Friends.Models.User({id: firstId}),
-						second: new Friends.Models.User({id: secondId})
-					}),
+					'.bblm-matches-first-choice': firstChoice,
+					'.bblm-matches-second-choice': secondChoice,
+					'.bblm-matches-comparison': comparison,
 					'.bblm-header-menu': new Header.Views.Menu(),
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
