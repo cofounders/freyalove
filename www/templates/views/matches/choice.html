@@ -1,7 +1,25 @@
-<section class="matches-choice">
-	<a href="javascript:alert('opens the friend's profile page');window.location.assign('profile-friend.html');" title="Link to the page of Tina Kennard"><img src="/dummy/user2.png" alt="Picture of Tina Kennard" /></a>
-	<h3><a href="javascript:alert('opens the friend's profile page');window.location.assign('profile-friend.html');" title="Link to the page of Tina Kennard">Tina Kennard</a></h3>
-	<p>Born March 7, 1971 (age 41) in Singapore, Singapore, lives in Singapore, Singapore. 25 friends on FreyaLove</p>
-	<p>Speaks English, Hokkinen, Mandarin, French</p>
-	<p>About text... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas faucibus mollis interdum. Cras mattis consectetur purus sit amet fermentum. Donec ullamcorper nulla non metus auctor fringilla. Curabitur blandit tempus porttitor.</p>
+<section class="panel matches-choice">
+	<article class="carousel">
+		<div class="viewport">
+			<ol>
+				{{#items}}
+				<li{{#selected}} class="selected"{{/selected}}>
+					<img src="{{photo}}" alt="{{firstName}} {{lastName}}" style="background-image: url({{photo}})" />
+
+					<h2>{{firstName}} {{lastName}}</h2>
+
+					<label>
+						<a href="/profile/{{id}}" title="Profile of {{firstName}} {{lastName}}">View profile</a>
+					</label>
+				</li>
+				{{/items}}
+			</ol>
+			{{^items}}
+			<p class="empty">No suitable girls found yet. Try filling out your profile or inviting more friends.</p>
+			{{/items}}
+		</div>
+		<ol class="bookmarks"></ol>
+		<a href="#" class="button flat previous {{^showPrevious}}disabled{{/showPrevious}}">Prev</a>
+		<a href="#" class="button flat next {{^showNext}}disabled{{/showNext}}">Next</a>
+	</article>
 </section>

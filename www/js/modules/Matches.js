@@ -72,7 +72,7 @@ function($, _, Backbone, app,
 		begin: 1,
 		step: 1,
 		offset: function (index) {
-			return -1 * (index - 1) * 230;
+			return -1 * (index - 1) * 130;
 		}
 	});
 
@@ -83,17 +83,19 @@ function($, _, Backbone, app,
 				first: options.first || new Friends.Models.User(),
 				second: options.second || new Friends.Models.User()
 			}, options);
+			var first = this.options.first,
+				second = this.options.second;
 			this.model = new Models.Comparison(null, {
-				users: [this.options.first, this.options.second]
+				users: [first, second]
 			});
 			this.model.on('change', this.render, this);
-			this.options.first.model.on('change:id', this.model.fetch, this);
-			this.options.second.model.on('change:id', this.model.fetch, this);
-			this.options.first.on('slide', function (user) {
-				this.options.first.model.set(user.attributes);
+			first.model.on('change:id', this.model.fetch, this);
+			second.model.on('change:id', this.model.fetch, this);
+			first.on('slide', function (user) {
+				first.model.set(user.attributes);
 			});
-			this.options.second.on('slide', function (user) {
-				this.options.second.model.set(user.attributes);
+			second.on('slide', function (user) {
+				second.model.set(user.attributes);
 			});
 		},
 		cleanup: function () {

@@ -1,2 +1,115 @@
+.bblm-matches-first-choice,
+.bblm-matches-second-choice
+	display inline-block
+	text-align center
+	width 50%
+
 .matches-choice
-	font-size 1rem
+	margin 0 auto
+	width 360px
+
+.matches-choice > .carousel
+	height 435px
+	position relative
+
+	> .previous,
+	> .next
+		padding-top 240px
+		position absolute
+		text-transform uppercase
+		top 70px
+		width 150px
+		&:after, &:before
+			line-height 110%
+			vertical-align top
+		&.disabled
+			display none
+
+	> .previous
+		text-align left
+		left -5px
+		&:before
+			content '<'
+			padding 0 15px 0 0
+
+	> .next
+		text-align right
+		right -5px
+		&:after
+			content '>'
+			padding 0 0 0 15px
+
+	// > .bookmarks
+
+	> .viewport
+
+		// > .empty
+
+		> ol
+			padding 3px
+			> li
+				background-color (rgba(246, 246, 246, 0.69)/2 + #dadada/2)
+				background-image linear-gradient(bottom, @background-color, (rgba(246, 246, 246, 0.69)/2 + white/2))
+				box-shadow inset 0px 1px 0px 0px white,
+					0px 1px 3px 0px rgba(0, 0, 0, 0.29)
+				margin 20px 10px 0 0
+				padding 10px
+				width 120px
+				> *
+					display none
+				> img
+					background-size cover
+					background-repeat no-repeat
+					border-radius 2px
+					content ' '
+					display inline-block
+					-webkit-filter grayscale(1)
+					filter grayscale(1)
+					height 100px
+					vertical-align: top
+					width 100px
+				&:not(.selected) > h2
+					color #aaaaaa
+					display block
+					font-size 0.875rem //14px
+					font-weight bold
+					height 2em
+					line-height 1
+					margin 3px 0 0 0
+					overflow hidden
+					padding 1px 6px 0 6px
+					text-align center
+					text-overflow ellipsis
+					text-transform none
+					word-break normal
+
+				&.selected
+					height 220px
+					left 127px
+					padding 10px
+					position absolute
+					width 220px
+					margin 0 0 0 (@width / -4)
+					z-index 1
+					> *
+						display inline-block
+					> img
+						-webkit-filter none
+						filter none
+						float left
+						height 200px
+						margin 0 0 25px 0
+						width 200px
+					> h2
+						display block
+						font-weight bold
+						text-align center
+						text-transform none
+					> label
+						display block
+						text-align center
+						> a
+							font-size 1rem
+
+			> .selected + li
+				margin-left 105px
