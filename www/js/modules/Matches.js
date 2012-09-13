@@ -16,7 +16,7 @@ function($, _, Backbone, app,
 		Views = {};
 
 	Models.Comparison = Backbone.Model.extend({
-		initialize: function (options) {
+		initialize: function (attributes, options) {
 			this.options = _.extend({
 				users: []
 			}, options);
@@ -89,8 +89,12 @@ function($, _, Backbone, app,
 				users: [first, second]
 			});
 			this.model.on('change', this.render, this);
-			first.model.on('change:id', this.model.fetch, this);
-			second.model.on('change:id', this.model.fetch, this);
+			first.model.on('change:id', function () {
+				this.model.fetch();
+			}, this);
+			second.model.on('change:id', function () {
+				this.model.fetch();
+			}, this);
 			first.on('slide', function (user) {
 				first.model.set(user.attributes);
 			});
