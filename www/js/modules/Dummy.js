@@ -605,6 +605,10 @@ Answer: { #fixed format
 			return randArray(user0.friends);
 		},
 
+		getAllFriends: function () {
+			return randArray(allUsers);
+		},
+
 		getMutualFriends: function () {
 			return randArray(user0.friends).splice(0, randInt(user0.friends.length));
 		},

@@ -37,7 +37,7 @@ function($, _, Backbone, app,
 			return Url(app.api + 'users/:id/friends/', app.session);
 		},
 		dummy: function () {
-			this.reset(Dummy.getFriends());
+			this.reset(Dummy.getAllFriends());
 		}
 	});
 

@@ -71,7 +71,14 @@ function($, _, Backbone, app,
 
 	Views.Choice = Carousel.extend({
 		template: 'matches/choice',
-		begin: 1,
+		begin: function () {
+			var selected = this.model.id;
+				user = this.collection.find(function (user) {
+					return user.id === selected;
+				}),
+				position = this.collection.indexOf(user);
+			return Math.max(0, position);
+		},
 		step: 1,
 		offset: function (index) {
 			return -1 * (index - 1) * 130;

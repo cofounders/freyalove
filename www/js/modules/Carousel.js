@@ -40,9 +40,11 @@ function($, _, Backbone) {
 			}
 		},
 		render: function (manage) {
-			var begin = Math.min(this.begin, this.collection.length - 1);
-			this.trigger('slide', this.collection.at(begin));
-			return manage(this).render();
+			var deferred = manage(this).render();
+			deferred.then(_.delay(_.bind(function () {
+				slide.apply(this);
+			}, this), 100));
+			return deferred;
 		},
 		offset: function (index) {
 			return -1 * index * this.width;
@@ -56,13 +58,14 @@ function($, _, Backbone) {
 				selectItem = function (item) { item.selected = true; },
 				formula = function (a, b) { return b * (Math.ceil(a/b) - 1); },
 				lastAllowed = formula(items.length, this.step),
-				begin = Math.max(0, Math.min(this.begin, lastAllowed));
-			items.slice(begin, begin + this.step).forEach(selectItem);
+				begin = _.isFunction(this.begin) ? this.begin() : this.begin,
+				floor = Math.max(0, Math.min(begin, lastAllowed));
+			items.slice(floor, floor + this.step).forEach(selectItem);
 			return {
 				hasItems: items.length > 0,
 				items: items,
-				showNext: begin < items.length - 2,
-				showPrevious: begin > 0
+				showNext: floor < items.length - 2,
+				showPrevious: floor > 0
 			};
 		}
 	}, Backbone.Events));
