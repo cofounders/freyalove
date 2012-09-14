@@ -89,16 +89,27 @@ function($, _, Backbone, app,
 		template: 'matches/comparison',
 		initialize: function (options) {
 			var first = this.options.first,
-				second = this.options.second;
+				second = this.options.second,
+				setUrl = function () {
+					var url = Url('/matchmaker/:first/with/:second', {
+							first: first.model.id,
+							second: second.model.id
+						});
+					Backbone.history.navigate(url, {replace: true, silent: true});
+				};
 			this.model = new Models.Comparison(null, {
 				users: [first, second]
 			});
-			this.model.on('change', this.render, this);
+			this.model.on('change', function () {
+				this.render();
+			}, this);
 			first.model.on('change:id', function () {
 				this.model.fetch();
+				setUrl();
 			}, this);
 			second.model.on('change:id', function () {
 				this.model.fetch();
+				setUrl();
 			}, this);
 			first.on('slide', function (user) {
 				first.model.set(user.attributes);
