@@ -1,6 +1,6 @@
 define(['Underscore'], function (_) {
 	return function (url, params, options) {
-		var label = /:[\w\-\d]+/i;
+		var label = /:[\w\-\d]+/ig;
 		_.extend({
 			separator: '+'
 		}, options);
