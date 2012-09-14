@@ -3,14 +3,14 @@ define(['jQuery', 'Underscore', 'Backbone', 'app',
 	'libs/url',
 	'modules/Dummy',
 	'modules/Friends',
-	'modules/Popup'
+	'modules/Dialog'
 ],
 function($, _, Backbone, app,
 	Chosen,
 	Url,
 	Dummy,
 	Friends,
-	Popup
+	Dialog
 ) {
 	var Models = {},
 		Collections = {},
@@ -144,7 +144,7 @@ function($, _, Backbone, app,
 		}
 	});
 
-	Views.Create = Popup.extend({
+	Views.Create = Dialog.extend({
 		template: 'conversations/create',
 		serialize: function () {
 			return {

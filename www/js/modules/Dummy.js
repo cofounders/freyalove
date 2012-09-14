@@ -641,7 +641,7 @@ Answer: { #fixed format
 		},
 
 		getComparison: function () {
-			return [];
+			return randArray([1, 2, 3]);
 		},
 
 	// ACTIVITIES

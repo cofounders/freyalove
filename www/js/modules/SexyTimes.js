@@ -2,13 +2,13 @@ define(['jQuery', 'Underscore', 'Backbone', 'app',
 	'Chosen',
 	'modules/Dummy',
 	'modules/Friends',
-	'modules/Popup'
+	'modules/Dialog'
 ],
 function($, _, Backbone, app,
 	Chosen,
 	Dummy,
 	Friends,
-	Popup
+	Dialog
 ) {
 
 	var Collections = {},
@@ -60,7 +60,7 @@ function($, _, Backbone, app,
 		template: 'sexytimes/menu'
 	});
 
-	Views.Create = Popup.extend({
+	Views.Create = Dialog.extend({
 		template: 'sexytimes/create',
 		serialize: function () {
 			return {

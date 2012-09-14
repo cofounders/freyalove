@@ -10,7 +10,6 @@ function($, _, Backbone) {
 			if (this.collection) {
 				this.collection.off(null, null, this);
 			}
-		},
-		events: {}
+		}
 	}, Backbone.Events));
 });

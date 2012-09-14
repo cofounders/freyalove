@@ -1,0 +1,32 @@
+<div class="dialog">
+	<section class="matches-introduce">
+		<header>
+			<h2>Introduce {{#first}}{{firstName}}{{/first}} and {{#second}}{{firstName}}{{/second}}</h2>
+		</header>
+		<article>
+			<div class="form-item">
+				<figure>
+					{{#first}}
+					<div class="first">
+						<img src="{{photo}}" alt="{{firstName}} {{lastName}}" />
+						<h5>{{firstName}} {{lastName}}</h5>
+					</div>
+					{{/first}}
+					{{#second}}
+					<div class="second">
+						<img src="{{photo}}" alt="{{firstName}} {{lastName}}" />
+						<h5>{{firstName}} {{lastName}}</h5>
+					</div>
+					{{/second}}
+				</figure>
+			</div>
+			<div class="form-item">
+				<textarea placeholder="Write an introduction..."></textarea>
+			</div>
+		</article>
+		<footer>
+			<a href="#" class="button flat close">Close</a>
+			<a href="#" class="button primary">Make the Match</a>
+		</footer>
+	</section>
+</div>

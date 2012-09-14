@@ -2,12 +2,14 @@ define(['jQuery', 'Underscore', 'Backbone', 'app',
 	'libs/url',
 	'modules/Friends',
 	'modules/Carousel',
+	'modules/Dialog',
 	'modules/Dummy'
 ],
 function($, _, Backbone, app,
 	Url,
 	Friends,
 	Carousel,
+	Dialog,
 	Dummy
 ) {
 
@@ -79,10 +81,6 @@ function($, _, Backbone, app,
 	Views.Comparison = Backbone.View.extend({
 		template: 'matches/comparison',
 		initialize: function (options) {
-			this.options = _.extend({
-				first: options.first || new Friends.Models.User(),
-				second: options.second || new Friends.Models.User()
-			}, options);
 			var first = this.options.first,
 				second = this.options.second;
 			this.model = new Models.Comparison(null, {
@@ -106,8 +104,51 @@ function($, _, Backbone, app,
 			this.options.first.off(null, null, this);
 			this.options.second.off(null, null, this);
 		},
+		events: {
+			'click .introduce .button.cta': function (event) {
+				event.stopPropagation();
+				event.preventDefault();
+				var popup = new Views.Introduce({
+					first: this.options.first.model,
+					second: this.options.second.model
+				});
+				app.layout.insertViews({
+					'.bblm-popup': popup
+				});
+				popup.render();
+			}
+		},
 		serialize: function () {
-			return this.model.toJSON();
+			return {
+				first: this.options.first.model.toJSON(),
+				second: this.options.second.model.toJSON(),
+				questions: this.model.toJSON()
+			};
+		}
+	});
+
+	Views.Introduce = Dialog.extend({
+		template: 'matches/introduce',
+		initialize: function (options) {
+			this.options = options;
+		},
+		serialize: function () {
+			return {
+				first: this.options.first.toJSON(),
+				second: this.options.second.toJSON()
+			};
+		},
+		events: {
+			'click .close': function (event) {
+				event.stopPropagation();
+				event.preventDefault();
+				this.remove();
+			},
+			'click .button.primary': function (event) {
+				event.stopPropagation();
+				event.preventDefault();
+				console.log('Intro', this.options.first.id, this.options.second.id, this.$('textarea').val());
+			}
 		}
 	});
 
