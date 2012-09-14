@@ -24,7 +24,7 @@ function($, _, Backbone, app,
 			}, options);
 		},
 		url: function () {
-			Url(app.api + '/matchmaker/:users/questions/answered/', {
+			Url(app.api + 'matchmaker/:users/questions/answered/', {
 				users: _.pluck(this.options.users, 'id')
 			});
 		},
@@ -148,7 +148,7 @@ function($, _, Backbone, app,
 				event.stopPropagation();
 				event.preventDefault();
 				var popup = this;
-				$.post(app.api + '/matchmaker/match/', {
+				$.post(app.api + 'matchmaker/match/', {
 					from: this.options.first.id,
 					to: this.options.second.id
 				}, function () {

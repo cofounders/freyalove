@@ -88,7 +88,7 @@ function($, _, Backbone, app,
 			event.preventDefault();
 
 			var body = this.$('textarea').val(),
-				url = app.api + '/conversations/message/',
+				url = app.api + 'conversations/message/',
 				participants = _.pluck(this.model.get('participants'), 'id');
 
 			this.$('textarea').val('');
