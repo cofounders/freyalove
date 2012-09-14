@@ -147,7 +147,13 @@ function($, _, Backbone, app,
 			'click .button.primary': function (event) {
 				event.stopPropagation();
 				event.preventDefault();
-				console.log('Intro', this.options.first.id, this.options.second.id, this.$('textarea').val());
+				var popup = this;
+				$.post(app.api + '/matchmaker/match/', {
+					from: this.options.first.id,
+					to: this.options.second.id
+				}, function () {
+					popup.remove();
+				});
 			}
 		}
 	});

@@ -24,13 +24,12 @@ def match(request):
     cookie = facebook.get_user_from_cookie(request.COOKIES, settings.FACEBOOK_ID, settings.FACEBOOK_SECRET)
     profile = is_registered_user(fetch_profile(cookie["access_token"]))
 
-    from_profile = request.POST.get('from_username', None)
-    to_profile = request.POST.get('to_username', None)
-    quality = request.POST.get('quality', None)
+    from_profile = request.POST.get('from', None)
+    to_profile = request.POST.get('to', None)
 
     resp_data = {}
 
-    if not from_profile and not to_profile and not quality:
+    if not from_profile or not to_profile:
     	resp["status"] = "Failure"
 
     from_profile = Profile.objects.get(fb_username=from_profile)
@@ -48,7 +47,7 @@ def match(request):
     	proposal = MatchProposal()
     	proposal.from_profile = from_profile
     	proposal.to_profile = to_profile
-    	proposal.quality = int(quality)
+    	proposal.quality = int(69)
     	proposal.match = match
     	proposal.save()
 
