@@ -258,10 +258,13 @@ define(['Underscore'], function (_) {
 		"likeQuotes": "Carpe Diem",
 		"friends": [user1, user2, user3, user4, user10, user11, user12, user12]};
 
-	var allUsers = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user14, user20, user21, user22];
-	var allOthers = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user14, user20, user21, user22];
-	var allUsersById = {0: user0, 1: user1, 2: user2, 3: user3, 4: user4, 10: user10, 11: user11, 12: user12, 13: user13, 14: user14, 20: user20, 21: user21, 22: user22};
 	var allProfiles = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user14];
+	var allOthers = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user14, user20, user21, user22];
+	var allUsers = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user14, user20, user21, user22];
+	var allUsersById = _.reduce(allUsers, function (memo, user) {
+		memo[user.id] = user;
+		return memo;
+	}, {});
 
 	var userToUserSummary = function (user) {
 			return {

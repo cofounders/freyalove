@@ -20,11 +20,7 @@ function($, _, Backbone, app,
 			return Url(app.api + 'users/:id/profile/', this);
 		},
 		dummy: function () {
-			this.clear({silent: true});
-			this.set(this.id === app.session.id
-				? Dummy.getMyProfile()
-				: Dummy.getRandomProfile()
-			);
+			this.set(Dummy.getProfile(this.id));
 		}
 	});
 
