@@ -8,7 +8,7 @@ function($, _, Backbone) {
 				};
 			this.$('.viewport > ol').css('margin-left', offsetLeft + 'px');
 			// this.$('.viewport > ol').css('transform', 'translateX(' + offsetLeft + 'px)');
-			setDisabled(this.$('.previous'), index === 0);
+			setDisabled(this.$('.previous'), index <= 0);
 			setDisabled(this.$('.next'), index === this.collection.length - 1);
 			this.trigger('slide', this.collection.at(index));
 		};
