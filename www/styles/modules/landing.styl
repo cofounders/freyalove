@@ -5,34 +5,23 @@
 	background-size cover
 	min-height 100%
 
-	.header-public
+	header
 		h1
 			background url('../img/logo_landing.png') no-repeat
+			background-size 90%
 			height 92px
-			margin 10px 0 30px 0
+			margin 10px 0 20px 0
 			width 335px
-		.button
-			background-size auto 100%
-			font-size 1.3rem
-			height 40px
-			left 560px
-			right auto
-			top 430px
-			z-index 1
+			a
+				color transparent
 
 	article.splash
 		background url('../img/bg_splash_overlay.png')
 		background-color rgba(255, 255, 255, 0.3)
 		box-shadow 0px 2px 5px 0px rgba(0, 0, 0, 0.3)
 		overflow hidden
-		padding 20px 40px 60px 40px
+		padding 60px 40px 60px 40px
 		width 100%
-		h1
-			font-size 3.75rem //60px
-			font-weight 700
-			margin 0 0 20px 0
-			display block
-			text-align center
 		figure
 			border 1px solid #aaa
 			display inline-block
@@ -45,14 +34,25 @@
 				background #000
 				height 100%
 				width 100%
-		p
+		p.pitch
 			font-size 2rem
-		small
-			display block
-			font-size 0.875rem
-			font-style italic
-			margin-top 80px
+			margin 20px 0 0 0
+		p.cta
+			margin 2em 0 0.25em 0
 			text-align center
+			.button
+				background-size auto 100%
+				font-size 1.3rem
+				height 40px
+				min-width 270px
+		p.caveatemptor
+			margin 0
+			small
+				display block
+				font-size 0.875rem
+				font-style italic
+				margin 0
+				text-align center
 
 	address
 		padding 20px 0
