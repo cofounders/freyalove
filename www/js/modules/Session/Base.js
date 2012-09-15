@@ -16,6 +16,7 @@ function(_, Backbone) {
 			switch (method) {
 				case 'create':
 				case 'update':
+					localStorage.removeItem(key); // iPad QUOTA_EXCEEDED_ERR workaround
 					response = localStorage.setItem(key, JSON.stringify(this.toJSON()));
 					break;
 				case 'delete':
