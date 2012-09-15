@@ -9,7 +9,7 @@ define(['Underscore'], function (_) {
 		"firstName": "Bette",
 		"lastName": "Porter",
 		"dateOfBirth": "1975-04-12",
-		"photo": "/dummy/user1.png",
+		"photo": "/dummy/user1.jpg",
 		"about": "Bette Porter is a fictional character on the Showtime television network series The L Word, played by Jennifer Beals. While she is portrayed as the one true love of Tina Kennard, she is shown to be rather promiscuous and has had countless affairs with other women, whether or not she is with Tina. She was ranked No. 10 in AfterEllen.com's Top 50 Favorite Female TV Characters.",
 		"points": "975",
 		"location": "Los Angeles, US",
@@ -32,7 +32,7 @@ define(['Underscore'], function (_) {
 		"firstName": "Tina",
 		"lastName": "Kennard",
 		"dateOfBirth": "1972-12-08",
-		"photo": "/dummy/user2.png",
+		"photo": "/dummy/user2.jpg",
 		"about": "Tina Kennard is a fictional character on the Showtime television network series The L Word, shown nationally in the United States. She is played by American actress Laurel Holloman. Tina lives in Los Angeles, California, and mostly hangs out in West Hollywood. She is the mother of Angelica Porter-Kennard and the on-off lover of Bette Porter.",
 		"points": "1205",
 		"location": "London, UK",
@@ -55,7 +55,7 @@ define(['Underscore'], function (_) {
 		"firstName": "Alice",
 		"lastName": "Pieszecki",
 		"dateOfBirth": "1976-11-25",
-		"photo": "/dummy/user3.png",
+		"photo": "/dummy/user3.jpg",
 		"about": "Alice Pieszecki is a fictional character on the Showtime television network series The L Word, shown nationally in the United States. She is played by American actress Leisha Hailey. Alice lives in Los Angeles, California, and mostly hangs out in West Hollywood. During the first seasons, she is often seen with her best friends, Shane McCutcheon (Katherine Moennig) and Dana Fairbanks (Erin Daniels).",
 		"points": "201",
 		"location": "Cape Town, ZA",
@@ -78,7 +78,7 @@ define(['Underscore'], function (_) {
 		"firstName": "Anabelle",
 		"lastName": "Hernandez-Herrara",
 		"dateOfBirth": "1984-2-29",
-		"photo": "/dummy/user4.png",
+		"photo": "/dummy/user4.jpg",
 		"about": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porta sem malesuada magna mollis euismod. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.",
 		"points": "612",
 		"location": "Cartagena, CO",
@@ -127,7 +127,7 @@ define(['Underscore'], function (_) {
 		"firstName": "Sayanee",
 		"lastName": "Basu",
 		"dateOfBirth": "1985-03-22",
-		"photo": "/dummy/user11.png",
+		"photo": "/dummy/user11.jpg",
 		"about": "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.",
 		"points": "234",
 		"location": "Bali, ID",
@@ -173,7 +173,7 @@ define(['Underscore'], function (_) {
 		"firstName": "Cora",
 		"lastName": "Puddifoot",
 		"dateOfBirth": "1983-1-8",
-		"photo": "/dummy/user13.png",
+		"photo": "/dummy/user13.jpg",
 		"about": "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.",
 		"points": "290",
 		"location": "Kota Kinabalu, MY",
@@ -220,17 +220,17 @@ define(['Underscore'], function (_) {
 		"id": "amy_hunting",
 		"firstName": "Amy",
 		"lastName": "Hunting",
-		"photo": "/dummy/user20.png"};
+		"photo": "/dummy/user20.jpg"};
 	var user21 = {
 		"id": "adrianna.svitak",
 		"firstName": "Adrianna",
 		"lastName": "Svitak",
-		"photo": "/dummy/user21.png"};
+		"photo": "/dummy/user21.jpg"};
 	var user22 = {
 		"id": "greta",
 		"firstName": "Greta",
 		"lastName": "Howell",
-		"photo": "/dummy/user22.png"};
+		"photo": "/dummy/user22.jpg"};
 
 	// MYSELF
 		var user0 = {
@@ -238,7 +238,7 @@ define(['Underscore'], function (_) {
 		"firstName": "Jenny",
 		"lastName": "Schecter",
 		"dateOfBirth": "1979-05-26",
-		"photo": "/dummy/user0.png",
+		"photo": "/dummy/user0.jpg",
 		"about": "Jennifer Schecter is a fictional character origin the American Showtime television drama series The L Word, played by Mia Kirshner. Jenny debuted on-screen during the pilot episode and remained until the series' final episode. Jenny became well documented in the media for her outlandish plots. Jenny was created by series creator Ilene Chaiken, based on herself as a younger woman living in the lesbian community.",
 		"points": "702",
 		"location": "Beijing, CN",
@@ -258,9 +258,9 @@ define(['Underscore'], function (_) {
 		"likeQuotes": "Carpe Diem",
 		"friends": [user1, user2, user3, user4, user10, user11, user12, user12]};
 
-	var allProfiles = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user14];
-	var allOthers = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user14, user20, user21, user22];
-	var allUsers = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user14, user20, user21, user22];
+	var allProfiles = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user13, user14];
+	var allOthers = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user13, user14, user20, user21, user22];
+	var allUsers = [user0, user1, user2, user3, user4, user10, user11, user12, user12, user13, user14, user20, user21, user22];
 	var allUsersById = _.reduce(allUsers, function (memo, user) {
 		memo[user.id] = user;
 		return memo;
