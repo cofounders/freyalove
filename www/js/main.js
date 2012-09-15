@@ -23,6 +23,7 @@ function ($, app, Router, Facebook, Session, Stream, DummySync) {
 			app.stream.go();
 			var url = app.api + 'profile/';
 			$.get(url).success(function (response) {
+				_.extend(response, {dummy: true});
 				app.session.save(response);
 				Backbone.history.navigate('/dashboard', true);
 			});
