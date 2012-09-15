@@ -124,7 +124,7 @@ define([
 				.setViews({
 					'.bblm-footer-end': new Footer.Views.End()
 				}).render();
-			$('.button.facebook').click(function (event) {
+			$('.cta > .button.facebook').click(function (event) {
 				event.stopPropagation();
 				event.preventDefault();
 				app.session.signIn({scope: 'email,user_likes'});
