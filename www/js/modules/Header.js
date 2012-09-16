@@ -1,9 +1,11 @@
 define(['jQuery', 'Underscore', 'Backbone', 'app', 'Facebook',
+	'libs/url',
 	'modules/Conversations',
 	'modules/Notifications',
 	'modules/SexyTimes',
 ],
 function($, _, Backbone, app, Facebook,
+	Url,
 	Conversations,
 	Notifications,
 	SexyTimes
@@ -11,21 +13,30 @@ function($, _, Backbone, app, Facebook,
 	var Views = {};
 
 	var activeMenuView = null;
+		cleanupMenu = function () {
+			if (activeMenuView) {
+				// $(activeMenuView.el).closest('.opened').removeClass('opened');
+				$(this.el).find('section.opened').removeClass('opened');
 
-	var cleanupMenu = function () {
-		if (activeMenuView) {
-			// $(activeMenuView.el).closest('.opened').removeClass('opened');
-			$(this.el).find('section.opened').removeClass('opened');
+				// activeMenuView.removeView();
+				// activeMenuView.remove();
 
-			// activeMenuView.removeView();
-			// activeMenuView.remove();
+				// this.remove();
+				this.removeView();
 
-			// this.remove();
-			this.removeView();
-
-			activeMenuView = null;
-		}
-	};
+				activeMenuView = null;
+			}
+		},
+		fixEmailLink = function () {
+			var $email = this.$('a.email');
+			$email.attr('href', Url(
+				$email.attr('href')
+					+ '&MERGE0=:email'
+					+ '&MERGE1=:firstName'
+					+ '&MERGE2=:lastName',
+				app.session.toJSON()
+			));
+		};
 
 	Views.Menu = Backbone.View.extend({
 		template: 'header/menu',
@@ -45,6 +56,7 @@ function($, _, Backbone, app, Facebook,
 				$(this.el).find('.name')
 					.text(app.session.get('name'))
 					.attr('href', '/profile/' + app.session.get('id'));
+				fixEmailLink.apply(this);
 			}, this);
 			$(document).on('click', this.closeMenu = _.bind(this.closeMenu, this));
 		},
@@ -70,6 +82,8 @@ function($, _, Backbone, app, Facebook,
 			var deferred = manage(this).render();
 			deferred.then(_.bind(function () {
 				Facebook.XFBML.parse();
+				var $email = this.$('a.email');
+				fixEmailLink.apply(this);
 			}, this));
 			return deferred;
 		},
