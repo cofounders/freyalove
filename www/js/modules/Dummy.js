@@ -621,7 +621,11 @@ Answer: { #fixed format
 		},
 
 		getTopMatchmakers: function () {
-			return [user2, user1, user0, user4, user3];
+			return _.chain(randArray(allProfiles))
+				.first(5)
+				.sortBy(function (user) { return +user.points; })
+				.reverse()
+				.value();
 		},
 
 		getMyPossibleMatches: function () {
