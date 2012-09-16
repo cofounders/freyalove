@@ -1,3 +1,11 @@
+placeholder()
+	&::-webkit-input-placeholder
+		font-style italic
+	&:-moz-placeholder
+		font-style italic
+	&:-ms-input-placeholder
+		font-style italic
+
 form-input()
 	border 1px solid #ccc
 	outline none
@@ -6,12 +14,7 @@ form-input()
 	font 1rem Bariol, Helvetica, Arial, sans-serif
 	color #444
 	margin 0
-	&::-webkit-input-placeholder
-		font-style italic
-	&:-moz-placeholder
-		font-style italic
-	&:-ms-input-placeholder
-		font-style italic
+	placeholder()
 
 textarea()
 	height 100px
