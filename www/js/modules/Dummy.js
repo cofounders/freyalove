@@ -667,7 +667,7 @@ Answer: { #fixed format
 
 		getSexyTimes: function () {
 			if (randInt() > 0)
-				return randArray(allSexytimes);
+				return randArray(allSexytimes).slice(0, Math.random() * 5);
 			return [];
 		},
 
