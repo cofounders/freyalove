@@ -631,14 +631,18 @@ Answer: { #fixed format
 		getMatchingFriends: function () {
 			var first = randArray(allOthersSummary),
 				second = randArray(allOthersSummary),
-				matchProposals = [];
+				matchProposals = [],
+				different = function (pair) { return pair.first !== pair.second; };
 			for (var i = 0; i < first.length; i++) {
 				matchProposals.push({
 					first: first[i],
 					second: second[i]
 				});
 			}
-			return matchProposals;
+			return _.chain(matchProposals)
+				.filter(different)
+				.first(Math.round(Math.random() * 8))
+				.value();
 		},
 
 		getFacebookFriends: function () {
