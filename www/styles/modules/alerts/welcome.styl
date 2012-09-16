@@ -1,0 +1,53 @@
+.alerts-welcome
+	background-color #fefefe
+	background-image url('../img/note_vertical.png')
+	background-position 70px top
+	background-repeat repeat-y
+	border 1px solid rgba(219, 220, 222, 0.9)
+	box-shadow 0 1px 3px 0 rgba(0, 0, 0, 0.09)
+	padding-top 35px
+	padding-bottom 40px
+	position relative
+
+	&:before
+		background-image url('../img/tape.png')
+		background-repeat no-repeat
+		content ' '
+		height 32px
+		left 40%
+		position absolute
+		top -14px
+		width 105px
+
+	&:after
+		// background -webkit-radial-gradient(center, ellipse closest-side, rgba(0, 0, 0, 0.225) 0%, rgba(0, 0, 0, 0) 100%);
+		// background radial-gradient(ellipse at center,  rgba(0, 0, 0, 0.225) 0%, rgba(0, 0, 0, 0) 100%);
+		background -webkit-radial-gradient( 0% 0%, cover, rgba(0, 0, 0, 0.1) 10%, transparent 40% ), -webkit-radial-gradient( 100% 0%, cover, rgba(0, 0, 0, 0.1) 10%, transparent 40% )
+		background radial-gradient( 0% 0%, cover, rgba(0, 0, 0, 0.1) 10%, transparent 40% ), radial-gradient( 100% 0%, cover, rgba(0, 0, 0, 0.1) 10%, transparent 40% )
+		border-radius 0 0 40px 40px / 20px
+		bottom -16px
+		content ' '
+		height 15px
+		left 3%
+		position absolute
+		width 94%
+
+	> *
+		padding-left 90px
+		padding-right 30px
+
+	> header
+		padding-bottom 10px
+		> h1
+			color #a63e00
+			font-weight bold
+
+	> article
+		background-image url('../img/note_horizontal.png')
+		padding-bottom 1px
+		> p
+			margin 0 0 30px 0
+			color #444444
+			line-height 30px
+			&:last-of-type
+				margin 0
