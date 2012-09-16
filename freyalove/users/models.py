@@ -216,5 +216,5 @@ def engage_and_matchmaker_rank_notify(sender, instance, **kwargs):
 
 # Register with freyalove.notifications
 pre_save.connect(wink_notify, sender=Wink, dispatch_uid="wink_presave")
-pre_save.connect(engage_and_matchmaker_rank_notify, sender=Profile, dispatch_uid="profile_presave")
+#pre_save.connect(engage_and_matchmaker_rank_notify, sender=Profile, dispatch_uid="profile_presave")
 post_save.connect(blocked_notify, sender=Blocked, dispatch_uid="block_postsave")
