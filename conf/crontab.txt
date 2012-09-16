@@ -1,2 +1,0 @@
-*/5 * * * * cd /var/www/freyalove.com && git reset --hard && git pull origin master && cd www && h5bp && stylus styles/app.styl
-*/5 * * * * cd /home/ec2-user/freyalove && git reset --hard && git pull origin master && /home/ec2-user/_env/bin/python manage.py migrate --all && /etc/init.d/httpd restart
