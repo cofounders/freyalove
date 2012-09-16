@@ -123,11 +123,17 @@ define([
 			app.useLayout('landing')
 				.setViews({
 					'.bblm-footer-end': new Footer.Views.End()
-				}).render().then(function () {
+				}).render()
+				.then(function () {
 					$('.cta > .button.facebook').click(function (event) {
 						event.stopPropagation();
 						event.preventDefault();
-						app.session.signIn({scope: 'email,user_likes'});
+						app.session.signIn({
+							scope: 'email,user_likes',
+							success: function () {
+								$('.cta > .button.facebook').addClass('loading');
+							}
+						});
 					});
 				});
 		},
