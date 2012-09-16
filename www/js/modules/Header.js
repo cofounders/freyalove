@@ -1,9 +1,9 @@
-define(['jQuery', 'Underscore', 'Backbone', 'app',
+define(['jQuery', 'Underscore', 'Backbone', 'app', 'Facebook',
 	'modules/Conversations',
 	'modules/Notifications',
 	'modules/SexyTimes',
 ],
-function($, _, Backbone, app,
+function($, _, Backbone, app, Facebook,
 	Conversations,
 	Notifications,
 	SexyTimes
@@ -65,6 +65,13 @@ function($, _, Backbone, app,
 				app.session.toJSON(),
 				app.stream.toJSON()
 			);
+		},
+		render: function (manage) {
+			var deferred = manage(this).render();
+			deferred.then(_.bind(function () {
+				Facebook.XFBML.parse();
+			}, this));
+			return deferred;
 		},
 		events: {
 			'submit nav > form.search': function (event) {

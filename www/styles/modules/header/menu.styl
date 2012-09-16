@@ -5,16 +5,27 @@
 	font-weight 200
 
 	.dummy
-		padding 1em
-		background-color black
+		background-color #333333
+		height 48px
+		overflow hidden
+		position fixed
+		top 0
+		min-width 960px
+		width 100%
+		z-index 2
 		p
 			color white
-			margin 0
-			a
-				color orange
-				text-decoration underline
-		.facebook-like
 			float right
+			font-size 0.875rem
+			margin 1em
+			a
+				color #ff9f00
+				text-decoration underline
+		.fb-like
+			margin 12px
+
+		+ *
+			margin-top 48px
 
 	h1
 		display inline-block
