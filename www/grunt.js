@@ -65,7 +65,10 @@ module.exports = function(grunt) {
 		},
 
 		img: {
-			dist: '<config:rev.img>'
+			dist: [
+				'img/**/*.png',
+				'img/**/*.jpg'
+			]
 		},
 
 		watch: {
