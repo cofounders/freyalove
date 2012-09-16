@@ -82,7 +82,6 @@ function($, _, Backbone, app, Facebook,
 			var deferred = manage(this).render();
 			deferred.then(_.bind(function () {
 				Facebook.XFBML.parse();
-				var $email = this.$('a.email');
 				fixEmailLink.apply(this);
 			}, this));
 			return deferred;
