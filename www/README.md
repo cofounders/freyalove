@@ -25,7 +25,7 @@
             proxy_pass http://api.freyalove.cofounders.sg;
           }
           # Let the Backbone.js router handle internal app paths
-          location ~ ^/(css|fonts|img|js|templates)/ {}
+          location ~ ^/(styles|fonts|img|js|templates)/ {}
           location / { try_files $uri $uri/ /index.html; }
         }
 
@@ -40,7 +40,7 @@
             proxy_pass http://api.freyalove.cofounders.sg;
           }
           # Let the Backbone.js router handle internal app paths
-          location ~ ^/(css|fonts|img|js|templates)/ {}
+          location ~ ^/(styles|fonts|img|js|templates)/ {}
           location / { try_files $uri $uri/ /index.html; }
         }
 
