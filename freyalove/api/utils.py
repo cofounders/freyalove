@@ -84,7 +84,7 @@ def create_freya_profile(profile_dict):
     profile.first_name = profile_dict["first_name"]
     profile.last_name = profile_dict["last_name"]
     profile.fb_id = profile_dict["id"]
-    profile.fb_username = profile_dict["username"]
+    profile.fb_username = profile_dict.get("username", profile_dict["id"])
     profile.fb_link = profile_dict["link"]
     profile.email = profile_dict["email"]
     profile.save()
