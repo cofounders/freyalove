@@ -23,6 +23,7 @@ define([
 
 		routes: {
 			'': 'landing',
+			'?*query': 'landing',
 			'about': 'about',
 			'conversations/:id': 'conversation',
 			'conversations/': 'conversations',
